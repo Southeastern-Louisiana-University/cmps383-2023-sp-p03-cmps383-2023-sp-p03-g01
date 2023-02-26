@@ -1,19 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import { APP_STYLING, mantineTheme } from './AppStyling';
+import { Header } from './components/Header/Header';
+import { MantineProvider } from '@mantine/core';
+import { Routes, Route } from 'react-router-dom';
+import { AppRoutes } from './models/AppRoutes';
 
 /**
  * This is the main component of the application.
  */
-export const App = (): React.ReactElement => {
+export function App(): React.ReactElement {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Test</p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    <div style={APP_STYLING.rootStyles}>
+      <MantineProvider theme={mantineTheme}>
+        <Header />
+        <div style={APP_STYLING.contentStyles}>
+          <Routes>
+            <Route path={AppRoutes.HOME} element={<div>Home</div>} />
+
+            {/* Page Not Found */}
+            <Route path="*" element={<div>404</div>} />
+          </Routes>
+        </div>
+      </MantineProvider>
     </div>
   );
-};
+}
