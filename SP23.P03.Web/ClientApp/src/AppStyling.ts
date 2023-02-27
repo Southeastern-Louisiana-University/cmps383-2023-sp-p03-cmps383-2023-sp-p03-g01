@@ -24,9 +24,50 @@ export const mantineTheme: MantineThemeOverride = {
         root: {
           backgroundColor: COLOR_PALETTE.light.default.blueNcs,
 
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
           '&:hover': {
             backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
           },
+        },
+      },
+    },
+    Drawer: {
+      styles: {
+        drawer: {
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        },
+        header: {
+          width: '100%',
+          maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+
+          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+        },
+        body: {
+          width: '100%',
+          maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+        },
+      },
+    },
+    Modal: {
+      styles: {
+        header: {
+          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+        },
+        body: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+      },
+    },
+    TextInput: {
+      styles: {
+        label: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+        input: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
         },
       },
     },

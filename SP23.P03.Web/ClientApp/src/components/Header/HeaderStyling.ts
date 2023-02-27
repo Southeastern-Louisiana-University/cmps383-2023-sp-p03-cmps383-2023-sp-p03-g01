@@ -25,7 +25,7 @@ export const HEADER_STYLING: PageStyles = {
 
     color: COLOR_PALETTE.light.default.textColorPrimary,
 
-    padding: '0.5rem',
+    padding: `${STYLING_VARIABLES.defaultSpacing}`,
   },
 
   /* The Logo & Company Name */
@@ -41,9 +41,9 @@ export const HEADER_STYLING: PageStyles = {
     height: `calc(${STYLING_VARIABLES.headerHeight} - 2 * ${STYLING_VARIABLES.defaultSpacing})`,
   },
   titleStyles: {
-    marginLeft: '0.5rem',
+    marginLeft: `${STYLING_VARIABLES.defaultSpacing}`,
 
-    fontSize: '1.5rem',
+    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
     fontWeight: 'bold',
   },
   loggedInUserStyles: {
@@ -56,5 +56,13 @@ export const HEADER_STYLING: PageStyles = {
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
+  },
+
+  /* Navigation Drawer */
+  navDrawerButtonContainerStyles: {
+    display: 'grid',
+    gridTemplateColumns: '1fr',
+    justifyContent: 'center',
+    gap: `${STYLING_VARIABLES.defaultSpacing}`,
   },
 };
