@@ -7,5 +7,6 @@
 
         public int TrainId { get; set; }
         public Train Train { get; set; } = new Train();
+        public List<Seat> Seats { get; set; } = new List<Seat>();
     }
 }
