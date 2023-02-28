@@ -2,5 +2,10 @@
 {
     public class Feature
     {
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;    
+
+        public Train Train { get; set; } = new Train();
+        public int TrainId { get; set; }
     }
 }

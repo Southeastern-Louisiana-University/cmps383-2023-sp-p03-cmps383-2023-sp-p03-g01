@@ -12,5 +12,6 @@ namespace SP23.P03.Web.Features.Trains
         public TrainRoute TrainRoute { get; set; } = new TrainRoute();
 
         public List<Section> Sections { get; set; } = new List<Section>();
+        public List<Feature> Features { get; set; } = new List<Feature>();
     }
 }
