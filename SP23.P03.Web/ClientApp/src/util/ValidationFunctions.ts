@@ -60,3 +60,62 @@ export const validatePassword = (password: string): true | string => {
 
   return true;
 };
+
+/**
+ * Validates a name based on these conditions:
+ * - Must be between 1 and 50 characters
+ * - Must only contain letters, spaces, apostrophes, and dashes
+ * - Spaces and dashes must have a letter on either side
+ * - Apostrophes must have a letter on the left side
+ */
+export const validateName = (name: string): true | string => {
+  if (name.length < 1 || name.length > 50) {
+    return 'Name must be between 1 and 50 characters';
+  }
+
+  if (!/^[a-zA-Z]+([-'\s][a-zA-Z]+)*$/.test(name)) {
+    return 'Name must only contain letters, spaces, apostrophes, and dashes';
+  }
+
+  if (/\s-/.test(name) || /-\s/.test(name)) {
+    return 'Spaces and dashes must have a letter on either side';
+  }
+
+  if (/-'/.test(name)) {
+    return 'Apostrophes must have a letter on the left side';
+  }
+
+  return true;
+};
+
+/**
+ * Validates an email based on these conditions:
+ * - Must be between 5 and 254 characters
+ * - Must contain an @ symbol
+ * - Must contain only one period
+ * - Must not contain any spaces
+ * - Must not contain any special characters
+ */
+export const validateEmail = (email: string): true | string => {
+  if (email.length < 5 || email.length > 254) {
+    return 'Email must be between 5 and 254 characters';
+  }
+
+  if (!/@/.test(email)) {
+    return 'Email must contain an @ symbol';
+  }
+
+  if (email.split('.').length !== 2) {
+    return 'Email must contain only one period';
+  }
+
+  if (/\s/.test(email)) {
+    return 'Email must not contain any spaces';
+  }
+
+  if (!/^[a-zA-Z0-9@.]+$/.test(email)) {
+    return 'Email must not contain any special characters';
+  }
+
+  return true;
+};

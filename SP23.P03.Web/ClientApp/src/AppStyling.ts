@@ -8,9 +8,19 @@ import { STYLING_VARIABLES } from './styling/StylingVariables';
  */
 export const APP_STYLING: PageStyles = {
   rootStyles: {},
-  contentStyles: {
+  contentRootStyles: {
     width: '100%',
     height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
+
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  contentStyles: {
+    width: '100%',
+    maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+    height: '100%',
+
+    margin: `${STYLING_VARIABLES.defaultSpacing}`,
   },
 };
 
@@ -25,6 +35,8 @@ export const mantineTheme: MantineThemeOverride = {
           backgroundColor: COLOR_PALETTE.light.default.blueNcs,
 
           fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+          maxWidth: '500px',
 
           '&:hover': {
             backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
@@ -67,6 +79,22 @@ export const mantineTheme: MantineThemeOverride = {
           fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
         },
         input: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+      },
+    },
+    Select: {
+      styles: {
+        label: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+        input: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+        item: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+        separatorLabel: {
           fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
         },
       },

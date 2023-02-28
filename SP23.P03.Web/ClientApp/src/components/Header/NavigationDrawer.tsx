@@ -20,6 +20,7 @@ interface NavigationDrawerProps {
 export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
+  const componentSize = getMantineComponentSize(browserWidth);
 
   const navigateToTrainSchedules = () => {
     navigate(AppRoutes.TRAIN_SCHEDULES);
@@ -39,15 +40,15 @@ export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): Re
   return (
     <Drawer opened={opened} onClose={onClose} title="Navigate to..." padding="sm" position="top" size="auto">
       <div style={HEADER_STYLING.navDrawerButtonContainerStyles}>
-        <Button size={getMantineComponentSize(browserWidth)} onClick={navigateToTrainSchedules}>
+        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainSchedules}>
           Train Schedules
         </Button>
 
-        <Button size={getMantineComponentSize(browserWidth)} onClick={navigateToTrainStatuses}>
+        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainStatuses}>
           Train Statuses
         </Button>
 
-        <Button size={getMantineComponentSize(browserWidth)} onClick={navigateToTrainTracking}>
+        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainTracking}>
           Train Tracking
         </Button>
       </div>

@@ -18,6 +18,7 @@ import { useViewportSize } from '@mantine/hooks';
 export function Header(): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
+  const componentSize = getMantineComponentSize(browserWidth, 'md');
   const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
 
   const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
@@ -35,11 +36,15 @@ export function Header(): React.ReactElement {
     navigate(AppRoutes.HOME);
   };
 
+  const navigateToAccountPage = () => {
+    navigate(AppRoutes.ACCOUNT_PAGE);
+  };
+
   return (
     <div style={HEADER_STYLING.rootStyles}>
       <div style={HEADER_STYLING.rootContentStyles}>
         {/* Navigation Menu */}
-        <Burger opened={navigationMenuOpened} onClick={toggleBurgerMenu} aria-label="Open navigation" size={getMantineComponentSize(browserWidth, 'md')} />
+        <Burger opened={navigationMenuOpened} onClick={toggleBurgerMenu} aria-label="Open navigation" size={componentSize} />
         <NavigationDrawer opened={navigationMenuOpened} onClose={toggleBurgerMenu} />
 
         {/* The Logo & Company Name */}
@@ -52,12 +57,12 @@ export function Header(): React.ReactElement {
 
         {/* Sign-In/Profile Button */}
         {currentlyLoggedInUser === null ? (
-          <Button size={getMantineComponentSize(browserWidth, 'md')} onClick={toggleAuthenticationModal}>
+          <Button size={componentSize} onClick={toggleAuthenticationModal}>
             Sign-In
           </Button>
         ) : (
           <div style={HEADER_STYLING.loggedInUserStyles}>
-            <ActionIcon>
+            <ActionIcon onClick={navigateToAccountPage}>
               <MdAccountCircle style={HEADER_STYLING.iconStyles} />
             </ActionIcon>
             {browserWidth > 500 && <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>Hello, {currentlyLoggedInUser}</span>}
