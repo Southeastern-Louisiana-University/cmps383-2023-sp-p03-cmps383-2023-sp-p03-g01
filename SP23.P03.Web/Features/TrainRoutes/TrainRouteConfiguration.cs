@@ -19,6 +19,9 @@ namespace SP23.P03.Web.Features.TrainRoutes
                 .WithOne()
             .OnDelete(DeleteBehavior.Restrict);
 
+            builder.HasOne(b => b.Train)
+                .WithOne(i => i.TrainRoute)
+                .HasForeignKey<Train>(b => b.TrainRouteId);
         }
     }
 }
