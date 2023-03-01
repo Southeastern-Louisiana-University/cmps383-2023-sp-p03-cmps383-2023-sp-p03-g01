@@ -6,7 +6,7 @@
         public double Cost { get; set; }
         public string Location { get; set; } = string.Empty;
 
-        public Section Section { get; set; } = new Section();
-        public int SectionId { get; set; }
+        public Section? Section { get; set; } 
+        public int? SectionId { get; set; }
     }
 }

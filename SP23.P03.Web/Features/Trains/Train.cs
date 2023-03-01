@@ -8,10 +8,10 @@ namespace SP23.P03.Web.Features.Trains
         public string Model { get; set; } = string.Empty;
         public int Capacity { get; set; }
 
-        public int TrainRouteId { get; set; }
-        public TrainRoute TrainRoute { get; set; } = new TrainRoute();
+        public int? TrainRouteId { get; set; }
+        public TrainRoute? TrainRoute { get; set; } 
 
-        public List<Section> Sections { get; set; } = new List<Section>();
-        public List<Feature> Features { get; set; } = new List<Feature>();
+        public List<Section>? Sections { get; set; } 
+        public List<Feature>? Features { get; set; }
     }
 }

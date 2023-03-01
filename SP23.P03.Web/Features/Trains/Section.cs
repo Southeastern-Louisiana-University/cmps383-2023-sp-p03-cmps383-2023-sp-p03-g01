@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public string type { get; set; } = string.Empty;
 
-        public int TrainId { get; set; }
-        public Train Train { get; set; } = new Train();
-        public List<Seat> Seats { get; set; } = new List<Seat>();
+        public int? TrainId { get; set; }
+        public Train? Train { get; set; }
+        public List<Seat>? Seats { get; set; }
     }
 }
