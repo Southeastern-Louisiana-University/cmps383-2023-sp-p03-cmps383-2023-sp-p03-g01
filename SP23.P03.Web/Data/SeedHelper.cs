@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.TrainRoutes;
+using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
 
 namespace SP23.P03.Web.Data;
@@ -17,6 +19,9 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
 
         await AddTrainStation(dataContext);
+        await AddTrainRoute(dataContext);
+        await AddTrain(dataContext);
+
     }
 
     private static async Task AddUsers(IServiceProvider serviceProvider)
@@ -90,4 +95,48 @@ public static class SeedHelper
 
         await dataContext.SaveChangesAsync();
     }
+    private static async Task AddTrainRoute(DataContext dataContext)
+    {
+        var trainRoutes = dataContext.Set<TrainRoute>();
+
+        if (await trainRoutes.AnyAsync())
+        {
+            return;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            dataContext.Set<TrainRoute>()
+                .Add(new TrainRoute
+                {
+                    DeperatureTime = DateTimeOffset.Now,
+                    ArrivalTime= DateTimeOffset.Now,
+                });
+        }
+
+        await dataContext.SaveChangesAsync();
+    }
+    private static async Task AddTrain(DataContext dataContext)
+    {
+        var trains = dataContext.Set<Train>();
+
+        if (await trains.AnyAsync())
+        {
+            return;
+        }
+
+        for (int i = 0; i < 3; i++)
+        {
+            dataContext.Set<Train>()
+                .Add(new Train
+                {
+                    Capacity = i + i,
+                    Model = "F150",
+                });
+        }
+
+        await dataContext.SaveChangesAsync();
+    }
+
+
 }

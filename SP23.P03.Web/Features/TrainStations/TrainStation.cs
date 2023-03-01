@@ -1,4 +1,5 @@
 ﻿using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.TrainRoutes;
 
 namespace SP23.P03.Web.Features.TrainStations;
 
@@ -12,4 +13,5 @@ public class TrainStation
 
     public int? ManagerId { get; set; }
     public virtual User? Manager { get; set; }
+
 }
