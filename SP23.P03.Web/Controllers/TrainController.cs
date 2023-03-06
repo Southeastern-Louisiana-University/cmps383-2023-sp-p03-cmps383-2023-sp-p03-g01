@@ -49,9 +49,8 @@ namespace SP23.P03.Web.Controllers;
 
         var train = new Train
         {
-            Model = dto.Model,
-            Capacity = dto.Capacity,
             TrainRouteId = dto.TrainRouteId,
+            Locomotive = dto.Locomotive,
         };
         trains.Add(train);
 
@@ -64,9 +63,8 @@ namespace SP23.P03.Web.Controllers;
 
     private bool IsInvalid(TrainCreateDto dto)
     {
-        return string.IsNullOrWhiteSpace(dto.Model) ||
-               dto.Model.Length > 100 ||
-               string.IsNullOrWhiteSpace((dto.Capacity).ToString());
+        return string.IsNullOrWhiteSpace(dto.Locomotive) ||
+               dto.Locomotive.Length > 100;
     }
     private static IQueryable<TrainDto> GetTrainDtos(IQueryable<Train> trains)
     {
@@ -74,11 +72,15 @@ namespace SP23.P03.Web.Controllers;
             .Select(x => new TrainDto
             {
                 Id = x.Id,
-                Capacity = x.Capacity,
-                Features = x.Features,
-                Model = x.Model,
-                Sections = x.Sections,
+                Locomotive= x.Locomotive,
                 TrainRouteId = x.TrainRouteId,
+                Sections = (List<SectionDto>)x.Sections.Select(x => new SectionDto 
+                { Id = x.Id,
+                  type = x.type,
+                  Capacity= x.Capacity,
+                  Features= x.Features,
+                  TrainId= x.TrainId,
+                }),
             });
     }
     [HttpPut]
@@ -97,8 +99,7 @@ namespace SP23.P03.Web.Controllers;
         }
 
 
-        train.Model = dto.Model;
-        train.Capacity = dto.Capacity;
+        train.Locomotive = dto.Locomotive;
         train.TrainRouteId = dto.TrainRouteId;
 
         dataContext.SaveChanges();

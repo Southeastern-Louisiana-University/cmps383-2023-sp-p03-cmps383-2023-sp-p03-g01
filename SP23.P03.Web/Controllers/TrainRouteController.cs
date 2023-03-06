@@ -16,10 +16,10 @@ namespace SP23.P03.Web.Controllers
             this.dataContext = dataContext;
             trainRoutes = dataContext.Set<TrainRoute>();
         }
-        [HttpGet]
+   /*     [HttpGet]
         public IQueryable<TrainDto> GetAllTrains()
         {
-            return GetTrainDtos(trains);
-        }
+            *//*return GetTrainDtos(trains);*//*
+        }*/
     }
 }
