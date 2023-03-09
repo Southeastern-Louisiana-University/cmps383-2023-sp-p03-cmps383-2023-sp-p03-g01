@@ -74,7 +74,7 @@ namespace SP23.P03.Web.Controllers;
                 Id = x.Id,
                 Locomotive= x.Locomotive,
                 TrainRouteId = x.TrainRouteId,
-                Sections = (List<SectionDto>)x.Sections.Select(x => new SectionDto 
+                Sections = x.Sections.Select(x => new SectionDto 
                 { Id = x.Id,
                   type = x.type,
                   Capacity= x.Capacity,
