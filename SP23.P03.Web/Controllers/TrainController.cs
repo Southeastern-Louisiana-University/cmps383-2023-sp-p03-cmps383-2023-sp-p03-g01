@@ -76,10 +76,9 @@ namespace SP23.P03.Web.Controllers;
                 TrainRouteId = x.TrainRouteId,
                 Sections = x.Sections.Select(x => new SectionDto 
                 { Id = x.Id,
-                  type = x.type,
+                  Class = x.Class,
                   Capacity= x.Capacity,
                   Features= x.Features,
-                  TrainId= x.TrainId,
                 }),
             });
     }

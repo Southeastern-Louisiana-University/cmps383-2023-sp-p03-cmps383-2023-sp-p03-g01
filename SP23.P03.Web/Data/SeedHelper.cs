@@ -136,6 +136,26 @@ public static class SeedHelper
 
         await dataContext.SaveChangesAsync();
     }
+    private static async Task AddSections(DataContext dataContext)
+    {
+        var sections = dataContext.Set<Section>();
+
+        if (await sections.AnyAsync())
+        {
+            return;
+        }
+
+
+            dataContext.Set<Section>()
+                .Add(new Section
+                {
+                    Class = "A",
+                    Capacity = 168
+
+                });
+
+        await dataContext.SaveChangesAsync();
+    }
 
 
 }
