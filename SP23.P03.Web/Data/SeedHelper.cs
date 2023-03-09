@@ -130,8 +130,7 @@ public static class SeedHelper
             dataContext.Set<Train>()
                 .Add(new Train
                 {
-                    Capacity = i + i,
-                    Model = "F150",
+                    Locomotive = "F150",
                 });
         }
 

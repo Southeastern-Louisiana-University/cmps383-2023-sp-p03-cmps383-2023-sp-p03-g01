@@ -9,6 +9,7 @@ namespace SP23.P03.Web.Features.Trains
         {
             builder.HasOne(x => x.Train)
                 .WithMany(x => x.Sections);
+
         }
     }
 }
