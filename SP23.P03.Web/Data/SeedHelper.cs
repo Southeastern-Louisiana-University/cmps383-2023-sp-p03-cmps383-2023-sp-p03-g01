@@ -123,9 +123,27 @@ public static class SeedHelper
     {
         var trains = dataContext.Set<Train>();
         var sections = dataContext.Set<Section>();
-        var section = sections.First();
-        var currentSections = new List<Section>();
-        currentSections.Add(section);
+
+
+        var train1Sections = new List<Section>();
+        train1Sections.Add(sections.First());
+
+        var train2Sections = new List<Section>();
+        if(sections.Find(2)  != null) {
+           train2Sections.Add(sections.Find(2));
+        }
+
+        var train3Sections = new List<Section>();
+        if (sections.Find(3) != null)
+        {
+            train3Sections.Add(sections.Find(3));
+        }
+
+        var train4Sections = new List<Section>();
+        if (sections.Find(4) != null)
+        {
+            train4Sections.Add(sections.Find(4));
+        }
 
         if (await trains.AnyAsync())
         {
@@ -136,7 +154,28 @@ public static class SeedHelper
             .Add(new Train
             {
                 Locomotive = "F150",
-                Sections = currentSections
+                Sections = train1Sections
+            });
+
+        dataContext.Set<Train>()
+            .Add(new Train
+            {
+                Locomotive = "F420",
+                Sections = train2Sections
+            });
+
+        dataContext.Set<Train>()
+            .Add(new Train
+            {
+                Locomotive = "F750",
+                Sections = train3Sections
+            });
+
+        dataContext.Set<Train>()
+            .Add(new Train
+            {
+                Locomotive = "F950",
+                Sections = train4Sections
             });
 
         await dataContext.SaveChangesAsync();
@@ -148,6 +187,41 @@ public static class SeedHelper
 
         var ClassAseats = new List<Seat>();
         ClassAseats.Add(seats.First());
+
+        var ClassBseats = new List<Seat>();
+        if (seats.Find(2) != null)
+        {
+            ClassBseats.Add(seats.Find(2));
+        }
+
+        if (seats.Find(3) != null)
+        {
+            ClassBseats.Add(seats.Find(3));
+        }
+
+        var ClassCseats = new List<Seat>();
+        if (seats.Find(4) != null)
+        {
+            ClassCseats.Add(seats.Find(4));
+        }
+        if (seats.Find(5) != null)
+        {
+            ClassCseats.Add(seats.Find(5));
+        }
+
+        var ClassDseats = new List<Seat>();
+        if (seats.Find(6) != null)
+        {
+            ClassDseats.Add(seats.Find(6));
+        }
+        if (seats.Find(7) != null)
+        {
+            ClassDseats.Add(seats.Find(7));
+        }
+        if (seats.Find(8) != null)
+        {
+            ClassDseats.Add(seats.Find(8));
+        }
 
         if (await sections.AnyAsync())
         {
@@ -170,6 +244,8 @@ public static class SeedHelper
                 Class = "B",
                 Capacity = 168,
                 Features = "Coach,First Class",
+                SeatList = ClassBseats,
+       
 
             });
 
@@ -179,14 +255,18 @@ public static class SeedHelper
                 Class = "C",
                 Capacity = 168,
                 Features = "Coach,First Class,Dining",
+                SeatList = ClassCseats,
+            
             });
 
         dataContext.Set<Section>()
             .Add(new Section
             {
                 Class = "D",
-                Capacity = 168,
-                Features = "First Class,Dining,Sleeper,Roomlet"
+                Capacity = 56,
+                Features = "First Class,Dining,Sleeper,Roomlet",
+                SeatList = ClassDseats,
+          
 
             });
 
