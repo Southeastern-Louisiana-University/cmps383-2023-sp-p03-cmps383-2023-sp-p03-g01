@@ -79,6 +79,11 @@ namespace SP23.P03.Web.Controllers;
                   Class = x.Class,
                   Capacity= x.Capacity,
                   Features= x.Features,
+                  SeatList = x.SeatList.Select(x => new SeatDto
+                    {
+                        Quantity = x.Quantity,
+                        type = x.type
+                    })
                 }),
             });
     }

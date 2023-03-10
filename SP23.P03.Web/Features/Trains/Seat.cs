@@ -7,7 +7,7 @@
         public int Quantity { get; set; }
         public string type { get; set; }
 
-        public int SectionId { get; set; }
+        public int? SectionId { get; set; }
         public Section? Section { get; set; }
     }
 }

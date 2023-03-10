@@ -20,6 +20,9 @@ public static class SeedHelper
 
         await AddTrainStation(dataContext);
         await AddTrainRoute(dataContext);
+
+        await AddSeat(dataContext);
+        await AddSection(dataContext);
         await AddTrain(dataContext);
 
     }
@@ -119,26 +122,32 @@ public static class SeedHelper
     private static async Task AddTrain(DataContext dataContext)
     {
         var trains = dataContext.Set<Train>();
+        var sections = dataContext.Set<Section>();
+        var section = sections.First();
+        var currentSections = new List<Section>();
+        currentSections.Add(section);
 
         if (await trains.AnyAsync())
         {
             return;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            dataContext.Set<Train>()
-                .Add(new Train
-                {
-                    Locomotive = "F150",
-                });
-        }
+        dataContext.Set<Train>()
+            .Add(new Train
+            {
+                Locomotive = "F150",
+                Sections = currentSections
+            });
 
         await dataContext.SaveChangesAsync();
     }
-    private static async Task AddSections(DataContext dataContext)
+    private static async Task AddSection(DataContext dataContext)
     {
         var sections = dataContext.Set<Section>();
+        var seats = dataContext.Set<Seat>();
+
+        var ClassAseats = new List<Seat>();
+        ClassAseats.Add(seats.First());
 
         if (await sections.AnyAsync())
         {
@@ -146,16 +155,106 @@ public static class SeedHelper
         }
 
 
-            dataContext.Set<Section>()
-                .Add(new Section
-                {
-                    Class = "A",
-                    Capacity = 168
+        dataContext.Set<Section>()
+            .Add(new Section
+            {
+                Class = "A",
+                Capacity = 168,
+                Features = "Coach",
+                SeatList = ClassAseats,
+            });
 
-                });
+        dataContext.Set<Section>()
+            .Add(new Section
+            {
+                Class = "B",
+                Capacity = 168,
+                Features = "Coach,First Class",
+
+            });
+
+        dataContext.Set<Section>()
+            .Add(new Section
+            {
+                Class = "C",
+                Capacity = 168,
+                Features = "Coach,First Class,Dining",
+            });
+
+        dataContext.Set<Section>()
+            .Add(new Section
+            {
+                Class = "D",
+                Capacity = 168,
+                Features = "First Class,Dining,Sleeper,Roomlet"
+
+            });
 
         await dataContext.SaveChangesAsync();
     }
+    private static async Task AddSeat(DataContext dataContext)
+    {
+        var seats = dataContext.Set<Seat>();
 
+        if (await seats.AnyAsync())
+        {
+            return;
+        }
+        //class A
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 168,
+                type = "coach"
+            });
+        //class B
+        dataContext.Set<Seat>()
+             .Add(new Seat
+             {
+                 Quantity = 84,
+                 type = "coach"
+             });
 
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 42,
+                type = "first class"
+            });
+        //class C
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 42,
+                type = "coach"
+            });
+
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 62,
+                type = "first class"
+            });
+        //class D
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 42,
+                type = "coach"
+            });
+
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 10,
+                type = "sleeper"
+            });
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
+                Quantity = 4,
+                type = "roomlet"
+            });
+        await dataContext.SaveChangesAsync();
+    }   
 }

@@ -7,5 +7,6 @@
 
         public int Capacity { get; set; }
         public string Features { get; set; } = string.Empty;
+        public IEnumerable<SeatDto>? SeatList { get; set; }
     }
 }
