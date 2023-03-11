@@ -76,7 +76,7 @@ public class SectionController : ControllerBase
 
     [HttpPut]
     [Route("{id}")]
-    public ActionResult<SectionDto> UpdateTrain(int id, SectionCreateDto dto)
+    public ActionResult<SectionDto> UpdateSection(int id, SectionCreateDto dto)
     {
         if (IsInvalid(dto))
         {

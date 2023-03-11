@@ -66,6 +66,45 @@ public class SeatController : ControllerBase
 
         return CreatedAtAction(nameof(GetSeatById), new { id = dto.Id }, dto);
     }
+    [HttpPut]
+    [Route("{id}")]
+    public ActionResult<SeatDto> UpdateSeat(int id, SeatDto dto)
+    {
+        if (IsInvalid(dto))
+        {
+            return BadRequest();
+        }
+
+        var seat = seats.FirstOrDefault(x => x.Id == id);
+        if (seat == null)
+        {
+            return NotFound();
+        }
+        seat.Quantity = dto.Quantity;
+        seat.type = dto.type;
+        dataContext.SaveChanges();
+
+        dto.Id = seat.Id;
+
+        return Ok(dto);
+    }
+    [HttpDelete]
+    [Route("{id}")]
+    public ActionResult DeleteSeat(int id)
+    {
+        var seat = seats.FirstOrDefault(x => x.Id == id);
+        if (seat == null)
+        {
+            return NotFound();
+        }
+
+
+        seats.Remove(seat);
+
+        dataContext.SaveChanges();
+
+        return Ok();
+    }
     private bool IsInvalid(SeatDto dto)
     {
         return string.IsNullOrWhiteSpace(dto.type);
