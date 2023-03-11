@@ -81,6 +81,7 @@ namespace SP23.P03.Web.Controllers;
                   Features= x.Features,
                   SeatList = x.SeatList.Select(x => new SeatDto
                     {
+                        Id = x.Id,
                         Quantity = x.Quantity,
                         type = x.type
                     })
