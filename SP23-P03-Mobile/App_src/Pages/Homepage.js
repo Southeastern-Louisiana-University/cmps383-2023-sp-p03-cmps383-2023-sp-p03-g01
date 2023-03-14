@@ -1,17 +1,26 @@
 import React from "react";
-import { View } from "react-native";
+import { View,Style } from "react-native";
+import { SearchBar } from 'react-native-elements';
 
-
-const HomeScreen = ({navigation}) => {
+export function HomePageApp() {
+  
     return (
-        <View>
-            <Button
-            title="Go to Jane's profile"
-            onPress={() =>
-            null
-            }
+        <View style = {styles.rootStyles}>
+            <SearchBar
+            placeholder="Type Here..."
+            onChangeText={this.updateSearch}
+            value={search}
             />
-      </View>
+        </View>
     );
-  };
+  }
+  
+  const styles = StyleSheet.create({
+    rootStyles: {
+        width: '100%',
+    
+        display: 'flex',
+        justifyContent: 'center',
+    },
+});
 
