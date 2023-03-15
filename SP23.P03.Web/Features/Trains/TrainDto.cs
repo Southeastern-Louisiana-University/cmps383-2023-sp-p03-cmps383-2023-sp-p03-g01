@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string Locomotive { get; set; } = string.Empty;
         public int? TrainRouteId { get; set; }
-        public List<SectionDto>? Sections { get; set; }
+        public IEnumerable<SectionDto>? Sections { get; set; }
     }
 }

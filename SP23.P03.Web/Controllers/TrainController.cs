@@ -28,7 +28,7 @@ namespace SP23.P03.Web.Controllers;
 
     [HttpGet]
     [Route("{id}")]
-    public ActionResult<TrainDto> GetStationById(int id)
+    public ActionResult<TrainDto> GetTrainById(int id)
     {
         var result = GetTrainDtos(trains.Where(x => x.Id == id)).FirstOrDefault();
         if (result == null)
@@ -40,7 +40,7 @@ namespace SP23.P03.Web.Controllers;
     }
 
     [HttpPost]
-    public ActionResult<TrainCreateDto> CreateStation(TrainCreateDto dto)
+    public ActionResult<TrainCreateDto> CreateTrain(TrainCreateDto dto)
     {
         if (IsInvalid(dto))
         {
@@ -58,7 +58,7 @@ namespace SP23.P03.Web.Controllers;
 
         dto.Id = train.Id;
 
-        return CreatedAtAction(nameof(GetStationById), new { id = dto.Id }, dto);
+        return CreatedAtAction(nameof(GetTrainById), new { id = dto.Id }, dto);
     }
 
     private bool IsInvalid(TrainCreateDto dto)
@@ -74,12 +74,17 @@ namespace SP23.P03.Web.Controllers;
                 Id = x.Id,
                 Locomotive= x.Locomotive,
                 TrainRouteId = x.TrainRouteId,
-                Sections = (List<SectionDto>)x.Sections.Select(x => new SectionDto 
+                Sections = x.Sections.Select(x => new SectionDto 
                 { Id = x.Id,
-                  type = x.type,
+                  Class = x.Class,
                   Capacity= x.Capacity,
                   Features= x.Features,
-                  TrainId= x.TrainId,
+                  SeatList = x.SeatList.Select(x => new SeatDto
+                    {
+                        Id = x.Id,
+                        Quantity = x.Quantity,
+                        type = x.type
+                    })
                 }),
             });
     }
