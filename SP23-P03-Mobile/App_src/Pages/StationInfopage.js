@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Text} from "react-native";
 import { TRAIN_STATIONS } from "../Models/TempFilterData/trainStations"
 
-export default function HomeScreen() {
+export default function StationScreen() {
     const [Train,SetTrain] = useState(TRAIN_STATIONS[1]);
     return(
         <View>

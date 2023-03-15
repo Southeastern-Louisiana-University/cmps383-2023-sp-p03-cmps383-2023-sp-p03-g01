@@ -2,16 +2,24 @@ import React, { useState } from "react";
 import { View,StyleSheet,Text, FlatList } from "react-native";
 import { Button, SearchBar } from 'react-native-elements';
 import { TRAIN_STATIONS } from "../Models/TempFilterData/trainStations";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-const Item = ({title}) => (
+
+const Item = ({title,state,city,navigation}) => (
   <View style={styles.item}>
-    <Text style={styles.title}>{title}{}</Text>
+    <Text style={styles.title}>{title}</Text>
+    <Text style={styles.title}>{state} {city}</Text>
+    <Button 
+    onPress={() => 
+    navigation.navigate("Station")
+    } />
   </View>
 );
 
 
-export default function HomeScreen(navigation) {
+export default function HomeScreen({navigation}) {
 
   const[search,setsearch] = useState('');
   const[searchresult,setsearchresult] = useState(TRAIN_STATIONS);
@@ -47,7 +55,7 @@ export default function HomeScreen(navigation) {
             />
           {searching && (<FlatList 
           data = {searchresult}
-          renderItem={({item})=> <Item title={item.name}/>}
+          renderItem={({item})=> <Item title={item.name} state ={item.state} city = {item.city} navigation = {navigation}/>}
           keyExtractor = {item => item.id}
           />)
         }
@@ -73,7 +81,7 @@ export default function HomeScreen(navigation) {
       borderRadius: 5
     },
     title: {
-      fontSize: 32,
+      fontSize: 28,
     },
 
 });
