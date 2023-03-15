@@ -38,10 +38,6 @@ export function HomePage(): React.ReactElement {
           )}
         </Paper>
 
-        {/* This is a placeholder that launches the Stripe payment */}
-        <form action="/api/payment/create-checkout-session" method="POST">
-          <Button type="submit">Checkout Test</Button>
-        </form>
       </div>
     </div>
   );
