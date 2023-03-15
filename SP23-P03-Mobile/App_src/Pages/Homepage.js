@@ -2,25 +2,17 @@ import React from "react";
 import { View,Style } from "react-native";
 import { SearchBar } from 'react-native-elements';
 
-export function HomePageApp() {
-  
+function HomeScreen() {
     return (
-        <View style = {styles.rootStyles}>
-            <SearchBar
-            placeholder="Type Here..."
-            onChangeText={this.updateSearch}
-            value={search}
-            />
-        </View>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Home Screen</Text>
+      </View>
     );
   }
   
   const styles = StyleSheet.create({
     rootStyles: {
-        width: '100%',
-    
-        display: 'flex',
-        justifyContent: 'center',
+
     },
 });
 
