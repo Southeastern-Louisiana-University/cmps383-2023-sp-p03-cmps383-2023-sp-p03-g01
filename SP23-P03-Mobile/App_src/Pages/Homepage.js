@@ -10,7 +10,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Item = ({title,state,city,navigation}) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
-    <Text style={styles.title}>{state} {city}</Text>
+    <Text style={styles.title}>{city}, {state}</Text>
     <Button 
     onPress={() => 
     navigation.navigate("Station")
