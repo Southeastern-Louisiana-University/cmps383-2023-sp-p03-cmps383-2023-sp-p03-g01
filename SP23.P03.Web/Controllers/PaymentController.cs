@@ -8,9 +8,14 @@ namespace SP23.P03.Web.Controllers;
 [Route("api/payment")]
 public class PaymentController : ControllerBase
 {
-    public PaymentController()
+
+    private readonly IConfiguration _config;
+
+    public PaymentController(IConfiguration config)
     {
-        StripeConfiguration.ApiKey = Environment.GetEnvironmentVariable("StripeBackendSecret");
+        _config = config;
+
+        StripeConfiguration.ApiKey = _config["StripeBackendSecret"];
     }
 
     [HttpPost("create-checkout-session")]

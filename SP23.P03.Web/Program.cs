@@ -1,17 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using SP23.P03.Web;
 using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.Authorization;
 
-// Load the .env file (https://dusted.codes/dotenv-in-dotnet)
-var rootDirectory = Directory.GetCurrentDirectory();
-var dotenv = Path.Combine(rootDirectory, ".env");
-DotEnv.Load(dotenv);
-
 var builder = WebApplication.CreateBuilder(args);
-
-// Load environment variables from line 9
-builder.Configuration.AddEnvironmentVariables();
 
 // sets up our database connection
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataContext")));
