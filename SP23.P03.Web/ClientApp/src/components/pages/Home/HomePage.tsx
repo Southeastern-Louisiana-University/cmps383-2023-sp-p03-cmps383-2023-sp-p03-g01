@@ -30,13 +30,18 @@ export function HomePage(): React.ReactElement {
       <div style={HOME_PAGE_STYLING.rootContentStyles}>
         <Paper shadow="lg" style={HOME_PAGE_STYLING.paperStyles}>
           <TrainStationSelect label="Where do you want to go?" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
-          
+
           {selectedTrainStation !== null && (
             <Button size={componentSize} onClick={navigateToRoutePlanningPage}>
               Find A Route
             </Button>
           )}
         </Paper>
+
+        {/* This is a placeholder that launches the Stripe payment */}
+        <form action="/api/payment/create-checkout-session" method="POST">
+          <Button type="submit">Checkout Test</Button>
+        </form>
       </div>
     </div>
   );
