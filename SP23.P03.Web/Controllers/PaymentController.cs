@@ -33,7 +33,7 @@ public class PaymentController : ControllerBase
                   },
                 },
             Mode = "payment",
-            SuccessUrl = domain + "ticketSuccess",
+            SuccessUrl = domain + "ticketSuccess?session_id={CHECKOUT_SESSION_ID}",
             CancelUrl = domain + "ticketCanceled",
         };
         var service = new SessionService();
