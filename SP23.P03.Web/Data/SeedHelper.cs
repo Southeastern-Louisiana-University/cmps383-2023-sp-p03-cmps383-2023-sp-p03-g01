@@ -4,6 +4,7 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
+using System.Globalization;
 
 namespace SP23.P03.Web.Data;
 
@@ -19,11 +20,11 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
 
         await AddTrainStation(dataContext);
-        await AddTrainRoute(dataContext);
 
         await AddSeat(dataContext);
         await AddSection(dataContext);
         await AddTrain(dataContext);
+        await AddTrainRoute(dataContext);
 
     }
 
@@ -140,7 +141,59 @@ public static class SeedHelper
     private static async Task AddTrainRoute(DataContext dataContext)
     {
         var trainRoutes = dataContext.Set<TrainRoute>();
+        var trainStations = dataContext.Set<TrainStation>();
+        var trains = dataContext.Set<Train>();
 
+        var station1 = trainStations.First();
+        var station2 = new TrainStation();
+        var station3 = new TrainStation();
+        var station4 = new TrainStation();
+        var station5 = new TrainStation();
+        var station6 = new TrainStation();
+
+        if (trainStations.Find(2) != null)
+        {
+            station2 = trainStations.Find(2);
+        }
+        if (trainStations.Find(3) != null)
+        {
+            station3 = trainStations.Find(3);
+        }
+        if (trainStations.Find(4) != null)
+        {
+            station4 = trainStations.Find(4);
+        }
+        if (trainStations.Find(5) != null)
+        {
+            station5 = trainStations.Find(5);
+        }
+        if (trainStations.Find(6) != null)
+        {
+            station6 = trainStations.Find(6);
+        }
+
+        var train1 = trains.First();
+        var train2 = new Train();
+        var train3 = new Train();
+        var train4 = new Train();
+        var train5 = new Train();
+
+        if (trains.Find(2) != null)
+        {
+            train2 = trains.Find(2);
+        }
+        if (trains.Find(3) != null)
+        {
+            train3 = trains.Find(3);
+        }
+        if (trains.Find(4) != null)
+        {
+            train4 = trains.Find(4);
+        }
+        if (trains.Find(5) != null)
+        {
+            train5 = trains.Find(5);
+        }
 
         if (await trainRoutes.AnyAsync())
         {
@@ -151,8 +204,61 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                DeperatureTime = DateTimeOffset.Now,
-                ArrivalTime = DateTimeOffset.Now,
+                ArrivalTime = DateTimeOffset.Parse("05/01/2022 6:00:00"),
+                DeperatureTime = DateTimeOffset.Parse("05/01/2022 10:00:00"),
+                StartingTrainStation = station1,
+                StartingTrainStationId = station1.Id,
+                EndingTrainStation = station2,
+                EndingTrainStationId = station2.Id,
+                Train = train5,
+            });
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
+                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
+                StartingTrainStation = station2,
+                StartingTrainStationId = station2.Id,
+                EndingTrainStation = station3,
+                EndingTrainStationId = station3.Id,
+                Train = train1,
+            });
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = DateTimeOffset.Parse("05/01/2022 13:00:00"),
+                DeperatureTime = DateTimeOffset.Parse("05/01/2022 15:00:00"),
+                StartingTrainStation = station3,
+                StartingTrainStationId = station3.Id,
+                EndingTrainStation = station4,
+                EndingTrainStationId = station4.Id,
+                Train = train2,
+            });
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
+                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
+                StartingTrainStation = station4,
+                StartingTrainStationId = station4.Id,
+                EndingTrainStation = station5,
+                EndingTrainStationId = station5.Id,
+                Train = train3,
+            });
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
+                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
+                StartingTrainStation = station5,
+                StartingTrainStationId = station5.Id,
+                EndingTrainStation = station6,
+                EndingTrainStationId = station6.Id,
+                Train = train4,
             });
 
         await dataContext.SaveChangesAsync();
@@ -215,6 +321,12 @@ public static class SeedHelper
             {
                 Locomotive = "F950",
                 Sections = train4Sections
+            });
+
+        dataContext.Set<Train>()
+            .Add(new Train
+            {
+                Locomotive = "F950",
             });
 
         await dataContext.SaveChangesAsync();
