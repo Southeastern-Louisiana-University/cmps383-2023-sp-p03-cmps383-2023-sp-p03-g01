@@ -4,8 +4,11 @@ using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 
+
 namespace SP23.P03.Web.Controllers
 {
+    [Route("api/routes")]
+    [ApiController]
     public class TrainRouteController : ControllerBase
     {
         private readonly DbSet<TrainRoute> trainRoutes;
@@ -16,10 +19,23 @@ namespace SP23.P03.Web.Controllers
             this.dataContext = dataContext;
             trainRoutes = dataContext.Set<TrainRoute>();
         }
-   /*     [HttpGet]
-        public IQueryable<TrainDto> GetAllTrains()
+        [HttpGet]
+        public IQueryable<TrainRouteDto> GetAllTrainRoutes()
         {
-            *//*return GetTrainDtos(trains);*//*
-        }*/
+            return GetTrainRouteDtos(trainRoutes);
+        }
+        private static IQueryable<TrainRouteDto> GetTrainRouteDtos(IQueryable<TrainRoute> routes)
+        {
+            return routes
+                .Select(x => new TrainRouteDto
+                {
+                    Id = x.Id,
+                    StartingTrainStationId = x.StartingTrainStationId,
+                    EndingTrainStationId= x.EndingTrainStationId,
+                    ArrivalTime = x.ArrivalTime,
+                    DeperatureTime = x.DeperatureTime,
+                    TrainId = x.Train.Id,
+                });
+        }
     }
 }

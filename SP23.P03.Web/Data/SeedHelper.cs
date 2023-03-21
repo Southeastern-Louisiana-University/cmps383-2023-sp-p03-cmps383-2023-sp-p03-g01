@@ -86,15 +86,54 @@ public static class SeedHelper
             return;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            dataContext.Set<TrainStation>()
-                .Add(new TrainStation
-                {
-                    Name = "Hammond",
-                    Address = "1234 Place st"
-                });
-        }
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Hammond",
+                Address = "404 N.W. Railroad Avenue",
+                Hours = "9:00 AM - 4:45 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "New Orlean",
+                Address = "1001 Loyola Avenue",
+                Hours = "5:00 AM - 10:00 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Slidell",
+                Address = "1827 Front St",
+                Hours = "9:00 AM - 10:42 AM\r\n6:00 PM - 7:52 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Picayune",
+                Address = "200 South Highway 11",
+                Hours = "unknown"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Hattiesburg",
+                Address = "308 Newman Street",
+                Hours = "10:00 AM - 1:00 PM\r\n4:00 PM - 7:00 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Meridian",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+            });
+
 
         await dataContext.SaveChangesAsync();
     }
@@ -102,22 +141,22 @@ public static class SeedHelper
     {
         var trainRoutes = dataContext.Set<TrainRoute>();
 
+
         if (await trainRoutes.AnyAsync())
         {
             return;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            dataContext.Set<TrainRoute>()
-                .Add(new TrainRoute
-                {
-                    DeperatureTime = DateTimeOffset.Now,
-                    ArrivalTime= DateTimeOffset.Now,
-                });
-        }
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                DeperatureTime = DateTimeOffset.Now,
+                ArrivalTime = DateTimeOffset.Now,
+            });
 
         await dataContext.SaveChangesAsync();
+
     }
     private static async Task AddTrain(DataContext dataContext)
     {
