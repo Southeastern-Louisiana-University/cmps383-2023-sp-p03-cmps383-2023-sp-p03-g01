@@ -78,8 +78,10 @@ tunnels:
 ![image](https://user-images.githubusercontent.com/74465454/226641468-35fefd90-5934-4d2e-89de-c13416807605.png)
 
 
+
 ### Tunnel to expo
 1. Copy url before (-> http://localhost:19000) 
+(side note this url will change after every ngrok start when I think you switch wifi)
 2. Open your package.json in mobile app with VS Code
 3. Change the EXPO_PACKAGER_PROXY_URL to :"EXPO_PACKAGER_PROXY_URL={your url} && expo start”
 4. Cd commnad to your mobile app in your VS code terminal (ex: cd cmps383-2023-sp-p03-cmps383-2023-sp-p03-g01\SP23-P03-Mobile) 
