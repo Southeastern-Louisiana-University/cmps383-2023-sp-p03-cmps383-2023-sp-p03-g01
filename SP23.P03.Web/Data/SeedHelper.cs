@@ -210,7 +210,7 @@ public static class SeedHelper
                 StartingTrainStationId = station1.Id,
                 EndingTrainStation = station2,
                 EndingTrainStationId = station2.Id,
-                Train = train5,
+                Train = train1,
             });
 
         dataContext.Set<TrainRoute>()
@@ -222,7 +222,7 @@ public static class SeedHelper
                 StartingTrainStationId = station2.Id,
                 EndingTrainStation = station3,
                 EndingTrainStationId = station3.Id,
-                Train = train1,
+                Train = train5,
             });
 
         dataContext.Set<TrainRoute>()
