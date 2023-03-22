@@ -10,6 +10,8 @@ import { TrainTrackingPage } from './components/pages/TrainTracking/TrainTrackin
 import { AccountPage } from './components/pages/Account/AccountPage';
 import { NotFoundPage } from './components/pages/NotFound/NotFoundPage';
 import { RoutePlanningPage } from './components/pages/RoutePlanning/RoutePlanningPage';
+import { TicketSuccessPage } from './components/pages/PurchaseHandling/TicketSuccessPage';
+import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCanceledPage';
 
 /**
  * This is the main component of the application.
@@ -26,6 +28,8 @@ export function App(): React.ReactElement {
           <Route path={AppRoutes.TRAIN_TRACKING} element={<TrainTrackingPage />} />
           <Route path={AppRoutes.ACCOUNT_PAGE} element={<AccountPage />} />
           <Route path={AppRoutes.ROUTE_PLANNING} element={<RoutePlanningPage />} />
+          <Route path={AppRoutes.TICKET_SUCCESS} element={<TicketSuccessPage />} />
+          <Route path={AppRoutes.TICKET_CANCELED} element={<TicketCanceledPage />} />
 
           {/* Page Not Found */}
           <Route path="*" element={<NotFoundPage />} />
