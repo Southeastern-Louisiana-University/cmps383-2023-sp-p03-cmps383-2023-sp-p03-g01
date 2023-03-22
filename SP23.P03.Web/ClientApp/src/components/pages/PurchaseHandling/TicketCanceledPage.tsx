@@ -6,15 +6,14 @@ import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { TICKET_CANCELED_PAGE_STYLING } from './TicketCanceledPageStyling';
 
-interface TicketCanceledPage {}
+interface TicketCanceledPageProps {}
 /**
  * <description here>
  *
  * @param props <description here>
  */
 
-export function TicketCanceledPage(props: TicketCanceledPage): React.ReactElement {
-
+export function TicketCanceledPage(props: TicketCanceledPageProps): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);

@@ -5,20 +5,17 @@ import { useViewportSize } from '@mantine/hooks';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { TICKET_SUCCESS_PAGE_STYLING } from './TicketSuccessPageStyling';
-import { useSearchParams } from 'react-router-dom';
 
-interface TicketSuccessPage {}
+interface TicketSuccessPageProps {}
 /**
  * <description here>
  *
  * @param props <description here>
  */
-export function TicketSuccessPage(props: TicketSuccessPage): React.ReactElement {
-
+export function TicketSuccessPage(props: TicketSuccessPageProps): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
-  const [searchParams] = useSearchParams();
 
   const navigateToHomePage = () => {
     navigate(AppRoutes.HOME);
