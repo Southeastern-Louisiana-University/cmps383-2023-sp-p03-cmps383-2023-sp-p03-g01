@@ -38,18 +38,18 @@ export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): Re
   };
 
   return (
-    <Drawer opened={opened} onClose={onClose} title="Navigate to..." padding="sm" position="top" size="auto">
+    <Drawer opened={opened} onClose={onClose} title="Navigate to..." padding="sm" position="left" size="auto">
       <div style={HEADER_STYLING.navDrawerButtonContainerStyles}>
         <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainSchedules}>
-          Train Schedules
+          Schedules
         </Button>
 
         <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainStatuses}>
-          Train Statuses
+          Statuses
         </Button>
 
         <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainTracking}>
-          Train Tracking
+          Tracking
         </Button>
       </div>
     </Drawer>

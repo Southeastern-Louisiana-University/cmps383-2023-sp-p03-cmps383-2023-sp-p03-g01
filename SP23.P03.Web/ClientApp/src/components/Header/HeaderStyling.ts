@@ -66,7 +66,6 @@ export const HEADER_STYLING: PageStyles = {
 
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
     gap: `${STYLING_VARIABLES.defaultSpacing}`,
   },
   navDrawerButtonStyles: {

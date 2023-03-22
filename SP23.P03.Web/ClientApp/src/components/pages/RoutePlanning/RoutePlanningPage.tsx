@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Paper } from '@mantine/core';
+import { Button } from '@mantine/core';
 
 interface RoutePlanningPageProps {}
 /**
@@ -12,8 +12,8 @@ export function RoutePlanningPage(props: RoutePlanningPageProps): React.ReactEle
     <div>
       {/* This is a placeholder that launches the Stripe payment */}
       <form action="/api/payment/create-checkout-session" method="POST">
-          <Button type="submit">Checkout</Button>
-        </form>
+        <Button type="submit">Checkout</Button>
+      </form>
     </div>
   );
 }

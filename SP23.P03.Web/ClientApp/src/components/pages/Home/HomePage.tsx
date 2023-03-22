@@ -1,4 +1,5 @@
-import { Button, Paper } from '@mantine/core';
+import { Button, NumberInput, Paper, Select } from '@mantine/core';
+import { DateInput } from '@mantine/dates';
 import { useViewportSize } from '@mantine/hooks';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +30,12 @@ export function HomePage(): React.ReactElement {
     <div style={HOME_PAGE_STYLING.rootStyles}>
       <div style={HOME_PAGE_STYLING.rootContentStyles}>
         <Paper shadow="lg" style={HOME_PAGE_STYLING.paperStyles}>
-          <TrainStationSelect label="Where do you want to go?" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
+          <Select data={[]} label="Trip Type:" />
+          <NumberInput label="Passengers:" />
+          <Select data={[]} label="Leaving From:" />
+          <TrainStationSelect label="Going To:" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
+          <DateInput label="Leaving When?" />
+          <DateInput label="Returning When?" />
 
           {selectedTrainStation !== null && (
             <Button size={componentSize} onClick={navigateToRoutePlanningPage}>
@@ -37,7 +43,6 @@ export function HomePage(): React.ReactElement {
             </Button>
           )}
         </Paper>
-
       </div>
     </div>
   );
