@@ -30,15 +30,17 @@ export function HomePage(): React.ReactElement {
     <div style={HOME_PAGE_STYLING.rootStyles}>
       <div style={HOME_PAGE_STYLING.rootContentStyles}>
         <Paper shadow="lg" style={HOME_PAGE_STYLING.paperStyles}>
-          <Select data={[]} label="Trip Type:" />
-          <NumberInput label="Passengers:" />
-          <Select data={[]} label="Leaving From:" />
-          <TrainStationSelect label="Going To:" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
-          <DateInput label="Leaving When?" />
-          <DateInput label="Returning When?" />
+          <Select style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} data={[]} label="Trip Type:" />
+          <NumberInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Passengers:" />
+
+          <Select style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} data={[]} label="Leaving From:" />
+          <TrainStationSelect style={HOME_PAGE_STYLING.paperContentStyles} label="Going To:" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
+
+          <DateInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Leaving When?" />
+          <DateInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Returning When?" />
 
           {selectedTrainStation !== null && (
-            <Button size={componentSize} onClick={navigateToRoutePlanningPage}>
+            <Button style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} onClick={navigateToRoutePlanningPage}>
               Find A Route
             </Button>
           )}

@@ -99,5 +99,12 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+    NumberInput: {
+      styles: {
+        label: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+      },
+    },
   },
 };

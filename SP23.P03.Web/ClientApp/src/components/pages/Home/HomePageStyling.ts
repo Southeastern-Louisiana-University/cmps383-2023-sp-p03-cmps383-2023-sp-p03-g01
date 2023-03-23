@@ -33,4 +33,7 @@ export const HOME_PAGE_STYLING: PageStyles = {
     justifyContent: 'center',
     gap: `${STYLING_VARIABLES.defaultSpacing}`,
   },
+  paperContentStyles: {
+    width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})`,
+  },
 };

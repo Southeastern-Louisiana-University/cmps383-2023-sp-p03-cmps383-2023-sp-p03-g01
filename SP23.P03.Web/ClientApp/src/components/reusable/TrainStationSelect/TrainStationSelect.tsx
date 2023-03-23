@@ -5,6 +5,7 @@ import { TRAIN_STATIONS } from '../../../models/tempFillerData/trainStations';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 
 interface TrainStationSelectProps {
+  style?: React.CSSProperties;
   label: string;
   value: string | null;
   setValue: (value: string | null) => void;
@@ -17,7 +18,7 @@ interface TrainStationSelectProps {
  * @param props.value The currently selected value.
  * @param props.setValue The function to call when the value changes.
  */
-export function TrainStationSelect({ label, value, setValue }: TrainStationSelectProps): React.ReactElement {
+export function TrainStationSelect({ style, label, value, setValue }: TrainStationSelectProps): React.ReactElement {
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
 
@@ -29,19 +30,5 @@ export function TrainStationSelect({ label, value, setValue }: TrainStationSelec
     };
   });
 
-  return (
-    <Select
-      style={{
-        width: '100%',
-      }}
-      data={data}
-      value={value}
-      onChange={setValue}
-      label={label}
-      size={componentSize}
-      searchable
-      clearable
-      nothingFound="No options"
-    />
-  );
+  return <Select style={style} data={data} value={value} onChange={setValue} label={label} size={componentSize} searchable clearable nothingFound="No options" />;
 }
