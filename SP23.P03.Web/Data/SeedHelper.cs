@@ -82,6 +82,15 @@ public static class SeedHelper
     {
         var trainStations = dataContext.Set<TrainStation>();
 
+        var seededarrayoftrainstation = new List<TrainStation>()
+        {
+            new TrainStation
+            {
+                Name = "Hammond",
+                Address = "404 N.W. Railroad Avenue",
+                Hours = "9:00 AM - 4:45 PM"
+            },
+    };
         if (await trainStations.AnyAsync())
         {
             return;
