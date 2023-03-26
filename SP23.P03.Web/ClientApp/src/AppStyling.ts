@@ -1,27 +1,28 @@
 import { MantineThemeOverride } from '@mantine/core';
 import { COLOR_PALETTE } from './styling/ColorPalette';
-import { PageStyles } from './styling/PageStyles';
 import { STYLING_VARIABLES } from './styling/StylingVariables';
 
 /**
  * Styling for the App Component.
  */
-export const APP_STYLING: PageStyles = {
-  rootStyles: {},
+export const APP_STYLING = {
+  rootStyles: {} as React.CSSProperties,
+
   contentRootStyles: {
     width: '100%',
     height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
 
     display: 'flex',
     justifyContent: 'center',
-  },
+  } as React.CSSProperties,
+
   contentStyles: {
     width: '100%',
     maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
     height: '100%',
 
     margin: `${STYLING_VARIABLES.defaultSpacing}`,
-  },
+  } as React.CSSProperties,
 };
 
 /**

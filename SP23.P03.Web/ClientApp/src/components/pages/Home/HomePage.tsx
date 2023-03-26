@@ -1,12 +1,24 @@
-import { Button, NumberInput, Paper, Select } from '@mantine/core';
-import { DateInput } from '@mantine/dates';
+import { Button, Paper } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AppRoutes } from '../../../models/AppRoutes';
+import React from 'react';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
-import { TrainStationSelect } from '../../reusable/TrainStationSelect/TrainStationSelect';
+import { DestinationStationSelect } from './modules/DestinationStationSelect';
 import { HOME_PAGE_STYLING } from './HomePageStyling';
+import { DepartureStationSelect } from './modules/DepartureStationSelect';
+import { PassengersNumberInput } from './modules/PassengersNumberInput';
+import { TripSelect } from './modules/TripSelect';
+import { DepartureDatePicker } from './modules/DepartureDatePicker';
+import { ReturnDatePicker } from './modules/ReturnDatePicker';
+import { AppRoutes } from '../../../models/AppRoutes';
+import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import {
+  enteredPassengerCountState,
+  selectedArrivalStationState,
+  selectedDepartureDateState,
+  selectedDepartureStationState,
+  selectedReturnDateState,
+} from '../../../recoil/atoms/HomePageAtom';
 
 /**
  * The home page of the app.
@@ -16,31 +28,48 @@ export function HomePage(): React.ReactElement {
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
 
-  const [selectedTrainStation, setSelectedTrainStation] = useState<string | null>(null);
-
-  const updateSelectedTrainStation = (value: string | null) => {
-    setSelectedTrainStation(value);
-  };
+  const enteredPassengerCount = useRecoilValue(enteredPassengerCountState);
+  const selectedDepartureStation = useRecoilValue(selectedDepartureStationState);
+  const selectedArrivalStation = useRecoilValue(selectedArrivalStationState);
+  const selectedDepartureDate = useRecoilValue(selectedDepartureDateState);
+  const selectedReturnDate = useRecoilValue(selectedReturnDateState);
+  const formIsComplete =
+    enteredPassengerCount > 0 &&
+    selectedDepartureStation !== '' &&
+    selectedArrivalStation !== '' &&
+    selectedDepartureDate !== null &&
+    selectedReturnDate !== null;
 
   const navigateToRoutePlanningPage = () => {
     navigate(AppRoutes.ROUTE_PLANNING);
   };
 
   return (
-    <div style={HOME_PAGE_STYLING.rootStyles}>
-      <div style={HOME_PAGE_STYLING.rootContentStyles}>
-        <Paper shadow="lg" style={HOME_PAGE_STYLING.paperStyles}>
-          <Select style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} data={[]} label="Trip Type:" />
-          <NumberInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Passengers:" />
+    <div style={HOME_PAGE_STYLING['rootStyles']}>
+      <div style={HOME_PAGE_STYLING['rootContentStyles']}>
+        <Paper
+          shadow='lg'
+          style={HOME_PAGE_STYLING['paperStyles'] as React.CSSProperties}
+        >
+          {/* Top Row */}
+          <TripSelect />
+          <PassengersNumberInput />
 
-          <Select style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} data={[]} label="Leaving From:" />
-          <TrainStationSelect style={HOME_PAGE_STYLING.paperContentStyles} label="Going To:" value={selectedTrainStation} setValue={updateSelectedTrainStation} />
+          {/* 2nd Row */}
+          <DepartureStationSelect />
+          <DestinationStationSelect />
 
-          <DateInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Leaving When?" />
-          <DateInput style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} label="Returning When?" />
+          {/* 3rd Row */}
+          <DepartureDatePicker />
+          <ReturnDatePicker />
 
-          {selectedTrainStation !== null && (
-            <Button style={HOME_PAGE_STYLING.paperContentStyles} size={componentSize} onClick={navigateToRoutePlanningPage}>
+          {/* Final Row */}
+          {formIsComplete && (
+            <Button
+              style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+              size={componentSize}
+              onClick={navigateToRoutePlanningPage}
+            >
               Find A Route
             </Button>
           )}

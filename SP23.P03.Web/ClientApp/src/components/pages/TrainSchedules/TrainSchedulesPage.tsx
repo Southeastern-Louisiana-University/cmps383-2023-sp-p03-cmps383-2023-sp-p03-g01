@@ -1,12 +1,9 @@
 import React from 'react';
 
-interface TrainSchedulesPageProps {}
 /**
  * <description here>
- *
- * @param props <description here>
  */
-export function TrainSchedulesPage(props: TrainSchedulesPageProps): React.ReactElement {
+export function TrainSchedulesPage(): React.ReactElement {
   return (
     <div>
       <span>TrainSchedulesPage</span>

@@ -1,16 +1,16 @@
-import { PageStyles } from '../../../styling/PageStyles';
 import { STYLING_VARIABLES } from '../../../styling/StylingVariables';
 
 /**
  * Styling for the HomePage component.
  */
-export const HOME_PAGE_STYLING: PageStyles = {
+export const HOME_PAGE_STYLING = {
   rootStyles: {
     width: '100%',
 
     display: 'flex',
     justifyContent: 'center',
-  },
+  } as React.CSSProperties,
+
   rootContentStyles: {
     width: '100%',
     maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
@@ -21,7 +21,8 @@ export const HOME_PAGE_STYLING: PageStyles = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-  },
+  } as React.CSSProperties,
+
   paperStyles: {
     width: '100%',
     maxWidth: '1000px',
@@ -32,8 +33,9 @@ export const HOME_PAGE_STYLING: PageStyles = {
     flexWrap: 'wrap',
     justifyContent: 'center',
     gap: `${STYLING_VARIABLES.defaultSpacing}`,
-  },
+  } as React.CSSProperties,
+
   paperContentStyles: {
     width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})`,
-  },
+  } as React.CSSProperties,
 };
