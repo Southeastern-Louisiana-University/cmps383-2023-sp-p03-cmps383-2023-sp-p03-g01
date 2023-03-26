@@ -45,11 +45,11 @@ export function HomePage(): React.ReactElement {
   };
 
   return (
-    <div style={HOME_PAGE_STYLING['rootStyles']}>
-      <div style={HOME_PAGE_STYLING['rootContentStyles']}>
+    <div style={HOME_PAGE_STYLING.rootStyles}>
+      <div style={HOME_PAGE_STYLING.rootContentStyles}>
         <Paper
           shadow='lg'
-          style={HOME_PAGE_STYLING['paperStyles'] as React.CSSProperties}
+          style={HOME_PAGE_STYLING.paperStyles}
         >
           {/* Top Row */}
           <TripSelect />
@@ -66,7 +66,7 @@ export function HomePage(): React.ReactElement {
           {/* Final Row */}
           {formIsComplete && (
             <Button
-              style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+              style={HOME_PAGE_STYLING.paperContentStyles}
               size={componentSize}
               onClick={navigateToRoutePlanningPage}
             >

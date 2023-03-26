@@ -30,7 +30,7 @@ export function ReturnDatePicker(): React.ReactElement {
 
   return (
     <DateInput
-      style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+      style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
       label='Returning When?'
       value={returnDate}

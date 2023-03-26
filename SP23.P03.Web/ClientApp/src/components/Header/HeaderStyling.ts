@@ -7,7 +7,7 @@ import { STYLING_VARIABLES } from '../../styling/StylingVariables';
 export const HEADER_STYLING = {
   rootStyles: {
     width: '100%',
-    height: STYLING_VARIABLES.headerHeight,
+    height: `calc(${STYLING_VARIABLES.headerHeight} - 1px)`, // -1px to account for the border
 
     borderBottom: `1px solid ${COLOR_PALETTE.light.default.borderColor}`,
 

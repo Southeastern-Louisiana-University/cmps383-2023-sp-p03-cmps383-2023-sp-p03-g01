@@ -21,7 +21,7 @@ export function DepartureStationSelect(): React.ReactElement {
 
   return (
     <Select
-      style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+      style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
       data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA']}
       label='Departing From:'

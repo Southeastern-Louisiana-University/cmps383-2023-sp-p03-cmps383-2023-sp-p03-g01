@@ -21,7 +21,7 @@ export function PassengersNumberInput(): React.ReactElement {
 
   return (
     <NumberInput
-      style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+      style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
       label='Passengers:'
       value={passengers}

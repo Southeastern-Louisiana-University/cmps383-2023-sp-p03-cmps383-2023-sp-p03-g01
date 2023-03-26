@@ -21,7 +21,7 @@ export function DepartureDatePicker(): React.ReactElement {
 
   return (
     <DateInput
-      style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+      style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
       label='Departing When?'
       value={departureDate}

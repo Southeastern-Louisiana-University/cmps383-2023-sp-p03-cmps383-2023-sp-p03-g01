@@ -24,7 +24,7 @@ export function TripSelect(): React.ReactElement {
 
   return (
     <Select
-      style={HOME_PAGE_STYLING['paperContentStyles'] as React.CSSProperties}
+      style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
       data={data}
       value={selectedTripType}

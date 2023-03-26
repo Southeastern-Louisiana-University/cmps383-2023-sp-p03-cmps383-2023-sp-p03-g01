@@ -6,14 +6,15 @@ import { STYLING_VARIABLES } from './styling/StylingVariables';
  * Styling for the App Component.
  */
 export const APP_STYLING = {
-  rootStyles: {} as React.CSSProperties,
+  rootStyles: {
+    height: '100vh',
+  } as React.CSSProperties,
 
   contentRootStyles: {
     width: '100%',
     height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
 
-    display: 'flex',
-    justifyContent: 'center',
+    overflowY: 'auto',
   } as React.CSSProperties,
 
   contentStyles: {
@@ -45,6 +46,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Drawer: {
       styles: {
         drawer: {
@@ -64,6 +66,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Modal: {
       styles: {
         header: {
@@ -74,6 +77,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     TextInput: {
       styles: {
         label: {
@@ -84,6 +88,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Select: {
       styles: {
         label: {
@@ -100,11 +105,32 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     NumberInput: {
       styles: {
         label: {
           fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
         },
+      },
+    },
+
+    Accordion: {
+      styles: {
+        control: {
+          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+
+          color: 'white',
+
+          backgroundColor: COLOR_PALETTE.light.default.blueNcs,
+
+          '&:hover': {
+            backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
+          },
+        },
+      },
+      defaultProps: {
+        radius: 'md',
+        variant: 'contained',
       },
     },
   },
