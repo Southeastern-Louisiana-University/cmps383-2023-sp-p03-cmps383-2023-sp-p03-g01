@@ -23,7 +23,7 @@ export function DepartureStationSelect(): React.ReactElement {
     <Select
       style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
-      data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA']}
+      data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA', 'Lake Charles, LA']}
       label='Departing From:'
       value={departureLocation}
       onChange={updateDepartureLocation}

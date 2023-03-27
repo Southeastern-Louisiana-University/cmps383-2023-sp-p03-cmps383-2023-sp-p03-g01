@@ -24,7 +24,9 @@ export function DestinationStationSelect(): React.ReactElement {
     <Select
       style={HOME_PAGE_STYLING.paperContentStyles}
       size={componentSize}
-      data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA'].filter((station) => station !== departureStation)}
+      data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA', 'Lake Charles, LA'].filter(
+        (station) => station !== departureStation
+      )}
       label='Destination:'
       value={arrivalLocation}
       onChange={updateArrivalLocation}
