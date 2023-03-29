@@ -6,13 +6,10 @@ import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { TICKET_SUCCESS_PAGE_STYLING } from './TicketSuccessPageStyling';
 
-interface TicketSuccessPageProps {}
 /**
  * <description here>
- *
- * @param props <description here>
  */
-export function TicketSuccessPage(props: TicketSuccessPageProps): React.ReactElement {
+export function TicketSuccessPage(): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
@@ -26,7 +23,10 @@ export function TicketSuccessPage(props: TicketSuccessPageProps): React.ReactEle
       {/* This is a placeholder that launches the Stripe payment */}
       <span>Purchase complete! Thanks for riding with EnTrack today!</span>
       <span>Your confirmation number is: 314159</span>
-      <Button size={componentSize} onClick={navigateToHomePage}>
+      <Button
+        size={componentSize}
+        onClick={navigateToHomePage}
+      >
         Home
       </Button>
     </div>

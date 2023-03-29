@@ -21,19 +21,48 @@ export function App(): React.ReactElement {
     <div style={APP_STYLING.rootStyles}>
       <MantineProvider theme={mantineTheme}>
         <Header />
-        <Routes>
-          <Route path={AppRoutes.HOME} element={<HomePage />} />
-          <Route path={AppRoutes.TRAIN_SCHEDULES} element={<TrainSchedulesPage />} />
-          <Route path={AppRoutes.TRAIN_STATUSES} element={<TrainStatusesPage />} />
-          <Route path={AppRoutes.TRAIN_TRACKING} element={<TrainTrackingPage />} />
-          <Route path={AppRoutes.ACCOUNT_PAGE} element={<AccountPage />} />
-          <Route path={AppRoutes.ROUTE_PLANNING} element={<RoutePlanningPage />} />
-          <Route path={AppRoutes.TICKET_SUCCESS} element={<TicketSuccessPage />} />
-          <Route path={AppRoutes.TICKET_CANCELED} element={<TicketCanceledPage />} />
+        <div style={APP_STYLING.contentRootStyles}>
+          <Routes>
+            <Route
+              path={AppRoutes.HOME}
+              element={<HomePage />}
+            />
+            <Route
+              path={AppRoutes.TRAIN_SCHEDULES}
+              element={<TrainSchedulesPage />}
+            />
+            <Route
+              path={AppRoutes.TRAIN_STATUSES}
+              element={<TrainStatusesPage />}
+            />
+            <Route
+              path={AppRoutes.TRAIN_TRACKING}
+              element={<TrainTrackingPage />}
+            />
+            <Route
+              path={AppRoutes.ACCOUNT_PAGE}
+              element={<AccountPage />}
+            />
+            <Route
+              path={AppRoutes.ROUTE_PLANNING}
+              element={<RoutePlanningPage />}
+            />
+            <Route
+              path={AppRoutes.TICKET_SUCCESS}
+              element={<TicketSuccessPage />}
+            />
+            <Route
+              path={AppRoutes.TICKET_CANCELED}
+              element={<TicketCanceledPage />}
+            />
 
-          {/* Page Not Found */}
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+            {/* Page Not Found */}
+            <Route
+              path='*'
+              element={<NotFoundPage />}
+            />
+          </Routes>
+        </div>
       </MantineProvider>
     </div>
   );

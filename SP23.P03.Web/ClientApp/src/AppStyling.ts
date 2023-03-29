@@ -1,27 +1,29 @@
 import { MantineThemeOverride } from '@mantine/core';
 import { COLOR_PALETTE } from './styling/ColorPalette';
-import { PageStyles } from './styling/PageStyles';
 import { STYLING_VARIABLES } from './styling/StylingVariables';
 
 /**
  * Styling for the App Component.
  */
-export const APP_STYLING: PageStyles = {
-  rootStyles: {},
+export const APP_STYLING = {
+  rootStyles: {
+    height: '100vh',
+  } as React.CSSProperties,
+
   contentRootStyles: {
     width: '100%',
     height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
 
-    display: 'flex',
-    justifyContent: 'center',
-  },
+    overflowY: 'auto',
+  } as React.CSSProperties,
+
   contentStyles: {
     width: '100%',
     maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
     height: '100%',
 
     margin: `${STYLING_VARIABLES.defaultSpacing}`,
-  },
+  } as React.CSSProperties,
 };
 
 /**
@@ -44,6 +46,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Drawer: {
       styles: {
         drawer: {
@@ -63,6 +66,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Modal: {
       styles: {
         header: {
@@ -73,6 +77,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     TextInput: {
       styles: {
         label: {
@@ -83,6 +88,7 @@ export const mantineTheme: MantineThemeOverride = {
         },
       },
     },
+
     Select: {
       styles: {
         label: {
@@ -97,6 +103,34 @@ export const mantineTheme: MantineThemeOverride = {
         separatorLabel: {
           fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
         },
+      },
+    },
+
+    NumberInput: {
+      styles: {
+        label: {
+          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+        },
+      },
+    },
+
+    Accordion: {
+      styles: {
+        control: {
+          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+
+          color: 'white',
+
+          backgroundColor: COLOR_PALETTE.light.default.blueNcs,
+
+          '&:hover': {
+            backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
+          },
+        },
+      },
+      defaultProps: {
+        radius: 'md',
+        variant: 'contained',
       },
     },
   },
