@@ -43,14 +43,14 @@ export function RoutePlanningPage(): React.ReactElement {
         day: 'numeric',
         year: 'numeric',
       })
-    : 'ERROR';
+    : null;
   const formattedReturnDate = selectedReturnDate
     ? selectedReturnDate.toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',
         year: 'numeric',
       })
-    : 'ERROR';
+    : null;
 
   const [currentStep, setCurrentStep] = useState<0 | 1 | 2>(0);
 
@@ -80,6 +80,10 @@ export function RoutePlanningPage(): React.ReactElement {
 
   const navigateToHome = (): void => {
     navigate(AppRoutes.HOME);
+  };
+
+  const formatNumber = (num: number): string => {
+    return Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
   return (
@@ -115,8 +119,12 @@ export function RoutePlanningPage(): React.ReactElement {
               {/* Trip Dates */}
               <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
                 <span>{formattedDepartureDate}</span>
-                <span>|</span>
-                <span>{formattedReturnDate}</span>
+                {formattedReturnDate ? (
+                  <>
+                    <span>|</span>
+                    <span>{formattedReturnDate}</span>
+                  </>
+                ) : null}
               </div>
             </div>
           </Stepper.Step>
@@ -149,8 +157,12 @@ export function RoutePlanningPage(): React.ReactElement {
               {/* Trip Dates */}
               <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
                 <span>{formattedDepartureDate}</span>
-                <span>|</span>
-                <span>{formattedReturnDate}</span>
+                {formattedReturnDate ? (
+                  <>
+                    <span>|</span>
+                    <span>{formattedReturnDate}</span>
+                  </>
+                ) : null}
               </div>
             </div>
           </Stepper.Step>
@@ -183,8 +195,12 @@ export function RoutePlanningPage(): React.ReactElement {
               {/* Trip Dates */}
               <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
                 <span>{formattedDepartureDate}</span>
-                <span>|</span>
-                <span>{formattedReturnDate}</span>
+                {formattedReturnDate ? (
+                  <>
+                    <span>|</span>
+                    <span>{formattedReturnDate}</span>
+                  </>
+                ) : null}
               </div>
             </div>
           </Stepper.Step>
@@ -213,16 +229,18 @@ export function RoutePlanningPage(): React.ReactElement {
                               <tr>
                                 <th {...tStyle2}>Departure Time</th>
                                 <th {...tStyle2}>Final Arrival Time</th>
+                                <th {...tStyle2}>Trip Duration</th>
                                 <th {...tStyle2}>Total Stops</th>
-                                <th {...tStyle2}>Estimated Minimum Cost (USD)</th>
+                                <th {...tStyle2}>Cost (USD)</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td {...tStyle2}>8:00 AM CDT</td>
                                 <td {...tStyle2}>3:00 PM CDT</td>
+                                <td {...tStyle2}>7 hours</td>
                                 <td {...tStyle2}>5</td>
-                                <td {...tStyle2}>$152</td>
+                                <td {...tStyle2}>{formatNumber(156)}</td>
                               </tr>
                             </tbody>
                           </Table>
@@ -232,58 +250,58 @@ export function RoutePlanningPage(): React.ReactElement {
                             <thead>
                               <tr>
                                 <th {...tStyle1}>Stop</th>
-                                <th {...tStyle1}>Model</th>
                                 <th {...tStyle1}>Departure Time</th>
                                 <th {...tStyle1}>Departure Station</th>
                                 <th {...tStyle1}>Arrival Time</th>
                                 <th {...tStyle1}>Arrival Station</th>
+                                <th {...tStyle1}>Dwell Time</th>
                                 <th {...tStyle1}>Layover</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td {...tStyle1}>1</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>8:00 AM CDT</td>
                                 <td {...tStyle1}>Baton Rouge, LA</td>
                                 <td {...tStyle1}>9:18 AM CDT</td>
                                 <td {...tStyle1}>New Orleans, LA</td>
                                 <td {...tStyle1}>15 minutes</td>
+                                <td {...tStyle1}>None</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>2</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>9:33 AM CDT</td>
                                 <td {...tStyle1}>New Orleans, LA</td>
                                 <td {...tStyle1}>10:51 AM CDT</td>
                                 <td {...tStyle1}>Schriever, LA</td>
+                                <td {...tStyle1}>None</td>
                                 <td {...tStyle1}>30 minutes</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>3</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>11:21 AM CDT</td>
                                 <td {...tStyle1}>Schriever, LA</td>
                                 <td {...tStyle1}>12:39 PM CDT</td>
                                 <td {...tStyle1}>New Iberia, LA</td>
                                 <td {...tStyle1}>15 minutes</td>
+                                <td {...tStyle1}>None</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>4</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>12:54 PM CDT</td>
                                 <td {...tStyle1}>New Iberia, LA</td>
                                 <td {...tStyle1}>2:12 PM CDT</td>
                                 <td {...tStyle1}>Lafayette, LA</td>
+                                <td {...tStyle1}>None</td>
                                 <td {...tStyle1}>30 minutes</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>5</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>2:42 PM CDT</td>
                                 <td {...tStyle1}>Lafayette, LA</td>
                                 <td {...tStyle1}>3:00 PM CDT</td>
                                 <td {...tStyle1}>Lake Charles, LA</td>
+                                <td {...tStyle1}>None</td>
                                 <td {...tStyle1}>None</td>
                               </tr>
                             </tbody>
@@ -305,16 +323,18 @@ export function RoutePlanningPage(): React.ReactElement {
                               <tr>
                                 <th {...tStyle2}>Departure Time</th>
                                 <th {...tStyle2}>Final Arrival Time</th>
+                                <th {...tStyle2}>Trip Duration</th>
                                 <th {...tStyle2}>Total Stops</th>
-                                <th {...tStyle2}>Estimated Minimum Cost (USD)</th>
+                                <th {...tStyle2}>Cost (USD)</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td {...tStyle2}>10:00 AM CDT</td>
                                 <td {...tStyle2}>5:00 PM CDT</td>
+                                <td {...tStyle2}>7 hours</td>
                                 <td {...tStyle2}>5</td>
-                                <td {...tStyle2}>$152</td>
+                                <td {...tStyle2}>{formatNumber(156)}</td>
                               </tr>
                             </tbody>
                           </Table>
@@ -324,58 +344,58 @@ export function RoutePlanningPage(): React.ReactElement {
                             <thead>
                               <tr>
                                 <th {...tStyle1}>Stop</th>
-                                <th {...tStyle1}>Model</th>
                                 <th {...tStyle1}>Departure Time</th>
                                 <th {...tStyle1}>Departure Station</th>
                                 <th {...tStyle1}>Arrival Time</th>
                                 <th {...tStyle1}>Arrival Station</th>
+                                <th {...tStyle1}>Dwell Time</th>
                                 <th {...tStyle1}>Layover</th>
                               </tr>
                             </thead>
                             <tbody>
                               <tr>
                                 <td {...tStyle1}>1</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>10:00 AM CDT</td>
                                 <td {...tStyle1}>Baton Rouge, LA</td>
                                 <td {...tStyle1}>11:18 AM CDT</td>
                                 <td {...tStyle1}>New Orleans, LA</td>
-                                <td {...tStyle1}>15 minutes</td>
+                                <td {...tStyle1}>15min</td>
+                                <td {...tStyle1}>None</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>2</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>11:33 AM CDT</td>
                                 <td {...tStyle1}>New Orleans, LA</td>
                                 <td {...tStyle1}>12:51 PM CDT</td>
                                 <td {...tStyle1}>Schriever, LA</td>
-                                <td {...tStyle1}>30 minutes</td>
+                                <td {...tStyle1}>None</td>
+                                <td {...tStyle1}>30min</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>3</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>1:21 PM CDT</td>
                                 <td {...tStyle1}>Schriever, LA</td>
                                 <td {...tStyle1}>2:39 PM CDT</td>
                                 <td {...tStyle1}>New Iberia, LA</td>
-                                <td {...tStyle1}>15 minutes</td>
+                                <td {...tStyle1}>15min</td>
+                                <td {...tStyle1}>None</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>4</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>2:54 PM CDT</td>
                                 <td {...tStyle1}>New Iberia, LA</td>
                                 <td {...tStyle1}>4:12 PM CDT</td>
                                 <td {...tStyle1}>Lafayette, LA</td>
-                                <td {...tStyle1}>30 minutes</td>
+                                <td {...tStyle1}>None</td>
+                                <td {...tStyle1}>30min</td>
                               </tr>
                               <tr>
                                 <td {...tStyle1}>5</td>
-                                <td {...tStyle1}>Siemens Charger</td>
                                 <td {...tStyle1}>4:42 PM CDT</td>
                                 <td {...tStyle1}>Lafayette, LA</td>
                                 <td {...tStyle1}>5:00 PM CDT</td>
                                 <td {...tStyle1}>Lake Charles, LA</td>
+                                <td {...tStyle1}>None</td>
                                 <td {...tStyle1}>None</td>
                               </tr>
                             </tbody>
@@ -406,7 +426,6 @@ export function RoutePlanningPage(): React.ReactElement {
                         <Table>
                           <thead>
                             <tr>
-                              <th {...tStyle2}>Model</th>
                               <th {...tStyle2}>Departure Time</th>
                               <th {...tStyle2}>Departure Station</th>
                               <th {...tStyle2}>Arrival Time</th>
@@ -415,7 +434,6 @@ export function RoutePlanningPage(): React.ReactElement {
                           </thead>
                           <tbody>
                             <tr>
-                              <td {...tStyle2}>Siemens Charger</td>
                               <td {...tStyle2}>8:00 AM CDT</td>
                               <td {...tStyle2}>Baton Rouge, LA</td>
                               <td {...tStyle2}>10:51 AM CDT</td>
@@ -428,19 +446,19 @@ export function RoutePlanningPage(): React.ReactElement {
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <Checkbox
                             size={componentSize}
-                            label='Coach (52$)'
+                            label={`Coach (${formatNumber(52)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='First Class (72$)'
+                            label={`First Class (${formatNumber(72)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Sleeper (92$)'
+                            label={`Sleeper (${formatNumber(92)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Roomlet (120$)'
+                            label={`Roomlet (${formatNumber(120)})`}
                           />
                         </div>
                       </Accordion.Panel>
@@ -454,7 +472,6 @@ export function RoutePlanningPage(): React.ReactElement {
                         <Table>
                           <thead>
                             <tr>
-                              <th {...tStyle2}>Model</th>
                               <th {...tStyle2}>Departure Time</th>
                               <th {...tStyle2}>Departure Station</th>
                               <th {...tStyle2}>Arrival Time</th>
@@ -463,7 +480,6 @@ export function RoutePlanningPage(): React.ReactElement {
                           </thead>
                           <tbody>
                             <tr>
-                              <td {...tStyle2}>Siemens Charger</td>
                               <td {...tStyle2}>11:21 AM CDT</td>
                               <td {...tStyle2}>Schriever, LA</td>
                               <td {...tStyle2}>2:12 PM CDT</td>
@@ -476,19 +492,19 @@ export function RoutePlanningPage(): React.ReactElement {
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <Checkbox
                             size={componentSize}
-                            label='Coach (52$)'
+                            label={`Coach (${formatNumber(52)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='First Class (72$)'
+                            label={`First Class (${formatNumber(72)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Sleeper (92$)'
+                            label={`Sleeper (${formatNumber(92)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Roomlet (120$)'
+                            label={`Roomlet (${formatNumber(120)})`}
                           />
                         </div>
                       </Accordion.Panel>
@@ -502,7 +518,6 @@ export function RoutePlanningPage(): React.ReactElement {
                         <Table>
                           <thead>
                             <tr>
-                              <th {...tStyle2}>Model</th>
                               <th {...tStyle2}>Departure Time</th>
                               <th {...tStyle2}>Departure Station</th>
                               <th {...tStyle2}>Arrival Time</th>
@@ -511,7 +526,6 @@ export function RoutePlanningPage(): React.ReactElement {
                           </thead>
                           <tbody>
                             <tr>
-                              <td {...tStyle2}>Siemens Charger</td>
                               <td {...tStyle2}>2:42 PM CDT</td>
                               <td {...tStyle2}>Lafayette, LA</td>
                               <td {...tStyle2}>3:00 PM CDT</td>
@@ -524,19 +538,19 @@ export function RoutePlanningPage(): React.ReactElement {
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           <Checkbox
                             size={componentSize}
-                            label='Coach (52$)'
+                            label={`Coach (${formatNumber(52)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='First Class (72$)'
+                            label={`First Class (${formatNumber(72)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Sleeper (92$)'
+                            label={`Sleeper (${formatNumber(92)})`}
                           />
                           <Checkbox
                             size={componentSize}
-                            label='Roomlet (120$)'
+                            label={`Roomlet (${formatNumber(120)})`}
                           />
                         </div>
                       </Accordion.Panel>
@@ -582,7 +596,6 @@ export function RoutePlanningPage(): React.ReactElement {
                       inheritPadding
                     >
                       <ul>
-                        <li>Model: Siemens Charger</li>
                         <li>Departure Time: 9:00 AM CDT</li>
                         <li>Duration: 1hr 51min</li>
                         <li>Arrival Time: 10:51 AM CDT</li>
@@ -594,7 +607,7 @@ export function RoutePlanningPage(): React.ReactElement {
                       style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
                       inheritPadding
                     >
-                      <span>1 Coach (52$)</span>
+                      <span>1 Coach ({formatNumber(52)})</span>
                     </Card.Section>
                   </Card>
 
@@ -621,7 +634,6 @@ export function RoutePlanningPage(): React.ReactElement {
                       inheritPadding
                     >
                       <ul>
-                        <li>Model: Siemens Charger</li>
                         <li>Departure Time: 11:21 AM CDT</li>
                         <li>Duration: 2hr 51min</li>
                         <li>Arrival Time: 2:12 PM CDT</li>
@@ -633,7 +645,7 @@ export function RoutePlanningPage(): React.ReactElement {
                       style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
                       inheritPadding
                     >
-                      <span>1 Coach (52$)</span>
+                      <span>1 Coach ({formatNumber(52)})</span>
                     </Card.Section>
                   </Card>
 
@@ -660,7 +672,6 @@ export function RoutePlanningPage(): React.ReactElement {
                       inheritPadding
                     >
                       <ul>
-                        <li>Model: Siemens Charger</li>
                         <li>Departure Time: 2:42 PM CDT</li>
                         <li>Duration: 18min</li>
                         <li>Arrival Time: 3:00 PM CDT</li>
@@ -672,7 +683,7 @@ export function RoutePlanningPage(): React.ReactElement {
                       style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
                       inheritPadding
                     >
-                      <span>1 Coach (52$)</span>
+                      <span>1 Coach ({formatNumber(52)})</span>
                     </Card.Section>
                   </Card>
                 </div>

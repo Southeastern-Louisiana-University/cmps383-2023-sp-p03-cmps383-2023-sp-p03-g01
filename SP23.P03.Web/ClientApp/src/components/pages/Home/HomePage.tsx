@@ -11,14 +11,16 @@ import { DepartureDatePicker } from './modules/DepartureDatePicker';
 import { ReturnDatePicker } from './modules/ReturnDatePicker';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   enteredPassengerCountState,
   selectedArrivalStationState,
   selectedDepartureDateState,
   selectedDepartureStationState,
   selectedReturnDateState,
+  selectedTripTypeState,
 } from '../../../recoil/atoms/HomePageAtom';
+import { TripType } from '../../../models/TripTypes';
 
 /**
  * The home page of the app.
@@ -28,19 +30,27 @@ export function HomePage(): React.ReactElement {
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
 
+  const selectedTripType = useRecoilValue(selectedTripTypeState);
   const enteredPassengerCount = useRecoilValue(enteredPassengerCountState);
   const selectedDepartureStation = useRecoilValue(selectedDepartureStationState);
   const selectedArrivalStation = useRecoilValue(selectedArrivalStationState);
   const selectedDepartureDate = useRecoilValue(selectedDepartureDateState);
-  const selectedReturnDate = useRecoilValue(selectedReturnDateState);
+  const [selectedReturnDate, setSelectedReturnDate] = useRecoilState(selectedReturnDateState);
+
+  const returnDateIsFilledOutWhenRequired =
+    (selectedTripType !== TripType.ONE_WAY && selectedReturnDate !== null) || selectedTripType === TripType.ONE_WAY;
   const formIsComplete =
     enteredPassengerCount > 0 &&
     selectedDepartureStation !== '' &&
     selectedArrivalStation !== '' &&
     selectedDepartureDate !== null &&
-    selectedReturnDate !== null;
+    returnDateIsFilledOutWhenRequired;
 
   const navigateToRoutePlanningPage = () => {
+    // Also, clear the return date if the trip type is one way.
+    if (selectedTripType === TripType.ONE_WAY) {
+      setSelectedReturnDate(null);
+    }
     navigate(AppRoutes.ROUTE_PLANNING);
   };
 
@@ -61,12 +71,12 @@ export function HomePage(): React.ReactElement {
 
           {/* 3rd Row */}
           <DepartureDatePicker />
-          <ReturnDatePicker />
+          {selectedTripType !== TripType.ONE_WAY && <ReturnDatePicker />}
 
           {/* Final Row */}
           {formIsComplete && (
             <Button
-              style={HOME_PAGE_STYLING.paperContentStyles}
+              style={{ width: '80%' }}
               size={componentSize}
               onClick={navigateToRoutePlanningPage}
             >
