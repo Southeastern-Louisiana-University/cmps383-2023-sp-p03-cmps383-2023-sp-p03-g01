@@ -11,30 +11,27 @@ namespace SP23.P03.Web.Controllers
     [ApiController]
     public class TrainRouteController : ControllerBase
     {
-        private readonly DbSet<TrainRoute> trainRoutes;
+        private readonly DbSet<TrainPath> trainRoutes;
         private readonly DataContext dataContext;
 
         public TrainRouteController(DataContext dataContext)
         {
             this.dataContext = dataContext;
-            trainRoutes = dataContext.Set<TrainRoute>();
+            trainRoutes = dataContext.Set<TrainPath>();
         }
         [HttpGet]
-        public IQueryable<TrainRouteDto> GetAllTrainRoutes()
+        public IQueryable<TrainPathDto> GetAllTrainRoutes()
         {
             return GetTrainRouteDtos(trainRoutes);
         }
-        private static IQueryable<TrainRouteDto> GetTrainRouteDtos(IQueryable<TrainRoute> routes)
+        private static IQueryable<TrainPathDto> GetTrainRouteDtos(IQueryable<TrainPath> routes)
         {
             return routes
-                .Select(x => new TrainRouteDto
+                .Select(x => new TrainPathDto
                 {
                     Id = x.Id,
                     StartingTrainStationId = x.StartingTrainStationId,
                     EndingTrainStationId= x.EndingTrainStationId,
-                    ArrivalTime = x.ArrivalTime,
-                    DeperatureTime = x.DeperatureTime,
-                    TrainId = x.Train.Id,
                 });
         }
     }

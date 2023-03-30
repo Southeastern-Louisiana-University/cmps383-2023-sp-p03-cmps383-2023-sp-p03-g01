@@ -155,7 +155,6 @@ public class StationsController : ControllerBase
                 Address = x.Address,
                 ManagerId = x.ManagerId,
                 Hours = x.Hours,
-                Parking = x.Parking,
             });
     }
 }

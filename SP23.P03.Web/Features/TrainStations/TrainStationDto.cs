@@ -10,5 +10,4 @@ public class TrainStationDto
 
     public int? ManagerId { get; set; }
     public string Hours { get; set; } = string.Empty;
-    public string Parking { get; set; } = string.Empty;
 }

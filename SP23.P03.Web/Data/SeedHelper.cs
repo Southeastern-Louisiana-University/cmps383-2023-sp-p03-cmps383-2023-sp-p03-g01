@@ -149,7 +149,7 @@ public static class SeedHelper
     }
     private static async Task AddTrainRoute(DataContext dataContext)
     {
-        var trainRoutes = dataContext.Set<TrainRoute>();
+        var trainRoutes = dataContext.Set<TrainPath>();
         var trainStations = dataContext.Set<TrainStation>();
         var trains = dataContext.Set<Train>();
 
@@ -210,64 +210,49 @@ public static class SeedHelper
         }
 
 
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
             {
-                ArrivalTime = DateTimeOffset.Parse("05/01/2022 6:00:00"),
-                DeperatureTime = DateTimeOffset.Parse("05/01/2022 10:00:00"),
                 StartingTrainStation = station1,
                 StartingTrainStationId = station1.Id,
                 EndingTrainStation = station2,
                 EndingTrainStationId = station2.Id,
-                Train = train1,
             });
 
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
             {
-                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
-                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
                 StartingTrainStation = station2,
                 StartingTrainStationId = station2.Id,
                 EndingTrainStation = station3,
                 EndingTrainStationId = station3.Id,
-                Train = train5,
             });
 
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
             {
-                ArrivalTime = DateTimeOffset.Parse("05/01/2022 13:00:00"),
-                DeperatureTime = DateTimeOffset.Parse("05/01/2022 15:00:00"),
                 StartingTrainStation = station3,
                 StartingTrainStationId = station3.Id,
                 EndingTrainStation = station4,
                 EndingTrainStationId = station4.Id,
-                Train = train2,
             });
 
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
             {
-                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
-                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
                 StartingTrainStation = station4,
                 StartingTrainStationId = station4.Id,
                 EndingTrainStation = station5,
                 EndingTrainStationId = station5.Id,
-                Train = train3,
             });
 
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
             {
-                ArrivalTime = DateTimeOffset.Parse("05/01/2022 8:00:00"),
-                DeperatureTime = DateTimeOffset.Parse("05/01/2022 12:00:00"),
                 StartingTrainStation = station5,
                 StartingTrainStationId = station5.Id,
                 EndingTrainStation = station6,
                 EndingTrainStationId = station6.Id,
-                Train = train4,
             });
 
         await dataContext.SaveChangesAsync();
