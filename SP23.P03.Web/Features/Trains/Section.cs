@@ -12,6 +12,6 @@ namespace SP23.P03.Web.Features.Trains
         public int Capacity { get; set; }
         public string Features { get; set; } = string.Empty;
 
-        public List<Seat>? SeatList { get; set; }
+        public ICollection<Seat>? SeatList { get; set; }
     }
 }

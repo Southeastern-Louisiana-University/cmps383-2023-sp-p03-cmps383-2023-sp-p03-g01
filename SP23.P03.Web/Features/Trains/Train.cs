@@ -10,6 +10,6 @@ namespace SP23.P03.Web.Features.Trains
         public int? TrainRouteId { get; set; }
         public TrainRoute? Route { get; set; } 
 
-        public List<Section>? Sections { get; set; } 
+        public ICollection<Section>? Sections { get; set; } 
     }
 }
