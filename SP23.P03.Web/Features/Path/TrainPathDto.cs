@@ -6,10 +6,7 @@ namespace SP23.P03.Web.Features.TrainRoutes
     public class TrainPathDto
     {
         public int Id { get; set; }
-        public DateTimeOffset ArrivalTime { get; set; }
-        public DateTimeOffset DeperatureTime { get; set; }
         public int? StartingTrainStationId { get; set; }
         public int? EndingTrainStationId { get; set; }
-        public int? TrainId { get; set; }
     }
 }

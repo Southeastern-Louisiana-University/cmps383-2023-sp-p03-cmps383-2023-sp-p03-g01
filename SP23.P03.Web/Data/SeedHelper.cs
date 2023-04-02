@@ -246,14 +246,6 @@ public static class SeedHelper
                 EndingTrainStationId = station5.Id,
             });
 
-        dataContext.Set<TrainPath>()
-            .Add(new TrainPath
-            {
-                StartingTrainStation = station5,
-                StartingTrainStationId = station5.Id,
-                EndingTrainStation = station6,
-                EndingTrainStationId = station6.Id,
-            });
 
         await dataContext.SaveChangesAsync();
 
