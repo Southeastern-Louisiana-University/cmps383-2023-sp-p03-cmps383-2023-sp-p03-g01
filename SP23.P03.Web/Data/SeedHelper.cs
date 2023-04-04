@@ -222,8 +222,8 @@ public static class SeedHelper
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
             {
-                StartingTrainStation = station2,
-                StartingTrainStationId = station2.Id,
+                StartingTrainStation = station1,
+                StartingTrainStationId = station1.Id,
                 EndingTrainStation = station3,
                 EndingTrainStationId = station3.Id,
             });

@@ -16,7 +16,7 @@ namespace SP23.P03.Web.Features.TrainRoutes
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.StartingTrainStation)
-                .WithOne()
+                .WithMany()
             .OnDelete(DeleteBehavior.Restrict);
 
         }
