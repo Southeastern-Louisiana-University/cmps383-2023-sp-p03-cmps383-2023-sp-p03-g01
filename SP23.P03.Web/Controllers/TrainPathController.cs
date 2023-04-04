@@ -32,7 +32,7 @@ namespace SP23.P03.Web.Controllers
         } 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<TrainDto> GetTrainPathsById(int id)
+        public ActionResult<TrainPathDto> GetTrainPathsById(int id)
         {
             var result = GetTrainPathDtos(trainPaths.Where(x => x.Id == id)).FirstOrDefault();
             if (result == null)
