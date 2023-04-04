@@ -5,11 +5,12 @@ using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Migrations;
+using System.Diagnostics;
 
 
 namespace SP23.P03.Web.Controllers
 {
-    [Route("api/routes")]
+    [Route("api/paths")]
     [ApiController]
     public class TrainPathController : ControllerBase
     {
@@ -31,7 +32,7 @@ namespace SP23.P03.Web.Controllers
         } 
         [HttpGet]
         [Route("{id}")]
-        public ActionResult<TrainDto> GetTrainRoutesById(int id)
+        public ActionResult<TrainDto> GetTrainPathsById(int id)
         {
             var result = GetTrainPathDtos(trainPaths.Where(x => x.Id == id)).FirstOrDefault();
             if (result == null)
@@ -65,7 +66,9 @@ namespace SP23.P03.Web.Controllers
 
             dataContext.SaveChanges();
 
-            return Created("", trainPath);
+            dto.Id = trainPath.Id;
+
+            return CreatedAtAction(nameof(GetTrainPathsById), new { id = dto.Id }, dto);
         }
         [HttpPut]
         [Route("{id}")]
