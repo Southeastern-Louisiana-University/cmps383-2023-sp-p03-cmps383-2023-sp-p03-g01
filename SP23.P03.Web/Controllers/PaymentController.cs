@@ -28,7 +28,7 @@ public class PaymentController : ControllerBase
                 {
                   new SessionLineItemOptions
                   {
-                    Price = "price_1MlNShFW1RxYQCHIxFJifAPj",
+                    Price = "price_1Mq2fUFW1RxYQCHI9ODtua7k",
                     Quantity = 1,
                   },
                 },

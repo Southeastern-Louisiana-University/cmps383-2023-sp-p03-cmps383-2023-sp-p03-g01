@@ -309,12 +309,6 @@ public static class SeedHelper
                 Sections = train4Sections
             });
 
-        dataContext.Set<Train>()
-            .Add(new Train
-            {
-                Locomotive = "F950",
-            });
-
         await dataContext.SaveChangesAsync();
     }
     private static async Task AddSection(DataContext dataContext)

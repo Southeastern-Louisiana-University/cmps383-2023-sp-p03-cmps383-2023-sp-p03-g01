@@ -602,6 +602,11 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("SeatList");
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Section", b =>
+                {
+                    b.Navigation("SeatList");
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
                 {
                     b.Navigation("Sections");
