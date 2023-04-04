@@ -118,9 +118,9 @@ namespace SP23.P03.Web.Controllers
 
             return Ok();
         }
-        private static IQueryable<TrainPathDto> GetTrainPathDtos(IQueryable<TrainPath> routes)
+        private static IQueryable<TrainPathDto> GetTrainPathDtos(IQueryable<TrainPath> paths)
         {
-            return routes
+            return paths
                 .Select(x => new TrainPathDto
                 {
                     Id = x.Id,
