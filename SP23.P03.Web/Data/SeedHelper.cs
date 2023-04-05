@@ -474,6 +474,7 @@ public static class SeedHelper
     {
         var trainRoutes = dataContext.Set<TrainRoute>();
         var trains = dataContext.Set<Train>();
+        var paths = dataContext.Set<TrainPath>();
 
         if (await trainRoutes.AnyAsync())
         {
@@ -485,7 +486,8 @@ public static class SeedHelper
             {
                 ArrivalTime = DateTime.Now,
                 DeperatureTime = DateTime.Now.AddHours(3),
-                PathId = 1,
+                Path = paths.First(),
+                PathId = paths.First().Id,
                 Train = trains.First(),
             });
 
