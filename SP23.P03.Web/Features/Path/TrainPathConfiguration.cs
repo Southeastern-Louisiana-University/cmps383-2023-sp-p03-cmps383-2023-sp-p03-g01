@@ -7,21 +7,18 @@ using SP23.P03.Web.Features.Trains;
 
 namespace SP23.P03.Web.Features.TrainRoutes
 {
-    public class TrainRouteConfiguration : IEntityTypeConfiguration<TrainRoute>
+    public class TrainPathConfiguration : IEntityTypeConfiguration<TrainPath>
     {
-        public void Configure(EntityTypeBuilder<TrainRoute> builder)
+        public void Configure(EntityTypeBuilder<TrainPath> builder)
         {
             builder.HasOne(x => x.EndingTrainStation)
                 .WithMany()
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.StartingTrainStation)
-                .WithOne()
+                .WithMany()
             .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(b => b.Train)
-                .WithOne(i => i.TrainRoute)
-                .HasForeignKey<Train>(b => b.TrainRouteId);
         }
     }
 }

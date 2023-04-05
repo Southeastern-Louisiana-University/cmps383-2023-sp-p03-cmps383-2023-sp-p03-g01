@@ -9,4 +9,5 @@ public class TrainStationDto
     public string Address { get; set; } = string.Empty;
 
     public int? ManagerId { get; set; }
+    public string Hours { get; set; } = string.Empty;
 }

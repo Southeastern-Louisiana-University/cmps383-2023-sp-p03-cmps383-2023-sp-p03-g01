@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230330175831_PathSettingUp")]
+    partial class PathSettingUp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,48 +226,6 @@ namespace SP23.P03.Web.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTimeOffset>("ArrivalTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("DeperatureTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<int?>("PathId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TrainScheduledRoutesId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PathId");
-
-                    b.HasIndex("TrainScheduledRoutesId");
-
-                    b.ToTable("TrainRoute");
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TrainScheduledRoutes");
-                });
-
             modelBuilder.Entity("SP23.P03.Web.Features.TrainRoutes.TrainPath", b =>
                 {
                     b.Property<int>("Id")
@@ -283,7 +244,9 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("EndingTrainStationId");
 
-                    b.HasIndex("StartingTrainStationId");
+                    b.HasIndex("StartingTrainStationId")
+                        .IsUnique()
+                        .HasFilter("[StartingTrainStationId] IS NOT NULL");
 
                     b.ToTable("TrainPath");
                 });
@@ -317,37 +280,6 @@ namespace SP23.P03.Web.Migrations
                     b.HasIndex("ManagerId");
 
                     b.ToTable("TrainStation");
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.TrainTicket.TrainRouteTicket", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("PassagerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ScheduledTrainRouteId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SeatId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("cost")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PassagerId");
-
-                    b.HasIndex("ScheduledTrainRouteId");
-
-                    b.HasIndex("SeatId");
-
-                    b.ToTable("TrainRouteTicket");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Seat", b =>
@@ -421,9 +353,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainRouteId")
-                        .IsUnique()
-                        .HasFilter("[TrainRouteId] IS NOT NULL");
+                    b.HasIndex("TrainRouteId");
 
                     b.ToTable("Train");
                 });
@@ -483,19 +413,6 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
-                {
-                    b.HasOne("SP23.P03.Web.Features.TrainRoutes.TrainPath", "Path")
-                        .WithMany()
-                        .HasForeignKey("PathId");
-
-                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", null)
-                        .WithMany("Routes")
-                        .HasForeignKey("TrainScheduledRoutesId");
-
-                    b.Navigation("Path");
-                });
-
             modelBuilder.Entity("SP23.P03.Web.Features.TrainRoutes.TrainPath", b =>
                 {
                     b.HasOne("SP23.P03.Web.Features.TrainStations.TrainStation", "EndingTrainStation")
@@ -504,8 +421,8 @@ namespace SP23.P03.Web.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("SP23.P03.Web.Features.TrainStations.TrainStation", "StartingTrainStation")
-                        .WithMany()
-                        .HasForeignKey("StartingTrainStationId")
+                        .WithOne()
+                        .HasForeignKey("SP23.P03.Web.Features.TrainRoutes.TrainPath", "StartingTrainStationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("EndingTrainStation");
@@ -520,29 +437,6 @@ namespace SP23.P03.Web.Migrations
                         .HasForeignKey("ManagerId");
 
                     b.Navigation("Manager");
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.TrainTicket.TrainRouteTicket", b =>
-                {
-                    b.HasOne("SP23.P03.Web.Features.Authorization.User", "Passager")
-                        .WithMany("Tickets")
-                        .HasForeignKey("PassagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", "ScheduledTrainRoute")
-                        .WithMany()
-                        .HasForeignKey("ScheduledTrainRouteId");
-
-                    b.HasOne("SP23.P03.Web.Features.Trains.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId");
-
-                    b.Navigation("Passager");
-
-                    b.Navigation("ScheduledTrainRoute");
-
-                    b.Navigation("Seat");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Seat", b =>
@@ -565,11 +459,11 @@ namespace SP23.P03.Web.Migrations
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
                 {
-                    b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "Route")
-                        .WithOne("Train")
-                        .HasForeignKey("SP23.P03.Web.Features.Trains.Train", "TrainRouteId");
+                    b.HasOne("SP23.P03.Web.Features.TrainRoutes.TrainPath", "TrainRoute")
+                        .WithMany()
+                        .HasForeignKey("TrainRouteId");
 
-                    b.Navigation("Route");
+                    b.Navigation("TrainRoute");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Authorization.Role", b =>
@@ -582,24 +476,6 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("ManageStations");
 
                     b.Navigation("Roles");
-
-                    b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
-                {
-                    b.Navigation("Train")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
-                {
-                    b.Navigation("Routes");
-                });
-
-            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Section", b =>
-                {
-                    b.Navigation("SeatList");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Section", b =>

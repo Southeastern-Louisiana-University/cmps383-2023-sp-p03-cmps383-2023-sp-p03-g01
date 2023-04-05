@@ -84,6 +84,7 @@ export function HomePage(): React.ReactElement {
             </Button>
           )}
         </Paper>
+
       </div>
     </div>
   );

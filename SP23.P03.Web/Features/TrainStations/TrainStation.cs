@@ -15,6 +15,5 @@ public class TrainStation
     public virtual User? Manager { get; set; }
 
     public string Hours { get; set; } = string.Empty;
-    public string Parking { get; set; } = string.Empty;
 
 }

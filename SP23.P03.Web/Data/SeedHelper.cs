@@ -4,6 +4,7 @@ using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
+using System.Globalization;
 
 namespace SP23.P03.Web.Data;
 
@@ -19,11 +20,11 @@ public static class SeedHelper
         await AddUsers(serviceProvider);
 
         await AddTrainStation(dataContext);
-        await AddTrainRoute(dataContext);
 
         await AddSeat(dataContext);
         await AddSection(dataContext);
         await AddTrain(dataContext);
+        await AddTrainRoute(dataContext);
 
     }
 
@@ -81,43 +82,173 @@ public static class SeedHelper
     {
         var trainStations = dataContext.Set<TrainStation>();
 
+        var seededarrayoftrainstation = new List<TrainStation>()
+        {
+            new TrainStation
+            {
+                Name = "Hammond",
+                Address = "404 N.W. Railroad Avenue",
+                Hours = "9:00 AM - 4:45 PM"
+            },
+    };
         if (await trainStations.AnyAsync())
         {
             return;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            dataContext.Set<TrainStation>()
-                .Add(new TrainStation
-                {
-                    Name = "Hammond",
-                    Address = "1234 Place st"
-                });
-        }
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Hammond",
+                Address = "404 N.W. Railroad Avenue",
+                Hours = "9:00 AM - 4:45 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "New Orlean",
+                Address = "1001 Loyola Avenue",
+                Hours = "5:00 AM - 10:00 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Slidell",
+                Address = "1827 Front St",
+                Hours = "9:00 AM - 10:42 AM\r\n6:00 PM - 7:52 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Picayune",
+                Address = "200 South Highway 11",
+                Hours = "unknown"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Hattiesburg",
+                Address = "308 Newman Street",
+                Hours = "10:00 AM - 1:00 PM\r\n4:00 PM - 7:00 PM"
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Meridian",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+            });
+
 
         await dataContext.SaveChangesAsync();
     }
     private static async Task AddTrainRoute(DataContext dataContext)
     {
-        var trainRoutes = dataContext.Set<TrainRoute>();
+        var trainRoutes = dataContext.Set<TrainPath>();
+        var trainStations = dataContext.Set<TrainStation>();
+        var trains = dataContext.Set<Train>();
+
+        var station1 = trainStations.First();
+        var station2 = new TrainStation();
+        var station3 = new TrainStation();
+        var station4 = new TrainStation();
+        var station5 = new TrainStation();
+        var station6 = new TrainStation();
+
+        if (trainStations.Find(2) != null)
+        {
+            station2 = trainStations.Find(2);
+        }
+        if (trainStations.Find(3) != null)
+        {
+            station3 = trainStations.Find(3);
+        }
+        if (trainStations.Find(4) != null)
+        {
+            station4 = trainStations.Find(4);
+        }
+        if (trainStations.Find(5) != null)
+        {
+            station5 = trainStations.Find(5);
+        }
+        if (trainStations.Find(6) != null)
+        {
+            station6 = trainStations.Find(6);
+        }
+
+        var train1 = trains.First();
+        var train2 = new Train();
+        var train3 = new Train();
+        var train4 = new Train();
+        var train5 = new Train();
+
+        if (trains.Find(2) != null)
+        {
+            train2 = trains.Find(2);
+        }
+        if (trains.Find(3) != null)
+        {
+            train3 = trains.Find(3);
+        }
+        if (trains.Find(4) != null)
+        {
+            train4 = trains.Find(4);
+        }
+        if (trains.Find(5) != null)
+        {
+            train5 = trains.Find(5);
+        }
 
         if (await trainRoutes.AnyAsync())
         {
             return;
         }
 
-        for (int i = 0; i < 3; i++)
-        {
-            dataContext.Set<TrainRoute>()
-                .Add(new TrainRoute
-                {
-                    DeperatureTime = DateTimeOffset.Now,
-                    ArrivalTime= DateTimeOffset.Now,
-                });
-        }
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station1,
+                StartingTrainStationId = station1.Id,
+                EndingTrainStation = station2,
+                EndingTrainStationId = station2.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station1,
+                StartingTrainStationId = station1.Id,
+                EndingTrainStation = station3,
+                EndingTrainStationId = station3.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station3,
+                StartingTrainStationId = station3.Id,
+                EndingTrainStation = station4,
+                EndingTrainStationId = station4.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station4,
+                StartingTrainStationId = station4.Id,
+                EndingTrainStation = station5,
+                EndingTrainStationId = station5.Id,
+            });
+
 
         await dataContext.SaveChangesAsync();
+
     }
     private static async Task AddTrain(DataContext dataContext)
     {
