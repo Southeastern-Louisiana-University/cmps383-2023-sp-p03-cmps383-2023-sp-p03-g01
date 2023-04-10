@@ -43,7 +43,7 @@ namespace SP23.P03.Web.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public ActionResult<TrainPathDto> CreateTrain(TrainPathDto dto)
+        public ActionResult<TrainPathDto> CreateTrainPath(TrainPathDto dto)
         {
             var newEndingTrainStation = stations.Where(x=> x.Id == dto.EndingTrainStationId).FirstOrDefault();
             var newStartingTrainStation = stations.Where(x => x.Id == dto.StartingTrainStationId).FirstOrDefault();
@@ -72,7 +72,7 @@ namespace SP23.P03.Web.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public ActionResult<TrainPathDto> UpdateTrain(int id, TrainPathDto dto)
+        public ActionResult<TrainPathDto> UpdateTrainPath(int id, TrainPathDto dto)
         {
             var newEndingTrainStation = stations.Where(x => x.Id == dto.EndingTrainStationId).FirstOrDefault();
             var newStartingTrainStation = stations.Where(x => x.Id == dto.StartingTrainStationId).FirstOrDefault();
@@ -103,7 +103,7 @@ namespace SP23.P03.Web.Controllers
         }
         [HttpDelete]
         [Route("{id}")]
-        public ActionResult DeleteTrain(int id)
+        public ActionResult DeleteTrainPath(int id)
         {
             var trainPath = trainPaths.FirstOrDefault(x => x.Id == id);
             if (trainPath == null)

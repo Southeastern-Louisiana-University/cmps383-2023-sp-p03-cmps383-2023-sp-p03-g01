@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230410205432_trainRouteTrainNullable")]
+    partial class trainRouteTrainNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -567,8 +570,7 @@ namespace SP23.P03.Web.Migrations
                 {
                     b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "Route")
                         .WithOne("Train")
-                        .HasForeignKey("SP23.P03.Web.Features.Trains.Train", "TrainRouteId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("SP23.P03.Web.Features.Trains.Train", "TrainRouteId");
 
                     b.Navigation("Route");
                 });
@@ -589,8 +591,7 @@ namespace SP23.P03.Web.Migrations
 
             modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
                 {
-                    b.Navigation("Train")
-                        .IsRequired();
+                    b.Navigation("Train");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
