@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.Trains;
-using SP23.P03.Web.Migrations;
 
 namespace SP23.P03.Web.Controllers;
 
@@ -10,13 +9,13 @@ namespace SP23.P03.Web.Controllers;
 [ApiController]
 public class SectionController : ControllerBase
 {
-    private readonly DbSet<Features.Trains.Section> sections;
+    private readonly DbSet<Section> sections;
     private readonly DataContext dataContext;
 
     public SectionController(DataContext dataContext)
     {
         this.dataContext = dataContext;
-        sections = dataContext.Set<Features.Trains.Section>();
+        sections = dataContext.Set<Section>();
     }
     [HttpGet]
     public IQueryable<SectionDto> GetAllSections()
@@ -35,7 +34,7 @@ public class SectionController : ControllerBase
 
         return Ok(result);
     }
-    private static IQueryable<SectionDto> GetSectionDtos(IQueryable<Features.Trains.Section> sections)
+    private static IQueryable<SectionDto> GetSectionDtos(IQueryable<Section> sections)
     {
         return sections
             .Select(x => new SectionDto
