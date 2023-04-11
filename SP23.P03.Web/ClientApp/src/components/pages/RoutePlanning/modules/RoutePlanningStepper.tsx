@@ -57,6 +57,7 @@ export function RoutePlanningStepper(): React.ReactElement {
   return (
     <div style={ROUTE_PLANNING_PAGE_STYLING.headerStyles}>
       <Stepper active={currentRoutePlanningPage}>
+        {/* Departure Route(s) */}
         <Stepper.Step
           label='Choose Your Routes'
           description='How would you like to get there?'
@@ -95,6 +96,8 @@ export function RoutePlanningStepper(): React.ReactElement {
             </div>
           </div>
         </Stepper.Step>
+
+        {/* Seat Selection */}
         <Stepper.Step
           label='Select Your Seats'
           description='Feeling first class?'
@@ -133,6 +136,8 @@ export function RoutePlanningStepper(): React.ReactElement {
             </div>
           </div>
         </Stepper.Step>
+
+        {/* Review & Pay */}
         <Stepper.Step
           label='Review & Pay'
           description='Keeping the lights on.'
