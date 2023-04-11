@@ -10,7 +10,7 @@ namespace SP23.P03.Web.Features.Route
         public DateTimeOffset DeperatureTime { get; set; }
         public TrainPath? Path { get; set; }
         public int? PathId { get; set; }
-        public Train Train { get; set; }
+        public Train? Train { get; set; }
 
     }
 }
