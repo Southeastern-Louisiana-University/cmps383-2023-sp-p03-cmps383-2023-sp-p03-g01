@@ -1,81 +1,37 @@
-import { Accordion, Avatar, Button, Card, Checkbox, Stepper, Table } from '@mantine/core';
+import { Accordion, Button, Card, Checkbox, Table } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
-import React, { useState } from 'react';
+import React from 'react';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
-import { ROUTE_PLANNING_PAGE_STYLING } from './RoutePlanningPageStyling';
+import { ROUTE_PLANNING_PAGE_STYLING } from './RoutePlanningPageRootStyling';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import { BsArrowLeftRight, BsPersonFill } from 'react-icons/bs';
-import { useRecoilValue } from 'recoil';
-import {
-  enteredPassengerCountState,
-  selectedArrivalStationState,
-  selectedDepartureDateState,
-  selectedDepartureStationState,
-  selectedReturnDateState,
-  selectedTripTypeState,
-} from '../../../recoil/atoms/HomePageAtom';
-import { TripType } from '../../../models/TripTypes';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { selectedArrivalStationState, selectedDepartureStationState } from '../../../recoil/atoms/HomePageAtom';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { GrStripe } from 'react-icons/gr';
 import { STYLING_VARIABLES } from '../../../styling/StylingVariables';
 import { COLOR_PALETTE } from '../../../styling/ColorPalette';
+import { RoutePlanningStepper } from './modules/RoutePlanningStepper';
+import { currentRoutePlanningPageState } from '../../../recoil/atoms/RoutePlanningAtom';
+import { RoutePlanningPage } from '../../../models/RoutePlanningPages';
 
 /**
  * The main page for route planning.
  */
-export function RoutePlanningPage(): React.ReactElement {
+export function RoutePlanningPageRoot(): React.ReactElement {
   const navigate = useNavigate();
   const { width: browserWidth } = useViewportSize();
   const componentSize = getMantineComponentSize(browserWidth);
 
-  const selectedTripType = useRecoilValue(selectedTripTypeState);
-  const enteredPassengerCount = useRecoilValue(enteredPassengerCountState);
   const selectedDepartureStation = useRecoilValue(selectedDepartureStationState);
   const selectedArrivalStation = useRecoilValue(selectedArrivalStationState);
-  const selectedDepartureDate = useRecoilValue(selectedDepartureDateState);
-  const selectedReturnDate = useRecoilValue(selectedReturnDateState);
-
-  // Format the dates as Month Day, Year
-  const formattedDepartureDate = selectedDepartureDate
-    ? selectedDepartureDate.toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    : null;
-  const formattedReturnDate = selectedReturnDate
-    ? selectedReturnDate.toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      })
-    : null;
-
-  const [currentStep, setCurrentStep] = useState<0 | 1 | 2>(0);
-
-  /* const routePlanningIsAllowed =
-    selectedDepartureStation === '' ||
-    selectedArrivalStation === '' ||
-    selectedDepartureDate === null ||
-    selectedReturnDate === null; */
+  const [currentRoutePlanningPage, setCurrentRoutePlanningPage] = useRecoilState(currentRoutePlanningPageState);
 
   const tStyle1 = {
     style: ROUTE_PLANNING_PAGE_STYLING.trainRouteAccordionControlStyles,
   };
   const tStyle2 = {
     style: { ...ROUTE_PLANNING_PAGE_STYLING.trainRouteAccordionControlStyles, color: 'white' },
-  };
-
-  const determineArrowIcon = (): React.ReactElement => {
-    switch (selectedTripType) {
-      case TripType.ONE_WAY:
-        return <AiOutlineArrowRight />;
-      case TripType.ROUND_TRIP:
-        return <BsArrowLeftRight />;
-      case TripType.MULTI_CITY:
-        return <AiOutlineArrowRight />;
-    }
   };
 
   const navigateToHome = (): void => {
@@ -88,128 +44,11 @@ export function RoutePlanningPage(): React.ReactElement {
 
   return (
     <div style={ROUTE_PLANNING_PAGE_STYLING.rootStyles}>
-      <div style={ROUTE_PLANNING_PAGE_STYLING.headerStyles}>
-        <Stepper active={currentStep}>
-          <Stepper.Step
-            label='Choose Your Routes'
-            description='How would you like to get there?'
-          >
-            <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentStyles}>
-              {/* Trip Destinations */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{selectedDepartureStation}</span>
-
-                <Avatar size='md'>{determineArrowIcon()}</Avatar>
-
-                <span>{selectedArrivalStation}</span>
-              </div>
-
-              {/* Passenger Count */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{enteredPassengerCount}</span>
-
-                <Avatar
-                  size='md'
-                  radius='xl'
-                >
-                  <BsPersonFill />
-                </Avatar>
-              </div>
-
-              {/* Trip Dates */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{formattedDepartureDate}</span>
-                {formattedReturnDate ? (
-                  <>
-                    <span>|</span>
-                    <span>{formattedReturnDate}</span>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          </Stepper.Step>
-          <Stepper.Step
-            label='Select Your Seats'
-            description='Feeling first class?'
-          >
-            <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentStyles}>
-              {/* Trip Destinations */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{selectedDepartureStation}</span>
-
-                <Avatar size='md'>{determineArrowIcon()}</Avatar>
-
-                <span>{selectedArrivalStation}</span>
-              </div>
-
-              {/* Passenger Count */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{enteredPassengerCount}</span>
-
-                <Avatar
-                  size='md'
-                  radius='xl'
-                >
-                  <BsPersonFill />
-                </Avatar>
-              </div>
-
-              {/* Trip Dates */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{formattedDepartureDate}</span>
-                {formattedReturnDate ? (
-                  <>
-                    <span>|</span>
-                    <span>{formattedReturnDate}</span>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          </Stepper.Step>
-          <Stepper.Step
-            label='Review & Pay'
-            description='Keeping the lights on.'
-          >
-            <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentStyles}>
-              {/* Trip Destinations */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{selectedDepartureStation}</span>
-
-                <Avatar size='md'>{determineArrowIcon()}</Avatar>
-
-                <span>{selectedArrivalStation}</span>
-              </div>
-
-              {/* Passenger Count */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{enteredPassengerCount}</span>
-
-                <Avatar
-                  size='md'
-                  radius='xl'
-                >
-                  <BsPersonFill />
-                </Avatar>
-              </div>
-
-              {/* Trip Dates */}
-              <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
-                <span>{formattedDepartureDate}</span>
-                {formattedReturnDate ? (
-                  <>
-                    <span>|</span>
-                    <span>{formattedReturnDate}</span>
-                  </>
-                ) : null}
-              </div>
-            </div>
-          </Stepper.Step>
-        </Stepper>
-      </div>
+      <RoutePlanningStepper />
 
       <div style={ROUTE_PLANNING_PAGE_STYLING.contentStyles}>
         {/* Departure Route */}
-        {currentStep === 0 && (
+        {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && (
           <Accordion defaultValue='Departure Route'>
             <Accordion.Item value='Departure Route'>
               <Accordion.Control>
@@ -411,7 +250,7 @@ export function RoutePlanningPage(): React.ReactElement {
         )}
 
         {/* Seat Selection Page */}
-        {currentStep === 1 && (
+        {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && (
           <Accordion defaultValue='Departure Route'>
             <Accordion.Item value='Departure Route'>
               <Accordion.Control>
@@ -563,7 +402,7 @@ export function RoutePlanningPage(): React.ReactElement {
         )}
 
         {/* Review & Pay */}
-        {currentStep === 2 && (
+        {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && (
           <Accordion defaultValue='Departure Route'>
             <Accordion.Item value='Departure Route'>
               <Accordion.Control>
@@ -694,7 +533,7 @@ export function RoutePlanningPage(): React.ReactElement {
       </div>
 
       {/* Departure Route Buttons */}
-      {currentStep === 0 && (
+      {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && (
         <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
           <Button
             size={componentSize}
@@ -706,7 +545,7 @@ export function RoutePlanningPage(): React.ReactElement {
           <Button
             size={componentSize}
             onClick={() => {
-              setCurrentStep(1);
+              setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
             }}
           >
             Continue to Seat Selection <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
@@ -715,12 +554,12 @@ export function RoutePlanningPage(): React.ReactElement {
       )}
 
       {/* Seat Selection Page Buttons */}
-      {currentStep === 1 && (
+      {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && (
         <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
           <Button
             size={componentSize}
             onClick={() => {
-              setCurrentStep(0);
+              setCurrentRoutePlanningPage(RoutePlanningPage.DEPARTURE_ROUTE);
             }}
           >
             <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Route Selection
@@ -729,7 +568,7 @@ export function RoutePlanningPage(): React.ReactElement {
           <Button
             size={componentSize}
             onClick={() => {
-              setCurrentStep(2);
+              setCurrentRoutePlanningPage(RoutePlanningPage.REVIEW_AND_PAY);
             }}
           >
             Continue to Review & Pay <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
@@ -738,12 +577,12 @@ export function RoutePlanningPage(): React.ReactElement {
       )}
 
       {/* Review & Pay Buttons */}
-      {currentStep === 2 && (
+      {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && (
         <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
           <Button
             size={componentSize}
             onClick={() => {
-              setCurrentStep(1);
+              setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
             }}
           >
             <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Seat Selection
