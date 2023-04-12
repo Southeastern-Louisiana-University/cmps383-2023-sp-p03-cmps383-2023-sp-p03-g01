@@ -58,7 +58,7 @@ public class SectionController : ControllerBase
             return BadRequest();
         }
 
-        var section = new Features.Trains.Section
+        var section = new Section
         {
             Capacity = dto.Capacity,
             Class = dto.Class,
