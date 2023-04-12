@@ -114,4 +114,21 @@ namespace SP23.P03.Web.Controllers;
 
         return Ok(scheduledTrainRoutes);
     }
+    [HttpDelete]
+    [Route("{id}")]
+    public ActionResult DeleteTrainScheduledRoutes(int id)
+    {
+        var scheduledTrainRoutes = scheduledRoutes.FirstOrDefault(x => x.Id == id);
+        if (scheduledTrainRoutes == null)
+        {
+            return NotFound();
+        }
+
+
+        scheduledRoutes.Remove(scheduledTrainRoutes);
+
+        dataContext.SaveChanges();
+
+        return Ok();
+    }
 }
