@@ -4,6 +4,7 @@ using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.Trains;
+using SP23.P03.Web.Migrations;
 using System.Transactions;
 
 namespace SP23.P03.Web.Controllers;
@@ -55,15 +56,14 @@ namespace SP23.P03.Web.Controllers;
         return Ok(result);
     }
     [HttpPost]
-    public ActionResult<TrainScheduledRouteCreateDto> CreateSection(TrainScheduledRouteCreateDto dto)
+    public ActionResult<TrainScheduledRouteCreateDto> CreateTrainScheduledRoutes(TrainScheduledRouteCreateDto dto)
     {
         if (dto.RoutesId == null)
         {
             return BadRequest();
         }
 
-        var trainScheduledRoutes = new TrainScheduledRoutes { 
-        };
+        var trainScheduledRoutes = new TrainScheduledRoutes{};
         var temptrainRoute = new TrainRoute();
 
         for (int y = 0; y < dto.RoutesId.Count(); y++)
@@ -76,10 +76,42 @@ namespace SP23.P03.Web.Controllers;
 
             trainScheduledRoutes.Routes.Add(temptrainRoute);
         } 
-    scheduledRoutes.Add(trainScheduledRoutes);
+        scheduledRoutes.Add(trainScheduledRoutes);
 
         dataContext.SaveChanges();
 
         return CreatedAtAction(nameof(GetSectionById), new { id = trainScheduledRoutes.Id }, trainScheduledRoutes);
+    }
+    [HttpPut]
+    [Route("{id}")]
+    public ActionResult<TrainScheduledRouteCreateDto> UpdateTrainScheduledRoutes(int id, TrainScheduledRouteCreateDto dto)
+    {
+        if (dto.RoutesId == null)
+        {
+            return BadRequest();
+        }
+
+        var scheduledTrainRoutes = scheduledRoutes.FirstOrDefault(x => x.Id == id);
+        scheduledTrainRoutes.Routes = new List<TrainRoute>();
+
+        if (scheduledTrainRoutes == null)
+        {
+            return NotFound();
+        }
+
+        var temptrainRoute = new TrainRoute();
+        for (int y = 0; y < dto.RoutesId.Count(); y++)
+        {
+            temptrainRoute = trainRoutes.Where(x => x.Id == dto.RoutesId.ElementAt(y)).FirstOrDefault();
+            if (temptrainRoute == null)
+            {
+                return NotFound();
+            }
+
+            scheduledTrainRoutes.Routes.Add(temptrainRoute);
+        }
+        dataContext.SaveChanges();
+
+        return Ok(scheduledTrainRoutes);
     }
 }
