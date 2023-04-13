@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Route;
+using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
@@ -27,6 +28,7 @@ public static class SeedHelper
         await AddTrain(dataContext);
         await AddTrainPath(dataContext);
         await AddTrainRoute(dataContext);
+        await AddTrainScheduledRoute(dataContext);
 
     }
 
@@ -491,6 +493,26 @@ public static class SeedHelper
                 Train = trains.First(),
             });
 
+
+        await dataContext.SaveChangesAsync();
+    }
+    private static async Task AddTrainScheduledRoute(DataContext dataContext)
+    {
+        var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
+        var trainRoutes = dataContext.Set<TrainRoute>();
+
+        if (await trainScheduledRoutes.AnyAsync())
+        {
+            return;
+        }
+        var groupofRoutes = new List<TrainRoute>();
+        groupofRoutes.Add(trainRoutes.First());
+
+        dataContext.Set<TrainScheduledRoutes>()
+            .Add(new TrainScheduledRoutes
+            {
+                Routes = groupofRoutes,
+            });
 
         await dataContext.SaveChangesAsync();
     }
