@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
+using SP23.P03.Web.Features.TrainTicket;
 using System.Globalization;
 
 namespace SP23.P03.Web.Data;
@@ -29,6 +31,7 @@ public static class SeedHelper
         await AddTrainPath(dataContext);
         await AddTrainRoute(dataContext);
         await AddTrainScheduledRoute(dataContext);
+        await AddTickets(dataContext);
 
     }
 
@@ -512,6 +515,30 @@ public static class SeedHelper
             .Add(new TrainScheduledRoutes
             {
                 Routes = groupofRoutes,
+            });
+
+        await dataContext.SaveChangesAsync();
+    }
+    private static async Task AddTickets(DataContext dataContext)
+    {
+        var tickets = dataContext.Set<TrainRouteTicket>();
+        var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
+        var seats = dataContext.Set<Seat>();
+        var users = dataContext.Set<User>();
+
+        if (await tickets.AnyAsync())
+        {
+            return;
+        }
+
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 12.50,
+                Passager = users.First(),
+                PassagerId = users.First().Id,
+                ScheduledTrainRoute = trainScheduledRoutes.First(),
+                Seat = seats.First(),
             });
 
         await dataContext.SaveChangesAsync();
