@@ -6,7 +6,6 @@ using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainTicket;
-using Stripe.Terminal;
 
 namespace SP23.P03.Web.Controllers
 {
@@ -18,7 +17,6 @@ namespace SP23.P03.Web.Controllers
         private readonly DbSet<TrainRouteTicket> tickets;
         private readonly DbSet<TrainScheduledRoutes> scheduledRoutes;
         private readonly DbSet<Seat> seats;
-        private readonly DbSet<User> users;
         private readonly DataContext dataContext;
 
         public TicketController(DataContext dataContext)
@@ -27,7 +25,6 @@ namespace SP23.P03.Web.Controllers
             tickets = dataContext.Set<TrainRouteTicket>();
             scheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
             seats = dataContext.Set<Seat>();
-            users = dataContext.Set<User>();
         }
         private static IQueryable<TrainRouteTicketDto> GetTicketDtos(IQueryable<TrainRouteTicket> tickets)
         {
@@ -169,6 +166,24 @@ namespace SP23.P03.Web.Controllers
             dataContext.SaveChanges();
 
             return Ok();
+        }
+        [HttpPut]
+        [Route("{id}/{userId}")]
+        public ActionResult<TrainRouteTicketDto> UpdateAssignTicket(int id, int userId)
+        {
+
+            var ticket = tickets.FirstOrDefault(x => x.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            ticket.PassagerId = userId;
+
+            dataContext.SaveChanges();
+
+            return Ok(ticket);
         }
     }
 }
