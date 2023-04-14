@@ -75,7 +75,18 @@ namespace SP23.P03.Web.Controllers
         public ActionResult<TrainRouteTicketDto> CreateTickets(TrainRouteTicketCreateDto dto)
         {
             var seat = seats.Where(x => x.Id == dto.SeatId).FirstOrDefault();
+
             var scheduledTrainRoute = scheduledRoutes.Where(x => x.Id == dto.ScheduledTrainRouteId).FirstOrDefault();
+            
+            if (seat == null)
+            {
+                return BadRequest();
+            }
+            if (scheduledTrainRoute == null)
+            {
+                return BadRequest();
+            }
+
             var ticket = new TrainRouteTicket
             {
                 cost = dto.cost,
@@ -108,6 +119,56 @@ namespace SP23.P03.Web.Controllers
                 SeatId = ticket.Seat.Id,
             };
             return CreatedAtAction(nameof(GetSectionById), new { id = returnticket.Id }, returnticket);
+        }
+        [HttpPut]
+        [Route("{id}")]
+        public ActionResult<TrainRouteTicketDto> UpdateTickets(int id, TrainRouteTicketCreateDto dto)
+        {
+            var seat = seats.Where(x => x.Id == dto.SeatId).FirstOrDefault();
+
+            var scheduledTrainRoute = scheduledRoutes.Where(x => x.Id == dto.ScheduledTrainRouteId).FirstOrDefault();
+
+            if (seat == null)
+            {
+                return BadRequest();
+            }
+            if (scheduledTrainRoute == null)
+            {
+                return BadRequest();
+            }
+
+            var ticket = tickets.FirstOrDefault(x => x.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            ticket.ScheduledTrainRoute = scheduledTrainRoute;
+            ticket.Seat = seat;
+            ticket.cost = dto.cost;
+
+            dataContext.SaveChanges();
+
+            return Ok(ticket);
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        public ActionResult DeleteTickets(int id)
+        {
+            var ticket = tickets.FirstOrDefault(x => x.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+
+            tickets.Remove(ticket);
+
+            dataContext.SaveChanges();
+
+            return Ok();
         }
     }
 }
