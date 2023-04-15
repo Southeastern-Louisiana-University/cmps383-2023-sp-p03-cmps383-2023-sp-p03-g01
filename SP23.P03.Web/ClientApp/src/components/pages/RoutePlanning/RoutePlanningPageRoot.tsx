@@ -15,35 +15,35 @@ import { ReviewAndPayButtons } from './modules/ActionButtons/ReviewAndPayButtons
  * The main page for route planning.
  */
 export function RoutePlanningPageRoot(): React.ReactElement {
-  const currentRoutePlanningPage = useRecoilValue(currentRoutePlanningPageState);
+    const currentRoutePlanningPage = useRecoilValue(currentRoutePlanningPageState);
 
-  return (
-    <div style={ROUTE_PLANNING_PAGE_STYLING.rootStyles}>
-      <RoutePlanningStepper />
+    return (
+        <div style={ROUTE_PLANNING_PAGE_STYLING.rootStyles}>
+            <RoutePlanningStepper />
 
-      {/* Content */}
-      <div style={ROUTE_PLANNING_PAGE_STYLING.contentStyles}>
-        {/* Departure Route */}
-        {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesPage />}
+            {/* Content */}
+            <div style={ROUTE_PLANNING_PAGE_STYLING.contentStyles}>
+                {/* Departure Route */}
+                {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesPage />}
 
-        {/* Seat Selection Page */}
-        {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionPage />}
+                {/* Seat Selection Page */}
+                {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionPage />}
 
-        {/* Review & Pay */}
-        {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayPage />}
-      </div>
+                {/* Review & Pay */}
+                {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayPage />}
+            </div>
 
-      {/* Footer Buttons */}
-      <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
-        {/* Departure Route Buttons */}
-        {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesButtons />}
+            {/* Footer Buttons */}
+            <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
+                {/* Departure Route Buttons */}
+                {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesButtons />}
 
-        {/* Seat Selection Page Buttons */}
-        {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionButtons />}
+                {/* Seat Selection Page Buttons */}
+                {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionButtons />}
 
-        {/* Review & Pay Buttons */}
-        {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayButtons />}
-      </div>
-    </div>
-  );
+                {/* Review & Pay Buttons */}
+                {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayButtons />}
+            </div>
+        </div>
+    );
 }

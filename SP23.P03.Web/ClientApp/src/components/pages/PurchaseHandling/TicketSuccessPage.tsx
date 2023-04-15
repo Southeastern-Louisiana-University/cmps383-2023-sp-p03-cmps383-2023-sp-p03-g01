@@ -10,25 +10,25 @@ import { TICKET_SUCCESS_PAGE_STYLING } from './TicketSuccessPageStyling';
  * <description here>
  */
 export function TicketSuccessPage(): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const navigateToHomePage = () => {
-    navigate(AppRoutes.HOME);
-  };
+    const navigateToHomePage = () => {
+        navigate(AppRoutes.HOME);
+    };
 
-  return (
-    <div style={TICKET_SUCCESS_PAGE_STYLING.rootStyles}>
-      {/* This is a placeholder that launches the Stripe payment */}
-      <span>Purchase complete! Thanks for riding with EnTrack today!</span>
-      <span>Your confirmation number is: 314159</span>
-      <Button
-        size={componentSize}
-        onClick={navigateToHomePage}
-      >
-        Home
-      </Button>
-    </div>
-  );
+    return (
+        <div style={TICKET_SUCCESS_PAGE_STYLING.rootStyles}>
+            {/* This is a placeholder that launches the Stripe payment */}
+            <span>Purchase complete! Thanks for riding with EnTrack today!</span>
+            <span>Your confirmation number is: 314159</span>
+            <Button
+                size={componentSize}
+                onClick={navigateToHomePage}
+            >
+                Home
+            </Button>
+        </div>
+    );
 }
