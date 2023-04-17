@@ -10,7 +10,8 @@ namespace SP23.P03.Web.Features.Route
         {
 
             builder.HasOne(x => x.Train)
-                .WithOne(x => x.Route);
+                .WithOne(x => x.Route)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
