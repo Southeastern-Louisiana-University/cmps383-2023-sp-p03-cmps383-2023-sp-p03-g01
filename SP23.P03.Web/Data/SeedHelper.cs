@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
@@ -24,6 +25,7 @@ public static class SeedHelper
         await AddSeat(dataContext);
         await AddSection(dataContext);
         await AddTrain(dataContext);
+        await AddTrainPath(dataContext);
         await AddTrainRoute(dataContext);
 
     }
@@ -147,7 +149,7 @@ public static class SeedHelper
 
         await dataContext.SaveChangesAsync();
     }
-    private static async Task AddTrainRoute(DataContext dataContext)
+    private static async Task AddTrainPath(DataContext dataContext)
     {
         var trainRoutes = dataContext.Set<TrainPath>();
         var trainStations = dataContext.Set<TrainStation>();
@@ -467,5 +469,29 @@ public static class SeedHelper
                 type = "roomlet"
             });
         await dataContext.SaveChangesAsync();
-    }   
+    }
+    private static async Task AddTrainRoute(DataContext dataContext)
+    {
+        var trainRoutes = dataContext.Set<TrainRoute>();
+        var trains = dataContext.Set<Train>();
+        var paths = dataContext.Set<TrainPath>();
+
+        if (await trainRoutes.AnyAsync())
+        {
+            return;
+        }
+
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = DateTime.Now,
+                DeperatureTime = DateTime.Now.AddHours(3),
+                Path = paths.First(),
+                PathId = paths.First().Id,
+                Train = trains.First(),
+            });
+
+
+        await dataContext.SaveChangesAsync();
+    }
 }
