@@ -46,7 +46,7 @@ public class SeatController : ControllerBase
         return Ok(result);
     }
     [HttpPost]
-    public ActionResult<SeatDto> CreateSection(SeatDto dto)
+    public ActionResult<SeatDto> CreateSeat(SeatDto dto)
     {
         if (IsInvalid(dto))
         {
