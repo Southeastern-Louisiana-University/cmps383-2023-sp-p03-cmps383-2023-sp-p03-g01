@@ -22,7 +22,7 @@ export function TripDateRangePicker(): React.ReactElement {
         <DatePickerInput
             style={HOME_PAGE_STYLING.paperContentStyles}
             size={componentSize}
-            label='Trip Duration:'
+            label='Departure Date:'
             placeholder='Select departure date'
             value={departureDate}
             onChange={setDepartureDate}
@@ -34,7 +34,7 @@ export function TripDateRangePicker(): React.ReactElement {
             style={HOME_PAGE_STYLING.paperContentStyles}
             size={componentSize}
             type='range'
-            label='Trip Duration:'
+            label='Departure & Return Dates:'
             placeholder='Select travel dates'
             value={dateRangeValue}
             onChange={setDateRangeValue}

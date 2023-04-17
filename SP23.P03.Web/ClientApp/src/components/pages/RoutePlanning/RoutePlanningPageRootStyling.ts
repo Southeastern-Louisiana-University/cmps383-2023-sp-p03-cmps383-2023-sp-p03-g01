@@ -6,13 +6,13 @@ import { STYLING_VARIABLES } from '../../../styling/StylingVariables';
  */
 export const ROUTE_PLANNING_PAGE_STYLING = {
     rootStyles: {
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr auto',
         gap: STYLING_VARIABLES.defaultSpacing,
 
-        padding: STYLING_VARIABLES.defaultSpacing,
+        padding: STYLING_VARIABLES.defaultRootContentPadding,
 
-        height: `calc(100% - 2 * ${STYLING_VARIABLES.defaultSpacing})`,
+        height: `calc(100% - 3 * ${STYLING_VARIABLES.defaultSpacing})`,
     } as React.CSSProperties,
 
     // ******************* //

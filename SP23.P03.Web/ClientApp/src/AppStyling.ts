@@ -69,7 +69,7 @@ export const mantineTheme: MantineThemeOverride = {
                     width: '100%',
                     maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
 
-                    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
                 },
                 body: {
                     width: '100%',
@@ -152,7 +152,7 @@ export const mantineTheme: MantineThemeOverride = {
         Accordion: {
             styles: {
                 control: {
-                    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
 
                     color: COLOR_PALETTE.light.default.textColorPrimary,
 
@@ -198,6 +198,31 @@ export const mantineTheme: MantineThemeOverride = {
                             backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
                         },
                     },
+                },
+            },
+        },
+
+        Stepper: {
+            styles: {
+                stepLabel: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                stepDescription: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                stepIcon: {
+                    '&[data-progress]': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+
+                    '&[data-completed]': {
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+                separatorActive: {
+                    backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
                 },
             },
         },
