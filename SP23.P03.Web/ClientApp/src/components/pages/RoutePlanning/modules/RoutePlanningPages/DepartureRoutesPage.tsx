@@ -1,9 +1,30 @@
 import React from 'react';
 import { ROUTE_PLANNING_PAGE_STYLING } from '../../RoutePlanningPageRootStyling';
-import { Accordion, Checkbox, Table } from '@mantine/core';
+import { Accordion, ActionIcon, Checkbox, Text, Title, Tooltip } from '@mantine/core';
 import { useRecoilValue } from 'recoil';
 import { departureStationState, arrivalStationState } from '../../../../../recoil/atoms/HomePageAtom';
+import { COLOR_PALETTE } from '../../../../../styling/ColorPalette';
+import { IoMdTrain } from 'react-icons/io';
+import { BlackArrow } from '../../../../../media/BlackArrow';
 import { formatNumberAsUSD } from '../../../../../util/formatNumberAsUSD';
+
+const SeatSelectButton = (props: React.HTMLProps<HTMLButtonElement>) => {
+    return (
+        <button
+            type='button'
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+
+                height: '100%',
+            }}
+        >
+            {props.children}
+        </button>
+    );
+};
 
 /**
  * The first step in the route planning process.
@@ -12,16 +33,17 @@ export function DepartureRoutesPage(): React.ReactElement {
     const selectedDepartureStation = useRecoilValue(departureStationState);
     const selectedArrivalStation = useRecoilValue(arrivalStationState);
 
-    const tStyle1 = {
-        style: ROUTE_PLANNING_PAGE_STYLING.trainRouteAccordionControlStyles,
-    };
-    const tStyle2 = {
-        style: { ...ROUTE_PLANNING_PAGE_STYLING.trainRouteAccordionControlStyles, color: 'white' },
-    };
+    /**
+     * Departure Time, Arrival Time, Trip Duration, Total Stops, Cost
+     * - Stop, Departure Time, Departure Station, Arrival Time, Arrival Station, Dwell Time, Layover
+     */
 
     return (
         <div>
-            <Accordion defaultValue='Departure Route'>
+            <Accordion
+                defaultValue='Departure Route'
+                chevronPosition='left'
+            >
                 <Accordion.Item value='Departure Route'>
                     <Accordion.Control>
                         {selectedDepartureStation} to {selectedArrivalStation}
@@ -29,191 +51,137 @@ export function DepartureRoutesPage(): React.ReactElement {
                     <Accordion.Panel>
                         <div style={ROUTE_PLANNING_PAGE_STYLING.parentAccordionPanelStyles}>
                             {/* Train 1 */}
-                            <div style={ROUTE_PLANNING_PAGE_STYLING.trainRouteRowStyles}>
-                                <Checkbox />
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
 
-                                <Accordion defaultValue='train 1'>
-                                    <Accordion.Item value='train 1'>
-                                        <Accordion.Control>
-                                            <Table>
-                                                <thead>
-                                                    <tr>
-                                                        <th {...tStyle2}>Departure Time</th>
-                                                        <th {...tStyle2}>Final Arrival Time</th>
-                                                        <th {...tStyle2}>Trip Duration</th>
-                                                        <th {...tStyle2}>Total Stops</th>
-                                                        <th {...tStyle2}>Cost (USD)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td {...tStyle2}>8:00 AM CDT</td>
-                                                        <td {...tStyle2}>3:00 PM CDT</td>
-                                                        <td {...tStyle2}>7 hours</td>
-                                                        <td {...tStyle2}>5</td>
-                                                        <td {...tStyle2}>{formatNumberAsUSD(156)}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Accordion.Control>
-                                        <Accordion.Panel>
-                                            <Table>
-                                                <thead>
-                                                    <tr>
-                                                        <th {...tStyle1}>Stop</th>
-                                                        <th {...tStyle1}>Departure Time</th>
-                                                        <th {...tStyle1}>Departure Station</th>
-                                                        <th {...tStyle1}>Arrival Time</th>
-                                                        <th {...tStyle1}>Arrival Station</th>
-                                                        <th {...tStyle1}>Dwell Time</th>
-                                                        <th {...tStyle1}>Layover</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td {...tStyle1}>1</td>
-                                                        <td {...tStyle1}>8:00 AM CDT</td>
-                                                        <td {...tStyle1}>Baton Rouge, LA</td>
-                                                        <td {...tStyle1}>9:18 AM CDT</td>
-                                                        <td {...tStyle1}>New Orleans, LA</td>
-                                                        <td {...tStyle1}>15 minutes</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>2</td>
-                                                        <td {...tStyle1}>9:33 AM CDT</td>
-                                                        <td {...tStyle1}>New Orleans, LA</td>
-                                                        <td {...tStyle1}>10:51 AM CDT</td>
-                                                        <td {...tStyle1}>Schriever, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>30 minutes</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>3</td>
-                                                        <td {...tStyle1}>11:21 AM CDT</td>
-                                                        <td {...tStyle1}>Schriever, LA</td>
-                                                        <td {...tStyle1}>12:39 PM CDT</td>
-                                                        <td {...tStyle1}>New Iberia, LA</td>
-                                                        <td {...tStyle1}>15 minutes</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>4</td>
-                                                        <td {...tStyle1}>12:54 PM CDT</td>
-                                                        <td {...tStyle1}>New Iberia, LA</td>
-                                                        <td {...tStyle1}>2:12 PM CDT</td>
-                                                        <td {...tStyle1}>Lafayette, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>30 minutes</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>5</td>
-                                                        <td {...tStyle1}>2:42 PM CDT</td>
-                                                        <td {...tStyle1}>Lafayette, LA</td>
-                                                        <td {...tStyle1}>3:00 PM CDT</td>
-                                                        <td {...tStyle1}>Lake Charles, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Accordion.Panel>
-                                    </Accordion.Item>
-                                </Accordion>
-                            </div>
+                                    height: '100px',
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '2rem',
 
-                            {/* Train 2 */}
-                            <div style={ROUTE_PLANNING_PAGE_STYLING.trainRouteRowStyles}>
-                                <Checkbox />
+                                        height: '100%',
+                                    }}
+                                >
+                                    <Checkbox />
 
-                                <Accordion defaultValue='train 2'>
-                                    <Accordion.Item value='train 2'>
-                                        <Accordion.Control>
-                                            <Table>
-                                                <thead>
-                                                    <tr>
-                                                        <th {...tStyle2}>Departure Time</th>
-                                                        <th {...tStyle2}>Final Arrival Time</th>
-                                                        <th {...tStyle2}>Trip Duration</th>
-                                                        <th {...tStyle2}>Total Stops</th>
-                                                        <th {...tStyle2}>Cost (USD)</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td {...tStyle2}>10:00 AM CDT</td>
-                                                        <td {...tStyle2}>5:00 PM CDT</td>
-                                                        <td {...tStyle2}>7 hours</td>
-                                                        <td {...tStyle2}>5</td>
-                                                        <td {...tStyle2}>{formatNumberAsUSD(156)}</td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Accordion.Control>
-                                        <Accordion.Panel>
-                                            <Table>
-                                                <thead>
-                                                    <tr>
-                                                        <th {...tStyle1}>Stop</th>
-                                                        <th {...tStyle1}>Departure Time</th>
-                                                        <th {...tStyle1}>Departure Station</th>
-                                                        <th {...tStyle1}>Arrival Time</th>
-                                                        <th {...tStyle1}>Arrival Station</th>
-                                                        <th {...tStyle1}>Dwell Time</th>
-                                                        <th {...tStyle1}>Layover</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td {...tStyle1}>1</td>
-                                                        <td {...tStyle1}>10:00 AM CDT</td>
-                                                        <td {...tStyle1}>Baton Rouge, LA</td>
-                                                        <td {...tStyle1}>11:18 AM CDT</td>
-                                                        <td {...tStyle1}>New Orleans, LA</td>
-                                                        <td {...tStyle1}>15min</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>2</td>
-                                                        <td {...tStyle1}>11:33 AM CDT</td>
-                                                        <td {...tStyle1}>New Orleans, LA</td>
-                                                        <td {...tStyle1}>12:51 PM CDT</td>
-                                                        <td {...tStyle1}>Schriever, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>30min</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>3</td>
-                                                        <td {...tStyle1}>1:21 PM CDT</td>
-                                                        <td {...tStyle1}>Schriever, LA</td>
-                                                        <td {...tStyle1}>2:39 PM CDT</td>
-                                                        <td {...tStyle1}>New Iberia, LA</td>
-                                                        <td {...tStyle1}>15min</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>4</td>
-                                                        <td {...tStyle1}>2:54 PM CDT</td>
-                                                        <td {...tStyle1}>New Iberia, LA</td>
-                                                        <td {...tStyle1}>4:12 PM CDT</td>
-                                                        <td {...tStyle1}>Lafayette, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>30min</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td {...tStyle1}>5</td>
-                                                        <td {...tStyle1}>4:42 PM CDT</td>
-                                                        <td {...tStyle1}>Lafayette, LA</td>
-                                                        <td {...tStyle1}>5:00 PM CDT</td>
-                                                        <td {...tStyle1}>Lake Charles, LA</td>
-                                                        <td {...tStyle1}>None</td>
-                                                        <td {...tStyle1}>None</td>
-                                                    </tr>
-                                                </tbody>
-                                            </Table>
-                                        </Accordion.Panel>
-                                    </Accordion.Item>
-                                </Accordion>
+                                    {/* Departs */}
+                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>Departs</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            12:20pm
+                                        </Title>
+                                    </div>
+
+                                    {/* Trip Duration, Train Swaps */}
+                                    <div
+                                        style={{
+                                            display: 'grid',
+                                            justifyItems: 'center',
+                                        }}
+                                    >
+                                        {/* Train Swaps */}
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'center',
+                                                alignItems: 'center',
+                                                gap: '0.25rem',
+                                            }}
+                                        >
+                                            <Tooltip label='Train Swaps During Route'>
+                                                <ActionIcon>
+                                                    <Text>3</Text>
+                                                    <IoMdTrain />
+                                                </ActionIcon>
+                                            </Tooltip>
+                                        </div>
+
+                                        <BlackArrow />
+
+                                        {/* Trip Duration */}
+                                        <Text>23h 40m</Text>
+                                    </div>
+
+                                    {/* Arrives */}
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                        }}
+                                    >
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>Arrives</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            12:20am
+                                        </Title>
+                                    </div>
+                                </div>
+
+                                <div
+                                    style={{
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '2rem',
+
+                                        height: '100%',
+                                    }}
+                                >
+                                    {/* Coach */}
+                                    <SeatSelectButton>
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>Coach</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            {formatNumberAsUSD(156)}
+                                        </Title>
+                                    </SeatSelectButton>
+
+                                    {/* First Class */}
+                                    <SeatSelectButton>
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>First Class</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            {formatNumberAsUSD(156)}
+                                        </Title>
+                                    </SeatSelectButton>
+
+                                    {/* Sleeper */}
+                                    <SeatSelectButton>
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>Sleeper</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            {formatNumberAsUSD(156)}
+                                        </Title>
+                                    </SeatSelectButton>
+
+                                    {/* Roomlet */}
+                                    <SeatSelectButton>
+                                        <Text color={COLOR_PALETTE.light.default.textColorSecondary}>Roomlet</Text>
+                                        <Title
+                                            order={1}
+                                            weight={'normal'}
+                                        >
+                                            {formatNumberAsUSD(156)}
+                                        </Title>
+                                    </SeatSelectButton>
+                                </div>
                             </div>
                         </div>
                     </Accordion.Panel>

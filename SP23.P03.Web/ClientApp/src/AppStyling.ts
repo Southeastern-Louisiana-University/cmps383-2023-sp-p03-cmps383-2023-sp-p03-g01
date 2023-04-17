@@ -28,6 +28,13 @@ export const APP_STYLING = {
  * Styling for Mantine Components in the app.
  */
 export const mantineTheme: MantineThemeOverride = {
+    fontSizes: {
+        xs: '0.75rem',
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
+    },
     components: {
         Button: {
             styles: {
@@ -211,6 +218,12 @@ export const mantineTheme: MantineThemeOverride = {
                     fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
                 },
                 stepIcon: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+
+                    borderColor: COLOR_PALETTE.light.default.grayBackground,
+
                     '&[data-progress]': {
                         borderColor: COLOR_PALETTE.light.default.kellyGreen,
                     },
@@ -221,8 +234,56 @@ export const mantineTheme: MantineThemeOverride = {
                         borderColor: COLOR_PALETTE.light.default.kellyGreen,
                     },
                 },
+                separator: {
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+                },
                 separatorActive: {
                     backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+                },
+            },
+        },
+
+        Avatar: {
+            styles: {
+                placeholder: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+                },
+            },
+        },
+
+        Checkbox: {
+            styles: {
+                input: {
+                    borderColor: COLOR_PALETTE.light.default.borderColor,
+
+                    '&:hover': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        cursor: 'pointer',
+                    },
+
+                    '&:checked': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        '&:hover': {
+                            borderColor: COLOR_PALETTE.light.default.kellyGreenHover,
+
+                            backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+
+                            cursor: 'pointer',
+                        },
+                    },
+                },
+            },
+        },
+
+        ActionIcon: {
+            styles: {
+                root: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
                 },
             },
         },

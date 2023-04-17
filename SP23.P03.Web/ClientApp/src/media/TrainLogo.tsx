@@ -7,7 +7,7 @@ export function TrainLogo(): React.ReactElement {
     return (
         <svg
             version='1.0'
-            /* width="700.000000pt" height="700.000000pt" */ viewBox='0 0 700.000000 700.000000'
+            viewBox='0 0 700.000000 700.000000'
             preserveAspectRatio='xMidYMid meet'
             id='svg56'
             xmlns='http://www.w3.org/2000/svg'

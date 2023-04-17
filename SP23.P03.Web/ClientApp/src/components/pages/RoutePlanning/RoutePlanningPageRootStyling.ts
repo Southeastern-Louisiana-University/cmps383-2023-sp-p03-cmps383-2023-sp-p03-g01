@@ -33,6 +33,7 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
 
         fontSize: STYLING_VARIABLES.defaultBodyFontSize,
     } as React.CSSProperties,
+
     stepperContentBlockStyles: {
         display: 'flex',
         flexDirection: 'row',
@@ -57,15 +58,12 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
         gap: STYLING_VARIABLES.defaultSpacing,
     } as React.CSSProperties,
 
-    // Train Route Row Styles
-    trainRouteRowStyles: {
-        display: 'grid',
-        gridTemplateColumns: '20px 1fr',
-        alignItems: 'center',
-        gap: STYLING_VARIABLES.defaultSpacing,
-    } as React.CSSProperties,
     trainRouteAccordionControlStyles: {
+        color: COLOR_PALETTE.light.default.textColorPrimary,
+
         fontSize: STYLING_VARIABLES.defaultBodyFontSize,
+
+        borderColor: COLOR_PALETTE.light.default.textColorPrimary,
     } as React.CSSProperties,
 
     // Review Page Styles

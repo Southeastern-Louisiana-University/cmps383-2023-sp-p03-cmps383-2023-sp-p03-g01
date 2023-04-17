@@ -17,8 +17,12 @@ export const COLOR_PALETTE = {
             cream: 'hsl(63, 65%, 88%)', // #f2f4cb
 
             // The rest
-            textColorPrimary: 'hsl(0, 0%, 0%)', // #000000
+            textColorPrimary: 'rgba(0, 0, 0, 1)', // #000000
+            textColorSecondary: 'rgba(115, 117, 117, 1)', // #737575
+
             borderColor: 'rgba(212, 216, 217, 1)', // #D4D8D9
+
+            grayBackground: 'rgba(227, 229, 232, 1)',
         },
     },
 };
