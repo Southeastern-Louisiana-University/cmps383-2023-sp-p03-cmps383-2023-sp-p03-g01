@@ -161,12 +161,12 @@ export const mantineTheme: MantineThemeOverride = {
                 control: {
                     fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
 
-                    color: COLOR_PALETTE.light.default.textColorPrimary,
+                    color: COLOR_PALETTE.light.default.accordionText,
 
-                    backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+                    backgroundColor: COLOR_PALETTE.light.default.accordionBackground,
 
                     '&:hover': {
-                        backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+                        backgroundColor: COLOR_PALETTE.light.default.accordionBackgroundHover,
                     },
                 },
             },

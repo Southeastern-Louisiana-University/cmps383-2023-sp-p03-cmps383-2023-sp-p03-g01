@@ -5,9 +5,28 @@ export const COLOR_PALETTE = {
     light: {
         default: {
             // Main Color
-            kellyGreen: 'rgba(101, 163, 13, 1)', // #65a30d
+            kellyGreen: '#65a30d',
             kellyGreenActive: 'rgba(101, 163, 13, 0.2)',
             kellyGreenHover: 'rgba(101, 163, 13, 0.6)',
+
+            // Accordion
+            accordionBackground: '#5B1D72',
+            accordionBackgroundHover: 'rgba(101, 163, 13, 0.6)',
+            accordionText: '#fff',
+
+            // Seat Colors
+            coachSeatButtonBackground: '#d0e4c0',
+            coachSeatButtonBackgroundHover: '#e7f2df',
+            coachSeatButtonText: '#737575',
+            firstClassSeatButtonBackground: '#b1d296',
+            firstClassSeatButtonBackgroundHover: '#d8e9cb',
+            firstClassSeatButtonText: '#545555',
+            sleeperSeatButtonBackground: '#92bf6b',
+            sleeperSeatButtonBackgroundHover: '#c8dfb6',
+            sleeperSeatButtonText: '#363737',
+            roomletSeatButtonBackground: '#74ad39',
+            roomletSeatButtonBackgroundHover: '#b8d7a1',
+            roomletSeatButtonText: '#1b1c1c',
 
             // Subject to change, based on Main Color
             blackOlive: 'hsl(112, 6%, 27%)', // #434a42

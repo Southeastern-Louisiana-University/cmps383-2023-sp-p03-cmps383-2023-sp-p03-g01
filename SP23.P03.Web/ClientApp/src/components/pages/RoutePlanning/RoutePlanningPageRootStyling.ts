@@ -52,12 +52,6 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
         overflowY: 'auto',
     } as React.CSSProperties,
 
-    parentAccordionPanelStyles: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: STYLING_VARIABLES.defaultSpacing,
-    } as React.CSSProperties,
-
     trainRouteAccordionControlStyles: {
         color: COLOR_PALETTE.light.default.textColorPrimary,
 
