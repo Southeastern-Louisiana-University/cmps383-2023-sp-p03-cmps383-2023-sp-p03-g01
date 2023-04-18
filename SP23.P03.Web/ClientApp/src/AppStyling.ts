@@ -159,15 +159,19 @@ export const mantineTheme: MantineThemeOverride = {
         Accordion: {
             styles: {
                 control: {
-                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-
-                    color: COLOR_PALETTE.light.default.accordionText,
-
                     backgroundColor: COLOR_PALETTE.light.default.accordionBackground,
 
                     '&:hover': {
                         backgroundColor: COLOR_PALETTE.light.default.accordionBackgroundHover,
                     },
+                },
+                label: {
+                    fontWeight: 'bold',
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                    color: COLOR_PALETTE.light.default.accordionText,
+                },
+                chevron: {
+                    color: COLOR_PALETTE.light.default.accordionText,
                 },
             },
             defaultProps: {

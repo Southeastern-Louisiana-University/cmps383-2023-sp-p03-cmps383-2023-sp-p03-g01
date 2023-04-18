@@ -10,9 +10,9 @@ export const COLOR_PALETTE = {
             kellyGreenHover: 'rgba(101, 163, 13, 0.6)',
 
             // Accordion
-            accordionBackground: '#5B1D72',
+            accordionBackground: '#E8D9C5',
             accordionBackgroundHover: 'rgba(101, 163, 13, 0.6)',
-            accordionText: '#fff',
+            accordionText: '#000',
 
             // Seat Colors
             coachSeatButtonBackground: '#d0e4c0',
