@@ -11,7 +11,7 @@ export const COLOR_PALETTE = {
 
             // Accordion
             accordionBackground: '#E8D9C5',
-            accordionBackgroundHover: 'rgba(101, 163, 13, 0.6)',
+            accordionBackgroundHover: '#D0B18A',
             accordionText: '#000',
 
             // Seat Colors
