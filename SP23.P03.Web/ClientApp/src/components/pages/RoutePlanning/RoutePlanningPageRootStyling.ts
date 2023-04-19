@@ -6,13 +6,13 @@ import { STYLING_VARIABLES } from '../../../styling/StylingVariables';
  */
 export const ROUTE_PLANNING_PAGE_STYLING = {
     rootStyles: {
-        display: 'flex',
-        flexDirection: 'column',
+        display: 'grid',
+        gridTemplateRows: 'auto 1fr auto',
         gap: STYLING_VARIABLES.defaultSpacing,
 
-        padding: STYLING_VARIABLES.defaultSpacing,
+        padding: STYLING_VARIABLES.defaultRootContentPadding,
 
-        height: `calc(100% - 2 * ${STYLING_VARIABLES.defaultSpacing})`,
+        height: `calc(100% - 3 * ${STYLING_VARIABLES.defaultSpacing})`,
     } as React.CSSProperties,
 
     // ******************* //
@@ -33,6 +33,7 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
 
         fontSize: STYLING_VARIABLES.defaultBodyFontSize,
     } as React.CSSProperties,
+
     stepperContentBlockStyles: {
         display: 'flex',
         flexDirection: 'row',
@@ -51,21 +52,12 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
         overflowY: 'auto',
     } as React.CSSProperties,
 
-    parentAccordionPanelStyles: {
-        display: 'flex',
-        flexDirection: 'column',
-        gap: STYLING_VARIABLES.defaultSpacing,
-    } as React.CSSProperties,
-
-    // Train Route Row Styles
-    trainRouteRowStyles: {
-        display: 'grid',
-        gridTemplateColumns: '20px 1fr',
-        alignItems: 'center',
-        gap: STYLING_VARIABLES.defaultSpacing,
-    } as React.CSSProperties,
     trainRouteAccordionControlStyles: {
+        color: COLOR_PALETTE.light.default.textColorPrimary,
+
         fontSize: STYLING_VARIABLES.defaultBodyFontSize,
+
+        borderColor: COLOR_PALETTE.light.default.textColorPrimary,
     } as React.CSSProperties,
 
     // Review Page Styles

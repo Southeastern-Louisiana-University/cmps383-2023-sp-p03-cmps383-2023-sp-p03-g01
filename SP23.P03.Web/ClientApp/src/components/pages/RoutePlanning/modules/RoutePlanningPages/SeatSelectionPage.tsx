@@ -29,7 +29,7 @@ export function SeatSelectionPage(): React.ReactElement {
                         {selectedDepartureStation} to {selectedArrivalStation}
                     </Accordion.Control>
                     <Accordion.Panel>
-                        <div style={ROUTE_PLANNING_PAGE_STYLING.parentAccordionPanelStyles}>
+                        <div /* style={ROUTE_PLANNING_PAGE_STYLING.parentAccordionPanelStyles} */>
                             {/* Train 1 */}
                             <Accordion defaultValue='train 1'>
                                 <Accordion.Item value='train 1'>
