@@ -496,6 +496,7 @@ public static class SeedHelper
 
         await dataContext.SaveChangesAsync();
     }
+
     private static async Task AddTrainScheduledRoute(DataContext dataContext)
     {
         var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
