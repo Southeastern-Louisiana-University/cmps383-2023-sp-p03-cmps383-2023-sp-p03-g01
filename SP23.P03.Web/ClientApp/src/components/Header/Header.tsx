@@ -16,61 +16,82 @@ import { useViewportSize } from '@mantine/hooks';
  * The header for the app.
  */
 export function Header(): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth, 'md');
-  const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth, 'md');
+    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
 
-  const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
-  const [authenticationModalOpened, setAuthenticationModalOpened] = useState(false);
+    const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
+    const [authenticationModalOpened, setAuthenticationModalOpened] = useState(false);
 
-  const toggleBurgerMenu = () => {
-    setNavigationMenuOpened(!navigationMenuOpened);
-  };
+    const toggleBurgerMenu = () => {
+        setNavigationMenuOpened(!navigationMenuOpened);
+    };
 
-  const toggleAuthenticationModal = () => {
-    setAuthenticationModalOpened(!authenticationModalOpened);
-  };
+    const toggleAuthenticationModal = () => {
+        setAuthenticationModalOpened(!authenticationModalOpened);
+    };
 
-  const navigateToHomePage = () => {
-    navigate(AppRoutes.HOME);
-  };
+    const navigateToHomePage = () => {
+        navigate(AppRoutes.HOME);
+    };
 
-  const navigateToAccountPage = () => {
-    navigate(AppRoutes.ACCOUNT_PAGE);
-  };
+    const navigateToAccountPage = () => {
+        navigate(AppRoutes.ACCOUNT_PAGE);
+    };
 
-  return (
-    <div style={HEADER_STYLING.rootStyles}>
-      <div style={HEADER_STYLING.rootContentStyles}>
-        {/* Navigation Menu */}
-        <Burger opened={navigationMenuOpened} onClick={toggleBurgerMenu} aria-label="Open navigation" size={componentSize} />
-        <NavigationDrawer opened={navigationMenuOpened} onClose={toggleBurgerMenu} />
+    return (
+        <div style={HEADER_STYLING.rootStyles}>
+            <div style={HEADER_STYLING.rootContentStyles}>
+                {/* Navigation Menu */}
+                <Burger
+                    opened={navigationMenuOpened}
+                    onClick={toggleBurgerMenu}
+                    aria-label='Open navigation'
+                    size={componentSize}
+                />
+                <NavigationDrawer
+                    opened={navigationMenuOpened}
+                    onClose={toggleBurgerMenu}
+                />
 
-        {/* The Logo & Company Name */}
-        <div style={HEADER_STYLING.entrackStyles} onClick={navigateToHomePage}>
-          <div style={HEADER_STYLING.iconStyles}>
-            <TrainLogo />
-          </div>
-          <span style={HEADER_STYLING.titleStyles}>EnTrack</span>
+                {/* The Logo & Company Name */}
+                <div
+                    style={HEADER_STYLING.entrackStyles}
+                    onClick={navigateToHomePage}
+                >
+                    <div style={HEADER_STYLING.iconStyles}>
+                        <TrainLogo />
+                    </div>
+                    <span style={HEADER_STYLING.titleStyles}>EnTrack</span>
+                </div>
+
+                {/* Sign-In/Profile Button */}
+                {currentlyLoggedInUser === null ? (
+                    <Button
+                        size={componentSize}
+                        onClick={toggleAuthenticationModal}
+                    >
+                        Sign-In
+                    </Button>
+                ) : (
+                    <div style={HEADER_STYLING.loggedInUserStyles}>
+                        <ActionIcon onClick={navigateToAccountPage}>
+                            <MdAccountCircle style={HEADER_STYLING.iconStyles} />
+                        </ActionIcon>
+                        {browserWidth > 500 && (
+                            <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>
+                                Hello, {currentlyLoggedInUser}
+                            </span>
+                        )}
+                    </div>
+                )}
+
+                <AuthenticationModal
+                    opened={authenticationModalOpened}
+                    onClose={toggleAuthenticationModal}
+                />
+            </div>
         </div>
-
-        {/* Sign-In/Profile Button */}
-        {currentlyLoggedInUser === null ? (
-          <Button size={componentSize} onClick={toggleAuthenticationModal}>
-            Sign-In
-          </Button>
-        ) : (
-          <div style={HEADER_STYLING.loggedInUserStyles}>
-            <ActionIcon onClick={navigateToAccountPage}>
-              <MdAccountCircle style={HEADER_STYLING.iconStyles} />
-            </ActionIcon>
-            {browserWidth > 500 && <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>Hello, {currentlyLoggedInUser}</span>}
-          </div>
-        )}
-
-        <AuthenticationModal opened={authenticationModalOpened} onClose={toggleAuthenticationModal} />
-      </div>
-    </div>
-  );
+    );
 }

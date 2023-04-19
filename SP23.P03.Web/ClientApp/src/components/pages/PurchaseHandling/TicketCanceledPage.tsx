@@ -11,24 +11,24 @@ import { TICKET_CANCELED_PAGE_STYLING } from './TicketCanceledPageStyling';
  */
 
 export function TicketCanceledPage(): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const navigateToHomePage = () => {
-    navigate(AppRoutes.HOME);
-  };
+    const navigateToHomePage = () => {
+        navigate(AppRoutes.HOME);
+    };
 
-  return (
-    <div style={TICKET_CANCELED_PAGE_STYLING.rootStyles}>
-      {/* This is a placeholder that launches the Stripe payment */}
-      <span>Purchase canceled.</span>
-      <Button
-        size={componentSize}
-        onClick={navigateToHomePage}
-      >
-        Home
-      </Button>
-    </div>
-  );
+    return (
+        <div style={TICKET_CANCELED_PAGE_STYLING.rootStyles}>
+            {/* This is a placeholder that launches the Stripe payment */}
+            <span>Purchase canceled.</span>
+            <Button
+                size={componentSize}
+                onClick={navigateToHomePage}
+            >
+                Home
+            </Button>
+        </div>
+    );
 }

@@ -9,7 +9,7 @@ import { TrainStatusesPage } from './components/pages/TrainStatuses/TrainStatuse
 import { TrainTrackingPage } from './components/pages/TrainTracking/TrainTrackingPage';
 import { AccountPage } from './components/pages/Account/AccountPage';
 import { NotFoundPage } from './components/pages/NotFound/NotFoundPage';
-import { RoutePlanningPage } from './components/pages/RoutePlanning/RoutePlanningPage';
+import { RoutePlanningPageRoot } from './components/pages/RoutePlanning/RoutePlanningPageRoot';
 import { TicketSuccessPage } from './components/pages/PurchaseHandling/TicketSuccessPage';
 import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCanceledPage';
 
@@ -17,53 +17,53 @@ import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCa
  * This is the main component of the application.
  */
 export function App(): React.ReactElement {
-  return (
-    <div style={APP_STYLING.rootStyles}>
-      <MantineProvider theme={mantineTheme}>
-        <Header />
-        <div style={APP_STYLING.contentRootStyles}>
-          <Routes>
-            <Route
-              path={AppRoutes.HOME}
-              element={<HomePage />}
-            />
-            <Route
-              path={AppRoutes.TRAIN_SCHEDULES}
-              element={<TrainSchedulesPage />}
-            />
-            <Route
-              path={AppRoutes.TRAIN_STATUSES}
-              element={<TrainStatusesPage />}
-            />
-            <Route
-              path={AppRoutes.TRAIN_TRACKING}
-              element={<TrainTrackingPage />}
-            />
-            <Route
-              path={AppRoutes.ACCOUNT_PAGE}
-              element={<AccountPage />}
-            />
-            <Route
-              path={AppRoutes.ROUTE_PLANNING}
-              element={<RoutePlanningPage />}
-            />
-            <Route
-              path={AppRoutes.TICKET_SUCCESS}
-              element={<TicketSuccessPage />}
-            />
-            <Route
-              path={AppRoutes.TICKET_CANCELED}
-              element={<TicketCanceledPage />}
-            />
+    return (
+        <div style={APP_STYLING.rootStyles}>
+            <MantineProvider theme={mantineTheme}>
+                <Header />
+                <div style={APP_STYLING.contentRootStyles}>
+                    <Routes>
+                        <Route
+                            path={AppRoutes.HOME}
+                            element={<HomePage />}
+                        />
+                        <Route
+                            path={AppRoutes.TRAIN_SCHEDULES}
+                            element={<TrainSchedulesPage />}
+                        />
+                        <Route
+                            path={AppRoutes.TRAIN_STATUSES}
+                            element={<TrainStatusesPage />}
+                        />
+                        <Route
+                            path={AppRoutes.TRAIN_TRACKING}
+                            element={<TrainTrackingPage />}
+                        />
+                        <Route
+                            path={AppRoutes.ACCOUNT_PAGE}
+                            element={<AccountPage />}
+                        />
+                        <Route
+                            path={AppRoutes.ROUTE_PLANNING}
+                            element={<RoutePlanningPageRoot />}
+                        />
+                        <Route
+                            path={AppRoutes.TICKET_SUCCESS}
+                            element={<TicketSuccessPage />}
+                        />
+                        <Route
+                            path={AppRoutes.TICKET_CANCELED}
+                            element={<TicketCanceledPage />}
+                        />
 
-            {/* Page Not Found */}
-            <Route
-              path='*'
-              element={<NotFoundPage />}
-            />
-          </Routes>
+                        {/* Page Not Found */}
+                        <Route
+                            path='*'
+                            element={<NotFoundPage />}
+                        />
+                    </Routes>
+                </div>
+            </MantineProvider>
         </div>
-      </MantineProvider>
-    </div>
-  );
+    );
 }

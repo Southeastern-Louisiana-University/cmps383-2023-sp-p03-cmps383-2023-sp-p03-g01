@@ -6,132 +6,290 @@ import { STYLING_VARIABLES } from './styling/StylingVariables';
  * Styling for the App Component.
  */
 export const APP_STYLING = {
-  rootStyles: {
-    height: '100vh',
-  } as React.CSSProperties,
+    rootStyles: {
+        height: '100vh',
+    } as React.CSSProperties,
 
-  contentRootStyles: {
-    width: '100%',
-    height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
+    contentRootStyles: {
+        width: '100%',
+        height: `calc(100% - ${STYLING_VARIABLES.headerHeight})`,
 
-    overflowY: 'auto',
-  } as React.CSSProperties,
+        overflowY: 'auto',
+    } as React.CSSProperties,
 
-  contentStyles: {
-    width: '100%',
-    maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
-    height: '100%',
-
-    margin: `${STYLING_VARIABLES.defaultSpacing}`,
-  } as React.CSSProperties,
+    contentStyles: {
+        width: '100%',
+        maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+        height: '100%',
+    } as React.CSSProperties,
 };
 
 /**
  * Styling for Mantine Components in the app.
  */
 export const mantineTheme: MantineThemeOverride = {
-  components: {
-    Button: {
-      styles: {
-        root: {
-          backgroundColor: COLOR_PALETTE.light.default.blueNcs,
-
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-
-          maxWidth: '500px',
-
-          '&:hover': {
-            backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
-          },
-        },
-      },
+    fontSizes: {
+        xs: '0.75rem',
+        sm: '0.875rem',
+        md: '1rem',
+        lg: '1.125rem',
+        xl: '1.25rem',
     },
+    components: {
+        Button: {
+            styles: {
+                root: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+                    backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
 
-    Drawer: {
-      styles: {
-        drawer: {
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        },
-        header: {
-          width: '100%',
-          maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
 
-          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                    maxWidth: '500px',
+
+                    '&:not([data-disabled]):hover': {
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+                    },
+
+                    '&:focus': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+            },
         },
-        body: {
-          width: '100%',
-          maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+
+        Paper: {
+            styles: {
+                root: {
+                    borderColor: COLOR_PALETTE.light.default.borderColor,
+                },
+            },
         },
-      },
+
+        Drawer: {
+            styles: {
+                drawer: {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                },
+                header: {
+                    width: '100%',
+                    maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                body: {
+                    width: '100%',
+                    maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
+                },
+            },
+        },
+
+        Modal: {
+            styles: {
+                header: {
+                    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                },
+                body: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+            },
+        },
+
+        TextInput: {
+            styles: {
+                label: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                input: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+                    '&:focus': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+            },
+        },
+
+        Select: {
+            styles: {
+                label: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                input: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+                    '&:focus': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+                item: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+                    '&[data-selected]': {
+                        color: COLOR_PALETTE.light.default.textColorPrimary,
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        '&:hover': {
+                            backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+                        },
+                    },
+                },
+                separatorLabel: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+            },
+        },
+
+        NumberInput: {
+            styles: {
+                label: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                input: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+                    '&:focus': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+            },
+        },
+
+        Accordion: {
+            styles: {
+                control: {
+                    backgroundColor: COLOR_PALETTE.light.default.accordionBackground,
+
+                    '&:hover': {
+                        backgroundColor: COLOR_PALETTE.light.default.accordionBackgroundHover,
+                    },
+                },
+                label: {
+                    fontWeight: 'bold',
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                    color: COLOR_PALETTE.light.default.accordionText,
+                },
+                chevron: {
+                    color: COLOR_PALETTE.light.default.accordionText,
+                },
+            },
+            defaultProps: {
+                radius: 'md',
+                variant: 'contained',
+            },
+        },
+
+        DatePickerInput: {
+            styles: {
+                label: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                input: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+
+                    '&:focus': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+                day: {
+                    '&[data-in-range]': {
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreenActive,
+
+                        '&:hover': {
+                            backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+                        },
+                    },
+
+                    '&[data-selected]': {
+                        color: COLOR_PALETTE.light.default.textColorPrimary,
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        '&:hover': {
+                            backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+                        },
+                    },
+                },
+            },
+        },
+
+        Stepper: {
+            styles: {
+                stepLabel: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                stepDescription: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                stepIcon: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+
+                    borderColor: COLOR_PALETTE.light.default.grayBackground,
+
+                    '&[data-progress]': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+
+                    '&[data-completed]': {
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+                separator: {
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+                },
+                separatorActive: {
+                    backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+                },
+            },
+        },
+
+        Avatar: {
+            styles: {
+                placeholder: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+                    backgroundColor: COLOR_PALETTE.light.default.grayBackground,
+                },
+            },
+        },
+
+        Checkbox: {
+            styles: {
+                input: {
+                    borderColor: COLOR_PALETTE.light.default.borderColor,
+
+                    '&:hover': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        cursor: 'pointer',
+                    },
+
+                    '&:checked': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+
+                        '&:hover': {
+                            borderColor: COLOR_PALETTE.light.default.kellyGreenHover,
+
+                            backgroundColor: COLOR_PALETTE.light.default.kellyGreenHover,
+
+                            cursor: 'pointer',
+                        },
+                    },
+                },
+            },
+        },
+
+        ActionIcon: {
+            styles: {
+                root: {
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+                },
+            },
+        },
     },
-
-    Modal: {
-      styles: {
-        header: {
-          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
-        },
-        body: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-      },
-    },
-
-    TextInput: {
-      styles: {
-        label: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-        input: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-      },
-    },
-
-    Select: {
-      styles: {
-        label: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-        input: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-        item: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-        separatorLabel: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-      },
-    },
-
-    NumberInput: {
-      styles: {
-        label: {
-          fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
-        },
-      },
-    },
-
-    Accordion: {
-      styles: {
-        control: {
-          fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
-
-          color: 'white',
-
-          backgroundColor: COLOR_PALETTE.light.default.blueNcs,
-
-          '&:hover': {
-            backgroundColor: COLOR_PALETTE.light.default.blueNcsHover,
-          },
-        },
-      },
-      defaultProps: {
-        radius: 'md',
-        variant: 'contained',
-      },
-    },
-  },
 };

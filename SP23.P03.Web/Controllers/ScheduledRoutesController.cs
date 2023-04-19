@@ -91,10 +91,10 @@ namespace SP23.P03.Web.Controllers;
             return BadRequest();
         }
 
-        var scheduledTrainRoute = scheduledRoutes.FirstOrDefault(x => x.Id == id);
-        scheduledTrainRoute.Routes = new List<TrainRoute>();
+        var scheduledTrainRoutes = scheduledRoutes.FirstOrDefault(x => x.Id == id);
+        scheduledTrainRoutes.Routes = new List<TrainRoute>();
 
-        if (scheduledTrainRoute == null)
+        if (scheduledTrainRoutes == null)
         {
             return NotFound();
         }
@@ -108,24 +108,24 @@ namespace SP23.P03.Web.Controllers;
                 return NotFound();
             }
 
-            scheduledTrainRoute.Routes.Add(temptrainRoute);
+            scheduledTrainRoutes.Routes.Add(temptrainRoute);
         }
         dataContext.SaveChanges();
 
-        return Ok(scheduledTrainRoute);
+        return Ok(scheduledTrainRoutes);
     }
     [HttpDelete]
     [Route("{id}")]
     public ActionResult DeleteTrainScheduledRoutes(int id)
     {
-        var scheduledTrainRoute = scheduledRoutes.FirstOrDefault(x => x.Id == id);
-        if (scheduledTrainRoute == null)
+        var scheduledTrainRoutes = scheduledRoutes.FirstOrDefault(x => x.Id == id);
+        if (scheduledTrainRoutes == null)
         {
             return NotFound();
         }
 
 
-        scheduledRoutes.Remove(scheduledTrainRoute);
+        scheduledRoutes.Remove(scheduledTrainRoutes);
 
         dataContext.SaveChanges();
 

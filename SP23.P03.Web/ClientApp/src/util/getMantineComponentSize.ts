@@ -7,17 +7,17 @@
  * @returns The size of the Mantine Component.
  */
 export const getMantineComponentSize = (size: number, upperLimit?: 'md' | 'lg'): 'sm' | 'md' | 'lg' | 'xl' => {
-  if (size <= 768) {
-    return 'sm';
-  }
+    if (size <= 768) {
+        return 'sm';
+    }
 
-  if (upperLimit === 'md' || size <= 992) {
-    return 'md';
-  }
+    if (upperLimit === 'md' || size <= 992) {
+        return 'md';
+    }
 
-  if (upperLimit === 'lg' || size <= 1200) {
-    return 'lg';
-  }
+    if (upperLimit === 'lg' || size <= 1200) {
+        return 'lg';
+    }
 
-  return 'xl';
+    return 'xl';
 };

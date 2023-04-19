@@ -5,47 +5,47 @@ import { TripType } from '../../models/TripTypes';
 /**
  * The currently selected trip type `Atom`.
  */
-export const selectedTripTypeState = atom<TripType>({
-  key: 'selectedTripType',
-  default: TripType.ONE_WAY,
+export const tripTypeState = atom<TripType>({
+    key: 'tripType',
+    default: TripType.ONE_WAY,
 });
 
 /**
  * The entered passenger count `Atom`.
  */
-export const enteredPassengerCountState = atom<number>({
-  key: 'enteredPassengerCount',
-  default: 1,
+export const passengerCountState = atom<number>({
+    key: 'passengerCount',
+    default: 1,
 });
 
 /**
  * The selected departure station `Atom`.
  */
-export const selectedDepartureStationState = atom<string>({
-  key: 'selectedDepartureStation',
-  default: '',
+export const departureStationState = atom<string>({
+    key: 'departureStation',
+    default: '',
 });
 
 /**
  * The selected arrival station `Atom`.
  */
-export const selectedArrivalStationState = atom<string>({
-  key: 'selectedArrivalStation',
-  default: '',
+export const arrivalStationState = atom<string>({
+    key: 'arrivalStation',
+    default: '',
 });
 
 /**
- * The selected departure date `Atom`.
+ * The selected date range `Atom`.
  */
-export const selectedDepartureDateState = atom<DateValue>({
-  key: 'selectedDepartureDate',
-  default: null,
+export const tripDurationState = atom<[Date | null, Date | null]>({
+    key: 'tripDuration',
+    default: [null, null],
 });
 
 /**
- * The selected return date `Atom`.
+ * One-way departure date `Atom`.
  */
-export const selectedReturnDateState = atom<DateValue>({
-  key: 'selectedReturnDate',
-  default: null,
+export const departureDateState = atom<DateValue>({
+    key: 'departureDate',
+    default: null,
 });
