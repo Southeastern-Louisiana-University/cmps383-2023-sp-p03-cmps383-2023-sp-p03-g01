@@ -9,7 +9,7 @@ import { TrainStatusesPage } from './components/pages/TrainStatuses/TrainStatuse
 import { TrainTrackingPage } from './components/pages/TrainTracking/TrainTrackingPage';
 import { AccountPage } from './components/pages/Account/AccountPage';
 import { NotFoundPage } from './components/pages/NotFound/NotFoundPage';
-import { RoutePlanningPage } from './components/pages/RoutePlanning/RoutePlanningPage';
+import { RoutePlanningPageRoot } from './components/pages/RoutePlanning/RoutePlanningPageRoot';
 import { TicketSuccessPage } from './components/pages/PurchaseHandling/TicketSuccessPage';
 import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCanceledPage';
 
@@ -45,7 +45,7 @@ export function App(): React.ReactElement {
             />
             <Route
               path={AppRoutes.ROUTE_PLANNING}
-              element={<RoutePlanningPage />}
+              element={<RoutePlanningPageRoot />}
             />
             <Route
               path={AppRoutes.TICKET_SUCCESS}
