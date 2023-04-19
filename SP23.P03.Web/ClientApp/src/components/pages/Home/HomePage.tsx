@@ -7,85 +7,77 @@ import { HOME_PAGE_STYLING } from './HomePageStyling';
 import { DepartureStationSelect } from './modules/DepartureStationSelect';
 import { PassengersNumberInput } from './modules/PassengersNumberInput';
 import { TripSelect } from './modules/TripSelect';
-import { DepartureDatePicker } from './modules/DepartureDatePicker';
-import { ReturnDatePicker } from './modules/ReturnDatePicker';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import {
-  enteredPassengerCountState,
-  selectedArrivalStationState,
-  selectedDepartureDateState,
-  selectedDepartureStationState,
-  selectedReturnDateState,
-  selectedTripTypeState,
+    passengerCountState,
+    arrivalStationState,
+    departureStationState,
+    tripTypeState,
+    tripDurationState,
+    departureDateState,
 } from '../../../recoil/atoms/HomePageAtom';
 import { TripType } from '../../../models/TripTypes';
+import { TripDateRangePicker } from './modules/TripDateRangePicker';
 
 /**
  * The home page of the app.
  */
 export function HomePage(): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const selectedTripType = useRecoilValue(selectedTripTypeState);
-  const enteredPassengerCount = useRecoilValue(enteredPassengerCountState);
-  const selectedDepartureStation = useRecoilValue(selectedDepartureStationState);
-  const selectedArrivalStation = useRecoilValue(selectedArrivalStationState);
-  const selectedDepartureDate = useRecoilValue(selectedDepartureDateState);
-  const [selectedReturnDate, setSelectedReturnDate] = useRecoilState(selectedReturnDateState);
+    const tripType = useRecoilValue(tripTypeState);
+    const passengerCount = useRecoilValue(passengerCountState);
+    const departureStation = useRecoilValue(departureStationState);
+    const arrivalStation = useRecoilValue(arrivalStationState);
+    const tripDuration = useRecoilValue(tripDurationState);
+    const departureDate = useRecoilValue(departureDateState);
 
-  const returnDateIsFilledOutWhenRequired =
-    (selectedTripType !== TripType.ONE_WAY && selectedReturnDate !== null) || selectedTripType === TripType.ONE_WAY;
-  const formIsComplete =
-    enteredPassengerCount > 0 &&
-    selectedDepartureStation !== '' &&
-    selectedArrivalStation !== '' &&
-    selectedDepartureDate !== null &&
-    returnDateIsFilledOutWhenRequired;
+    const formIsComplete =
+        passengerCount > 0 &&
+        departureStation !== '' &&
+        arrivalStation !== '' &&
+        ((tripType === TripType.ONE_WAY && departureDate !== null) ||
+            (tripType === TripType.ROUND_TRIP && tripDuration[0] !== null && tripDuration[1] !== null));
 
-  const navigateToRoutePlanningPage = () => {
-    // Also, clear the return date if the trip type is one way.
-    if (selectedTripType === TripType.ONE_WAY) {
-      setSelectedReturnDate(null);
-    }
-    navigate(AppRoutes.ROUTE_PLANNING);
-  };
+    const navigateToRoutePlanningPage = () => {
+        navigate(AppRoutes.ROUTE_PLANNING);
+    };
 
-  return (
-    <div style={HOME_PAGE_STYLING.rootStyles}>
-      <div style={HOME_PAGE_STYLING.rootContentStyles}>
-        <Paper
-          shadow='lg'
-          style={HOME_PAGE_STYLING.paperStyles}
-        >
-          {/* Top Row */}
-          <TripSelect />
-          <PassengersNumberInput />
+    return (
+        <div style={HOME_PAGE_STYLING.rootStyles}>
+            <div style={HOME_PAGE_STYLING.rootContentStyles}>
+                <Paper
+                    shadow='lg'
+                    style={HOME_PAGE_STYLING.paperStyles}
+                    withBorder
+                >
+                    {/* Top Row */}
+                    <TripSelect />
+                    <TripDateRangePicker />
 
-          {/* 2nd Row */}
-          <DepartureStationSelect />
-          <DestinationStationSelect />
+                    {/* 2nd Row */}
+                    <DepartureStationSelect />
+                    <DestinationStationSelect />
 
-          {/* 3rd Row */}
-          <DepartureDatePicker />
-          {selectedTripType !== TripType.ONE_WAY && <ReturnDatePicker />}
+                    {/* 3rd Row */}
+                    <PassengersNumberInput />
 
-          {/* Final Row */}
-          {formIsComplete && (
-            <Button
-              style={{ width: '80%' }}
-              size={componentSize}
-              onClick={navigateToRoutePlanningPage}
-            >
-              Find A Route
-            </Button>
-          )}
-        </Paper>
-
-      </div>
-    </div>
-  );
+                    {/* Final Row */}
+                    {formIsComplete && (
+                        <Button
+                            style={{ width: '80%' }}
+                            size={componentSize}
+                            onClick={navigateToRoutePlanningPage}
+                        >
+                            Find A Route
+                        </Button>
+                    )}
+                </Paper>
+            </div>
+        </div>
+    );
 }

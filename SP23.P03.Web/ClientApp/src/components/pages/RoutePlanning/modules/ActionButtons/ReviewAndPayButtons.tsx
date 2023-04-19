@@ -13,33 +13,33 @@ import { getMantineComponentSize } from '../../../../../util/getMantineComponent
  * The buttons for the Review & Pay page.
  */
 export function ReviewAndPayButtons(): React.ReactElement {
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
+    const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
 
-  return (
-    <>
-      <Button
-        size={componentSize}
-        onClick={() => {
-          setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
-        }}
-      >
-        <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Seat Selection
-      </Button>
+    return (
+        <>
+            <Button
+                size={componentSize}
+                onClick={() => {
+                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                }}
+            >
+                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Seat Selection
+            </Button>
 
-      <form
-        action='/api/payment/create-checkout-session'
-        method='POST'
-      >
-        <Button
-          type='submit'
-          size={componentSize}
-        >
-          Checkout with Stripe <GrStripe style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
-        </Button>
-      </form>
-    </>
-  );
+            <form
+                action='/api/payment/create-checkout-session'
+                method='POST'
+            >
+                <Button
+                    type='submit'
+                    size={componentSize}
+                >
+                    Checkout with Stripe <GrStripe style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
+                </Button>
+            </form>
+        </>
+    );
 }

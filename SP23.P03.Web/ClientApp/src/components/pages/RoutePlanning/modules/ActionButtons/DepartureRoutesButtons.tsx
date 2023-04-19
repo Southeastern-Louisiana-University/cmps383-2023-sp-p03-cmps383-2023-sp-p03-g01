@@ -14,33 +14,34 @@ import { currentRoutePlanningPageState } from '../../../../../recoil/atoms/Route
  * The buttons for the Departure Routes page.
  */
 export function DepartureRoutesButtons(): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
+    const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
 
-  const navigateToHome = (): void => {
-    navigate(AppRoutes.HOME);
-  };
+    const navigateToHome = (): void => {
+        navigate(AppRoutes.HOME);
+    };
 
-  return (
-    <>
-      <Button
-        size={componentSize}
-        onClick={navigateToHome}
-      >
-        <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Home Page
-      </Button>
+    return (
+        <>
+            <Button
+                size={componentSize}
+                onClick={navigateToHome}
+            >
+                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Home Page
+            </Button>
 
-      <Button
-        size={componentSize}
-        onClick={() => {
-          setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
-        }}
-      >
-        Continue to Seat Selection <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
-      </Button>
-    </>
-  );
+            <Button
+                size={componentSize}
+                onClick={() => {
+                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                }}
+            >
+                Continue to Seat Selection{' '}
+                <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
+            </Button>
+        </>
+    );
 }

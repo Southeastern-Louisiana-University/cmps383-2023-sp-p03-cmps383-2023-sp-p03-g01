@@ -7,5 +7,5 @@
  * @param delay Time in milliseconds to wait before resolving
  */
 export function callATimeout(delay: number) {
-  return new Promise((res) => setTimeout(res, delay));
+    return new Promise((res) => setTimeout(res, delay));
 }

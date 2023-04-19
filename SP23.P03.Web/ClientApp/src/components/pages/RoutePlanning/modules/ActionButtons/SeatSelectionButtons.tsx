@@ -12,30 +12,31 @@ import { currentRoutePlanningPageState } from '../../../../../recoil/atoms/Route
  * The buttons for the seat selection page.
  */
 export function SeatSelectionButtons(): React.ReactElement {
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
+    const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
 
-  return (
-    <>
-      <Button
-        size={componentSize}
-        onClick={() => {
-          setCurrentRoutePlanningPage(RoutePlanningPage.DEPARTURE_ROUTE);
-        }}
-      >
-        <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Route Selection
-      </Button>
+    return (
+        <>
+            <Button
+                size={componentSize}
+                onClick={() => {
+                    setCurrentRoutePlanningPage(RoutePlanningPage.DEPARTURE_ROUTE);
+                }}
+            >
+                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Route Selection
+            </Button>
 
-      <Button
-        size={componentSize}
-        onClick={() => {
-          setCurrentRoutePlanningPage(RoutePlanningPage.REVIEW_AND_PAY);
-        }}
-      >
-        Continue to Review & Pay <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
-      </Button>
-    </>
-  );
+            <Button
+                size={componentSize}
+                onClick={() => {
+                    setCurrentRoutePlanningPage(RoutePlanningPage.REVIEW_AND_PAY);
+                }}
+            >
+                Continue to Review & Pay{' '}
+                <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
+            </Button>
+        </>
+    );
 }

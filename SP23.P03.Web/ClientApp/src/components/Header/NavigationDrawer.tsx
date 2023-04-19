@@ -7,8 +7,8 @@ import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { HEADER_STYLING } from './HeaderStyling';
 
 interface NavigationDrawerProps {
-  opened: boolean;
-  onClose: () => void;
+    opened: boolean;
+    onClose: () => void;
 }
 /**
  * The navigation drawer for the app.
@@ -18,40 +18,59 @@ interface NavigationDrawerProps {
  * @param props.onClose Function to close the drawer.
  */
 export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): React.ReactElement {
-  const navigate = useNavigate();
-  const { width: browserWidth } = useViewportSize();
-  const componentSize = getMantineComponentSize(browserWidth);
+    const navigate = useNavigate();
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-  const navigateToTrainSchedules = () => {
-    navigate(AppRoutes.TRAIN_SCHEDULES);
-    onClose();
-  };
+    const navigateToTrainSchedules = () => {
+        navigate(AppRoutes.TRAIN_SCHEDULES);
+        onClose();
+    };
 
-  const navigateToTrainStatuses = () => {
-    navigate(AppRoutes.TRAIN_STATUSES);
-    onClose();
-  };
+    const navigateToTrainStatuses = () => {
+        navigate(AppRoutes.TRAIN_STATUSES);
+        onClose();
+    };
 
-  const navigateToTrainTracking = () => {
-    navigate(AppRoutes.TRAIN_TRACKING);
-    onClose();
-  };
+    const navigateToTrainTracking = () => {
+        navigate(AppRoutes.TRAIN_TRACKING);
+        onClose();
+    };
 
-  return (
-    <Drawer opened={opened} onClose={onClose} title="Navigate to..." padding="sm" position="left" size="auto">
-      <div style={HEADER_STYLING.navDrawerButtonContainerStyles}>
-        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainSchedules}>
-          Schedules
-        </Button>
+    return (
+        <Drawer
+            opened={opened}
+            onClose={onClose}
+            title='Navigate to...'
+            padding='sm'
+            position='left'
+            size='auto'
+        >
+            <div style={HEADER_STYLING.navDrawerButtonContainerStyles}>
+                <Button
+                    style={HEADER_STYLING.navDrawerButtonStyles}
+                    size={componentSize}
+                    onClick={navigateToTrainSchedules}
+                >
+                    Schedules
+                </Button>
 
-        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainStatuses}>
-          Statuses
-        </Button>
+                <Button
+                    style={HEADER_STYLING.navDrawerButtonStyles}
+                    size={componentSize}
+                    onClick={navigateToTrainStatuses}
+                >
+                    Statuses
+                </Button>
 
-        <Button style={HEADER_STYLING.navDrawerButtonStyles} size={componentSize} onClick={navigateToTrainTracking}>
-          Tracking
-        </Button>
-      </div>
-    </Drawer>
-  );
+                <Button
+                    style={HEADER_STYLING.navDrawerButtonStyles}
+                    size={componentSize}
+                    onClick={navigateToTrainTracking}
+                >
+                    Tracking
+                </Button>
+            </div>
+        </Drawer>
+    );
 }
