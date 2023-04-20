@@ -36,10 +36,10 @@ export function DepartureRoutesButtons(): React.ReactElement {
             <Button
                 size={componentSize}
                 onClick={() => {
-                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                    setCurrentRoutePlanningPage(RoutePlanningPage.REVIEW_AND_PAY);
                 }}
             >
-                Continue to Seat Selection{' '}
+                Continue to Review & Pay{' '}
                 <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
             </Button>
         </>

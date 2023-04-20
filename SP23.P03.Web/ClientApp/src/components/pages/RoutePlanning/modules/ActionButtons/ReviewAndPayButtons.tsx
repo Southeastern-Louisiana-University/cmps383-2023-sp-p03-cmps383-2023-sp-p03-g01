@@ -23,10 +23,10 @@ export function ReviewAndPayButtons(): React.ReactElement {
             <Button
                 size={componentSize}
                 onClick={() => {
-                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                    setCurrentRoutePlanningPage(RoutePlanningPage.DEPARTURE_ROUTE);
                 }}
             >
-                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Seat Selection
+                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Route Selection
             </Button>
 
             <form
