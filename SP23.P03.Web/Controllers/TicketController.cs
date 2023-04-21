@@ -44,9 +44,10 @@ namespace SP23.P03.Web.Controllers
                             TrainId = x.Train.Id,
                         }),
                     },
-                    SeatId = x.Seat.Id,
+                    SeatType = x.SeatType,
                     cost = x.cost,
                     PassagerId = (int)x.PassagerId,
+                    Code = x.Code,
 
                 });
         }
@@ -87,7 +88,7 @@ namespace SP23.P03.Web.Controllers
             var ticket = new TrainRouteTicket
             {
                 cost = dto.cost,
-                Seat = seat,
+                SeatType = seat.type,
                 ScheduledTrainRoute = scheduledTrainRoute,
                 Passager = null,
                 PassagerId = null,
@@ -113,7 +114,7 @@ namespace SP23.P03.Web.Controllers
                         TrainId = x.Train.Id,
                     }),
                 },
-                SeatId = ticket.Seat.Id,
+                SeatType = ticket.SeatType,
             };
             return CreatedAtAction(nameof(GetSectionById), new { id = returnticket.Id }, returnticket);
         }
@@ -142,7 +143,7 @@ namespace SP23.P03.Web.Controllers
             }
 
             ticket.ScheduledTrainRoute = scheduledTrainRoute;
-            ticket.Seat = seat;
+            ticket.SeatType = seat.type;
             ticket.cost = dto.cost;
 
             dataContext.SaveChanges();

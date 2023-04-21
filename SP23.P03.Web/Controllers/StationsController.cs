@@ -54,6 +54,8 @@ public class StationsController : ControllerBase
             Name = dto.Name,
             Address = dto.Address,
             ManagerId = dto.ManagerId,
+            City = dto.City,
+            State = dto.State,
         };
         stations.Add(station);
 
@@ -87,6 +89,8 @@ public class StationsController : ControllerBase
 
         station.Name = dto.Name;
         station.Address = dto.Address;
+        station.State = dto.State;
+        station.City = dto.City;
         if (User.IsInRole(RoleNames.Admin))
         {
             station.ManagerId = dto.ManagerId;
@@ -155,6 +159,8 @@ public class StationsController : ControllerBase
                 Address = x.Address,
                 ManagerId = x.ManagerId,
                 Hours = x.Hours,
+                City = x.City,
+                State = x.State,
             });
     }
 }

@@ -8,7 +8,8 @@ namespace SP23.P03.Web.Features.TrainTicket
     {
         public int Id { get; set; }
         public TrainScheduledRoutes? ScheduledTrainRoute { get; set; }
-        public Seat? Seat { get; set; }
+        public string? Code { get; set; }
+        public string? SeatType { get; set; }
         public double cost { get; set; }
         public virtual User? Passager { get; set; } 
 
