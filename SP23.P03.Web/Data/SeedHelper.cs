@@ -89,15 +89,6 @@ public static class SeedHelper
     {
         var trainStations = dataContext.Set<TrainStation>();
 
-        var seededarrayoftrainstation = new List<TrainStation>()
-        {
-            new TrainStation
-            {
-                Name = "Hammond",
-                Address = "404 N.W. Railroad Avenue",
-                Hours = "9:00 AM - 4:45 PM"
-            },
-    };
         if (await trainStations.AnyAsync())
         {
             return;
@@ -156,11 +147,355 @@ public static class SeedHelper
         dataContext.Set<TrainStation>()
             .Add(new TrainStation
             {
+                Name = "Laurel",
+                Address = "230 North Maple Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Hattiesburg",
+                State = "MS",
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
                 Name = "Meridian",
                 Address = "1901 Front Street",
                 Hours = "10:00 AM - 6:00 PM",
                 City = "Hattiesburg",
                 State = "MS",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Baton Rouge",
+                Address = "1900 Bacl Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Baton Rouge",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "McComb",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "McComb",
+                State = "MS",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Brookhaven",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Brookhaven",
+                State = "MS",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Hazelhurst",
+                State = "MS",
+            });
+
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Jackson",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Jackson",
+                State = "MS",
+            }); 
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Yazoo City",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Yazoo City",
+                State = "MS",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Schriever",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Schriever",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "New Iberia",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "New Iberia",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Lafayette",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Lafayette",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Lake Charles",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Lake Charles",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Shreveport",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Shreveport",
+                State = "LA",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Texarkana",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Texarkana",
+                State = "AR",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Marshall",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Marshall",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Longview",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Longview",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Nacogdoches",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Nacogdoches",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Beaumont",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Beaumont",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Galveston",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Galveston",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Houston",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Houston",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Tyler",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Mineola",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Prairie View",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Bryan",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Mesquite",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Dallas",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Waco",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Fort Worth",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Cleburne",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "McGregor",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Temple",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Taylor",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Austin",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "San Marcos",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "San Antonio",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Killeen",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Fort Hood",
+                State = "TX",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Biloxi",
+                State = "MS",
+            });
+        dataContext.Set<TrainStation>()
+            .Add(new TrainStation
+            {
+                Name = "Placeholder",
+                Address = "1901 Front Street",
+                Hours = "10:00 AM - 6:00 PM",
+                City = "Mobile",
+                State = "AL",
             });
 
 
@@ -200,35 +535,6 @@ public static class SeedHelper
             station6 = trainStations.Find(6);
         }
 
-        var train1 = trains.First();
-        var train2 = new Train();
-        var train3 = new Train();
-        var train4 = new Train();
-        var train5 = new Train();
-
-        if (trains.Find(2) != null)
-        {
-            train2 = trains.Find(2);
-        }
-        if (trains.Find(3) != null)
-        {
-            train3 = trains.Find(3);
-        }
-        if (trains.Find(4) != null)
-        {
-            train4 = trains.Find(4);
-        }
-        if (trains.Find(5) != null)
-        {
-            train5 = trains.Find(5);
-        }
-
-        if (await trainRoutes.AnyAsync())
-        {
-            return;
-        }
-
-
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
             {
@@ -241,8 +547,8 @@ public static class SeedHelper
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
             {
-                StartingTrainStation = station1,
-                StartingTrainStationId = station1.Id,
+                StartingTrainStation = station2,
+                StartingTrainStationId = station2.Id,
                 EndingTrainStation = station3,
                 EndingTrainStationId = station3.Id,
             });
@@ -552,6 +858,7 @@ public static class SeedHelper
                 ScheduledTrainRoute = trainScheduledRoutes.First(),
                 SeatType = seats.First().type,
             });
+
 
         await dataContext.SaveChangesAsync();
     }
