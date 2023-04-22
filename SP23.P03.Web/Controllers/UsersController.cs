@@ -1,8 +1,11 @@
+using System.Globalization;
 using System.Transactions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.Route;
+using SP23.P03.Web.Features.TrainTicket;
 
 namespace SP23.P03.Web.Controllers;
 
@@ -53,6 +56,24 @@ public class UsersController : ControllerBase
             Id = newUser.Id,
             Roles = dto.Roles,
             UserName = newUser.UserName,
-        });
+            Tickets = newUser.Tickets.Select(x => new TrainRouteTicketDto
+            {
+                Id = x.Id,
+                TrainRoute = new TrainRouteDto
+                {
+                    Id = x.TrainRoute.Id,
+                    ArrivalTime = x.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    DepartureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                    DepartureStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
+                    PassengerCount = x.TrainRoute.PassengerCount,
+                },
+                SeatType = x.SeatType,
+                cost = x.cost,
+                PassagerId = (int)x.PassagerId,
+                Code = x.Code,
+
+            })
+    });
     }
 }
