@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230413174705_ticketfixing")]
+    partial class ticketfixing
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -300,10 +303,6 @@ namespace SP23.P03.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Hours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -315,10 +314,6 @@ namespace SP23.P03.Web.Migrations
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
-
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -335,17 +330,14 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("PassagerId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ScheduledTrainRouteId")
                         .HasColumnType("int");
 
-                    b.Property<string>("SeatType")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("SeatId")
+                        .HasColumnType("int");
 
                     b.Property<double>("cost")
                         .HasColumnType("float");
@@ -355,6 +347,8 @@ namespace SP23.P03.Web.Migrations
                     b.HasIndex("PassagerId");
 
                     b.HasIndex("ScheduledTrainRouteId");
+
+                    b.HasIndex("SeatId");
 
                     b.ToTable("TrainRouteTicket");
                 });
@@ -541,9 +535,15 @@ namespace SP23.P03.Web.Migrations
                         .WithMany()
                         .HasForeignKey("ScheduledTrainRouteId");
 
+                    b.HasOne("SP23.P03.Web.Features.Trains.Seat", "Seat")
+                        .WithMany()
+                        .HasForeignKey("SeatId");
+
                     b.Navigation("Passager");
 
                     b.Navigation("ScheduledTrainRoute");
+
+                    b.Navigation("Seat");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Seat", b =>
