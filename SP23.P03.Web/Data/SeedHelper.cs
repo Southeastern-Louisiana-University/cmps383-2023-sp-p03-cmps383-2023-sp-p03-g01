@@ -783,6 +783,10 @@ public static class SeedHelper
         {
             ClassDseats.Add(seats.Find(8));
         }
+        if (seats.Find(9) != null)
+        {
+            ClassDseats.Add(seats.Find(9));
+        }
 
         if (await sections.AnyAsync())
         {
@@ -806,8 +810,6 @@ public static class SeedHelper
                 Capacity = 168,
                 Features = "Coach,First Class",
                 SeatList = ClassBseats,
-       
-
             });
 
         dataContext.Set<Section>()
@@ -893,6 +895,12 @@ public static class SeedHelper
         dataContext.Set<Seat>()
             .Add(new Seat
             {
+                Quantity = 22,
+                type = "first class"
+            });
+        dataContext.Set<Seat>()
+            .Add(new Seat
+            {
                 Quantity = 4,
                 type = "roomlet"
             });
@@ -964,14 +972,19 @@ public static class SeedHelper
 
         var train2 = new Train();
         var train3 = new Train();
+        var train4 = new Train();
 
         if (trains.Find(2) != null)
         {
             train2 = trains.Find(2);
         }
-        if (paths.Find(3) != null)
+        if (trains.Find(3) != null)
         {
             train3 = trains.Find(3);
+        }
+        if (trains.Find(4) != null)
+        {
+            train4 = trains.Find(4);
         }
 
         if (await trainRoutes.AnyAsync())
@@ -987,7 +1000,7 @@ public static class SeedHelper
                 DeperatureTime = new DateTime(2022, 5, 8, 10, 0, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
-                Train = trains.First(),
+                Train = train4,
                 DwellTime = null,
                 Layover = "30 min",
                 PassengerCount = 1,
@@ -1060,7 +1073,7 @@ public static class SeedHelper
                 DeperatureTime = new DateTime(2022, 5, 8, 12, 00, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
-                Train = trains.First(),
+                Train = train4,
                 DwellTime = null,
                 Layover = "30min",
                 PassengerCount = 1,
@@ -1182,18 +1195,18 @@ public static class SeedHelper
                 Path = path8,
                 PathId = path8.Id,
                 Train = train2,
-                DwellTime = "15 min",
-                Layover = null,
+                DwellTime = null,
+                Layover = "30min",
                 PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 14, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 45, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
                 Path = path7,
                 PathId = path7.Id,
-                Train = train2,
+                Train = train4,
                 DwellTime = null,
                 Layover = "30 min",
                 PassengerCount = 1,
@@ -1266,7 +1279,7 @@ public static class SeedHelper
                 DeperatureTime = new DateTime(2022, 5, 14, 18, 15, 0, 0, DateTimeKind.Utc),
                 Path = path7,
                 PathId = path7.Id,
-                Train = trains.First(),
+                Train = train4,
                 DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
@@ -1371,8 +1384,8 @@ public static class SeedHelper
                 Passager = users.First(),
                 PassagerId = users.First().Id,
                 TrainRoute = trainRoutes.First(),
-                SeatType = seats.First().type,
-                Code = "12",
+                SeatType = trainRoutes.First().Train.Sections.First().SeatList.First().type,
+                Code = "1",
             });
 
 
