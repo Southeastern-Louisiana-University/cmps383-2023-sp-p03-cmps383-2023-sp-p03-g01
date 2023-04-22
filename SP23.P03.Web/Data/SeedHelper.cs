@@ -909,7 +909,12 @@ public static class SeedHelper
         var path4 = new TrainPath();
         var path5 = new TrainPath();
         var path6 = new TrainPath();
-        var path7  = new TrainPath();
+        var path7 = new TrainPath();
+        var path8 = new TrainPath();
+        var path9 = new TrainPath();
+        var path10 = new TrainPath();
+        var path11 = new TrainPath();
+        var path12 = new TrainPath();
 
         if (paths.Find(2) != null)
         {
@@ -935,6 +940,27 @@ public static class SeedHelper
         {
             path7 = paths.Find(7);
         }
+        if (paths.Find(8) != null)
+        {
+            path8 = paths.Find(8);
+        }
+        if (paths.Find(9) != null)
+        {
+            path9 = paths.Find(9);
+        }
+        if (paths.Find(10) != null)
+        {
+            path10 = paths.Find(10);
+        }
+        if (paths.Find(11) != null)
+        {
+            path11 = paths.Find(11);
+        }
+        if (paths.Find(12) != null)
+        {
+            path12 = paths.Find(12);
+        }
+
 
         var train2 = new Train();
         var train3 = new Train();
@@ -953,7 +979,7 @@ public static class SeedHelper
             return;
         }
 
-
+        //May 8, 8 am Baton Rouge to Jackson
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
@@ -973,8 +999,8 @@ public static class SeedHelper
                 Path = path2,
                 PathId = path2.Id,
                 Train = train2,
-                DwellTime = "15 min",
-                Layover = null,
+                DwellTime = null,
+                Layover = "15 min",
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1020,18 +1046,229 @@ public static class SeedHelper
                 DwellTime = "15 min",
                 Layover = null,
             });
+        //May 8, 10 am Baton Rouge to Jackson
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 17, 05, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 17, 45, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 10, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 12, 00, 0, 0, DateTimeKind.Utc),
+                Path = paths.First(),
+                PathId = paths.First().Id,
+                Train = trains.First(),
+                DwellTime = null,
+                Layover = "30min",
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
+                Path = path2,
+                PathId = path2.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 14, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 16, 00, 0, 0, DateTimeKind.Utc),
+                Path = path3,
+                PathId = path3.Id,
+                Train = train2,
+                DwellTime = null,
+                Layover = "30 min",
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 16, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 17, 30, 0, 0, DateTimeKind.Utc),
+                Path = path4,
+                PathId = path4.Id,
+                Train = train3,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 17, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 18, 45, 0, 0, DateTimeKind.Utc),
+                Path = path5,
+                PathId = path5.Id,
+                Train = train3,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 19, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 20, 00, 0, 0, DateTimeKind.Utc),
+                Path = path6,
+                PathId = path6.Id,
+                Train = train3,
+                DwellTime = "15 null",
+                Layover = null,
+            });
+        //May 14, 8 am Jackson to Baton Rouge \
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 8, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 9, 00, 0, 0, DateTimeKind.Utc),
                 Path = path7,
                 PathId = path7.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
             });
-
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 9, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 10, 15, 0, 0, DateTimeKind.Utc),
+                Path = path8,
+                PathId = path8.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 10, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 11, 45, 0, 0, DateTimeKind.Utc),
+                Path = path8,
+                PathId = path8.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 12, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 13, 00, 0, 0, DateTimeKind.Utc),
+                Path = path9,
+                PathId = path9.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 13, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
+                Path = path10,
+                PathId = path10.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
+                Path = path11,
+                PathId = path11.Id,
+                Train = train2,
+                DwellTime = null,
+                Layover = "30 min",
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 16, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 18, 45, 0, 0, DateTimeKind.Utc),
+                Path = path12,
+                PathId = path12.Id,
+                Train = trains.First(),
+                DwellTime = null,
+                Layover = null,
+            });
+        //May 14, 10 am Jackson to Baton Rouge \
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 10, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 11, 00, 0, 0, DateTimeKind.Utc),
+                Path = path7,
+                PathId = path7.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 11, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 12, 15, 0, 0, DateTimeKind.Utc),
+                Path = path8,
+                PathId = path8.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 12, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 13, 45, 0, 0, DateTimeKind.Utc),
+                Path = path8,
+                PathId = path8.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 15, 00, 0, 0, DateTimeKind.Utc),
+                Path = path9,
+                PathId = path9.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 15, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
+                Path = path10,
+                PathId = path10.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 16, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 18, 15, 0, 0, DateTimeKind.Utc),
+                Path = path11,
+                PathId = path11.Id,
+                Train = train2,
+                DwellTime = null,
+                Layover = "30 min",
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 14, 18, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 20, 45, 0, 0, DateTimeKind.Utc),
+                Path = path12,
+                PathId = path12.Id,
+                Train = trains.First(),
+                DwellTime = null,
+                Layover = null,
+            });
 
         await dataContext.SaveChangesAsync();
     }
