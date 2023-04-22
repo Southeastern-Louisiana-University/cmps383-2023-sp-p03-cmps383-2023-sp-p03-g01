@@ -4,6 +4,7 @@ using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.Trains;
+using SP23.P03.Web.Features.TrainTicket;
 using SP23.P03.Web.Migrations;
 using System.Globalization;
 using System.Transactions;
@@ -34,13 +35,21 @@ namespace SP23.P03.Web.Controllers;
                     Id = x.Id,
                     ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                     DepartureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    ArrivalStation = x.Path.EndingTrainStation.City +", "+ x.Path.EndingTrainStation.State,
+                    ArrivalStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
                     DepartureStation = x.Path.StartingTrainStation.City + ", " + x.Path.StartingTrainStation.State,
                     PassengerCount = x.PassengerCount,
                 }),
                 ArrivalStation = x.Routes.FirstOrDefault().Path.EndingTrainStation.City + ", " + x.Routes.FirstOrDefault().Path.EndingTrainStation.State,
                 DepartureStation = x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.City + ", " + x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.State,
-            });
+                Ticket = x.Tickets.Select(x => new TrainScheduledRouteTicketDto
+                {
+                    Id = x.Id,
+                    cost = x.cost,
+                    Code = x.Code,
+                    SeatType = x.SeatType,
+                    RouteId = x.TrainRoute.Id,
+                })
+            }) ;
     }
     [HttpGet]
     public IQueryable<TrainScheduledRoutesDto> GetAllTrainScheduledRoutes()

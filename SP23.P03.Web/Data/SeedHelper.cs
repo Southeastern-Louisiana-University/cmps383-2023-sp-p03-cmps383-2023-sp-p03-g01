@@ -31,8 +31,8 @@ public static class SeedHelper
         await AddTrain(dataContext);
         await AddTrainPath(dataContext);
         await AddTrainRoute(dataContext);
-        await AddTrainScheduledRoute(dataContext);
         await AddTickets(dataContext);
+        await AddTrainScheduledRoute(dataContext);
 
     }
 
@@ -1292,18 +1292,23 @@ public static class SeedHelper
     {
         var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
         var trainRoutes = dataContext.Set<TrainRoute>();
+        var tickets = dataContext.Set<TrainRouteTicket>();
 
         if (await trainScheduledRoutes.AnyAsync())
         {
             return;
         }
-        var groupofRoutes = new List<TrainRoute>();
+        var groupofRoutes = new List<TrainRoute>();       
         groupofRoutes.Add(trainRoutes.First());
+
+        var groupofTickets = new List<TrainRouteTicket>();
+        /*groupofTickets.Add(tickets.First());*/
 
         dataContext.Set<TrainScheduledRoutes>()
             .Add(new TrainScheduledRoutes
             {
                 Routes = groupofRoutes,
+                Tickets = groupofTickets,
             });
 
         await dataContext.SaveChangesAsync();
@@ -1377,7 +1382,7 @@ public static class SeedHelper
             return;
         }
 
-        dataContext.Set<TrainRouteTicket>()
+/*        dataContext.Set<TrainRouteTicket>()
             .Add(new TrainRouteTicket
             {
                 cost = 12.50,
@@ -1386,7 +1391,7 @@ public static class SeedHelper
                 TrainRoute = trainRoutes.First(),
                 SeatType = trainRoutes.First().Train.Sections.First().SeatList.First().type,
                 Code = "1",
-            });
+            });*/
 
 
         await dataContext.SaveChangesAsync();
