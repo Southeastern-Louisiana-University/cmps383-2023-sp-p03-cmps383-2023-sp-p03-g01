@@ -11,6 +11,8 @@ import { AuthenticationModal } from './AuthenticationModal/AuthenticationModal';
 import { NavigationDrawer } from './NavigationDrawer';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useViewportSize } from '@mantine/hooks';
+import { STYLING_VARIABLES } from '../../styling/StylingVariables';
+import { COLOR_PALETTE } from '../../styling/ColorPalette';
 
 /**
  * The header for the app.
@@ -41,8 +43,31 @@ export function Header(): React.ReactElement {
     };
 
     return (
-        <div style={HEADER_STYLING.rootStyles}>
-            <div style={HEADER_STYLING.rootContentStyles}>
+        <div
+            style={{
+                width: '100%',
+                height: `calc(${STYLING_VARIABLES.headerHeight})`,
+
+                // Courtesy of Amtrak
+                boxShadow: '0 2px 5px #00000029,0 2px 10px #0000001f',
+
+                display: 'flex',
+                justifyContent: 'center',
+            }}
+        >
+            <div
+                style={{
+                    width: '100%',
+
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+
+                    margin: `${STYLING_VARIABLES.defaultSpacing}`,
+                }}
+            >
                 {/* Navigation Menu */}
                 <Burger
                     opened={navigationMenuOpened}
@@ -57,7 +82,12 @@ export function Header(): React.ReactElement {
 
                 {/* The Logo & Company Name */}
                 <div
-                    style={HEADER_STYLING.entrackStyles}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+
+                        cursor: 'pointer',
+                    }}
                     onClick={navigateToHomePage}
                 >
                     <div style={HEADER_STYLING.iconStyles}>

@@ -12,6 +12,7 @@ import { NotFoundPage } from './components/pages/NotFound/NotFoundPage';
 import { RoutePlanningPageRoot } from './components/pages/RoutePlanning/RoutePlanningPageRoot';
 import { TicketSuccessPage } from './components/pages/PurchaseHandling/TicketSuccessPage';
 import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCanceledPage';
+import { ViewTicketsPage } from './components/pages/Account/ViewTicketsPage';
 
 /**
  * This is the main component of the application.
@@ -54,6 +55,10 @@ export function App(): React.ReactElement {
                         <Route
                             path={AppRoutes.TICKET_CANCELED}
                             element={<TicketCanceledPage />}
+                        />
+                        <Route
+                            path={AppRoutes.VIEW_TICKETS}
+                            element={<ViewTicketsPage />}
                         />
 
                         {/* Page Not Found */}
