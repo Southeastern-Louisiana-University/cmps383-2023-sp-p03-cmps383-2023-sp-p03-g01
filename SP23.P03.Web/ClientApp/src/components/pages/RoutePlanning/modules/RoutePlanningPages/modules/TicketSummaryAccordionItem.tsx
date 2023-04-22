@@ -1,9 +1,35 @@
 import React from 'react';
 import { SeatType } from '../../../../../../models/SeatTypes';
-import { Accordion, Card } from '@mantine/core';
+import { Accordion, Card, Flex, Grid, Stack, Text } from '@mantine/core';
 import { COLOR_PALETTE } from '../../../../../../styling/ColorPalette';
-import { STYLING_VARIABLES } from '../../../../../../styling/StylingVariables';
 import { formatNumberAsUSD } from '../../../../../../util/formatNumberAsUSD';
+import { BlackArrow } from '../../../../../../media/BlackArrow';
+import { BsHourglassSplit } from 'react-icons/bs';
+import { BiRun } from 'react-icons/bi';
+
+interface TicketDataItemProps {
+    title: string;
+    content: string | number;
+    span?: number;
+}
+const TicketDataItem = ({ content, title, span = 1 }: TicketDataItemProps): React.ReactElement => {
+    return (
+        <Grid.Col span={span}>
+            <Stack
+                spacing={0}
+                align='center'
+            >
+                <Text size='md'>{title}</Text>
+                <Text
+                    size='xl'
+                    weight='bold'
+                >
+                    {content}
+                </Text>
+            </Stack>
+        </Grid.Col>
+    );
+};
 
 interface TicketSummaryProps {
     departureStation: string;
@@ -11,8 +37,11 @@ interface TicketSummaryProps {
     departureTime: string;
     arrivalTime: string;
     duration: string;
+    layover: string | null;
+    dwellTime: string | null;
     seat: SeatType;
     cost: number;
+    passengerCount: number;
 }
 const TicketSummary = ({
     arrivalStation,
@@ -22,45 +51,96 @@ const TicketSummary = ({
     departureTime,
     duration,
     seat,
+    passengerCount,
+    dwellTime,
 }: TicketSummaryProps): React.ReactElement => {
     return (
         <Card
             withBorder
             style={{ width: '500px' }}
             padding='sm'
+            radius='lg'
         >
             <Card.Section
                 withBorder
                 style={{
                     backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
-                    color: COLOR_PALETTE.light.default.textColorPrimary,
-                    fontSize: STYLING_VARIABLES.defaultBodyFontSize,
                 }}
                 inheritPadding
             >
-                {departureStation} to {arrivalStation}
+                {/* Need the bottom section to show, so hacky way it is */}
+                <span style={{ opacity: 0 }}>t</span>
             </Card.Section>
 
             <Card.Section
                 withBorder
-                style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
                 inheritPadding
             >
-                <ul>
-                    <li>Departure Time: {departureTime}</li>
-                    <li>Duration: {duration}</li>
-                    <li>Arrival Time: {arrivalTime}</li>
-                </ul>
+                <Grid
+                    columns={3}
+                    grow
+                    align='center'
+                >
+                    <TicketDataItem
+                        title='Class'
+                        content={seat}
+                    />
+                    <TicketDataItem
+                        title='Cost'
+                        content={formatNumberAsUSD(cost)}
+                    />
+                    <TicketDataItem
+                        title='Passenger Count'
+                        content={passengerCount}
+                    />
+                    <TicketDataItem
+                        title='Departure Time'
+                        content={departureTime}
+                    />
+                    {/* Trip Duration, Train Swaps */}
+                    <div
+                        style={{
+                            display: 'grid',
+                            justifyItems: 'center',
+                        }}
+                    >
+                        <Text weight='bold'>{duration}</Text>
+
+                        <BlackArrow />
+
+                        {dwellTime && (
+                            <Grid>
+                                <Flex align='center'>
+                                    <Text weight='bold'>{dwellTime}</Text>
+                                    <BsHourglassSplit />
+                                </Flex>
+                            </Grid>
+                        )}
+                    </div>
+                    <TicketDataItem
+                        title='Arrival Time'
+                        content={arrivalTime}
+                    />
+                    <TicketDataItem
+                        title='From'
+                        content={departureStation}
+                    />
+                    <TicketDataItem
+                        title='To'
+                        content={arrivalStation}
+                    />
+                </Grid>
             </Card.Section>
 
             <Card.Section
                 withBorder
-                style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
+                style={{
+                    backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
+                }}
                 inheritPadding
             >
-                <span>
-                    1 {seat} Seat {formatNumberAsUSD(cost)}
-                </span>
+                {/* Need the bottom section to show, so hacky way it is */}
+                <span style={{ opacity: 0 }}>t</span>
             </Card.Section>
         </Card>
     );
@@ -76,8 +156,11 @@ interface TicketSummaryAccordionItemProps {
             departureTime: string;
             arrivalTime: string;
             duration: string;
+            layover: string | null;
+            dwellTime: string | null;
             seat: SeatType;
             cost: number;
+            passengerCount: number;
         }[];
     };
 }
@@ -96,28 +179,34 @@ export function TicketSummaryAccordionItem({ data }: TicketSummaryAccordionItemP
                 </Accordion.Control>
 
                 <Accordion.Panel>
-                    <div
-                        style={{
-                            display: 'flex',
-                            flexDirection: 'row',
-                            flexWrap: 'wrap',
-                            justifyContent: 'center',
-                            gap: '2rem',
-                        }}
+                    <Flex
+                        justify='center'
+                        wrap='wrap'
+                        gap='2rem'
                     >
-                        {data.routes.map((route) => (
-                            <TicketSummary
+                        {data.routes.map((route, index) => (
+                            <Flex
                                 key={route.departureStation + route.arrivalStation}
-                                departureStation={route.departureStation}
-                                arrivalStation={route.arrivalStation}
-                                departureTime={route.departureTime}
-                                arrivalTime={route.arrivalTime}
-                                duration={route.duration}
-                                seat={route.seat}
-                                cost={route.cost}
-                            />
+                                align='center'
+                                gap='2rem'
+                            >
+                                <TicketSummary
+                                    key={route.departureStation + route.arrivalStation}
+                                    {...route}
+                                />
+
+                                {index !== data.routes.length - 1 && (
+                                    <Grid>
+                                        <Flex align='center'>
+                                            <Text weight='bold'>{route.layover}</Text>
+                                            <BiRun />
+                                        </Flex>
+                                        <BlackArrow />
+                                    </Grid>
+                                )}
+                            </Flex>
                         ))}
-                    </div>
+                    </Flex>
                 </Accordion.Panel>
             </Accordion.Item>
         </Accordion>

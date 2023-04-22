@@ -14,8 +14,11 @@ const FAKE_DATA = [
                 departureTime: '9:00 AM CDT',
                 arrivalTime: '10:51 AM CDT',
                 duration: '1hr 51min',
+                layover: '15min',
+                dwellTime: null,
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
             {
                 departureStation: 'Schriever, LA',
@@ -23,8 +26,11 @@ const FAKE_DATA = [
                 departureTime: '11:21 AM CDT',
                 arrivalTime: '2:12 PM CDT',
                 duration: '2hr 51min',
+                layover: '15min',
+                dwellTime: null,
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
             {
                 departureStation: 'Lafayette, LA',
@@ -32,8 +38,11 @@ const FAKE_DATA = [
                 departureTime: '2:42 PM CDT',
                 arrivalTime: '4:33 PM CDT',
                 duration: '1hr 51min',
+                layover: null,
+                dwellTime: '30min',
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
         ],
     },
@@ -48,8 +57,11 @@ const FAKE_DATA = [
                 departureTime: '9:00 AM CDT',
                 arrivalTime: '10:51 AM CDT',
                 duration: '1hr 51min',
+                layover: '15min',
+                dwellTime: null,
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
             {
                 departureStation: 'Schriever, LA',
@@ -57,8 +69,11 @@ const FAKE_DATA = [
                 departureTime: '11:21 AM CDT',
                 arrivalTime: '2:12 PM CDT',
                 duration: '2hr 51min',
+                layover: '15min',
+                dwellTime: null,
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
             {
                 departureStation: 'Lafayette, LA',
@@ -66,8 +81,11 @@ const FAKE_DATA = [
                 departureTime: '2:42 PM CDT',
                 arrivalTime: '4:33 PM CDT',
                 duration: '1hr 51min',
+                layover: null,
+                dwellTime: null,
                 seat: SeatType.COACH,
                 cost: 52,
+                passengerCount: 3,
             },
         ],
     },
@@ -79,11 +97,8 @@ const FAKE_DATA = [
 export function ReviewAndPayPage(): React.ReactElement {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-            {FAKE_DATA.map((data, index) => (
-                <TicketSummaryAccordionItem
-                    key={index}
-                    data={data}
-                />
+            {FAKE_DATA.map((data) => (
+                <TicketSummaryAccordionItem data={data} />
             ))}
         </div>
     );
