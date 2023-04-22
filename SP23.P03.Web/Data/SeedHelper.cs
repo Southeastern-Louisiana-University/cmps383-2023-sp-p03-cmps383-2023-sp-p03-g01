@@ -1295,7 +1295,7 @@ public static class SeedHelper
     private static async Task AddTickets(DataContext dataContext)
     {
         var tickets = dataContext.Set<TrainRouteTicket>();
-        var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
+        var trainRoutes = dataContext.Set<TrainRoute>();
         var seats = dataContext.Set<Seat>();
         var users = dataContext.Set<User>();
 
@@ -1310,7 +1310,7 @@ public static class SeedHelper
                 cost = 12.50,
                 Passager = users.First(),
                 PassagerId = users.First().Id,
-                ScheduledTrainRoute = trainScheduledRoutes.First(),
+                TrainRoute = trainRoutes.First(),
                 SeatType = seats.First().type,
             });
 
