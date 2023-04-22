@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../models/AppRoutes';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { HEADER_STYLING } from './HeaderStyling';
+import { useRecoilValue } from 'recoil';
+import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 
 interface NavigationDrawerProps {
     opened: boolean;
@@ -22,20 +24,7 @@ export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): Re
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth);
 
-    const navigateToTrainSchedules = () => {
-        navigate(AppRoutes.TRAIN_SCHEDULES);
-        onClose();
-    };
-
-    const navigateToTrainStatuses = () => {
-        navigate(AppRoutes.TRAIN_STATUSES);
-        onClose();
-    };
-
-    const navigateToTrainTracking = () => {
-        navigate(AppRoutes.TRAIN_TRACKING);
-        onClose();
-    };
+    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
 
     return (
         <Drawer
@@ -44,32 +33,30 @@ export function NavigationDrawer({ opened, onClose }: NavigationDrawerProps): Re
             title='Navigate to...'
             padding='sm'
             position='left'
-            size='auto'
+            size='xs'
         >
             <div style={HEADER_STYLING.navDrawerButtonContainerStyles}>
                 <Button
                     style={HEADER_STYLING.navDrawerButtonStyles}
                     size={componentSize}
-                    onClick={navigateToTrainSchedules}
+                    onClick={() => {
+                        navigate(AppRoutes.HOME);
+                    }}
                 >
-                    Schedules
+                    Home
                 </Button>
 
-                <Button
-                    style={HEADER_STYLING.navDrawerButtonStyles}
-                    size={componentSize}
-                    onClick={navigateToTrainStatuses}
-                >
-                    Statuses
-                </Button>
-
-                <Button
-                    style={HEADER_STYLING.navDrawerButtonStyles}
-                    size={componentSize}
-                    onClick={navigateToTrainTracking}
-                >
-                    Tracking
-                </Button>
+                {currentlyLoggedInUser && (
+                    <Button
+                        style={HEADER_STYLING.navDrawerButtonStyles}
+                        size={componentSize}
+                        onClick={() => {
+                            navigate(AppRoutes.VIEW_TICKETS);
+                        }}
+                    >
+                        View Tickets
+                    </Button>
+                )}
             </div>
         </Drawer>
     );
