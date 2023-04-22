@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { arrivalStationState, departureStationState } from '../../../../recoil/atoms/HomePageAtom';
 import { getMantineComponentSize } from '../../../../util/getMantineComponentSize';
-import { HOME_PAGE_STYLING } from '../HomePageStyling';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
 /**
  * Select for destination station.
@@ -22,7 +22,7 @@ export function DestinationStationSelect(): React.ReactElement {
 
     return (
         <Select
-            style={HOME_PAGE_STYLING.paperContentStyles}
+            style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
             data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA', 'Lake Charles, LA'].filter(
                 (station) => station !== departureStation

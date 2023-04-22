@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { HEADER_STYLING } from './HeaderStyling';
 import { TrainLogo } from '../../media/TrainLogo';
-import { Burger, Button, ActionIcon } from '@mantine/core';
+import { Burger, Button, ActionIcon, Popover, Stack } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../models/AppRoutes';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 import { MdAccountCircle } from 'react-icons/md';
-import { AuthenticationModal } from './AuthenticationModal/AuthenticationModal';
+import { AuthenticationModal } from './AuthenticationModal';
 import { NavigationDrawer } from './NavigationDrawer';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useViewportSize } from '@mantine/hooks';
@@ -21,10 +21,13 @@ export function Header(): React.ReactElement {
     const navigate = useNavigate();
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth, 'md');
-    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
+
+    const [currentlyLoggedInUser, setCurrentlyLoggedInUser] = useRecoilState(currentlyLoggedInUserState);
 
     const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
     const [authenticationModalOpened, setAuthenticationModalOpened] = useState(false);
+
+    const [popoverOpened, setPopoverOpened] = useState(false);
 
     const toggleBurgerMenu = () => {
         setNavigationMenuOpened(!navigationMenuOpened);
@@ -102,16 +105,46 @@ export function Header(): React.ReactElement {
                         size={componentSize}
                         onClick={toggleAuthenticationModal}
                     >
-                        Sign-In
+                        Sign In
                     </Button>
                 ) : (
                     <div style={HEADER_STYLING.loggedInUserStyles}>
-                        <ActionIcon onClick={navigateToAccountPage}>
-                            <MdAccountCircle style={HEADER_STYLING.iconStyles} />
-                        </ActionIcon>
+                        <Popover
+                            opened={popoverOpened}
+                            onChange={setPopoverOpened}
+                        >
+                            <Popover.Target>
+                                <ActionIcon
+                                    onClick={() => {
+                                        setPopoverOpened(!popoverOpened);
+                                    }}
+                                >
+                                    <MdAccountCircle style={HEADER_STYLING.iconStyles} />
+                                </ActionIcon>
+                            </Popover.Target>
+
+                            <Popover.Dropdown>
+                                <Stack>
+                                    <Button
+                                        size={componentSize}
+                                        onClick={navigateToAccountPage}
+                                    >
+                                        Account
+                                    </Button>
+                                    <Button
+                                        size={componentSize}
+                                        onClick={() => {
+                                            setCurrentlyLoggedInUser(null);
+                                        }}
+                                    >
+                                        Sign Out
+                                    </Button>
+                                </Stack>
+                            </Popover.Dropdown>
+                        </Popover>
                         {browserWidth > 500 && (
                             <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>
-                                Hello, {currentlyLoggedInUser}
+                                Hello, {currentlyLoggedInUser.split('@')[0]}
                             </span>
                         )}
                     </div>

@@ -4,8 +4,8 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { tripDurationState, tripTypeState, departureDateState } from '../../../../recoil/atoms/HomePageAtom';
 import { useViewportSize } from '@mantine/hooks';
 import { getMantineComponentSize } from '../../../../util/getMantineComponentSize';
-import { HOME_PAGE_STYLING } from '../HomePageStyling';
 import { TripType } from '../../../../models/TripTypes';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
 /**
  * A date range picker for the trip.
@@ -20,7 +20,7 @@ export function TripDateRangePicker(): React.ReactElement {
 
     return tripType === TripType.ONE_WAY ? (
         <DatePickerInput
-            style={HOME_PAGE_STYLING.paperContentStyles}
+            style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
             label='Departure Date:'
             placeholder='Select departure date'
@@ -31,7 +31,7 @@ export function TripDateRangePicker(): React.ReactElement {
         />
     ) : (
         <DatePickerInput
-            style={HOME_PAGE_STYLING.paperContentStyles}
+            style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
             type='range'
             label='Departure & Return Dates:'

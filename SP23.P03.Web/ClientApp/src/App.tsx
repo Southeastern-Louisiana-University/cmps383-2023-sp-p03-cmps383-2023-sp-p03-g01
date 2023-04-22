@@ -4,20 +4,21 @@ import { MantineProvider } from '@mantine/core';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoutes } from './models/AppRoutes';
 import { HomePage } from './components/pages/Home/HomePage';
-import { TrainSchedulesPage } from './components/pages/TrainSchedules/TrainSchedulesPage';
-import { TrainStatusesPage } from './components/pages/TrainStatuses/TrainStatusesPage';
-import { TrainTrackingPage } from './components/pages/TrainTracking/TrainTrackingPage';
 import { AccountPage } from './components/pages/Account/AccountPage';
 import { NotFoundPage } from './components/pages/NotFound/NotFoundPage';
 import { RoutePlanningPageRoot } from './components/pages/RoutePlanning/RoutePlanningPageRoot';
 import { TicketSuccessPage } from './components/pages/PurchaseHandling/TicketSuccessPage';
 import { TicketCanceledPage } from './components/pages/PurchaseHandling/TicketCanceledPage';
 import { ViewTicketsPage } from './components/pages/Account/ViewTicketsPage';
+import { useRecoilValue } from 'recoil';
+import { currentlyLoggedInUserState } from './recoil/atoms/AuthenticationAtom';
 
 /**
  * This is the main component of the application.
  */
 export function App(): React.ReactElement {
+    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
+
     return (
         <div style={APP_STYLING.rootStyles}>
             <MantineProvider theme={mantineTheme}>
@@ -27,22 +28,6 @@ export function App(): React.ReactElement {
                         <Route
                             path={AppRoutes.HOME}
                             element={<HomePage />}
-                        />
-                        <Route
-                            path={AppRoutes.TRAIN_SCHEDULES}
-                            element={<TrainSchedulesPage />}
-                        />
-                        <Route
-                            path={AppRoutes.TRAIN_STATUSES}
-                            element={<TrainStatusesPage />}
-                        />
-                        <Route
-                            path={AppRoutes.TRAIN_TRACKING}
-                            element={<TrainTrackingPage />}
-                        />
-                        <Route
-                            path={AppRoutes.ACCOUNT_PAGE}
-                            element={<AccountPage />}
                         />
                         <Route
                             path={AppRoutes.ROUTE_PLANNING}
@@ -56,10 +41,18 @@ export function App(): React.ReactElement {
                             path={AppRoutes.TICKET_CANCELED}
                             element={<TicketCanceledPage />}
                         />
-                        <Route
-                            path={AppRoutes.VIEW_TICKETS}
-                            element={<ViewTicketsPage />}
-                        />
+                        {currentlyLoggedInUser && (
+                            <>
+                                <Route
+                                    path={AppRoutes.ACCOUNT_PAGE}
+                                    element={<AccountPage />}
+                                />
+                                <Route
+                                    path={AppRoutes.VIEW_TICKETS}
+                                    element={<ViewTicketsPage />}
+                                />
+                            </>
+                        )}
 
                         {/* Page Not Found */}
                         <Route

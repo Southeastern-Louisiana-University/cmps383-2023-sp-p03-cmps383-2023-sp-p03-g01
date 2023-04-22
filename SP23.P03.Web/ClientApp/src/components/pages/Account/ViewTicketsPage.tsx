@@ -1,28 +1,25 @@
-import { ActionIcon, Button, Flex, Modal, Stack, Title } from '@mantine/core';
-import React, { useRef, useState } from 'react';
+import { Button, Flex, Stack, Title } from '@mantine/core';
+import React, { useState } from 'react';
 import { SeatType } from '../../../models/SeatTypes';
-import QRCode from 'react-qr-code';
-import Barcode from 'react-barcode';
-import { AiOutlineBarcode, AiOutlinePrinter } from 'react-icons/ai';
-import { BsQrCode } from 'react-icons/bs';
-import ReactToPrint from 'react-to-print';
 import { TicketSummaryProps, TicketSummary } from '../../common/TicketSummary';
+import { TicketModal } from '../../common/TicketModal';
+import { useViewportSize } from '@mantine/hooks';
+import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 
 interface TicketContainerProps {
-    tickets: TicketSummaryProps;
+    ticket: TicketSummaryProps;
 }
-const TicketContainer = ({ tickets }: TicketContainerProps): React.ReactElement => {
-    const [modalOpened, setModalOpened] = useState(false);
-    const [qrCodeIsSelected, setQrCodeIsSelected] = useState(true);
-    const componentToPrint = useRef(null);
+const TicketContainer = ({ ticket }: TicketContainerProps): React.ReactElement => {
+    const { width: browserWidth } = useViewportSize();
+    const componentSize = getMantineComponentSize(browserWidth);
 
-    const qrCodeVariant = qrCodeIsSelected ? 'filled' : 'outline';
-    const barcodeVariant = qrCodeIsSelected ? 'outline' : 'filled';
+    const [modalOpened, setModalOpened] = useState(false);
 
     return (
         <Stack align='center'>
-            <TicketSummary {...tickets} />
+            <TicketSummary {...ticket} />
             <Button
+                size={componentSize}
                 onClick={() => {
                     setModalOpened(true);
                 }}
@@ -30,69 +27,13 @@ const TicketContainer = ({ tickets }: TicketContainerProps): React.ReactElement 
                 View Ticket
             </Button>
 
-            <Modal
+            <TicketModal
+                ticket={ticket}
                 opened={modalOpened}
                 onClose={() => {
                     setModalOpened(false);
                 }}
-                centered
-                size='auto'
-            >
-                <Stack align='center'>
-                    <Stack
-                        align='center'
-                        ref={componentToPrint}
-                        style={{
-                            padding: '1rem',
-                        }}
-                    >
-                        <TicketSummary {...tickets} />
-
-                        <Flex
-                            align='center'
-                            style={{ height: '256px' }}
-                        >
-                            {qrCodeIsSelected ? (
-                                <QRCode value={tickets.arrivalStation} />
-                            ) : (
-                                <Barcode value={tickets.arrivalStation} />
-                            )}
-                        </Flex>
-                    </Stack>
-
-                    <Flex gap='0.5rem'>
-                        <ActionIcon
-                            variant={qrCodeVariant}
-                            size='lg'
-                            onClick={() => {
-                                setQrCodeIsSelected(true);
-                            }}
-                        >
-                            <BsQrCode />
-                        </ActionIcon>
-                        <ActionIcon
-                            variant={barcodeVariant}
-                            size='lg'
-                            onClick={() => {
-                                setQrCodeIsSelected(false);
-                            }}
-                        >
-                            <AiOutlineBarcode />
-                        </ActionIcon>
-                        <ReactToPrint
-                            trigger={() => (
-                                <ActionIcon
-                                    variant='outline'
-                                    size='lg'
-                                >
-                                    <AiOutlinePrinter />
-                                </ActionIcon>
-                            )}
-                            content={() => componentToPrint.current}
-                        />
-                    </Flex>
-                </Stack>
-            </Modal>
+            />
         </Stack>
     );
 };
@@ -131,7 +72,7 @@ export function ViewTicketsPage(): React.ReactElement {
                     wrap='wrap'
                     gap='2rem'
                 >
-                    <TicketContainer tickets={TEST_DATA} />
+                    <TicketContainer ticket={TEST_DATA} />
                 </Flex>
             </Stack>
 
@@ -141,7 +82,7 @@ export function ViewTicketsPage(): React.ReactElement {
                     wrap='wrap'
                     gap='2rem'
                 >
-                    <TicketContainer tickets={TEST_DATA} />
+                    <TicketContainer ticket={TEST_DATA} />
                 </Flex>
             </Stack>
         </div>

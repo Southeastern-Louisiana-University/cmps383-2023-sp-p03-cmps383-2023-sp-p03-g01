@@ -90,7 +90,10 @@ export const mantineTheme: MantineThemeOverride = {
 
         Modal: {
             styles: {
-                header: {
+                title: {
+                    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                },
+                close: {
                     fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
                 },
                 body: {
@@ -305,6 +308,14 @@ export const mantineTheme: MantineThemeOverride = {
                     '&[data-with-border]': {
                         borderColor: COLOR_PALETTE.light.default.borderColor,
                     },
+                },
+            },
+        },
+
+        Tabs: {
+            styles: {
+                tabLabel: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
                 },
             },
         },
