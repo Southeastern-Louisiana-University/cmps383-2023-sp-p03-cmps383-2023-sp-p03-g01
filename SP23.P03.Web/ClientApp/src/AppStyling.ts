@@ -311,5 +311,13 @@ export const mantineTheme: MantineThemeOverride = {
                 },
             },
         },
+
+        Tabs: {
+            styles: {
+                tabLabel: {
+                    fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+            },
+        },
     },
 };

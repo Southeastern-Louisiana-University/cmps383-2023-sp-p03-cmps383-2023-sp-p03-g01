@@ -21,6 +21,7 @@ export function Header(): React.ReactElement {
     const navigate = useNavigate();
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth, 'md');
+
     const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
 
     const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
