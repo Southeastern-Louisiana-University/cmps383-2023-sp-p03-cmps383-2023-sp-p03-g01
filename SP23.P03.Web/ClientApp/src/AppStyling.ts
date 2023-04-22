@@ -90,7 +90,10 @@ export const mantineTheme: MantineThemeOverride = {
 
         Modal: {
             styles: {
-                header: {
+                title: {
+                    fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
+                },
+                close: {
                     fontSize: `${STYLING_VARIABLES.defaultTitleFontSize}`,
                 },
                 body: {
