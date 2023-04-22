@@ -18,11 +18,6 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
     // ******************* //
     // ** Header Styles ** //
     // ******************* //
-    headerStyles: {
-        borderBottom: `1px solid ${COLOR_PALETTE.light.default.borderColor}`,
-
-        paddingBottom: STYLING_VARIABLES.defaultSpacing,
-    } as React.CSSProperties,
 
     stepperContentStyles: {
         display: 'flex',
@@ -58,15 +53,6 @@ export const ROUTE_PLANNING_PAGE_STYLING = {
         fontSize: STYLING_VARIABLES.defaultBodyFontSize,
 
         borderColor: COLOR_PALETTE.light.default.textColorPrimary,
-    } as React.CSSProperties,
-
-    // Review Page Styles
-    reviewPageAccordionPanelStyles: {
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: '2rem',
     } as React.CSSProperties,
 
     // ******************* //

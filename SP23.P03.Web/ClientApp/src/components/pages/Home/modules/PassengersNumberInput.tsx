@@ -4,7 +4,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 import { passengerCountState } from '../../../../recoil/atoms/HomePageAtom';
 import { getMantineComponentSize } from '../../../../util/getMantineComponentSize';
-import { HOME_PAGE_STYLING } from '../HomePageStyling';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
 /**
  * The number input for passengers.
@@ -21,7 +21,7 @@ export function PassengersNumberInput(): React.ReactElement {
 
     return (
         <NumberInput
-            style={HOME_PAGE_STYLING.paperContentStyles}
+            style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
             label='Passengers:'
             value={passengers}

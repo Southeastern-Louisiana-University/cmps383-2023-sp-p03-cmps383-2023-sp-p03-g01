@@ -1,30 +1,4 @@
 /**
- * Validates a username based on these conditions:
- * - Must be between 3 and 20 characters
- * - Must only contain alphanumeric characters
- * - Must not contain any spaces
- *
- * @param username The username to validate
- *
- * @returns True if the username is valid, an error message otherwise
- */
-export const validateUsername = (username: string): true | string => {
-    if (username.length < 3 || username.length > 20) {
-        return 'Username must be between 3 and 20 characters';
-    }
-
-    if (!/^[a-zA-Z0-9]+$/.test(username)) {
-        return 'Username must only contain alphanumeric characters';
-    }
-
-    if (/\s/.test(username)) {
-        return 'Username must not contain any spaces';
-    }
-
-    return true;
-};
-
-/**
  * Validates a password based on these conditions:
  * - Must be between 8 and 20 characters
  * - Must contain at least one uppercase letter

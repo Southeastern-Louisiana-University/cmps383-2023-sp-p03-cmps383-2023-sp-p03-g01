@@ -5,6 +5,7 @@ import { BlackArrow } from '../../../../../../media/BlackArrow';
 import { COLOR_PALETTE } from '../../../../../../styling/ColorPalette';
 import { formatNumberAsUSD } from '../../../../../../util/formatNumberAsUSD';
 import { SeatType } from '../../../../../../models/SeatTypes';
+import { getBackgroundBasedOnSeat } from '../../../../../../util/getBackgroundBasedOnSeat';
 
 interface SeatSelectButtonProps {
     seatType: SeatType;
@@ -12,19 +13,6 @@ interface SeatSelectButtonProps {
     onClick: () => void;
 }
 const SeatSelectButton = ({ seatPrice, seatType, onClick }: SeatSelectButtonProps): React.ReactElement => {
-    const getBackgroundColor = (): string => {
-        switch (seatType) {
-            case SeatType.COACH:
-                return COLOR_PALETTE.light.default.coachSeatButtonBackground;
-            case SeatType.FIRST_CLASS:
-                return COLOR_PALETTE.light.default.firstClassSeatButtonBackground;
-            case SeatType.SLEEPER:
-                return COLOR_PALETTE.light.default.sleeperSeatButtonBackground;
-            case SeatType.ROOMLET:
-                return COLOR_PALETTE.light.default.roomletSeatButtonBackground;
-        }
-    };
-
     const getHoverBackgroundColor = (): string => {
         switch (seatType) {
             case SeatType.COACH:
@@ -77,7 +65,7 @@ const SeatSelectButton = ({ seatPrice, seatType, onClick }: SeatSelectButtonProp
 
                 borderRadius: '0.25rem',
 
-                backgroundColor: getBackgroundColor(),
+                backgroundColor: getBackgroundBasedOnSeat(seatType),
             }}
             onMouseEnter={(e) => {
                 // change cursor to pointer
@@ -88,7 +76,7 @@ const SeatSelectButton = ({ seatPrice, seatType, onClick }: SeatSelectButtonProp
             }}
             onMouseLeave={(e) => {
                 // change background color
-                e.currentTarget.style.backgroundColor = getBackgroundColor();
+                e.currentTarget.style.backgroundColor = getBackgroundBasedOnSeat(seatType);
             }}
             onClick={onClick}
         >

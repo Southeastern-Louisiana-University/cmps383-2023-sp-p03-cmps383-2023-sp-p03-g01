@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { HEADER_STYLING } from './HeaderStyling';
 import { TrainLogo } from '../../media/TrainLogo';
-import { Burger, Button, ActionIcon } from '@mantine/core';
+import { Burger, Button, ActionIcon, Popover, Stack } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../models/AppRoutes';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 import { MdAccountCircle } from 'react-icons/md';
-import { AuthenticationModal } from './AuthenticationModal/AuthenticationModal';
+import { AuthenticationModal } from './AuthenticationModal';
 import { NavigationDrawer } from './NavigationDrawer';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useViewportSize } from '@mantine/hooks';
+import { STYLING_VARIABLES } from '../../styling/StylingVariables';
+import { COLOR_PALETTE } from '../../styling/ColorPalette';
 
 /**
  * The header for the app.
@@ -19,10 +21,13 @@ export function Header(): React.ReactElement {
     const navigate = useNavigate();
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth, 'md');
-    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
+
+    const [currentlyLoggedInUser, setCurrentlyLoggedInUser] = useRecoilState(currentlyLoggedInUserState);
 
     const [navigationMenuOpened, setNavigationMenuOpened] = useState(false);
     const [authenticationModalOpened, setAuthenticationModalOpened] = useState(false);
+
+    const [popoverOpened, setPopoverOpened] = useState(false);
 
     const toggleBurgerMenu = () => {
         setNavigationMenuOpened(!navigationMenuOpened);
@@ -41,8 +46,31 @@ export function Header(): React.ReactElement {
     };
 
     return (
-        <div style={HEADER_STYLING.rootStyles}>
-            <div style={HEADER_STYLING.rootContentStyles}>
+        <div
+            style={{
+                width: '100%',
+                height: `calc(${STYLING_VARIABLES.headerHeight})`,
+
+                // Courtesy of Amtrak
+                boxShadow: '0 2px 5px #00000029,0 2px 10px #0000001f',
+
+                display: 'flex',
+                justifyContent: 'center',
+            }}
+        >
+            <div
+                style={{
+                    width: '100%',
+
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+
+                    color: COLOR_PALETTE.light.default.textColorPrimary,
+
+                    margin: `${STYLING_VARIABLES.defaultSpacing}`,
+                }}
+            >
                 {/* Navigation Menu */}
                 <Burger
                     opened={navigationMenuOpened}
@@ -57,7 +85,12 @@ export function Header(): React.ReactElement {
 
                 {/* The Logo & Company Name */}
                 <div
-                    style={HEADER_STYLING.entrackStyles}
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+
+                        cursor: 'pointer',
+                    }}
                     onClick={navigateToHomePage}
                 >
                     <div style={HEADER_STYLING.iconStyles}>
@@ -72,16 +105,46 @@ export function Header(): React.ReactElement {
                         size={componentSize}
                         onClick={toggleAuthenticationModal}
                     >
-                        Sign-In
+                        Sign In
                     </Button>
                 ) : (
                     <div style={HEADER_STYLING.loggedInUserStyles}>
-                        <ActionIcon onClick={navigateToAccountPage}>
-                            <MdAccountCircle style={HEADER_STYLING.iconStyles} />
-                        </ActionIcon>
+                        <Popover
+                            opened={popoverOpened}
+                            onChange={setPopoverOpened}
+                        >
+                            <Popover.Target>
+                                <ActionIcon
+                                    onClick={() => {
+                                        setPopoverOpened(!popoverOpened);
+                                    }}
+                                >
+                                    <MdAccountCircle style={HEADER_STYLING.iconStyles} />
+                                </ActionIcon>
+                            </Popover.Target>
+
+                            <Popover.Dropdown>
+                                <Stack>
+                                    <Button
+                                        size={componentSize}
+                                        onClick={navigateToAccountPage}
+                                    >
+                                        Account
+                                    </Button>
+                                    <Button
+                                        size={componentSize}
+                                        onClick={() => {
+                                            setCurrentlyLoggedInUser(null);
+                                        }}
+                                    >
+                                        Sign Out
+                                    </Button>
+                                </Stack>
+                            </Popover.Dropdown>
+                        </Popover>
                         {browserWidth > 500 && (
                             <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>
-                                Hello, {currentlyLoggedInUser}
+                                Hello, {currentlyLoggedInUser.split('@')[0]}
                             </span>
                         )}
                     </div>

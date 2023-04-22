@@ -1,147 +1,105 @@
-import { Accordion, Card } from '@mantine/core';
 import React from 'react';
-import { COLOR_PALETTE } from '../../../../../styling/ColorPalette';
-import { STYLING_VARIABLES } from '../../../../../styling/StylingVariables';
-import { ROUTE_PLANNING_PAGE_STYLING } from '../../RoutePlanningPageRootStyling';
-import { formatNumberAsUSD } from '../../../../../util/formatNumberAsUSD';
-import { useRecoilValue } from 'recoil';
-import { departureStationState, arrivalStationState } from '../../../../../recoil/atoms/HomePageAtom';
+import { SeatType } from '../../../../../models/SeatTypes';
+import { TicketSummaryAccordionItem } from './modules/TicketSummaryAccordionItem';
+
+const FAKE_DATA = [
+    // Departure Route
+    {
+        departureStation: 'Baton Rouge, LA',
+        arrivalStation: 'New Orleans, LA',
+        routes: [
+            {
+                departureStation: 'Baton Rouge, LA',
+                arrivalStation: 'Schriever, LA',
+                departureTime: '9:00 AM CDT',
+                arrivalTime: '10:51 AM CDT',
+                duration: '1hr 51min',
+                layover: '15min',
+                dwellTime: null,
+                seat: SeatType.COACH,
+                cost: 52,
+                passengerCount: 3,
+            },
+            {
+                departureStation: 'Schriever, LA',
+                arrivalStation: 'Lafayette, LA',
+                departureTime: '11:21 AM CDT',
+                arrivalTime: '2:12 PM CDT',
+                duration: '2hr 51min',
+                layover: '15min',
+                dwellTime: null,
+                seat: SeatType.FIRST_CLASS,
+                cost: 52,
+                passengerCount: 3,
+            },
+            {
+                departureStation: 'Lafayette, LA',
+                arrivalStation: 'New Orleans, LA',
+                departureTime: '2:42 PM CDT',
+                arrivalTime: '4:33 PM CDT',
+                duration: '1hr 51min',
+                layover: null,
+                dwellTime: '30min',
+                seat: SeatType.SLEEPER,
+                cost: 52,
+                passengerCount: 3,
+            },
+        ],
+    },
+    // Return Route
+    {
+        departureStation: 'New Orleans, LA',
+        arrivalStation: 'Baton Rouge, LA',
+        routes: [
+            {
+                departureStation: 'Baton Rouge, LA',
+                arrivalStation: 'Schriever, LA',
+                departureTime: '9:00 AM CDT',
+                arrivalTime: '10:51 AM CDT',
+                duration: '1hr 51min',
+                layover: '15min',
+                dwellTime: null,
+                seat: SeatType.COACH,
+                cost: 52,
+                passengerCount: 3,
+            },
+            {
+                departureStation: 'Schriever, LA',
+                arrivalStation: 'Lafayette, LA',
+                departureTime: '11:21 AM CDT',
+                arrivalTime: '2:12 PM CDT',
+                duration: '2hr 51min',
+                layover: '15min',
+                dwellTime: null,
+                seat: SeatType.COACH,
+                cost: 52,
+                passengerCount: 3,
+            },
+            {
+                departureStation: 'Lafayette, LA',
+                arrivalStation: 'New Orleans, LA',
+                departureTime: '2:42 PM CDT',
+                arrivalTime: '4:33 PM CDT',
+                duration: '1hr 51min',
+                layover: null,
+                dwellTime: null,
+                seat: SeatType.COACH,
+                cost: 52,
+                passengerCount: 3,
+            },
+        ],
+    },
+];
 
 /**
  * The final screen in the route planning process.
  */
 export function ReviewAndPayPage(): React.ReactElement {
-    const selectedDepartureStation = useRecoilValue(departureStationState);
-    const selectedArrivalStation = useRecoilValue(arrivalStationState);
-
     return (
-        <div>
-            <Accordion defaultValue='Departure Route'>
-                <Accordion.Item value='Departure Route'>
-                    <Accordion.Control>
-                        {selectedDepartureStation} to {selectedArrivalStation} (156$)
-                    </Accordion.Control>
-
-                    <Accordion.Panel>
-                        <div style={ROUTE_PLANNING_PAGE_STYLING.reviewPageAccordionPanelStyles}>
-                            {/* Train 1 */}
-                            <Card
-                                withBorder
-                                style={{ width: '500px' }}
-                                padding='sm'
-                            >
-                                <Card.Section
-                                    withBorder
-                                    style={{
-                                        backgroundColor: COLOR_PALETTE.light.default.blueNcs,
-                                        color: 'white',
-                                        fontSize: STYLING_VARIABLES.defaultBodyFontSize,
-                                    }}
-                                    inheritPadding
-                                >
-                                    Baton Rouge, LA to Schriever, LA
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <ul>
-                                        <li>Departure Time: 9:00 AM CDT</li>
-                                        <li>Duration: 1hr 51min</li>
-                                        <li>Arrival Time: 10:51 AM CDT</li>
-                                    </ul>
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <span>1 Coach ({formatNumberAsUSD(52)})</span>
-                                </Card.Section>
-                            </Card>
-
-                            {/* Train 2 */}
-                            <Card
-                                withBorder
-                                style={{ width: '500px' }}
-                            >
-                                <Card.Section
-                                    withBorder
-                                    style={{
-                                        backgroundColor: COLOR_PALETTE.light.default.blueNcs,
-                                        color: 'white',
-                                        fontSize: STYLING_VARIABLES.defaultBodyFontSize,
-                                    }}
-                                    inheritPadding
-                                >
-                                    Schriever, LA to Lafayette, LA
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <ul>
-                                        <li>Departure Time: 11:21 AM CDT</li>
-                                        <li>Duration: 2hr 51min</li>
-                                        <li>Arrival Time: 2:12 PM CDT</li>
-                                    </ul>
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <span>1 Coach ({formatNumberAsUSD(52)})</span>
-                                </Card.Section>
-                            </Card>
-
-                            {/* Train 3 */}
-                            <Card
-                                withBorder
-                                style={{ width: '500px' }}
-                            >
-                                <Card.Section
-                                    withBorder
-                                    style={{
-                                        backgroundColor: COLOR_PALETTE.light.default.blueNcs,
-                                        color: 'white',
-                                        fontSize: STYLING_VARIABLES.defaultBodyFontSize,
-                                    }}
-                                    inheritPadding
-                                >
-                                    Lafayette, LA to Lake Charles, LA
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <ul>
-                                        <li>Departure Time: 2:42 PM CDT</li>
-                                        <li>Duration: 18min</li>
-                                        <li>Arrival Time: 3:00 PM CDT</li>
-                                    </ul>
-                                </Card.Section>
-
-                                <Card.Section
-                                    withBorder
-                                    style={{ fontSize: STYLING_VARIABLES.defaultBodyFontSize }}
-                                    inheritPadding
-                                >
-                                    <span>1 Coach ({formatNumberAsUSD(52)})</span>
-                                </Card.Section>
-                            </Card>
-                        </div>
-                    </Accordion.Panel>
-                </Accordion.Item>
-            </Accordion>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+            {FAKE_DATA.map((data) => (
+                <TicketSummaryAccordionItem data={data} />
+            ))}
         </div>
     );
 }

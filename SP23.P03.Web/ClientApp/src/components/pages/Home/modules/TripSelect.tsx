@@ -5,7 +5,7 @@ import { useRecoilState } from 'recoil';
 import { TripType } from '../../../../models/TripTypes';
 import { tripTypeState } from '../../../../recoil/atoms/HomePageAtom';
 import { getMantineComponentSize } from '../../../../util/getMantineComponentSize';
-import { HOME_PAGE_STYLING } from '../HomePageStyling';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
 /**
  * The select for the trip type.
@@ -24,7 +24,7 @@ export function TripSelect(): React.ReactElement {
 
     return (
         <Select
-            style={HOME_PAGE_STYLING.paperContentStyles}
+            style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
             data={data}
             value={selectedTripType}

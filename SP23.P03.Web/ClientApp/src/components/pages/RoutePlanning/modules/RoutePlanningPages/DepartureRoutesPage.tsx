@@ -10,6 +10,21 @@ export function DepartureRoutesPage(): React.ReactElement {
     const selectedDepartureStation = useRecoilValue(departureStationState);
     const selectedArrivalStation = useRecoilValue(arrivalStationState);
 
+    const FAKE_DATA = [
+        {
+            arrivalTime: '12:20pm',
+            departureTime: '12:20am',
+            tripDuration: '23h 40m',
+            trainSwaps: 3,
+        },
+        {
+            arrivalTime: '12:20pm',
+            departureTime: '12:20am',
+            tripDuration: '23h 40m',
+            trainSwaps: 3,
+        },
+    ];
+
     /**
      * Departure Time, Arrival Time, Trip Duration, Total Stops, Cost
      * - Stop, Departure Time, Departure Station, Arrival Time, Arrival Station, Dwell Time, Layover
@@ -26,39 +41,13 @@ export function DepartureRoutesPage(): React.ReactElement {
             <RouteSelectionAccordion
                 departureStation={selectedDepartureStation}
                 arrivalStation={selectedArrivalStation}
-                scheduledRoutes={[
-                    {
-                        arrivalTime: '12:20pm',
-                        departureTime: '12:20am',
-                        tripDuration: '23h 40m',
-                        trainSwaps: 3,
-                    },
-                    {
-                        arrivalTime: '12:20pm',
-                        departureTime: '12:20am',
-                        tripDuration: '23h 40m',
-                        trainSwaps: 3,
-                    },
-                ]}
+                scheduledRoutes={FAKE_DATA}
             />
 
             <RouteSelectionAccordion
                 departureStation={selectedArrivalStation}
                 arrivalStation={selectedDepartureStation}
-                scheduledRoutes={[
-                    {
-                        arrivalTime: '12:20pm',
-                        departureTime: '12:20am',
-                        tripDuration: '23h 40m',
-                        trainSwaps: 3,
-                    },
-                    {
-                        arrivalTime: '12:20pm',
-                        departureTime: '12:20am',
-                        tripDuration: '23h 40m',
-                        trainSwaps: 3,
-                    },
-                ]}
+                scheduledRoutes={FAKE_DATA}
             />
         </div>
     );
