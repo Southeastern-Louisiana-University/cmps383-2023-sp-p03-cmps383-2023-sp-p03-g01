@@ -1,14 +1,14 @@
-import { Button, LoadingOverlay, Modal, PasswordInput, TextInput } from '@mantine/core';
+import { Button, LoadingOverlay, Modal, PasswordInput, Text, TextInput } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { currentlyLoggedInUserState } from '../../../recoil/atoms/AuthenticationAtom';
-import { COLOR_PALETTE } from '../../../styling/ColorPalette';
-import { callATimeout } from '../../../util/callATimeout';
-import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
-import { useDebounce } from '../../../util/useDebounce';
-import { validatePassword, validateName, validateEmail } from '../../../util/ValidationFunctions';
-import { AUTHENTICATION_MODAL_STYLING } from './AuthenticationModalStyling';
+import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
+import { COLOR_PALETTE } from '../../styling/ColorPalette';
+import { callATimeout } from '../../util/callATimeout';
+import { getMantineComponentSize } from '../../util/getMantineComponentSize';
+import { useDebounce } from '../../util/useDebounce';
+import { validatePassword, validateName, validateEmail } from '../../util/ValidationFunctions';
+import { STYLING_VARIABLES } from '../../styling/StylingVariables';
 
 interface AuthenticationModalProps {
     opened: boolean;
@@ -118,9 +118,25 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
         setUserHasAnAccount(!userHasAnAccount);
     };
 
+    const resetErrorMessages = () => {
+        setPasswordErrorMessage(undefined);
+        setRepeatedPasswordErrorMessage(undefined);
+        setNameErrorMessage(undefined);
+        setEmailErrorMessage(undefined);
+    };
+
+    const resetFormValues = () => {
+        setPassword('');
+        setRepeatedPassword('');
+        setName('');
+        setEmail('');
+    };
+
     const closeModalAndResetState = () => {
         onClose();
         setUserHasAnAccount(true);
+        resetErrorMessages();
+        resetFormValues();
     };
 
     /**
@@ -176,13 +192,6 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
         return false;
     };
 
-    const resetErrorMessages = () => {
-        setPasswordErrorMessage(undefined);
-        setRepeatedPasswordErrorMessage(undefined);
-        setNameErrorMessage(undefined);
-        setEmailErrorMessage(undefined);
-    };
-
     const validateInputAndAuthenticateUser = async (mode: 'signup' | 'login') => {
         const inputIsValid = validateInput(mode);
 
@@ -215,7 +224,15 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                 loaderProps={{ color: COLOR_PALETTE.light.default.blueNcs }}
             />
 
-            <div style={AUTHENTICATION_MODAL_STYLING.rootStyles}>
+            <div
+                style={{
+                    display: 'grid',
+                    placeItems: 'center',
+                    gap: STYLING_VARIABLES.defaultSpacing,
+
+                    fontSize: STYLING_VARIABLES.defaultBodyFontSize,
+                }}
+            >
                 {userHasAnAccount ? (
                     <>
                         {/* Form Fields */}
@@ -257,8 +274,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                             Login
                         </Button>
 
-                        {/* Create An Account Section */}
-                        <span>Don't have an account?</span>
+                        <Text>Don't have an account?</Text>
 
                         <Button
                             style={{
@@ -331,6 +347,18 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                             }}
                         >
                             Create An Account
+                        </Button>
+
+                        <Text>Already have an account?</Text>
+
+                        <Button
+                            style={{
+                                width: '100%',
+                            }}
+                            size={componentSize}
+                            onClick={toggleUserHasAnAccount}
+                        >
+                            Back to Login
                         </Button>
                     </>
                 )}

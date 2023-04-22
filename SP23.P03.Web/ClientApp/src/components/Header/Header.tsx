@@ -7,7 +7,7 @@ import { AppRoutes } from '../../models/AppRoutes';
 import { useRecoilValue } from 'recoil';
 import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 import { MdAccountCircle } from 'react-icons/md';
-import { AuthenticationModal } from './AuthenticationModal/AuthenticationModal';
+import { AuthenticationModal } from './AuthenticationModal';
 import { NavigationDrawer } from './NavigationDrawer';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useViewportSize } from '@mantine/hooks';
@@ -111,7 +111,7 @@ export function Header(): React.ReactElement {
                         </ActionIcon>
                         {browserWidth > 500 && (
                             <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>
-                                Hello, {currentlyLoggedInUser}
+                                Hello, {currentlyLoggedInUser.split('@')[0]}
                             </span>
                         )}
                     </div>
