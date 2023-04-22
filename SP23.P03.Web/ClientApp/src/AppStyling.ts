@@ -82,6 +82,9 @@ export const mantineTheme: MantineThemeOverride = {
                     width: '100%',
                     maxWidth: `${STYLING_VARIABLES.maxContentWidth}`,
                 },
+                inner: {
+                    padding: '0',
+                },
             },
         },
 
@@ -92,6 +95,10 @@ export const mantineTheme: MantineThemeOverride = {
                 },
                 body: {
                     fontSize: `${STYLING_VARIABLES.defaultBodyFontSize}`,
+                },
+                // I have no idea why the paddingRight does not apply, but removing all horizontal padding fixes the issue.
+                inner: {
+                    padding: '5vh 0',
                 },
             },
         },
@@ -288,6 +295,16 @@ export const mantineTheme: MantineThemeOverride = {
             styles: {
                 root: {
                     color: COLOR_PALETTE.light.default.textColorPrimary,
+                },
+            },
+        },
+
+        Card: {
+            styles: {
+                root: {
+                    '&[data-with-border]': {
+                        borderColor: COLOR_PALETTE.light.default.borderColor,
+                    },
                 },
             },
         },

@@ -1,42 +1,9 @@
-import { COLOR_PALETTE } from '../../styling/ColorPalette';
 import { STYLING_VARIABLES } from '../../styling/StylingVariables';
 
 /**
  * Styling for the Header Component.
  */
 export const HEADER_STYLING = {
-    rootStyles: {
-        width: '100%',
-        height: `calc(${STYLING_VARIABLES.headerHeight} - 1px)`, // -1px to account for the border
-
-        // Courtesy of Amtrak
-        boxShadow: '0 2px 5px #00000029,0 2px 10px #0000001f',
-
-        display: 'flex',
-        justifyContent: 'center',
-    } as React.CSSProperties,
-
-    rootContentStyles: {
-        width: '100%',
-        maxWidth: STYLING_VARIABLES.maxContentWidth,
-
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-
-        color: COLOR_PALETTE.light.default.textColorPrimary,
-
-        margin: `${STYLING_VARIABLES.defaultSpacing}`,
-    } as React.CSSProperties,
-
-    /* The Logo & Company Name */
-    entrackStyles: {
-        display: 'flex',
-        alignItems: 'center',
-
-        cursor: 'pointer',
-    } as React.CSSProperties,
-
     iconStyles: {
         // These calculations are to make the logo square while accounting for the padding
         width: `calc(${STYLING_VARIABLES.headerHeight} - 2 * ${STYLING_VARIABLES.defaultSpacing})`,
