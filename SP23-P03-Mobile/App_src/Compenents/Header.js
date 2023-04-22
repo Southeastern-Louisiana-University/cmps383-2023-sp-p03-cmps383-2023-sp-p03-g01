@@ -2,6 +2,7 @@ import React from "react";
 import {  StyleSheet,Text, View } from 'react-native';
 import { COLOR_PALETTE } from "../styling/ColorPalette";
 import { Header } from 'react-native-elements'
+import { Title } from "./Title";
 
 
 export function HeaderApp() {
@@ -14,7 +15,7 @@ export function HeaderApp() {
             color: COLOR_PALETTE.light.default.textColorPrimary ,
             onPress: () => alert('ea'),
           }}
-          centerComponent={{ text: 'Entrack', style: { color: COLOR_PALETTE.light.default.textColorPrimary } }}
+          centerComponent={<Title/>}
           rightComponent={{ icon: 'home', color: COLOR_PALETTE.light.default.textColorPrimary }}
           backgroundColor="white"/>
         </View>
@@ -26,4 +27,8 @@ export function HeaderApp() {
         borderBottomColor: COLOR_PALETTE.light.default.borderColor,
         borderBottomWidth: 1,
     },
-});
+    centerStyles: {
+      color: COLOR_PALETTE.light.default.textColorPrimary,
+      fontSize: 15,
+    }
+  });
