@@ -37,9 +37,9 @@ namespace SP23.P03.Web.Controllers
                         {
                             Id = x.TrainRoute.Id,
                             ArrivalTime = x.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                            DeperatureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                            ArrivalStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
-                            DeperatureStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                            DepartureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                            ArrivalStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                            DepartureStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
                             PassengerCount = x.TrainRoute.PassengerCount,
                     },
                     SeatType = x.SeatType,
@@ -104,9 +104,9 @@ namespace SP23.P03.Web.Controllers
                 {
                     Id = ticket.TrainRoute.Id,
                     ArrivalTime = ticket.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    DeperatureTime = ticket.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    ArrivalStation = ticket.TrainRoute.Path.StartingTrainStation.City + ", " + ticket.TrainRoute.Path.StartingTrainStation.State,
-                    DeperatureStation = ticket.TrainRoute.Path.EndingTrainStation.City + ", " + ticket.TrainRoute.Path.EndingTrainStation.State,
+                    DepartureTime = ticket.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = ticket.TrainRoute.Path.EndingTrainStation.City + ", " + ticket.TrainRoute.Path.EndingTrainStation.State,
+                    DepartureStation = ticket.TrainRoute.Path.StartingTrainStation.City + ", " + ticket.TrainRoute.Path.StartingTrainStation.State,
                     PassengerCount = ticket.TrainRoute.PassengerCount,
 
                 },

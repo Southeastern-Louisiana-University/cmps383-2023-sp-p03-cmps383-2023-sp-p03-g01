@@ -5,8 +5,6 @@ using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using System.Globalization;
-using System.Net.Sockets;
-using System.Transactions;
 
 namespace SP23.P03.Web.Controllers
 {
@@ -131,9 +129,9 @@ namespace SP23.P03.Web.Controllers
                 {
                     Id = x.Id,
                     ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    ArrivalStation = x.Path.StartingTrainStation.City + ", " + x.Path.StartingTrainStation.State,
-                    DeperatureStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
+                    DepartureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
+                    DepartureStation = x.Path.StartingTrainStation.City + ", " + x.Path.StartingTrainStation.State,
                     PassengerCount = x.PassengerCount,
                     DwellTime = x.DwellTime,
                     Layover = x.Layover,                  

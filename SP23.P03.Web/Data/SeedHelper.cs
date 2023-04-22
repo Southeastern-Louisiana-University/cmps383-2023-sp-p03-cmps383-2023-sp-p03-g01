@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
@@ -9,7 +8,8 @@ using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainStations;
 using SP23.P03.Web.Features.TrainTicket;
-using System.Globalization;
+
+
 
 namespace SP23.P03.Web.Data;
 
@@ -1131,8 +1131,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 8, 00, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 9, 00, 0, 0, DateTimeKind.Utc),
-                Path = path7,
-                PathId = path7.Id,
+                Path = path12,
+                PathId = path12.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1143,8 +1143,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 9, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 10, 15, 0, 0, DateTimeKind.Utc),
-                Path = path8,
-                PathId = path8.Id,
+                Path = path11,
+                PathId = path11.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1155,8 +1155,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 10, 30, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 11, 45, 0, 0, DateTimeKind.Utc),
-                Path = path8,
-                PathId = path8.Id,
+                Path = path10,
+                PathId = path10.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1179,8 +1179,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 13, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
-                Path = path10,
-                PathId = path10.Id,
+                Path = path8,
+                PathId = path8.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1191,23 +1191,11 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 14, 30, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
-                Path = path11,
-                PathId = path11.Id,
+                Path = path7,
+                PathId = path7.Id,
                 Train = train2,
                 DwellTime = null,
                 Layover = "30 min",
-                PassengerCount = 1,
-            });
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
-            {
-                ArrivalTime = new DateTime(2022, 5, 14, 16, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 18, 45, 0, 0, DateTimeKind.Utc),
-                Path = path12,
-                PathId = path12.Id,
-                Train = trains.First(),
-                DwellTime = null,
-                Layover = null,
                 PassengerCount = 1,
             });
         //May 14, 10 am Jackson to Baton Rouge \
@@ -1216,8 +1204,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 10, 00, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 11, 00, 0, 0, DateTimeKind.Utc),
-                Path = path7,
-                PathId = path7.Id,
+                Path = path12,
+                PathId = path12.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1228,8 +1216,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 11, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 12, 15, 0, 0, DateTimeKind.Utc),
-                Path = path8,
-                PathId = path8.Id,
+                Path = path11,
+                PathId = path11.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1240,8 +1228,8 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 12, 30, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 13, 45, 0, 0, DateTimeKind.Utc),
-                Path = path8,
-                PathId = path8.Id,
+                Path = path10,
+                PathId = path10.Id,
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
@@ -1264,10 +1252,10 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 15, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
-                Path = path10,
-                PathId = path10.Id,
+                Path = path8,
+                PathId = path8.Id,
                 Train = train2,
-                DwellTime = "15 min",
+                DwellTime = "30 min",
                 Layover = null,
                 PassengerCount = 1,
             });
@@ -1276,25 +1264,14 @@ public static class SeedHelper
             {
                 ArrivalTime = new DateTime(2022, 5, 14, 16, 30, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 18, 15, 0, 0, DateTimeKind.Utc),
-                Path = path11,
-                PathId = path11.Id,
-                Train = train2,
-                DwellTime = null,
-                Layover = "30 min",
-                PassengerCount = 1,
-            });
-        dataContext.Set<TrainRoute>()
-            .Add(new TrainRoute
-            {
-                ArrivalTime = new DateTime(2022, 5, 14, 18, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 20, 45, 0, 0, DateTimeKind.Utc),
-                Path = path12,
-                PathId = path12.Id,
+                Path = path7,
+                PathId = path7.Id,
                 Train = trains.First(),
                 DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
             });
+        
 
         await dataContext.SaveChangesAsync();
     }
@@ -1325,6 +1302,63 @@ public static class SeedHelper
         var seats = dataContext.Set<Seat>();
         var users = dataContext.Set<User>();
 
+        var Routes2 = new TrainRoute();
+        var Routes3 = new TrainRoute();
+        var Routes4 = new TrainRoute();
+        var Routes5 = new TrainRoute();
+        var Routes6 = new TrainRoute();
+        var Routes13 = new TrainRoute();
+        var Routes14 = new TrainRoute();
+        var Routes15 = new TrainRoute();
+        var Routes16 = new TrainRoute();
+        var Routes17 = new TrainRoute();
+        var Routes18 = new TrainRoute();
+
+        if (trainRoutes.Find(2) != null)
+        {
+            Routes2 = trainRoutes.Find(2);
+        }
+        if (trainRoutes.Find(3) != null)
+        {
+            Routes3 = trainRoutes.Find(3);
+        }
+        if (trainRoutes.Find(4) != null)
+        {
+            Routes4 = trainRoutes.Find(4);
+        }
+        if (trainRoutes.Find(5) != null)
+        {
+            Routes5 = trainRoutes.Find(5);
+        }
+        if (trainRoutes.Find(6) != null)
+        {
+            Routes6 = trainRoutes.Find(6);
+        }
+        if (trainRoutes.Find(13) != null)
+        {
+            Routes13 = trainRoutes.Find(13);
+        }
+        if (trainRoutes.Find(14) != null)
+        {
+            Routes14 = trainRoutes.Find(14);
+        }
+        if (trainRoutes.Find(15) != null)
+        {
+            Routes15 = trainRoutes.Find(15);
+        }
+        if (trainRoutes.Find(16) != null)
+        {
+            Routes16 = trainRoutes.Find(16);
+        }
+        if (trainRoutes.Find(17) != null)
+        {
+            Routes17 = trainRoutes.Find(17);
+        }
+        if (trainRoutes.Find(18) != null)
+        {
+            Routes18 = trainRoutes.Find(18);
+        }
+
         if (await tickets.AnyAsync())
         {
             return;
@@ -1338,6 +1372,7 @@ public static class SeedHelper
                 PassagerId = users.First().Id,
                 TrainRoute = trainRoutes.First(),
                 SeatType = seats.First().type,
+                Code = "12",
             });
 
 

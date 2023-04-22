@@ -33,11 +33,13 @@ namespace SP23.P03.Web.Controllers;
                 {
                     Id = x.Id,
                     ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    ArrivalStation = x.Path.StartingTrainStation.City +", "+ x.Path.StartingTrainStation.State,
-                    DeperatureStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
+                    DepartureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = x.Path.EndingTrainStation.City +", "+ x.Path.EndingTrainStation.State,
+                    DepartureStation = x.Path.StartingTrainStation.City + ", " + x.Path.StartingTrainStation.State,
                     PassengerCount = x.PassengerCount,
                 }),
+                ArrivalStation = x.Routes.FirstOrDefault().Path.EndingTrainStation.City + ", " + x.Routes.FirstOrDefault().Path.EndingTrainStation.State,
+                DepartureStation = x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.City + ", " + x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.State,
             });
     }
     [HttpGet]

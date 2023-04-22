@@ -6,8 +6,8 @@ namespace SP23.P03.Web.Features.Route
     {
         public int Id { get; set; }
         public string ArrivalTime { get; set; }
-        public string DeperatureTime { get; set; }
-        public string DeperatureStation { get; set; }
+        public string DepartureTime { get; set; }
+        public string DepartureStation { get; set; }
         public string ArrivalStation { get; set; }
         public int? PassengerCount { get; set; }
         public string? Layover { get; set; }
