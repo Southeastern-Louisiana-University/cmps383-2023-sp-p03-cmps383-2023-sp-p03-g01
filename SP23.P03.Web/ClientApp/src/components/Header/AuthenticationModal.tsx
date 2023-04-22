@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 import { COLOR_PALETTE } from '../../styling/ColorPalette';
-import { callATimeout } from '../../util/callATimeout';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useDebounce } from '../../util/useDebounce';
 import { validatePassword, validateName, validateEmail } from '../../util/ValidationFunctions';
 import { STYLING_VARIABLES } from '../../styling/StylingVariables';
+import { Api } from '../../api/EntrackApi.ts/EntrackApi';
+
+const API = new Api();
 
 interface AuthenticationModalProps {
     opened: boolean;
@@ -199,11 +201,18 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
             setIsMakingApiCall(true);
             resetErrorMessages();
 
-            // TODO: Replace with API call
-            // Simulate a delay in the API call
-            await callATimeout(2000);
+            const { data, status } = await API.api.authenticationLoginCreate({
+                userName: email,
+                password,
+            });
 
-            setCurrentlyLoggedInUser(email);
+            if (status !== 200) {
+                setIsMakingApiCall(false);
+                console.error('AHHHHHHHHHHHHHHH');
+                return;
+            }
+
+            setCurrentlyLoggedInUser(data);
 
             closeModalAndResetState();
         }
@@ -271,7 +280,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                                 validateInputAndAuthenticateUser('login');
                             }}
                         >
-                            Login
+                            Sign In
                         </Button>
 
                         <Text>Don't have an account?</Text>
@@ -358,7 +367,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                             size={componentSize}
                             onClick={toggleUserHasAnAccount}
                         >
-                            Back to Login
+                            Back to Sign In
                         </Button>
                     </>
                 )}
