@@ -990,6 +990,7 @@ public static class SeedHelper
                 Train = trains.First(),
                 DwellTime = null,
                 Layover = "30 min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1001,6 +1002,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = null,
                 Layover = "15 min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1012,6 +1014,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1023,6 +1026,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1034,6 +1038,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1045,6 +1050,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         //May 8, 10 am Baton Rouge to Jackson
         dataContext.Set<TrainRoute>()
@@ -1057,6 +1063,7 @@ public static class SeedHelper
                 Train = trains.First(),
                 DwellTime = null,
                 Layover = "30min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1068,6 +1075,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1079,6 +1087,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = null,
                 Layover = "30 min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1090,6 +1099,7 @@ public static class SeedHelper
                 Train = train3,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1101,6 +1111,7 @@ public static class SeedHelper
                 Train = train3,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1112,6 +1123,7 @@ public static class SeedHelper
                 Train = train3,
                 DwellTime = "15 null",
                 Layover = null,
+                PassengerCount = 1,
             });
         //May 14, 8 am Jackson to Baton Rouge \
         dataContext.Set<TrainRoute>()
@@ -1124,6 +1136,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1135,6 +1148,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1146,6 +1160,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1157,6 +1172,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1168,6 +1184,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1179,6 +1196,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = null,
                 Layover = "30 min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1190,6 +1208,7 @@ public static class SeedHelper
                 Train = trains.First(),
                 DwellTime = null,
                 Layover = null,
+                PassengerCount = 1,
             });
         //May 14, 10 am Jackson to Baton Rouge \
         dataContext.Set<TrainRoute>()
@@ -1202,6 +1221,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1213,6 +1233,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1224,6 +1245,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1235,6 +1257,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1246,6 +1269,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = "15 min",
                 Layover = null,
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1257,6 +1281,7 @@ public static class SeedHelper
                 Train = train2,
                 DwellTime = null,
                 Layover = "30 min",
+                PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
@@ -1268,6 +1293,7 @@ public static class SeedHelper
                 Train = trains.First(),
                 DwellTime = null,
                 Layover = null,
+                PassengerCount = 1,
             });
 
         await dataContext.SaveChangesAsync();

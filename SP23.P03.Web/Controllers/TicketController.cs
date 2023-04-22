@@ -38,9 +38,10 @@ namespace SP23.P03.Web.Controllers
                             Id = x.TrainRoute.Id,
                             ArrivalTime = x.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                             DeperatureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                            PathId = x.TrainRoute.PathId,
-                            TrainId = x.TrainRoute.Train.Id,
-                        },
+                            ArrivalStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
+                            DeperatureStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                            PassengerCount = x.TrainRoute.PassengerCount,
+                    },
                     SeatType = x.SeatType,
                     cost = x.cost,
                     PassagerId = (int)x.PassagerId,
@@ -104,9 +105,10 @@ namespace SP23.P03.Web.Controllers
                     Id = ticket.TrainRoute.Id,
                     ArrivalTime = ticket.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                     DeperatureTime = ticket.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    PathId = ticket.TrainRoute.PathId,
-                    TrainId = ticket.TrainRoute.Train.Id,
-                    
+                    ArrivalStation = ticket.TrainRoute.Path.StartingTrainStation.City + ", " + ticket.TrainRoute.Path.StartingTrainStation.State,
+                    DeperatureStation = ticket.TrainRoute.Path.EndingTrainStation.City + ", " + ticket.TrainRoute.Path.EndingTrainStation.State,
+                    PassengerCount = ticket.TrainRoute.PassengerCount,
+
                 },
                 SeatType = ticket.SeatType,
             };

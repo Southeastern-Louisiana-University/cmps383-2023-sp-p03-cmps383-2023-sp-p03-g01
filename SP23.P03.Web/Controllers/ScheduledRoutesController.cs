@@ -34,8 +34,9 @@ namespace SP23.P03.Web.Controllers;
                     Id = x.Id,
                     ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                     DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
-                    PathId = x.PathId,
-                    TrainId = x.Train.Id,
+                    ArrivalStation = x.Path.StartingTrainStation.City +", "+ x.Path.StartingTrainStation.State,
+                    DeperatureStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
+                    PassengerCount = x.PassengerCount,
                 }),
             });
     }

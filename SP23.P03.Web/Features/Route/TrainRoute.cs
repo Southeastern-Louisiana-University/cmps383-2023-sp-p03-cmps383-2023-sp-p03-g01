@@ -11,6 +11,7 @@ namespace SP23.P03.Web.Features.Route
         public TrainPath? Path { get; set; }
         public int? PathId { get; set; }
         public Train? Train { get; set; }
+        public int? PassengerCount { get; set; }
         public string? Layover { get; set; }
         public string? DwellTime { get; set; }
     }
