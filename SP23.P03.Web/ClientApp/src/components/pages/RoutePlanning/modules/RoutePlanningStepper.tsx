@@ -15,6 +15,8 @@ import {
 } from '../../../../recoil/atoms/HomePageAtom';
 import { currentRoutePlanningPageState } from '../../../../recoil/atoms/RoutePlanningAtom';
 import { formatTheDate } from '../../../../util/formatTheDate';
+import { COLOR_PALETTE } from '../../../../styling/ColorPalette';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
 const StepperContent = (): React.ReactElement => {
     const tripType = useRecoilValue(tripTypeState);
@@ -86,15 +88,16 @@ export function RoutePlanningStepper(): React.ReactElement {
     const currentRoutePlanningPage = useRecoilValue(currentRoutePlanningPageState);
 
     return (
-        <div style={ROUTE_PLANNING_PAGE_STYLING.headerStyles}>
+        <div
+            style={{
+                borderBottom: `1px solid ${COLOR_PALETTE.light.default.borderColor}`,
+
+                paddingBottom: STYLING_VARIABLES.defaultSpacing,
+            }}
+        >
             <Stepper active={currentRoutePlanningPage}>
                 {/* Departure Route(s) */}
                 <Stepper.Step label='Choose Your Routes'>
-                    <StepperContent />
-                </Stepper.Step>
-
-                {/* Seat Selection */}
-                <Stepper.Step label='Select Your Seats'>
                     <StepperContent />
                 </Stepper.Step>
 

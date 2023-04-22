@@ -5,10 +5,8 @@ import { RoutePlanningStepper } from './modules/RoutePlanningStepper';
 import { currentRoutePlanningPageState } from '../../../recoil/atoms/RoutePlanningAtom';
 import { RoutePlanningPage } from '../../../models/RoutePlanningPages';
 import { DepartureRoutesPage } from './modules/RoutePlanningPages/DepartureRoutesPage';
-import { SeatSelectionPage } from './modules/RoutePlanningPages/SeatSelectionPage';
 import { ReviewAndPayPage } from './modules/RoutePlanningPages/ReviewAndPayPage';
 import { DepartureRoutesButtons } from './modules/ActionButtons/DepartureRoutesButtons';
-import { SeatSelectionButtons } from './modules/ActionButtons/SeatSelectionButtons';
 import { ReviewAndPayButtons } from './modules/ActionButtons/ReviewAndPayButtons';
 
 /**
@@ -26,9 +24,6 @@ export function RoutePlanningPageRoot(): React.ReactElement {
                 {/* Departure Route */}
                 {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesPage />}
 
-                {/* Seat Selection Page */}
-                {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionPage />}
-
                 {/* Review & Pay */}
                 {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayPage />}
             </div>
@@ -37,9 +32,6 @@ export function RoutePlanningPageRoot(): React.ReactElement {
             <div style={ROUTE_PLANNING_PAGE_STYLING.footerStyles}>
                 {/* Departure Route Buttons */}
                 {currentRoutePlanningPage === RoutePlanningPage.DEPARTURE_ROUTE && <DepartureRoutesButtons />}
-
-                {/* Seat Selection Page Buttons */}
-                {currentRoutePlanningPage === RoutePlanningPage.SEAT_SELECTION && <SeatSelectionButtons />}
 
                 {/* Review & Pay Buttons */}
                 {currentRoutePlanningPage === RoutePlanningPage.REVIEW_AND_PAY && <ReviewAndPayButtons />}
