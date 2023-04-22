@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SP23.P03.Web.Features.Authorization;
@@ -513,6 +514,14 @@ public static class SeedHelper
         var station4 = new TrainStation();
         var station5 = new TrainStation();
         var station6 = new TrainStation();
+        var station7 = new TrainStation();
+        var station8 = new TrainStation();
+        var station9 = new TrainStation();
+        var station10 = new TrainStation();
+        var station11 = new TrainStation();
+        var station12 = new TrainStation();
+        var station13 = new TrainStation();
+        var station14 = new TrainStation();
 
         if (trainStations.Find(2) != null)
         {
@@ -534,6 +543,97 @@ public static class SeedHelper
         {
             station6 = trainStations.Find(6);
         }
+        if (trainStations.Find(7) != null)
+        {
+            station7 = trainStations.Find(7);
+        }
+        if (trainStations.Find(8) != null)
+        {
+            station8 = trainStations.Find(8);
+        }
+        if (trainStations.Find(9) != null)
+        {
+            station9 = trainStations.Find(9);
+        }
+        if (trainStations.Find(10) != null)
+        {
+            station10 = trainStations.Find(10);
+        }
+        if (trainStations.Find(11) != null)
+        {
+            station11 = trainStations.Find(11);
+        }
+        if (trainStations.Find(12) != null)
+        {
+            station12 = trainStations.Find(12);
+        }
+        if (trainStations.Find(13) != null)
+        {
+            station13 = trainStations.Find(13);
+        }
+
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station8,
+                StartingTrainStationId = station8.Id,
+                EndingTrainStation = station2,
+                EndingTrainStationId = station2.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station2,
+                StartingTrainStationId = station2.Id,
+                EndingTrainStation = station1,
+                EndingTrainStationId = station1.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station1,
+                StartingTrainStationId = station1.Id,
+                EndingTrainStation = station9,
+                EndingTrainStationId = station9.Id,
+            });
+
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station9,
+                StartingTrainStationId = station9.Id,
+                EndingTrainStation = station10,
+                EndingTrainStationId = station10.Id,
+            });
+        dataContext.Set<TrainPath>()
+           .Add(new TrainPath
+           {
+               StartingTrainStation = station10,
+               StartingTrainStationId = station10.Id,
+               EndingTrainStation = station11,
+               EndingTrainStationId = station11.Id,
+           });
+        dataContext.Set<TrainPath>()
+           .Add(new TrainPath
+           {
+               StartingTrainStation = station11,
+               StartingTrainStationId = station11.Id,
+               EndingTrainStation = station12,
+               EndingTrainStationId = station12.Id,
+           });
+
+        //reverse
+        dataContext.Set<TrainPath>()
+            .Add(new TrainPath
+            {
+                StartingTrainStation = station2,
+                StartingTrainStationId = station2.Id,
+                EndingTrainStation = station8,
+                EndingTrainStationId = station8.Id,
+            });
 
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
@@ -547,31 +647,36 @@ public static class SeedHelper
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
             {
-                StartingTrainStation = station2,
-                StartingTrainStationId = station2.Id,
-                EndingTrainStation = station3,
-                EndingTrainStationId = station3.Id,
+                StartingTrainStation = station9,
+                StartingTrainStationId = station9.Id,
+                EndingTrainStation = station1,
+                EndingTrainStationId = station1.Id,
             });
 
         dataContext.Set<TrainPath>()
             .Add(new TrainPath
             {
-                StartingTrainStation = station3,
-                StartingTrainStationId = station3.Id,
-                EndingTrainStation = station4,
-                EndingTrainStationId = station4.Id,
+                StartingTrainStation = station10,
+                StartingTrainStationId = station10.Id,
+                EndingTrainStation = station9,
+                EndingTrainStationId = station9.Id,
             });
-
         dataContext.Set<TrainPath>()
-            .Add(new TrainPath
-            {
-                StartingTrainStation = station4,
-                StartingTrainStationId = station4.Id,
-                EndingTrainStation = station5,
-                EndingTrainStationId = station5.Id,
-            });
-
-
+           .Add(new TrainPath
+           {
+               StartingTrainStation = station11,
+               StartingTrainStationId = station11.Id,
+               EndingTrainStation = station10,
+               EndingTrainStationId = station10.Id,
+           });
+        dataContext.Set<TrainPath>()
+           .Add(new TrainPath
+           {
+               StartingTrainStation = station12,
+               StartingTrainStationId = station12.Id,
+               EndingTrainStation = station11,
+               EndingTrainStationId = station11.Id,
+           });
         await dataContext.SaveChangesAsync();
 
     }
@@ -799,19 +904,132 @@ public static class SeedHelper
         var trains = dataContext.Set<Train>();
         var paths = dataContext.Set<TrainPath>();
 
+        var path2 = new TrainPath();
+        var path3 = new TrainPath();
+        var path4 = new TrainPath();
+        var path5 = new TrainPath();
+        var path6 = new TrainPath();
+        var path7  = new TrainPath();
+
+        if (paths.Find(2) != null)
+        {
+            path2 = paths.Find(2);
+        }
+        if (paths.Find(3) != null)
+        {
+            path3 = paths.Find(3);
+        }
+        if (paths.Find(4) != null)
+        {
+            path4 = paths.Find(4);
+        }
+        if (paths.Find(5) != null)
+        {
+            path5 = paths.Find(5);
+        }
+        if (paths.Find(6) != null)
+        {
+            path6 = paths.Find(6);
+        }
+        if (paths.Find(7) != null)
+        {
+            path7 = paths.Find(7);
+        }
+
+        var train2 = new Train();
+        var train3 = new Train();
+
+        if (trains.Find(2) != null)
+        {
+            train2 = trains.Find(2);
+        }
+        if (paths.Find(3) != null)
+        {
+            train3 = trains.Find(3);
+        }
+
         if (await trainRoutes.AnyAsync())
         {
             return;
         }
 
+
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = DateTime.Now,
-                DeperatureTime = DateTime.Now.AddHours(3),
+                ArrivalTime = new DateTime(2022, 5, 8, 8, 0, 0, 0, DateTimeKind.Utc),      
+                DeperatureTime = new DateTime(2022, 5, 8, 10, 0, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
                 Train = trains.First(),
+                DwellTime = null,
+                Layover = "30 min",
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 10,30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 12, 15, 0, 0, DateTimeKind.Utc),
+                Path = path2,
+                PathId = path2.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 14, 15, 0, 0, DateTimeKind.Utc),
+                Path = path3,
+                PathId = path3.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 15, 30, 0, 0, DateTimeKind.Utc),
+                Path = path4,
+                PathId = path4.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 15, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 16, 20, 0, 0, DateTimeKind.Utc),
+                Path = path5,
+                PathId = path5.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 16, 35, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 16, 50, 0, 0, DateTimeKind.Utc),
+                Path = path6,
+                PathId = path6.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
+            });
+        dataContext.Set<TrainRoute>()
+            .Add(new TrainRoute
+            {
+                ArrivalTime = new DateTime(2022, 5, 8, 17, 05, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 17, 45, 0, 0, DateTimeKind.Utc),
+                Path = path7,
+                PathId = path7.Id,
+                Train = train2,
+                DwellTime = "15 min",
+                Layover = null,
             });
 
 

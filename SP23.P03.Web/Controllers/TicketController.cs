@@ -6,6 +6,7 @@ using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainTicket;
+using System.Globalization;
 
 namespace SP23.P03.Web.Controllers
 {
@@ -38,8 +39,8 @@ namespace SP23.P03.Web.Controllers
                         Routes = x.ScheduledTrainRoute.Routes.Select(x => new TrainRouteDto
                         {
                             Id = x.Id,
-                            ArrivalTime = x.ArrivalTime,
-                            DeperatureTime = x.DeperatureTime,
+                            ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                            DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                             PathId = x.PathId,
                             TrainId = x.Train.Id,
                         }),
@@ -108,8 +109,8 @@ namespace SP23.P03.Web.Controllers
                     Routes = ticket.ScheduledTrainRoute.Routes.Select(x => new TrainRouteDto
                     {
                         Id = x.Id,
-                        ArrivalTime = x.ArrivalTime,
-                        DeperatureTime = x.DeperatureTime,
+                        ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                        DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                         PathId = x.PathId,
                         TrainId = x.Train.Id,
                     }),

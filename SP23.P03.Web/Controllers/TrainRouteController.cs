@@ -4,6 +4,7 @@ using SP23.P03.Web.Data;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.TrainRoutes;
 using SP23.P03.Web.Features.Trains;
+using System.Globalization;
 using System.Transactions;
 
 namespace SP23.P03.Web.Controllers
@@ -42,7 +43,7 @@ namespace SP23.P03.Web.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public ActionResult<TrainRouteDto> CreateRoute(TrainRouteDto dto)
+        public ActionResult<TrainRouteDto> CreateRoute(TrainRouteCreateDto dto)
         {
             var Path = trainPath.Where(x => x.Id == dto.PathId).FirstOrDefault();
             if (Path == null)
@@ -74,7 +75,7 @@ namespace SP23.P03.Web.Controllers
         }
         [HttpPut]
         [Route("{id}")]
-        public ActionResult<TrainRouteDto> UpdateRoute(int id, TrainRouteDto dto)
+        public ActionResult<TrainRouteDto> UpdateRoute(int id, TrainRouteCreateDto dto)
         {
             var Path = trainPath.Where(x => x.Id == dto.PathId).FirstOrDefault();
             if (Path == null)
@@ -128,10 +129,12 @@ namespace SP23.P03.Web.Controllers
                 .Select(x => new TrainRouteDto
                 {
                     Id = x.Id,
-                    ArrivalTime = x.ArrivalTime,
-                    DeperatureTime = x.DeperatureTime,
+                    ArrivalTime = x.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    DeperatureTime = x.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
                     PathId = x.PathId,
-                    TrainId = x.Train.Id
+                    TrainId = x.Train.Id,
+                    DwellTime = x.DwellTime,
+                    Layover = x.Layover,                  
                 });
         }
     }

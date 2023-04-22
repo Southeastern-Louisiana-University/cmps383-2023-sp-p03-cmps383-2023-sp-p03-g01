@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230422013646_layoverAndDwellTime")]
+    partial class layoverAndDwellTime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,17 +249,12 @@ namespace SP23.P03.Web.Migrations
                     b.Property<int?>("PathId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TrainId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TrainScheduledRoutesId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PathId");
-
-                    b.HasIndex("TrainId");
 
                     b.HasIndex("TrainScheduledRoutesId");
 
@@ -441,6 +439,10 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("TrainRouteId")
+                        .IsUnique()
+                        .HasFilter("[TrainRouteId] IS NOT NULL");
+
                     b.ToTable("Train");
                 });
 
@@ -505,18 +507,11 @@ namespace SP23.P03.Web.Migrations
                         .WithMany()
                         .HasForeignKey("PathId");
 
-                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
-                        .WithMany("Routes")
-                        .HasForeignKey("TrainId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", null)
                         .WithMany("Routes")
                         .HasForeignKey("TrainScheduledRoutesId");
 
                     b.Navigation("Path");
-
-                    b.Navigation("Train");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.TrainRoutes.TrainPath", b =>
@@ -578,6 +573,16 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("Train");
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
+                {
+                    b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "Route")
+                        .WithOne("Train")
+                        .HasForeignKey("SP23.P03.Web.Features.Trains.Train", "TrainRouteId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Route");
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.Authorization.Role", b =>
                 {
                     b.Navigation("Users");
@@ -592,6 +597,11 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("Tickets");
                 });
 
+            modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
+                {
+                    b.Navigation("Train");
+                });
+
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
                 {
                     b.Navigation("Routes");
@@ -604,8 +614,6 @@ namespace SP23.P03.Web.Migrations
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
                 {
-                    b.Navigation("Routes");
-
                     b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618
