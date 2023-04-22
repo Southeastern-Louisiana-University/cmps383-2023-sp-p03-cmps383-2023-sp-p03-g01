@@ -7,6 +7,7 @@ using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainTicket;
 using SP23.P03.Web.Migrations;
 using System.Globalization;
+using System.Linq;
 using System.Transactions;
 
 namespace SP23.P03.Web.Controllers;
@@ -38,9 +39,11 @@ namespace SP23.P03.Web.Controllers;
                     ArrivalStation = x.Path.EndingTrainStation.City + ", " + x.Path.EndingTrainStation.State,
                     DepartureStation = x.Path.StartingTrainStation.City + ", " + x.Path.StartingTrainStation.State,
                     PassengerCount = x.PassengerCount,
+                    Layover = x.Layover,
+                    DwellTime = x.DwellTime,
                 }),
-                ArrivalStation = x.Routes.FirstOrDefault().Path.EndingTrainStation.City + ", " + x.Routes.FirstOrDefault().Path.EndingTrainStation.State,
-                DepartureStation = x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.City + ", " + x.Routes.OrderByDescending(t => t.Id).Last().Path.StartingTrainStation.State,
+                DepartureStation = x.Routes.FirstOrDefault().Path.StartingTrainStation.City + ", " + x.Routes.FirstOrDefault().Path.StartingTrainStation.State,
+                ArrivalStation = x.Routes.OrderBy(t => t.Id).Last().Path.EndingTrainStation.City + ", " + x.Routes.OrderBy(t => t.Id).Last().Path.EndingTrainStation.State,
                 Ticket = x.Tickets.Select(x => new TrainScheduledRouteTicketDto
                 {
                     Id = x.Id,
