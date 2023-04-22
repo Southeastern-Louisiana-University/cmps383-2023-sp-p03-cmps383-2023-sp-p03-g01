@@ -34,7 +34,6 @@ public static class SeedHelper
         await AddTrainRoute(dataContext);
         await AddTickets(dataContext);
         await AddTrainScheduledRoute(dataContext);
-        await AddTickets(dataContext);
 
     }
 
@@ -1824,30 +1823,6 @@ public static class SeedHelper
                 TrainRoute = Route18,
                 SeatType = seat9.type,
                 Code = "DEFGHIJKlM",
-            });
-
-        await dataContext.SaveChangesAsync();
-    }
-    private static async Task AddTickets(DataContext dataContext)
-    {
-        var tickets = dataContext.Set<TrainRouteTicket>();
-        var trainScheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
-        var seats = dataContext.Set<Seat>();
-        var users = dataContext.Set<User>();
-
-        if (await tickets.AnyAsync())
-        {
-            return;
-        }
-
-        dataContext.Set<TrainRouteTicket>()
-            .Add(new TrainRouteTicket
-            {
-                cost = 12.50,
-                Passager = users.First(),
-                PassagerId = users.First().Id,
-                ScheduledTrainRoute = trainScheduledRoutes.First(),
-                SeatType = seats.First().type,
             });
 
         await dataContext.SaveChangesAsync();
