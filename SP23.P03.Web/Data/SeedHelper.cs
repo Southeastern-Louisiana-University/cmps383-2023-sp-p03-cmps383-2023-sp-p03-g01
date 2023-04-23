@@ -1062,7 +1062,7 @@ public static class SeedHelper
                 Path = path6,
                 PathId = path6.Id,
                 Train = train2,
-                DwellTime = "15 min",
+                DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
             });
