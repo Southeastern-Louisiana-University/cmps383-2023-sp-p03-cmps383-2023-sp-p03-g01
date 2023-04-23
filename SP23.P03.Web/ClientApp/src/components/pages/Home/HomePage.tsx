@@ -201,7 +201,6 @@ export function HomePage(): React.ReactElement {
                                             arrivalTime={'Bobpm'}
                                             duration={'Bobmin'}
                                             layover={'15min'}
-                                            dwellTime={null}
                                             seat={SeatType.COACH}
                                             cost={100}
                                             passengerCount={10}
@@ -235,7 +234,6 @@ export function HomePage(): React.ReactElement {
                                                 arrivalTime: 'Bobpm',
                                                 duration: 'Bobmin',
                                                 layover: '15min',
-                                                dwellTime: null,
                                                 seat: SeatType.COACH,
                                                 cost: 100,
                                                 passengerCount: 10,

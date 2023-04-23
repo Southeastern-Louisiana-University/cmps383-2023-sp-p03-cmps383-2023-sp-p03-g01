@@ -1,10 +1,9 @@
-import { Grid, Stack, Card, Flex, Text } from '@mantine/core';
+import { Grid, Stack, Card, Text } from '@mantine/core';
 import React from 'react';
-import { BsHourglassSplit } from 'react-icons/bs';
-import { BlackArrow } from '../../media/BlackArrow';
 import { SeatType } from '../../models/SeatTypes';
 import { formatNumberAsUSD } from '../../util/formatNumberAsUSD';
 import { getBackgroundBasedOnSeat } from '../../util/getBackgroundBasedOnSeat';
+import arrow from '../../media/arrow.svg';
 
 interface TicketDataItemProps {
     title: string;
@@ -37,7 +36,6 @@ export interface TicketSummaryProps {
     arrivalTime: string;
     duration: string;
     layover: string | null;
-    dwellTime: string | null;
     seat: SeatType;
     cost: number;
     passengerCount: number;
@@ -66,7 +64,6 @@ export const TicketSummary = ({
     duration,
     seat,
     passengerCount,
-    dwellTime,
 }: TicketSummaryProps): React.ReactElement => {
     return (
         <Card
@@ -120,16 +117,10 @@ export const TicketSummary = ({
                     >
                         <Text weight='bold'>{duration}</Text>
 
-                        <BlackArrow />
-
-                        {dwellTime && (
-                            <Grid>
-                                <Flex align='center'>
-                                    <Text weight='bold'>{dwellTime}</Text>
-                                    <BsHourglassSplit />
-                                </Flex>
-                            </Grid>
-                        )}
+                        <img
+                            src={arrow}
+                            alt='black arrow'
+                        />
                     </div>
                     <TicketDataItem
                         title='Arrival Time'

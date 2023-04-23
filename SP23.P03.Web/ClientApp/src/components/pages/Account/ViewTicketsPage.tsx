@@ -49,7 +49,6 @@ export function ViewTicketsPage(): React.ReactElement {
         arrivalTime: '2:15pm',
         duration: '2hr 14min',
         layover: null,
-        dwellTime: '15min',
         seat: SeatType.COACH,
         cost: 152,
         passengerCount: 1,

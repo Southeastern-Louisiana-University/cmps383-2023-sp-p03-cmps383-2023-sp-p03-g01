@@ -19,13 +19,15 @@ export const scheduledRoutesState = atom<TrainScheduledRoutesDto[]>({
     default: [],
 });
 
+export interface SelectedRoute {
+    route: TrainScheduledRoutesDto;
+    seat: SeatType;
+}
+
 /**
  * The selected departure route `Atom`.
  */
-export const departureRouteState = atom<{
-    departureRoute: TrainScheduledRoutesDto;
-    seat: SeatType;
-} | null>({
+export const departureRouteState = atom<SelectedRoute | null>({
     key: 'departureRoute',
     default: null,
 });
@@ -33,10 +35,7 @@ export const departureRouteState = atom<{
 /**
  * The selected return route `Atom`.
  */
-export const returnRouteState = atom<{
-    returnRoute: TrainScheduledRoutesDto;
-    seat: SeatType;
-} | null>({
+export const returnRouteState = atom<SelectedRoute | null>({
     key: 'returnRoute',
     default: null,
 });

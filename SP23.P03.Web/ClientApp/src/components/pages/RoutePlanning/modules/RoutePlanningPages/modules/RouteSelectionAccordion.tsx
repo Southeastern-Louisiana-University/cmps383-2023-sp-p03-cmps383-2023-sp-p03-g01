@@ -1,7 +1,6 @@
 import { Accordion, Title, Tooltip, ActionIcon, Text, Checkbox } from '@mantine/core';
 import React from 'react';
 import { IoMdTrain } from 'react-icons/io';
-import { BlackArrow } from '../../../../../../media/BlackArrow';
 import { COLOR_PALETTE } from '../../../../../../styling/ColorPalette';
 import { formatNumberAsUSD } from '../../../../../../util/formatNumberAsUSD';
 import { SeatType, SeatPrice } from '../../../../../../models/SeatTypes';
@@ -10,7 +9,8 @@ import { TrainScheduledRoutesDto } from '../../../../../../api/EntrackApi.ts/Ent
 import dayjs from 'dayjs';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { departureRouteState, returnRouteState } from '../../../../../../recoil/atoms/RoutePlanningAtom';
-import { departureStationState } from '../../../../../../recoil/atoms/HomePageAtom';
+import { departureStationState, passengerCountState } from '../../../../../../recoil/atoms/HomePageAtom';
+import arrow from '../../../../../../media/arrow.svg';
 
 interface SeatSelectButtonProps {
     seatType: SeatType;
@@ -104,6 +104,7 @@ interface RouteSelectionAccordionProps {
  */
 export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccordionProps): React.ReactElement {
     const selectedDepartureStation = useRecoilValue(departureStationState);
+    const passengerCount = useRecoilValue(passengerCountState);
     const [departureRoute, setDepartureRoute] = useRecoilState(departureRouteState);
     const [returnRoute, setReturnRoute] = useRecoilState(returnRouteState);
 
@@ -111,8 +112,8 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
         selectedDepartureStation === scheduledRoutes[0]?.departureStation ? departureRoute?.seat : returnRoute?.seat;
     const selectedRouteId =
         selectedDepartureStation === scheduledRoutes[0]?.departureStation
-            ? departureRoute?.departureRoute.id
-            : returnRoute?.returnRoute.id;
+            ? departureRoute?.route.id
+            : returnRoute?.route.id;
 
     const clearSelectedRoute = (): void => {
         if (selectedDepartureStation === scheduledRoutes[0]?.departureStation) {
@@ -125,12 +126,12 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
     const updateSelectedRoute = (index: number, seat: SeatType): void => {
         if (selectedDepartureStation === scheduledRoutes[0]?.departureStation) {
             setDepartureRoute({
-                departureRoute: scheduledRoutes[index]!,
+                route: scheduledRoutes[index]!,
                 seat: seat,
             });
         } else {
             setReturnRoute({
-                returnRoute: scheduledRoutes[index]!,
+                route: scheduledRoutes[index]!,
                 seat: seat,
             });
         }
@@ -144,7 +145,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.COACH}
-                        seatPrice={SeatPrice.COACH * trainSwaps}
+                        seatPrice={SeatPrice.COACH * trainSwaps * passengerCount}
                         onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                     />
                 );
@@ -152,7 +153,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.FIRST_CLASS}
-                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
+                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps * passengerCount}
                         onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                     />
                 );
@@ -160,7 +161,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.SLEEPER}
-                        seatPrice={SeatPrice.SLEEPER * trainSwaps}
+                        seatPrice={SeatPrice.SLEEPER * trainSwaps * passengerCount}
                         onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                     />
                 );
@@ -169,7 +170,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.ROOMLET}
-                        seatPrice={SeatPrice.ROOMLET}
+                        seatPrice={SeatPrice.ROOMLET * trainSwaps * passengerCount}
                         onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                     />
                 );
@@ -324,7 +325,10 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 </Tooltip>
                                             </div>
 
-                                            <BlackArrow />
+                                            <img
+                                                src={arrow}
+                                                alt='black arrow'
+                                            />
 
                                             {/* Trip Duration */}
                                             <Text>{tripDuration}</Text>
@@ -364,7 +368,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.COACH) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.COACH}
-                                                        seatPrice={SeatPrice.COACH * trainSwaps}
+                                                        seatPrice={SeatPrice.COACH * trainSwaps * passengerCount}
                                                         onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                                                     />
                                                 )}
@@ -373,7 +377,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.FIRST_CLASS) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.FIRST_CLASS}
-                                                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
+                                                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps * passengerCount}
                                                         onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                                                     />
                                                 )}
@@ -382,7 +386,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.SLEEPER) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.SLEEPER}
-                                                        seatPrice={SeatPrice.SLEEPER * trainSwaps}
+                                                        seatPrice={SeatPrice.SLEEPER * trainSwaps * passengerCount}
                                                         onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                                                     />
                                                 )}
@@ -391,7 +395,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.ROOMLET) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.ROOMLET}
-                                                        seatPrice={SeatPrice.ROOMLET * trainSwaps}
+                                                        seatPrice={SeatPrice.ROOMLET * trainSwaps * passengerCount}
                                                         onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                                                     />
                                                 )}
