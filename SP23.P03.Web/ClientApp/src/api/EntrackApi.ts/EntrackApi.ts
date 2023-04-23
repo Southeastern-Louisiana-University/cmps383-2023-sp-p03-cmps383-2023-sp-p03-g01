@@ -28,43 +28,50 @@ export interface LoginDto {
 
 export interface SeatDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     /** @format int32 */
-    quantity?: number;
-    type?: string | null;
+    quantity: number;
+    /** @minLength 1 */
+    type: string;
 }
 
 export interface SectionCreateDto {
     /** @format int32 */
-    id?: number;
-    class?: string | null;
+    id: number;
+    /** @minLength 1 */
+    class: string;
     /** @format int32 */
-    capacity?: number;
-    features?: string | null;
+    capacity: number;
+    /** @minLength 1 */
+    features: string;
 }
 
 export interface SectionDto {
     /** @format int32 */
-    id?: number;
-    class?: string | null;
+    id: number;
+    /** @minLength 1 */
+    class: string;
     /** @format int32 */
-    capacity?: number;
-    features?: string | null;
+    capacity: number;
+    /** @minLength 1 */
+    features: string;
     seatList?: SeatDto[] | null;
 }
 
 export interface TrainCreateDto {
     /** @format int32 */
-    id?: number;
-    locomotive?: string | null;
+    id: number;
+    /** @minLength 1 */
+    locomotive: string;
     /** @format int32 */
-    trainRouteId?: number | null;
+    trainRouteId: number;
 }
 
 export interface TrainDto {
     /** @format int32 */
-    id?: number;
-    locomotive?: string | null;
+    id: number;
+    /** @minLength 1 */
+    locomotive: string;
     /** @format int32 */
     trainRouteId?: number | null;
     sections?: SectionDto[] | null;
@@ -72,96 +79,113 @@ export interface TrainDto {
 
 export interface TrainPathDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     /** @format int32 */
-    startingTrainStationId?: number | null;
+    startingTrainStationId: number;
     /** @format int32 */
-    endingTrainStationId?: number | null;
+    endingTrainStationId: number;
 }
 
 export interface TrainRouteCreateDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     /** @format date-time */
-    arrivalTime?: string;
+    arrivalTime: string;
     /** @format date-time */
-    deperatureTime?: string;
+    deperatureTime: string;
     /** @format int32 */
     pathId?: number | null;
     /** @format int32 */
     trainId?: number | null;
-    layover?: string | null;
-    dwellTime?: string | null;
+    /** @minLength 1 */
+    layover: string;
+    /** @minLength 1 */
+    dwellTime: string;
 }
 
 export interface TrainRouteDto {
     /** @format int32 */
-    id?: number;
-    arrivalTime?: string | null;
-    departureTime?: string | null;
-    departureStation?: string | null;
-    arrivalStation?: string | null;
+    id: number;
+    /** @minLength 1 */
+    arrivalTime: string;
+    /** @minLength 1 */
+    departureTime: string;
+    /** @minLength 1 */
+    departureStation: string;
+    /** @minLength 1 */
+    arrivalStation: string;
     /** @format int32 */
-    passengerCount?: number | null;
+    passengerCount: number;
     layover?: string | null;
     dwellTime?: string | null;
 }
 
 export interface TrainRouteTicketCreateDto {
     /** @format int32 */
-    trainRouteId?: number | null;
+    trainRouteId: number;
     /** @format int32 */
-    seatId?: number | null;
+    seatId: number;
     /** @format double */
-    cost?: number;
+    cost: number;
 }
 
 export interface TrainRouteTicketDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     trainRoute?: TrainRouteDto;
-    code?: string | null;
-    seatType?: string | null;
+    /** @minLength 1 */
+    code: string;
+    /** @minLength 1 */
+    seatType: string;
     /** @format double */
-    cost?: number;
+    cost: number;
     /** @format int32 */
     passagerId?: number | null;
 }
 
 export interface TrainScheduledRouteCreateDto {
-    routesId?: number[] | null;
+    routesId: number[];
 }
 
 export interface TrainScheduledRouteTicketDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     /** @format int32 */
     routeId?: number | null;
-    code?: string | null;
-    seatType?: string | null;
+    /** @minLength 1 */
+    code: string;
+    /** @minLength 1 */
+    seatType: string;
     /** @format double */
-    cost?: number;
+    cost: number;
 }
 
 export interface TrainScheduledRoutesDto {
     /** @format int32 */
-    id?: number;
+    id: number;
     routes?: TrainRouteDto[] | null;
     ticket?: TrainScheduledRouteTicketDto[] | null;
-    departureStation?: string | null;
-    arrivalStation?: string | null;
+    /** @minLength 1 */
+    departureStation: string;
+    /** @minLength 1 */
+    arrivalStation: string;
 }
 
 export interface TrainStationDto {
     /** @format int32 */
-    id?: number;
-    name?: string | null;
-    address?: string | null;
+    id: number;
+    /** @minLength 1 */
+    name: string;
+    /** @minLength 1 */
+    address: string;
     /** @format int32 */
-    managerId?: number | null;
-    hours?: string | null;
-    city?: string | null;
-    state?: string | null;
+    managerId: number;
+    /** @minLength 1 */
+    hours: string;
+    /** @minLength 1 */
+    city: string;
+    /** @minLength 1 */
+    state: string;
 }
 
 export interface UserDto {
