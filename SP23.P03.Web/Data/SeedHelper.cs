@@ -1,7 +1,5 @@
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using SP23.P03.Web.Features.Authorization;
 using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
@@ -210,7 +208,7 @@ public static class SeedHelper
                 Hours = "10:00 AM - 6:00 PM",
                 City = "Jackson",
                 State = "MS",
-            }); 
+            });
         dataContext.Set<TrainStation>()
             .Add(new TrainStation
             {
@@ -691,8 +689,9 @@ public static class SeedHelper
         train1Sections.Add(sections.First());
 
         var train2Sections = new List<Section>();
-        if(sections.Find(2)  != null) {
-           train2Sections.Add(sections.Find(2));
+        if (sections.Find(2) != null)
+        {
+            train2Sections.Add(sections.Find(2));
         }
 
         var train3Sections = new List<Section>();
@@ -820,7 +819,7 @@ public static class SeedHelper
                 Capacity = 168,
                 Features = "Coach,First Class,Dining",
                 SeatList = ClassCseats,
-            
+
             });
 
         dataContext.Set<Section>()
@@ -830,7 +829,7 @@ public static class SeedHelper
                 Capacity = 56,
                 Features = "First Class,Dining,Sleeper,Roomlet",
                 SeatList = ClassDseats,
-          
+
 
             });
 
@@ -849,61 +848,61 @@ public static class SeedHelper
             .Add(new Seat
             {
                 Quantity = 168,
-                type = "coach"
+                type = "Coach"
             });
         //class B
         dataContext.Set<Seat>()
              .Add(new Seat
              {
                  Quantity = 84,
-                 type = "coach"
+                 type = "Coach"
              });
 
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 42,
-                type = "first class"
+                type = "First Class"
             });
         //class C
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 42,
-                type = "coach"
+                type = "Coach"
             });
 
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 62,
-                type = "first class"
+                type = "First Class"
             });
         //class D
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 42,
-                type = "coach"
+                type = "Coach"
             });
 
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 10,
-                type = "sleeper"
+                type = "Sleeper"
             });
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 22,
-                type = "first class"
+                type = "First Class"
             });
         dataContext.Set<Seat>()
             .Add(new Seat
             {
                 Quantity = 4,
-                type = "roomlet"
+                type = "Roomlet"
             });
         await dataContext.SaveChangesAsync();
     }
@@ -997,7 +996,7 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 8, 0, 0, 0, DateTimeKind.Utc),      
+                ArrivalTime = new DateTime(2022, 5, 8, 8, 0, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 8, 10, 0, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
@@ -1009,7 +1008,7 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 10,30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 10, 30, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 8, 12, 15, 0, 0, DateTimeKind.Utc),
                 Path = path2,
                 PathId = path2.Id,
@@ -1285,8 +1284,8 @@ public static class SeedHelper
                 Layover = null,
                 PassengerCount = 1,
             });
-        
-        
+
+
 
         await dataContext.SaveChangesAsync();
     }
@@ -1300,7 +1299,7 @@ public static class SeedHelper
         {
             return;
         }
-        var groupofRoutes1 = new List<TrainRoute>();       
+        var groupofRoutes1 = new List<TrainRoute>();
         groupofRoutes1.Add(trainRoutes.First());
         if (trainRoutes.Find(2) != null)
         {

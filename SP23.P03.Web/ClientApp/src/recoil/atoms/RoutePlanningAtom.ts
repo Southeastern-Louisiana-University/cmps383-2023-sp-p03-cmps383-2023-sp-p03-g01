@@ -1,6 +1,7 @@
 import { atom } from 'recoil';
 import { RoutePlanningPage } from '../../models/RoutePlanningPages';
 import { TrainScheduledRoutesDto } from '../../api/EntrackApi.ts/EntrackApi';
+import { SeatType } from '../../models/SeatTypes';
 
 /**
  * The current route planning page `Atom`.
@@ -21,3 +22,21 @@ export const scheduledRoutesState = atom<TrainScheduledRoutesDto[]>({
 /**
  * The selected departure route `Atom`.
  */
+export const departureRouteState = atom<{
+    departureRoute: TrainScheduledRoutesDto;
+    seat: SeatType;
+} | null>({
+    key: 'departureRoute',
+    default: null,
+});
+
+/**
+ * The selected return route `Atom`.
+ */
+export const returnRouteState = atom<{
+    returnRoute: TrainScheduledRoutesDto;
+    seat: SeatType;
+} | null>({
+    key: 'returnRoute',
+    default: null,
+});

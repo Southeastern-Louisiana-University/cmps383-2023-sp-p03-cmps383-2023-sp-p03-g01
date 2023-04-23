@@ -1,14 +1,16 @@
 import { Accordion, Title, Tooltip, ActionIcon, Text, Checkbox } from '@mantine/core';
-import React, { useState } from 'react';
+import React from 'react';
 import { IoMdTrain } from 'react-icons/io';
 import { BlackArrow } from '../../../../../../media/BlackArrow';
 import { COLOR_PALETTE } from '../../../../../../styling/ColorPalette';
 import { formatNumberAsUSD } from '../../../../../../util/formatNumberAsUSD';
-import { SeatType } from '../../../../../../models/SeatTypes';
+import { SeatType, SeatPrice } from '../../../../../../models/SeatTypes';
 import { getBackgroundBasedOnSeat } from '../../../../../../util/getBackgroundBasedOnSeat';
 import { TrainScheduledRoutesDto } from '../../../../../../api/EntrackApi.ts/EntrackApi';
 import dayjs from 'dayjs';
-import { SeatPrice } from '../../../../../../models/SeatPrice';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { departureRouteState, returnRouteState } from '../../../../../../recoil/atoms/RoutePlanningAtom';
+import { departureStationState } from '../../../../../../recoil/atoms/HomePageAtom';
 
 interface SeatSelectButtonProps {
     seatType: SeatType;
@@ -101,17 +103,37 @@ interface RouteSelectionAccordionProps {
  * Selecting routes & seats.
  */
 export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccordionProps): React.ReactElement {
-    const [selectedRoute, setSelectedRoute] = useState<number | undefined>(undefined);
-    const [selectedSeat, setSelectedSeat] = useState<SeatType | undefined>(undefined);
+    const selectedDepartureStation = useRecoilValue(departureStationState);
+    const [departureRoute, setDepartureRoute] = useRecoilState(departureRouteState);
+    const [returnRoute, setReturnRoute] = useRecoilState(returnRouteState);
+
+    const selectedSeat =
+        selectedDepartureStation === scheduledRoutes[0]?.departureStation ? departureRoute?.seat : returnRoute?.seat;
+    const selectedRouteId =
+        selectedDepartureStation === scheduledRoutes[0]?.departureStation
+            ? departureRoute?.departureRoute.id
+            : returnRoute?.returnRoute.id;
 
     const clearSelectedRoute = (): void => {
-        setSelectedRoute(undefined);
-        setSelectedSeat(undefined);
+        if (selectedDepartureStation === scheduledRoutes[0]?.departureStation) {
+            setDepartureRoute(null);
+        } else {
+            setReturnRoute(null);
+        }
     };
 
     const updateSelectedRoute = (index: number, seat: SeatType): void => {
-        setSelectedRoute(index);
-        setSelectedSeat(seat);
+        if (selectedDepartureStation === scheduledRoutes[0]?.departureStation) {
+            setDepartureRoute({
+                departureRoute: scheduledRoutes[index]!,
+                seat: seat,
+            });
+        } else {
+            setReturnRoute({
+                returnRoute: scheduledRoutes[index]!,
+                seat: seat,
+            });
+        }
     };
 
     const renderSelectedSeatButton = (index: number, trainSwaps: number): React.ReactElement => {
@@ -198,27 +220,46 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                             /**
                              * Determine what seats are available on a route.
                              * Loop through each SeatPrice and check if it exists on a ticket for all unique routeIds in the ticket array.
+                             *
+                             * This is probably the least inefficient way to do this, but time is running out.
                              */
+                            const possibleSeats: SeatType[] = [
+                                SeatType.COACH,
+                                SeatType.FIRST_CLASS,
+                                SeatType.SLEEPER,
+                                SeatType.ROOMLET,
+                            ];
                             const availableSeats: SeatType[] = [];
-                            for (const seat in SeatPrice) {
-                                console.log('seat', seat);
+                            const uniqueRouteIds: number[] = route.ticket.reduce((acc, curr) => {
+                                if (curr.routeId === null || curr.routeId === undefined) return acc;
 
-                                const seatExistsOnAllTickets = route.ticket.every((ticketEntry) => {
-                                    console.log('ticketEntry', ticketEntry);
-                                    return ticketEntry.cost === SeatPrice[seat as keyof typeof SeatPrice];
+                                if (!acc.includes(curr.routeId)) {
+                                    acc.push(curr.routeId);
+                                }
+
+                                return acc;
+                            }, [] as number[]);
+                            possibleSeats.forEach((seat) => {
+                                const clearedRouteIds: number[] = [];
+
+                                route.ticket?.forEach((ticket) => {
+                                    if (ticket.routeId === null || ticket.routeId === undefined) return;
+
+                                    if (ticket.seatType === seat) {
+                                        if (!clearedRouteIds.includes(ticket.routeId)) {
+                                            clearedRouteIds.push(ticket.routeId);
+                                        }
+                                    }
                                 });
 
-                                if (seatExistsOnAllTickets) {
-                                    availableSeats.push(seat as SeatType);
+                                if (clearedRouteIds.length === uniqueRouteIds.length) {
+                                    availableSeats.push(seat);
                                 }
-                            }
-
-                            console.log('route', route);
-                            console.log('availableSeats', availableSeats);
+                            });
 
                             return (
                                 <div
-                                    key={index}
+                                    key={route.id}
                                     style={{
                                         display: 'flex',
                                         alignItems: 'center',
@@ -228,8 +269,8 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
 
                                         padding: '0 0.5rem',
 
-                                        border: selectedRoute === index ? '2px solid #000' : 'none',
-                                        borderRadius: selectedRoute === index ? '0.25rem' : 'none',
+                                        border: selectedRouteId === route.id ? '2px solid #000' : 'none',
+                                        borderRadius: selectedRouteId === route.id ? '0.25rem' : 'none',
                                     }}
                                 >
                                     <div
@@ -241,7 +282,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                             height: '100px',
                                         }}
                                     >
-                                        {selectedRoute === index ? (
+                                        {selectedRouteId === route.id ? (
                                             <Checkbox
                                                 checked
                                                 onChange={clearSelectedRoute}
@@ -315,37 +356,45 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                             height: '100px',
                                         }}
                                     >
-                                        {selectedSeat !== undefined && selectedRoute === index ? (
+                                        {selectedSeat !== undefined && selectedRouteId === route.id ? (
                                             renderSelectedSeatButton(index, trainSwaps)
                                         ) : (
                                             <>
                                                 {/* Coach */}
-                                                <SeatSelectButton
-                                                    seatType={SeatType.COACH}
-                                                    seatPrice={SeatPrice.COACH * trainSwaps}
-                                                    onClick={() => updateSelectedRoute(index, SeatType.COACH)}
-                                                />
+                                                {availableSeats.includes(SeatType.COACH) && (
+                                                    <SeatSelectButton
+                                                        seatType={SeatType.COACH}
+                                                        seatPrice={SeatPrice.COACH * trainSwaps}
+                                                        onClick={() => updateSelectedRoute(index, SeatType.COACH)}
+                                                    />
+                                                )}
 
                                                 {/* First Class */}
-                                                <SeatSelectButton
-                                                    seatType={SeatType.FIRST_CLASS}
-                                                    seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
-                                                    onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
-                                                />
+                                                {availableSeats.includes(SeatType.FIRST_CLASS) && (
+                                                    <SeatSelectButton
+                                                        seatType={SeatType.FIRST_CLASS}
+                                                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
+                                                        onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
+                                                    />
+                                                )}
 
                                                 {/* Sleeper */}
-                                                <SeatSelectButton
-                                                    seatType={SeatType.SLEEPER}
-                                                    seatPrice={SeatPrice.SLEEPER * trainSwaps}
-                                                    onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
-                                                />
+                                                {availableSeats.includes(SeatType.SLEEPER) && (
+                                                    <SeatSelectButton
+                                                        seatType={SeatType.SLEEPER}
+                                                        seatPrice={SeatPrice.SLEEPER * trainSwaps}
+                                                        onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
+                                                    />
+                                                )}
 
                                                 {/* Roomlet */}
-                                                <SeatSelectButton
-                                                    seatType={SeatType.ROOMLET}
-                                                    seatPrice={SeatPrice.ROOMLET * trainSwaps}
-                                                    onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
-                                                />
+                                                {availableSeats.includes(SeatType.ROOMLET) && (
+                                                    <SeatSelectButton
+                                                        seatType={SeatType.ROOMLET}
+                                                        seatPrice={SeatPrice.ROOMLET * trainSwaps}
+                                                        onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
+                                                    />
+                                                )}
                                             </>
                                         )}
                                     </div>
