@@ -46,6 +46,17 @@ export function TicketSummaryAccordionItem({ data }: TicketSummaryAccordionItemP
                     <Stack align='center'>
                         {data.route.routes
                             ? data.route.routes.map((route, index) => {
+                                  // Calculate cost of ticket
+                                  const previousTrain = data.route.routes![index - 1];
+                                  const previousTrainWasDifferent = previousTrain
+                                      ? previousTrain.layover
+                                          ? true
+                                          : false
+                                      : true;
+                                  const costOfTicket = previousTrainWasDifferent
+                                      ? getSeatCost(data.seat) * passengerCount
+                                      : 0;
+
                                   const departureTime = dayjs(route.departureTime);
                                   const departureTimeFormatted = departureTime.format('h:mm A');
 
@@ -72,7 +83,7 @@ export function TicketSummaryAccordionItem({ data }: TicketSummaryAccordionItemP
                                               duration={tripDuration}
                                               layover={route.layover ? route.layover : null}
                                               seat={data.seat}
-                                              cost={getSeatCost(data.seat)}
+                                              cost={costOfTicket}
                                               passengerCount={passengerCount}
                                           />
 

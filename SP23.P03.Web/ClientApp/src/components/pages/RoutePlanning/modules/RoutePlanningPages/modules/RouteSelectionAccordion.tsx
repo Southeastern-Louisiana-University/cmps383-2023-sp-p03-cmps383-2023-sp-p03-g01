@@ -145,7 +145,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.COACH}
-                        seatPrice={SeatPrice.COACH * trainSwaps * passengerCount}
+                        seatPrice={SeatPrice.COACH * trainSwaps + (passengerCount + SeatPrice.COACH)}
                         onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                     />
                 );
@@ -153,7 +153,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.FIRST_CLASS}
-                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps * passengerCount}
+                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps + (passengerCount + SeatPrice.FIRST_CLASS)}
                         onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                     />
                 );
@@ -161,7 +161,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.SLEEPER}
-                        seatPrice={SeatPrice.SLEEPER * trainSwaps * passengerCount}
+                        seatPrice={SeatPrice.SLEEPER * trainSwaps + (passengerCount + SeatPrice.SLEEPER)}
                         onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                     />
                 );
@@ -170,7 +170,7 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.ROOMLET}
-                        seatPrice={SeatPrice.ROOMLET * trainSwaps * passengerCount}
+                        seatPrice={SeatPrice.ROOMLET * trainSwaps + (passengerCount + SeatPrice.ROOMLET)}
                         onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                     />
                 );
@@ -368,7 +368,10 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.COACH) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.COACH}
-                                                        seatPrice={SeatPrice.COACH * trainSwaps * passengerCount}
+                                                        seatPrice={
+                                                            SeatPrice.COACH * trainSwaps +
+                                                            passengerCount * SeatPrice.COACH
+                                                        }
                                                         onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                                                     />
                                                 )}
@@ -377,7 +380,10 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.FIRST_CLASS) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.FIRST_CLASS}
-                                                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps * passengerCount}
+                                                        seatPrice={
+                                                            SeatPrice.FIRST_CLASS * trainSwaps +
+                                                            passengerCount * SeatPrice.FIRST_CLASS
+                                                        }
                                                         onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                                                     />
                                                 )}
@@ -386,7 +392,10 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.SLEEPER) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.SLEEPER}
-                                                        seatPrice={SeatPrice.SLEEPER * trainSwaps * passengerCount}
+                                                        seatPrice={
+                                                            SeatPrice.SLEEPER * trainSwaps +
+                                                            passengerCount * SeatPrice.SLEEPER
+                                                        }
                                                         onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                                                     />
                                                 )}
@@ -395,7 +404,10 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                 {availableSeats.includes(SeatType.ROOMLET) && (
                                                     <SeatSelectButton
                                                         seatType={SeatType.ROOMLET}
-                                                        seatPrice={SeatPrice.ROOMLET * trainSwaps * passengerCount}
+                                                        seatPrice={
+                                                            SeatPrice.ROOMLET * trainSwaps +
+                                                            passengerCount * SeatPrice.ROOMLET
+                                                        }
                                                         onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                                                     />
                                                 )}
