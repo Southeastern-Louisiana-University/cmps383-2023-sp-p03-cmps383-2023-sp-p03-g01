@@ -13,8 +13,16 @@ import {
     tripDurationState,
     departureDateState,
 } from '../../../../recoil/atoms/HomePageAtom';
-import { currentRoutePlanningPageState } from '../../../../recoil/atoms/RoutePlanningAtom';
+import {
+    currentRoutePlanningPageState,
+    departureRouteState,
+    returnRouteState,
+} from '../../../../recoil/atoms/RoutePlanningAtom';
 import { formatTheDate } from '../../../../util/formatTheDate';
+import { COLOR_PALETTE } from '../../../../styling/ColorPalette';
+import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { formatNumberAsUSD } from '../../../../util/formatNumberAsUSD';
 
 const StepperContent = (): React.ReactElement => {
     const tripType = useRecoilValue(tripTypeState);
@@ -23,6 +31,12 @@ const StepperContent = (): React.ReactElement => {
     const arrivalStation = useRecoilValue(arrivalStationState);
     const [tripDepartureDate, tripReturnDate] = useRecoilValue(tripDurationState);
     const oneWayDepartureDate = useRecoilValue(departureDateState);
+    const departureRoute = useRecoilValue(departureRouteState);
+    const returnRoute = useRecoilValue(returnRouteState);
+
+    const departureRouteCost = departureRoute ? departureRoute.cost : 0;
+    const returnRouteCost = returnRoute ? returnRoute.cost : 0;
+    const totalCost = departureRouteCost + returnRouteCost;
 
     // Format the dates as Month Day, Year
     const formattedDepartureDate =
@@ -75,6 +89,18 @@ const StepperContent = (): React.ReactElement => {
                     </>
                 ) : null}
             </div>
+
+            {/* Trip Cost */}
+            <div style={ROUTE_PLANNING_PAGE_STYLING.stepperContentBlockStyles}>
+                <span>{formatNumberAsUSD(totalCost)}</span>
+
+                <Avatar
+                    size='md'
+                    radius='xl'
+                >
+                    <AiOutlineShoppingCart />
+                </Avatar>
+            </div>
         </div>
     );
 };
@@ -86,15 +112,16 @@ export function RoutePlanningStepper(): React.ReactElement {
     const currentRoutePlanningPage = useRecoilValue(currentRoutePlanningPageState);
 
     return (
-        <div style={ROUTE_PLANNING_PAGE_STYLING.headerStyles}>
+        <div
+            style={{
+                borderBottom: `1px solid ${COLOR_PALETTE.light.default.borderColor}`,
+
+                paddingBottom: STYLING_VARIABLES.defaultSpacing,
+            }}
+        >
             <Stepper active={currentRoutePlanningPage}>
                 {/* Departure Route(s) */}
                 <Stepper.Step label='Choose Your Routes'>
-                    <StepperContent />
-                </Stepper.Step>
-
-                {/* Seat Selection */}
-                <Stepper.Step label='Select Your Seats'>
                     <StepperContent />
                 </Stepper.Step>
 

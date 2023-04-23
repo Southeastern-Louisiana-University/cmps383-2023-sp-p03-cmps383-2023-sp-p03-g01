@@ -1,34 +1,50 @@
 import React from 'react';
-import { Button } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+import { Button, Flex, Stack, Text, Title } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
+import { useNavigate } from 'react-router-dom';
 import { AppRoutes } from '../../../models/AppRoutes';
-import { TICKET_SUCCESS_PAGE_STYLING } from './TicketSuccessPageStyling';
 
 /**
- * <description here>
+ * The page shown when a user successfully purchases a ticket.
  */
 export function TicketSuccessPage(): React.ReactElement {
     const navigate = useNavigate();
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth);
 
-    const navigateToHomePage = () => {
-        navigate(AppRoutes.HOME);
-    };
-
     return (
-        <div style={TICKET_SUCCESS_PAGE_STYLING.rootStyles}>
-            {/* This is a placeholder that launches the Stripe payment */}
-            <span>Purchase complete! Thanks for riding with EnTrack today!</span>
-            <span>Your confirmation number is: 314159</span>
-            <Button
-                size={componentSize}
-                onClick={navigateToHomePage}
+        <Flex
+            align='center'
+            justify='center'
+            direction='column'
+            style={{ height: '100%' }}
+        >
+            <Title>Thank you for your purchase!</Title>
+            <Text size='lg'>Order Confirmation Number: #5484SET245F</Text>
+
+            <Stack
+                style={{
+                    marginTop: '2rem',
+                }}
             >
-                Home
-            </Button>
-        </div>
+                <Button
+                    size={componentSize}
+                    onClick={() => {
+                        navigate(AppRoutes.VIEW_TICKETS);
+                    }}
+                >
+                    View Ticket
+                </Button>
+                <Button
+                    size={componentSize}
+                    onClick={() => {
+                        navigate(AppRoutes.HOME);
+                    }}
+                >
+                    Home
+                </Button>
+            </Stack>
+        </Flex>
     );
 }

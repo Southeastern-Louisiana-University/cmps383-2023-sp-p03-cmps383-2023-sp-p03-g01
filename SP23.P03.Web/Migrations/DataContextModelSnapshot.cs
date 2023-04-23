@@ -237,7 +237,19 @@ namespace SP23.P03.Web.Migrations
                     b.Property<DateTimeOffset>("DeperatureTime")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("DwellTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Layover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PassengerCount")
+                        .HasColumnType("int");
+
                     b.Property<int?>("PathId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("TrainId")
                         .HasColumnType("int");
 
                     b.Property<int?>("TrainScheduledRoutesId")
@@ -246,6 +258,8 @@ namespace SP23.P03.Web.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("PathId");
+
+                    b.HasIndex("TrainId");
 
                     b.HasIndex("TrainScheduledRoutesId");
 
@@ -300,6 +314,10 @@ namespace SP23.P03.Web.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Hours")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -311,6 +329,10 @@ namespace SP23.P03.Web.Migrations
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -327,13 +349,19 @@ namespace SP23.P03.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("PassagerId")
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PassagerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ScheduledTrainRouteId")
+                    b.Property<string>("SeatType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TrainRouteId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SeatId")
+                    b.Property<int?>("TrainScheduledRoutesId")
                         .HasColumnType("int");
 
                     b.Property<double>("cost")
@@ -343,9 +371,9 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("PassagerId");
 
-                    b.HasIndex("ScheduledTrainRouteId");
+                    b.HasIndex("TrainRouteId");
 
-                    b.HasIndex("SeatId");
+                    b.HasIndex("TrainScheduledRoutesId");
 
                     b.ToTable("TrainRouteTicket");
                 });
@@ -421,10 +449,6 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TrainRouteId")
-                        .IsUnique()
-                        .HasFilter("[TrainRouteId] IS NOT NULL");
-
                     b.ToTable("Train");
                 });
 
@@ -489,11 +513,18 @@ namespace SP23.P03.Web.Migrations
                         .WithMany()
                         .HasForeignKey("PathId");
 
+                    b.HasOne("SP23.P03.Web.Features.Trains.Train", "Train")
+                        .WithMany("Routes")
+                        .HasForeignKey("TrainId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
                     b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", null)
                         .WithMany("Routes")
                         .HasForeignKey("TrainScheduledRoutesId");
 
                     b.Navigation("Path");
+
+                    b.Navigation("Train");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.TrainRoutes.TrainPath", b =>
@@ -526,23 +557,19 @@ namespace SP23.P03.Web.Migrations
                 {
                     b.HasOne("SP23.P03.Web.Features.Authorization.User", "Passager")
                         .WithMany("Tickets")
-                        .HasForeignKey("PassagerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PassagerId");
 
-                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", "ScheduledTrainRoute")
+                    b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "TrainRoute")
                         .WithMany()
-                        .HasForeignKey("ScheduledTrainRouteId");
+                        .HasForeignKey("TrainRouteId");
 
-                    b.HasOne("SP23.P03.Web.Features.Trains.Seat", "Seat")
-                        .WithMany()
-                        .HasForeignKey("SeatId");
+                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("TrainScheduledRoutesId");
 
                     b.Navigation("Passager");
 
-                    b.Navigation("ScheduledTrainRoute");
-
-                    b.Navigation("Seat");
+                    b.Navigation("TrainRoute");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Seat", b =>
@@ -563,16 +590,6 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("Train");
                 });
 
-            modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
-                {
-                    b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "Route")
-                        .WithOne("Train")
-                        .HasForeignKey("SP23.P03.Web.Features.Trains.Train", "TrainRouteId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("Route");
-                });
-
             modelBuilder.Entity("SP23.P03.Web.Features.Authorization.Role", b =>
                 {
                     b.Navigation("Users");
@@ -587,14 +604,11 @@ namespace SP23.P03.Web.Migrations
                     b.Navigation("Tickets");
                 });
 
-            modelBuilder.Entity("SP23.P03.Web.Features.Route.TrainRoute", b =>
-                {
-                    b.Navigation("Train");
-                });
-
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
                 {
                     b.Navigation("Routes");
+
+                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Section", b =>
@@ -604,6 +618,8 @@ namespace SP23.P03.Web.Migrations
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Train", b =>
                 {
+                    b.Navigation("Routes");
+
                     b.Navigation("Sections");
                 });
 #pragma warning restore 612, 618

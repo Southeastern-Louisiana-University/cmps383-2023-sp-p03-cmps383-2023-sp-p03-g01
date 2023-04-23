@@ -5,9 +5,10 @@ import { GrStripe } from 'react-icons/gr';
 import { RoutePlanningPage } from '../../../../../models/RoutePlanningPages';
 import { STYLING_VARIABLES } from '../../../../../styling/StylingVariables';
 import { useViewportSize } from '@mantine/hooks';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { currentRoutePlanningPageState } from '../../../../../recoil/atoms/RoutePlanningAtom';
 import { getMantineComponentSize } from '../../../../../util/getMantineComponentSize';
+import { currentlyLoggedInUserState } from '../../../../../recoil/atoms/AuthenticationAtom';
 
 /**
  * The buttons for the Review & Pay page.
@@ -17,16 +18,17 @@ export function ReviewAndPayButtons(): React.ReactElement {
     const componentSize = getMantineComponentSize(browserWidth);
 
     const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
+    const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
 
     return (
         <>
             <Button
                 size={componentSize}
                 onClick={() => {
-                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                    setCurrentRoutePlanningPage(RoutePlanningPage.DEPARTURE_ROUTE);
                 }}
             >
-                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Seat Selection
+                <AiOutlineArrowLeft style={{ marginRight: STYLING_VARIABLES.defaultSpacing }} /> Back to Route Selection
             </Button>
 
             <form
@@ -36,8 +38,15 @@ export function ReviewAndPayButtons(): React.ReactElement {
                 <Button
                     type='submit'
                     size={componentSize}
+                    disabled={!currentlyLoggedInUser}
                 >
-                    Checkout with Stripe <GrStripe style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
+                    {currentlyLoggedInUser ? (
+                        <>
+                            Checkout with Stripe <GrStripe style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />{' '}
+                        </>
+                    ) : (
+                        <>Sign In to Checkout</>
+                    )}
                 </Button>
             </form>
         </>

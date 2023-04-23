@@ -7,8 +7,12 @@ import { AppRoutes } from '../../../../../models/AppRoutes';
 import { useNavigate } from 'react-router-dom';
 import { useViewportSize } from '@mantine/hooks';
 import { getMantineComponentSize } from '../../../../../util/getMantineComponentSize';
-import { useSetRecoilState } from 'recoil';
-import { currentRoutePlanningPageState } from '../../../../../recoil/atoms/RoutePlanningAtom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import {
+    currentRoutePlanningPageState,
+    departureRouteState,
+    returnRouteState,
+} from '../../../../../recoil/atoms/RoutePlanningAtom';
 
 /**
  * The buttons for the Departure Routes page.
@@ -18,6 +22,8 @@ export function DepartureRoutesButtons(): React.ReactElement {
     const { width: browserWidth } = useViewportSize();
     const componentSize = getMantineComponentSize(browserWidth);
 
+    const departureRoute = useRecoilValue(departureRouteState);
+    const returnRoute = useRecoilValue(returnRouteState);
     const setCurrentRoutePlanningPage = useSetRecoilState(currentRoutePlanningPageState);
 
     const navigateToHome = (): void => {
@@ -36,10 +42,11 @@ export function DepartureRoutesButtons(): React.ReactElement {
             <Button
                 size={componentSize}
                 onClick={() => {
-                    setCurrentRoutePlanningPage(RoutePlanningPage.SEAT_SELECTION);
+                    setCurrentRoutePlanningPage(RoutePlanningPage.REVIEW_AND_PAY);
                 }}
+                disabled={!departureRoute || !returnRoute}
             >
-                Continue to Seat Selection{' '}
+                Continue to Review & Pay{' '}
                 <AiOutlineArrowRight style={{ marginLeft: STYLING_VARIABLES.defaultSpacing }} />
             </Button>
         </>

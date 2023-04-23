@@ -18,5 +18,6 @@ public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
             .HasOne(x => x.User)
             .WithMany(x => x.Roles)
             .HasForeignKey(x => x.UserId);
+
     }
 }

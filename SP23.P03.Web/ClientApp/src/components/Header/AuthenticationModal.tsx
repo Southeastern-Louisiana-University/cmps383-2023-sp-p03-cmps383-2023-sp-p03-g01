@@ -1,14 +1,14 @@
-import { Button, LoadingOverlay, Modal, TextInput } from '@mantine/core';
+import { Button, LoadingOverlay, Modal, PasswordInput, Text, TextInput } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { currentlyLoggedInUserState } from '../../../recoil/atoms/AuthenticationAtom';
-import { COLOR_PALETTE } from '../../../styling/ColorPalette';
-import { callATimeout } from '../../../util/callATimeout';
-import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
-import { useDebounce } from '../../../util/useDebounce';
-import { validateUsername, validatePassword, validateName, validateEmail } from '../../../util/ValidationFunctions';
-import { AUTHENTICATION_MODAL_STYLING } from './AuthenticationModalStyling';
+import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
+import { COLOR_PALETTE } from '../../styling/ColorPalette';
+import { getMantineComponentSize } from '../../util/getMantineComponentSize';
+import { useDebounce } from '../../util/useDebounce';
+import { validatePassword, validateName, validateEmail } from '../../util/ValidationFunctions';
+import { STYLING_VARIABLES } from '../../styling/StylingVariables';
+import API from '../../util/entrackApi';
 
 interface AuthenticationModalProps {
     opened: boolean;
@@ -29,10 +29,6 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
     const setCurrentlyLoggedInUser = useSetRecoilState(currentlyLoggedInUserState);
 
     // Local State
-    const [username, setUsername] = useState('');
-    const [usernameErrorMessage, setUsernameErrorMessage] = useState<string | undefined>(undefined);
-    const debouncedUsername = useDebounce(username, 500);
-
     const [password, setPassword] = useState('');
     const [passwordErrorMessage, setPasswordErrorMessage] = useState<string | undefined>(undefined);
     const debouncedPassword = useDebounce(password, 500);
@@ -51,19 +47,6 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
 
     const [isMakingApiCall, setIsMakingApiCall] = useState(false);
     const [userHasAnAccount, setUserHasAnAccount] = useState(true);
-
-    /* Check validity of username as user types */
-    useEffect(() => {
-        if (debouncedUsername.length > 0) {
-            const usernameIsValid = validateUsername(debouncedUsername);
-
-            if (usernameIsValid !== true) {
-                setUsernameErrorMessage(usernameIsValid);
-            } else {
-                setUsernameErrorMessage(undefined);
-            }
-        }
-    }, [debouncedUsername]);
 
     /* Check validity of password as user types */
     useEffect(() => {
@@ -115,10 +98,6 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
         }
     }, [debouncedRepeatedPassword, password]);
 
-    const updateUsername = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
-    };
-
     const updatePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(event.target.value);
     };
@@ -139,9 +118,25 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
         setUserHasAnAccount(!userHasAnAccount);
     };
 
+    const resetErrorMessages = () => {
+        setPasswordErrorMessage(undefined);
+        setRepeatedPasswordErrorMessage(undefined);
+        setNameErrorMessage(undefined);
+        setEmailErrorMessage(undefined);
+    };
+
+    const resetFormValues = () => {
+        setPassword('');
+        setRepeatedPassword('');
+        setName('');
+        setEmail('');
+    };
+
     const closeModalAndResetState = () => {
         onClose();
         setUserHasAnAccount(true);
+        resetErrorMessages();
+        resetFormValues();
     };
 
     /**
@@ -150,12 +145,12 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
      * @param mode The form mode to validate. Either 'signup' or 'login'.
      */
     const validateInput = (mode: 'signup' | 'login') => {
-        // Both need username and password
-        const usernameIsValid = validateUsername(username);
+        // Both need email and password
+        const emailIsValid = validateEmail(email);
         const passwordIsValid = validatePassword(password);
 
-        if (usernameIsValid !== true) {
-            setUsernameErrorMessage(usernameIsValid);
+        if (emailIsValid !== true) {
+            setEmailErrorMessage(emailIsValid);
         }
 
         if (passwordIsValid !== true) {
@@ -180,7 +175,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
             }
 
             if (
-                usernameIsValid === true &&
+                emailIsValid === true &&
                 emailIsValid === true &&
                 passwordIsValid === true &&
                 repeatedPasswordIsValid === true &&
@@ -190,38 +185,62 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
             }
         }
 
-        if (usernameIsValid === true && passwordIsValid === true) {
+        if (emailIsValid === true && passwordIsValid === true) {
             return true;
         }
 
         return false;
     };
 
-    const resetErrorMessages = () => {
-        setUsernameErrorMessage(undefined);
-        setPasswordErrorMessage(undefined);
-        setRepeatedPasswordErrorMessage(undefined);
-        setNameErrorMessage(undefined);
-        setEmailErrorMessage(undefined);
-    };
-
     const validateInputAndAuthenticateUser = async (mode: 'signup' | 'login') => {
         const inputIsValid = validateInput(mode);
 
-        if (inputIsValid) {
+        if (!inputIsValid) {
+            return;
+        }
+
+        if (mode === 'login') {
             setIsMakingApiCall(true);
             resetErrorMessages();
 
-            // TODO: Replace with API call
-            // Simulate a delay in the API call
-            await callATimeout(2000);
+            API.api
+                .authenticationLoginCreate({
+                    userName: email,
+                    password,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
 
-            setCurrentlyLoggedInUser(username);
+                    setIsMakingApiCall(false);
+                });
+        } else {
+            setIsMakingApiCall(true);
+            resetErrorMessages();
 
-            closeModalAndResetState();
+            API.api
+                .usersCreate({
+                    roles: ['User'],
+                    password,
+                    userName: email,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
+
+                    setIsMakingApiCall(false);
+                });
         }
 
-        setIsMakingApiCall(false);
+        closeModalAndResetState();
     };
 
     return (
@@ -237,22 +256,34 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                 loaderProps={{ color: COLOR_PALETTE.light.default.blueNcs }}
             />
 
-            <div style={AUTHENTICATION_MODAL_STYLING.rootStyles}>
+            <div
+                style={{
+                    display: 'grid',
+                    placeItems: 'center',
+                    gap: STYLING_VARIABLES.defaultSpacing,
+
+                    fontSize: STYLING_VARIABLES.defaultBodyFontSize,
+                }}
+            >
                 {userHasAnAccount ? (
                     <>
                         {/* Form Fields */}
                         <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
-                            placeholder='Username'
-                            label='Username'
+                            placeholder='Email'
+                            label='Email'
                             withAsterisk
-                            value={username}
-                            onChange={updateUsername}
-                            error={usernameErrorMessage}
+                            value={email}
+                            onChange={updateEmail}
+                            error={emailErrorMessage}
                         />
-                        <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                        <PasswordInput
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
                             placeholder='Password'
                             label='Password'
@@ -264,20 +295,23 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
 
                         {/* Login Button */}
                         <Button
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
                             onClick={() => {
                                 validateInputAndAuthenticateUser('login');
                             }}
                         >
-                            Login
+                            Sign In
                         </Button>
 
-                        {/* Create An Account Section */}
-                        <span>Don't have an account?</span>
+                        <Text>Don't have an account?</Text>
 
                         <Button
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
                             onClick={toggleUserHasAnAccount}
                         >
@@ -287,47 +321,9 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                 ) : (
                     <>
                         <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
-                            size={componentSize}
-                            placeholder='Username'
-                            label='Username'
-                            withAsterisk
-                            value={username}
-                            onChange={updateUsername}
-                            error={usernameErrorMessage}
-                        />
-                        <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
-                            size={componentSize}
-                            placeholder='Email'
-                            label='Email'
-                            withAsterisk
-                            value={email}
-                            onChange={updateEmail}
-                            error={emailErrorMessage}
-                        />
-                        <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
-                            size={componentSize}
-                            placeholder='Password'
-                            label='Password'
-                            withAsterisk
-                            value={password}
-                            onChange={updatePassword}
-                            error={passwordErrorMessage}
-                        />
-                        <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
-                            size={componentSize}
-                            placeholder='Repeat Password'
-                            label='Repeat Password'
-                            withAsterisk
-                            value={repeatedPassword}
-                            onChange={updateRepeatedPassword}
-                            error={repeatedPasswordErrorMessage}
-                        />
-                        <TextInput
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
                             placeholder='Name'
                             label='Name'
@@ -336,15 +332,65 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                             onChange={updateName}
                             error={nameErrorMessage}
                         />
+                        <TextInput
+                            style={{
+                                width: '100%',
+                            }}
+                            size={componentSize}
+                            placeholder='Email'
+                            label='Email'
+                            withAsterisk
+                            value={email}
+                            onChange={updateEmail}
+                            error={emailErrorMessage}
+                        />
+                        <PasswordInput
+                            style={{
+                                width: '100%',
+                            }}
+                            size={componentSize}
+                            placeholder='Password'
+                            label='Password'
+                            withAsterisk
+                            value={password}
+                            onChange={updatePassword}
+                            error={passwordErrorMessage}
+                        />
+                        <PasswordInput
+                            style={{
+                                width: '100%',
+                            }}
+                            size={componentSize}
+                            placeholder='Repeat Password'
+                            label='Repeat Password'
+                            withAsterisk
+                            value={repeatedPassword}
+                            onChange={updateRepeatedPassword}
+                            error={repeatedPasswordErrorMessage}
+                        />
 
                         <Button
-                            style={AUTHENTICATION_MODAL_STYLING.fullWidth}
+                            style={{
+                                width: '100%',
+                            }}
                             size={componentSize}
                             onClick={() => {
                                 validateInputAndAuthenticateUser('signup');
                             }}
                         >
                             Create An Account
+                        </Button>
+
+                        <Text>Already have an account?</Text>
+
+                        <Button
+                            style={{
+                                width: '100%',
+                            }}
+                            size={componentSize}
+                            onClick={toggleUserHasAnAccount}
+                        >
+                            Back to Sign In
                         </Button>
                     </>
                 )}

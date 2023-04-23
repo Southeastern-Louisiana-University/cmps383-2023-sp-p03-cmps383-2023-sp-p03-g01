@@ -1,7 +1,7 @@
 import React from 'react';
 
 /**
- * <description here>
+ * The account page.
  */
 export function AccountPage(): React.ReactElement {
     return (
