@@ -191,7 +191,7 @@ public class UsersControllerTests
         var loginAsThatUser = await webClient.PostAsJsonAsync("/api/authentication/login", new LoginDto
         {
             UserName = target.UserName,
-            Password = target.Password
+            Password = target.Password,
         });
         var loginResult = await loginAsThatUser.AssertLoginFunctions();
         loginResult.Should().BeEquivalentTo(createdUser, "we expect our created user to match our login");

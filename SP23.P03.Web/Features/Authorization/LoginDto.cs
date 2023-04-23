@@ -1,3 +1,4 @@
+using SP23.P03.Web.Features.TrainTicket;
 using System.ComponentModel.DataAnnotations;
 
 namespace SP23.P03.Web.Features.Authorization;
@@ -9,4 +10,5 @@ public class LoginDto
 
     [Required]
     public string Password { get; set; } = string.Empty;
+    public IEnumerable<TrainRouteTicketDto>? Tickets { get; set; }
 }

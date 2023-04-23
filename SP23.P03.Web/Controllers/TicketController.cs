@@ -6,6 +6,7 @@ using SP23.P03.Web.Features.Route;
 using SP23.P03.Web.Features.ScheduledRoutes;
 using SP23.P03.Web.Features.Trains;
 using SP23.P03.Web.Features.TrainTicket;
+using System.Globalization;
 
 namespace SP23.P03.Web.Controllers
 {
@@ -15,7 +16,7 @@ namespace SP23.P03.Web.Controllers
     public class TicketController : ControllerBase
     {
         private readonly DbSet<TrainRouteTicket> tickets;
-        private readonly DbSet<TrainScheduledRoutes> scheduledRoutes;
+        private readonly DbSet<TrainRoute> Routes;
         private readonly DbSet<Seat> seats;
         private readonly DataContext dataContext;
 
@@ -23,7 +24,7 @@ namespace SP23.P03.Web.Controllers
         {
             this.dataContext = dataContext;
             tickets = dataContext.Set<TrainRouteTicket>();
-            scheduledRoutes = dataContext.Set<TrainScheduledRoutes>();
+            Routes = dataContext.Set<TrainRoute>();
             seats = dataContext.Set<Seat>();
         }
         private static IQueryable<TrainRouteTicketDto> GetTicketDtos(IQueryable<TrainRouteTicket> tickets)
@@ -32,17 +33,14 @@ namespace SP23.P03.Web.Controllers
                 .Select(x => new TrainRouteTicketDto
                 {
                     Id = x.Id,
-                    ScheduledTrainRoute = new TrainScheduledRoutesDto
-                    {
-                        Id = x.ScheduledTrainRoute.Id,
-                        Routes = x.ScheduledTrainRoute.Routes.Select(x => new TrainRouteDto
+                    TrainRoute =  new TrainRouteDto
                         {
-                            Id = x.Id,
-                            ArrivalTime = x.ArrivalTime,
-                            DeperatureTime = x.DeperatureTime,
-                            PathId = x.PathId,
-                            TrainId = x.Train.Id,
-                        }),
+                            Id = x.TrainRoute.Id,
+                            ArrivalTime = x.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                            DepartureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                            ArrivalStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                            DepartureStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
+                            PassengerCount = x.TrainRoute.PassengerCount,
                     },
                     SeatType = x.SeatType,
                     cost = x.cost,
@@ -74,13 +72,13 @@ namespace SP23.P03.Web.Controllers
         {
             var seat = seats.Where(x => x.Id == dto.SeatId).FirstOrDefault();
 
-            var scheduledTrainRoute = scheduledRoutes.Where(x => x.Id == dto.ScheduledTrainRouteId).FirstOrDefault();
+            var TrainRoute = Routes.Where(x => x.Id == dto.TrainRouteId).FirstOrDefault();
             
             if (seat == null)
             {
                 return BadRequest();
             }
-            if (scheduledTrainRoute == null)
+            if (TrainRoute == null)
             {
                 return BadRequest();
             }
@@ -89,7 +87,7 @@ namespace SP23.P03.Web.Controllers
             {
                 cost = dto.cost,
                 SeatType = seat.type,
-                ScheduledTrainRoute = scheduledTrainRoute,
+                TrainRoute = TrainRoute,
                 Passager = null,
                 PassagerId = null,
             };
@@ -102,17 +100,15 @@ namespace SP23.P03.Web.Controllers
                 cost = ticket.cost,
                 Id = ticket.Id,
                 PassagerId = ticket.PassagerId,
-                ScheduledTrainRoute = new TrainScheduledRoutesDto
+                TrainRoute = new TrainRouteDto
                 {
-                    Id = ticket.ScheduledTrainRoute.Id,
-                    Routes = ticket.ScheduledTrainRoute.Routes.Select(x => new TrainRouteDto
-                    {
-                        Id = x.Id,
-                        ArrivalTime = x.ArrivalTime,
-                        DeperatureTime = x.DeperatureTime,
-                        PathId = x.PathId,
-                        TrainId = x.Train.Id,
-                    }),
+                    Id = ticket.TrainRoute.Id,
+                    ArrivalTime = ticket.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    DepartureTime = ticket.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = ticket.TrainRoute.Path.EndingTrainStation.City + ", " + ticket.TrainRoute.Path.EndingTrainStation.State,
+                    DepartureStation = ticket.TrainRoute.Path.StartingTrainStation.City + ", " + ticket.TrainRoute.Path.StartingTrainStation.State,
+                    PassengerCount = ticket.TrainRoute.PassengerCount,
+
                 },
                 SeatType = ticket.SeatType,
             };
@@ -124,13 +120,13 @@ namespace SP23.P03.Web.Controllers
         {
             var seat = seats.Where(x => x.Id == dto.SeatId).FirstOrDefault();
 
-            var scheduledTrainRoute = scheduledRoutes.Where(x => x.Id == dto.ScheduledTrainRouteId).FirstOrDefault();
+            var TrainRoute = Routes.Where(x => x.Id == dto.TrainRouteId).FirstOrDefault();
 
             if (seat == null)
             {
                 return BadRequest();
             }
-            if (scheduledTrainRoute == null)
+            if (TrainRoute == null)
             {
                 return BadRequest();
             }
@@ -142,7 +138,7 @@ namespace SP23.P03.Web.Controllers
                 return NotFound();
             }
 
-            ticket.ScheduledTrainRoute = scheduledTrainRoute;
+            ticket.TrainRoute = TrainRoute;
             ticket.SeatType = seat.type;
             ticket.cost = dto.cost;
 

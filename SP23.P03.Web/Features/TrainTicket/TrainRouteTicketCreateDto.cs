@@ -5,7 +5,7 @@ namespace SP23.P03.Web.Features.TrainTicket
 {
     public class TrainRouteTicketCreateDto
     {
-        public int? ScheduledTrainRouteId { get; set; }
+        public int? TrainRouteId { get; set; }
         public int? SeatId { get; set; }
         public double cost { get; set; }
     }
