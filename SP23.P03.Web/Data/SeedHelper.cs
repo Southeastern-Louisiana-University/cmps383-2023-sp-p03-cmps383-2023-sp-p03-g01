@@ -1135,7 +1135,7 @@ public static class SeedHelper
                 Path = path6,
                 PathId = path6.Id,
                 Train = train3,
-                DwellTime = "15 null",
+                DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
             });
@@ -1245,18 +1245,18 @@ public static class SeedHelper
                 Path = path10,
                 PathId = path10.Id,
                 Train = train2,
-                DwellTime = "15 min",
-                Layover = null,
+                DwellTime = null,
+                Layover = "30 min",
                 PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 14, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 15, 00, 0, 0, DateTimeKind.Utc),
                 Path = path9,
                 PathId = path9.Id,
-                Train = train2,
+                Train = train3,
                 DwellTime = "15 min",
                 Layover = null,
                 PassengerCount = 1,
@@ -1268,7 +1268,7 @@ public static class SeedHelper
                 DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
                 Path = path8,
                 PathId = path8.Id,
-                Train = train2,
+                Train = train3,
                 DwellTime = "30 min",
                 Layover = null,
                 PassengerCount = 1,
@@ -1285,6 +1285,7 @@ public static class SeedHelper
                 Layover = null,
                 PassengerCount = 1,
             });
+        
         
 
         await dataContext.SaveChangesAsync();
@@ -1321,31 +1322,83 @@ public static class SeedHelper
         {
             groupofRoutes1.Add(trainRoutes.Find(6));
         }
-        
+
         var groupofRoutes2 = new List<TrainRoute>();
+        if (trainRoutes.Find(7) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(7));
+        }
+        if (trainRoutes.Find(8) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(8));
+        }
+        if (trainRoutes.Find(9) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(9));
+        }
+        if (trainRoutes.Find(10) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(10));
+        }
+        if (trainRoutes.Find(11) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(11));
+        }
+        if (trainRoutes.Find(12) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(12));
+        }
+
+        var groupofRoutes3 = new List<TrainRoute>();
         if (trainRoutes.Find(13) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(13));
+            groupofRoutes3.Add(trainRoutes.Find(13));
         }
         if (trainRoutes.Find(14) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(14));
+            groupofRoutes3.Add(trainRoutes.Find(14));
         }
         if (trainRoutes.Find(15) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(15));
+            groupofRoutes3.Add(trainRoutes.Find(15));
         }
         if (trainRoutes.Find(16) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(16));
+            groupofRoutes3.Add(trainRoutes.Find(16));
         }
         if (trainRoutes.Find(17) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(17));
+            groupofRoutes3.Add(trainRoutes.Find(17));
         }
         if (trainRoutes.Find(18) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(18));
+            groupofRoutes3.Add(trainRoutes.Find(18));
+        }
+
+        var groupofRoutes4 = new List<TrainRoute>();
+        if (trainRoutes.Find(19) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(19));
+        }
+        if (trainRoutes.Find(20) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(20));
+        }
+        if (trainRoutes.Find(21) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(21));
+        }
+        if (trainRoutes.Find(22) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(22));
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(23));
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(23));
         }
 
         var groupofTickets1 = new List<TrainRouteTicket>();
@@ -1461,6 +1514,122 @@ public static class SeedHelper
             groupofTickets2.Add(tickets.Find(28));
         }
 
+        var groupofTickets3 = new List<TrainRouteTicket>();
+        if (tickets.Find(29) != null)
+        {
+            groupofTickets3.Add(tickets.Find(29));
+        }
+        if (tickets.Find(30) != null)
+        {
+            groupofTickets3.Add(tickets.Find(30));
+        }
+        if (tickets.Find(31) != null)
+        {
+            groupofTickets3.Add(tickets.Find(31));
+        }
+        if (tickets.Find(32) != null)
+        {
+            groupofTickets3.Add(tickets.Find(32));
+        }
+        if (tickets.Find(33) != null)
+        {
+            groupofTickets3.Add(tickets.Find(33));
+        }
+        if (tickets.Find(34) != null)
+        {
+            groupofTickets3.Add(tickets.Find(34));
+        }
+        if (tickets.Find(35) != null)
+        {
+            groupofTickets3.Add(tickets.Find(35));
+        }
+        if (tickets.Find(36) != null)
+        {
+            groupofTickets3.Add(tickets.Find(36));
+        }
+        if (tickets.Find(37) != null)
+        {
+            groupofTickets3.Add(tickets.Find(37));
+        }
+        if (tickets.Find(38) != null)
+        {
+            groupofTickets3.Add(tickets.Find(38));
+        }
+        if (tickets.Find(39) != null)
+        {
+            groupofTickets3.Add(tickets.Find(39));
+        }
+        if (tickets.Find(40) != null)
+        {
+            groupofTickets3.Add(tickets.Find(40));
+        }
+        if (tickets.Find(41) != null)
+        {
+            groupofTickets3.Add(tickets.Find(41));
+        }
+        if (tickets.Find(42) != null)
+        {
+            groupofTickets3.Add(tickets.Find(42));
+        }
+
+        var groupofTickets4 = new List<TrainRouteTicket>();
+        if (tickets.Find(43) != null)
+        {
+            groupofTickets4.Add(tickets.Find(43));
+        }
+        if (tickets.Find(44) != null)
+        {
+            groupofTickets4.Add(tickets.Find(44));
+        }
+        if (tickets.Find(45) != null)
+        {
+            groupofTickets4.Add(tickets.Find(45));
+        }
+        if (tickets.Find(46) != null)
+        {
+            groupofTickets4.Add(tickets.Find(46));
+        }
+        if (tickets.Find(47) != null)
+        {
+            groupofTickets4.Add(tickets.Find(47));
+        }
+        if (tickets.Find(48) != null)
+        {
+            groupofTickets4.Add(tickets.Find(48));
+        }
+        if (tickets.Find(49) != null)
+        {
+            groupofTickets4.Add(tickets.Find(49));
+        }
+        if (tickets.Find(50) != null)
+        {
+            groupofTickets4.Add(tickets.Find(50));
+        }
+        if (tickets.Find(51) != null)
+        {
+            groupofTickets4.Add(tickets.Find(51));
+        }
+        if (tickets.Find(52) != null)
+        {
+            groupofTickets4.Add(tickets.Find(52));
+        }
+        if (tickets.Find(53) != null)
+        {
+            groupofTickets4.Add(tickets.Find(53));
+        }
+        if (tickets.Find(54) != null)
+        {
+            groupofTickets4.Add(tickets.Find(54));
+        }
+        if (tickets.Find(55) != null)
+        {
+            groupofTickets4.Add(tickets.Find(55));
+        }
+        if (tickets.Find(56) != null)
+        {
+            groupofTickets4.Add(tickets.Find(56));
+        }
+
         dataContext.Set<TrainScheduledRoutes>()
             .Add(new TrainScheduledRoutes
             {
@@ -1472,6 +1641,18 @@ public static class SeedHelper
             {
                 Routes = groupofRoutes2,
                 Tickets = groupofTickets2,
+            });
+        dataContext.Set<TrainScheduledRoutes>()
+            .Add(new TrainScheduledRoutes
+            {
+                Routes = groupofRoutes3,
+                Tickets = groupofTickets3,
+            });
+        dataContext.Set<TrainScheduledRoutes>()
+            .Add(new TrainScheduledRoutes
+            {
+                Routes = groupofRoutes4,
+                Tickets = groupofTickets4,
             });
 
         await dataContext.SaveChangesAsync();
@@ -1488,12 +1669,27 @@ public static class SeedHelper
         var Route4 = new TrainRoute();
         var Route5 = new TrainRoute();
         var Route6 = new TrainRoute();
+
+        var Route7 = new TrainRoute();
+        var Route8 = new TrainRoute();
+        var Route9 = new TrainRoute();
+        var Route10 = new TrainRoute();
+        var Route11 = new TrainRoute();
+        var Route12 = new TrainRoute();
+
         var Route13 = new TrainRoute();
         var Route14 = new TrainRoute();
         var Route15 = new TrainRoute();
         var Route16 = new TrainRoute();
         var Route17 = new TrainRoute();
         var Route18 = new TrainRoute();
+
+        var Route19 = new TrainRoute();
+        var Route20 = new TrainRoute();
+        var Route21 = new TrainRoute();
+        var Route22 = new TrainRoute();
+        var Route23 = new TrainRoute();
+        var Route24 = new TrainRoute();
 
         var seat1 = new Seat();
         var seat2 = new Seat();
@@ -1562,6 +1758,34 @@ public static class SeedHelper
         {
             Route6 = trainRoutes.Find(6);
         }
+
+
+        if (trainRoutes.Find(7) != null)
+        {
+            Route7 = trainRoutes.Find(7);
+        }
+        if (trainRoutes.Find(8) != null)
+        {
+            Route8 = trainRoutes.Find(8);
+        }
+        if (trainRoutes.Find(9) != null)
+        {
+            Route9 = trainRoutes.Find(9);
+        }
+        if (trainRoutes.Find(10) != null)
+        {
+            Route10 = trainRoutes.Find(10);
+        }
+        if (trainRoutes.Find(11) != null)
+        {
+            Route11 = trainRoutes.Find(11);
+        }
+        if (trainRoutes.Find(12) != null)
+        {
+            Route12 = trainRoutes.Find(12);
+        }
+
+
         if (trainRoutes.Find(13) != null)
         {
             Route13 = trainRoutes.Find(13);
@@ -1585,6 +1809,32 @@ public static class SeedHelper
         if (trainRoutes.Find(18) != null)
         {
             Route18 = trainRoutes.Find(18);
+        }
+
+
+        if (trainRoutes.Find(19) != null)
+        {
+            Route19 = trainRoutes.Find(19);
+        }
+        if (trainRoutes.Find(20) != null)
+        {
+            Route20 = trainRoutes.Find(20);
+        }
+        if (trainRoutes.Find(21) != null)
+        {
+            Route21 = trainRoutes.Find(21);
+        }
+        if (trainRoutes.Find(22) != null)
+        {
+            Route22 = trainRoutes.Find(22);
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            Route23 = trainRoutes.Find(23);
+        }
+        if (trainRoutes.Find(24) != null)
+        {
+            Route24 = trainRoutes.Find(24);
         }
 
         if (await tickets.AnyAsync())
@@ -1706,6 +1956,122 @@ public static class SeedHelper
                 SeatType = seat3.type,
                 Code = "BCDEFGHIJK",
             });
+        //May 8 Route 2
+        //Train 4
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 52.00,
+                TrainRoute = Route7,
+                SeatType = seat6.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 152.00,
+                TrainRoute = Route7,
+                SeatType = seat7.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102.00,
+                TrainRoute = Route7,
+                SeatType = seat8.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 204.00,
+                TrainRoute = Route7,
+                SeatType = seat9.type,
+                Code = "EFGHIJKlMN",
+            });
+        //Train 2
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route8,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route8,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route9,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route9,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route10,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route10,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        //Train 3
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route11,
+               SeatType = seat4.type,
+               Code = "GHIJKlMNOP",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route11,
+                SeatType = seat5.type,
+                Code = "GHIJKlMNOP",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route12,
+               SeatType = seat4.type,
+               Code = "GHIJKlMNOP",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route12,
+                SeatType = seat5.type,
+                Code = "GHIJKlMNOP",
+            });
 
 
         //May 14 Route 1
@@ -1823,6 +2189,126 @@ public static class SeedHelper
                 TrainRoute = Route18,
                 SeatType = seat9.type,
                 Code = "DEFGHIJKlM",
+            });
+
+
+        //May 14 Route 2
+        //Train 2
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route19,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route19,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route20,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route20,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route21,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route21,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        // Train 3
+
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route22,
+               SeatType = seat4.type,
+               Code = "IJKlMNOPQR",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route22,
+                SeatType = seat5.type,
+                Code = "IJKlMNOPQR",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route23,
+               SeatType = seat4.type,
+               Code = "IJKlMNOPQR",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route23,
+                SeatType = seat5.type,
+                Code = "IJKlMNOPQR",
+            });
+
+        //Train 4
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 52.00,
+                TrainRoute = Route24,
+                SeatType = seat6.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 152.00,
+                TrainRoute = Route24,
+                SeatType = seat7.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102.00,
+                TrainRoute = Route24,
+                SeatType = seat8.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 204.00,
+                TrainRoute = Route24,
+                SeatType = seat9.type,
+                Code = "JKlMNOPQRS",
             });
 
         await dataContext.SaveChangesAsync();

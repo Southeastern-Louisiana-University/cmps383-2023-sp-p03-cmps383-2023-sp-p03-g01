@@ -41,6 +41,8 @@ namespace SP23.P03.Web.Controllers
                             ArrivalStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
                             DepartureStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
                             PassengerCount = x.TrainRoute.PassengerCount,
+                            Layover = x.TrainRoute.Layover,
+                            DwellTime = x.TrainRoute.DwellTime,
                     },
                     SeatType = x.SeatType,
                     cost = x.cost,
