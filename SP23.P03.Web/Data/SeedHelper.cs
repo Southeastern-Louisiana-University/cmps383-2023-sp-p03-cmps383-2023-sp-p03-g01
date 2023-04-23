@@ -109,7 +109,7 @@ public static class SeedHelper
         dataContext.Set<TrainStation>()
             .Add(new TrainStation
             {
-                Name = "New Orlean",
+                Name = "New Orleans",
                 Address = "1001 Loyola Avenue",
                 Hours = "5:00 AM - 10:00 PM",
                 City = "New Orlean",
@@ -152,7 +152,7 @@ public static class SeedHelper
                 Name = "Laurel",
                 Address = "230 North Maple Street",
                 Hours = "10:00 AM - 6:00 PM",
-                City = "Hattiesburg",
+                City = "Laurel",
                 State = "MS",
             });
 
@@ -162,7 +162,7 @@ public static class SeedHelper
                 Name = "Meridian",
                 Address = "1901 Front Street",
                 Hours = "10:00 AM - 6:00 PM",
-                City = "Hattiesburg",
+                City = "Meridian",
                 State = "MS",
             });
         dataContext.Set<TrainStation>()
@@ -198,7 +198,7 @@ public static class SeedHelper
                 Name = "Placeholder",
                 Address = "1901 Front Street",
                 Hours = "10:00 AM - 6:00 PM",
-                City = "Hazelhurst",
+                City = "Hazlehurst",
                 State = "MS",
             });
 
