@@ -2,6 +2,8 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { departureStationState, arrivalStationState } from '../../../../../recoil/atoms/HomePageAtom';
 import { RouteSelectionAccordion } from './modules/RouteSelectionAccordion';
+import { scheduledRoutesState } from '../../../../../recoil/atoms/RoutePlanningAtom';
+import { TrainScheduledRoutesDto } from '../../../../../api/EntrackApi.ts/EntrackApi';
 
 /**
  * The first step in the route planning process.
@@ -9,21 +11,15 @@ import { RouteSelectionAccordion } from './modules/RouteSelectionAccordion';
 export function DepartureRoutesPage(): React.ReactElement {
     const selectedDepartureStation = useRecoilValue(departureStationState);
     const selectedArrivalStation = useRecoilValue(arrivalStationState);
+    const scheduledRoutes = useRecoilValue(scheduledRoutesState);
 
-    const FAKE_DATA = [
-        {
-            arrivalTime: '12:20pm',
-            departureTime: '12:20am',
-            tripDuration: '23h 40m',
-            trainSwaps: 3,
-        },
-        {
-            arrivalTime: '12:20pm',
-            departureTime: '12:20am',
-            tripDuration: '23h 40m',
-            trainSwaps: 3,
-        },
-    ];
+    const sortedScheduledRoutes: [TrainScheduledRoutesDto[], TrainScheduledRoutesDto[]] = [[], []];
+    sortedScheduledRoutes[0] = scheduledRoutes.filter((scheduledRoute) => {
+        return scheduledRoute.departureStation === selectedDepartureStation;
+    });
+    sortedScheduledRoutes[1] = scheduledRoutes.filter((scheduledRoute) => {
+        return scheduledRoute.departureStation === selectedArrivalStation;
+    });
 
     /**
      * Departure Time, Arrival Time, Trip Duration, Total Stops, Cost
@@ -38,17 +34,14 @@ export function DepartureRoutesPage(): React.ReactElement {
                 gap: '2rem',
             }}
         >
-            <RouteSelectionAccordion
-                departureStation={selectedDepartureStation}
-                arrivalStation={selectedArrivalStation}
-                scheduledRoutes={FAKE_DATA}
-            />
-
-            <RouteSelectionAccordion
-                departureStation={selectedArrivalStation}
-                arrivalStation={selectedDepartureStation}
-                scheduledRoutes={FAKE_DATA}
-            />
+            {sortedScheduledRoutes.map((scheduledRoutes, index) => {
+                return (
+                    <RouteSelectionAccordion
+                        key={index}
+                        scheduledRoutes={scheduledRoutes}
+                    />
+                );
+            })}
         </div>
     );
 }

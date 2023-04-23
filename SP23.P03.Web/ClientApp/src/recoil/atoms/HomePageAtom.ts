@@ -3,6 +3,16 @@ import { atom } from 'recoil';
 import { TripType } from '../../models/TripTypes';
 
 /**
+ * Mantine-friendly select option that represents a TrainStationDTO.
+ * Never again will I use the Mantine select component.
+ */
+export interface MantineTrainStationDto {
+    id: number;
+    label: string;
+    value: string;
+}
+
+/**
  * The currently selected trip type `Atom`.
  */
 export const tripTypeState = atom<TripType>({
@@ -48,4 +58,12 @@ export const tripDurationState = atom<[Date | null, Date | null]>({
 export const departureDateState = atom<DateValue>({
     key: 'departureDate',
     default: null,
+});
+
+/**
+ * Holds all train stations.
+ */
+export const allTrainStationsState = atom<MantineTrainStationDto[]>({
+    key: 'allTrainStations',
+    default: [],
 });
