@@ -1322,31 +1322,83 @@ public static class SeedHelper
         {
             groupofRoutes1.Add(trainRoutes.Find(6));
         }
-        
+
         var groupofRoutes2 = new List<TrainRoute>();
+        if (trainRoutes.Find(7) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(7));
+        }
+        if (trainRoutes.Find(8) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(8));
+        }
+        if (trainRoutes.Find(9) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(9));
+        }
+        if (trainRoutes.Find(10) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(10));
+        }
+        if (trainRoutes.Find(11) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(11));
+        }
+        if (trainRoutes.Find(12) != null)
+        {
+            groupofRoutes2.Add(trainRoutes.Find(12));
+        }
+
+        var groupofRoutes3 = new List<TrainRoute>();
         if (trainRoutes.Find(13) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(13));
+            groupofRoutes3.Add(trainRoutes.Find(13));
         }
         if (trainRoutes.Find(14) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(14));
+            groupofRoutes3.Add(trainRoutes.Find(14));
         }
         if (trainRoutes.Find(15) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(15));
+            groupofRoutes3.Add(trainRoutes.Find(15));
         }
         if (trainRoutes.Find(16) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(16));
+            groupofRoutes3.Add(trainRoutes.Find(16));
         }
         if (trainRoutes.Find(17) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(17));
+            groupofRoutes3.Add(trainRoutes.Find(17));
         }
         if (trainRoutes.Find(18) != null)
         {
-            groupofRoutes2.Add(trainRoutes.Find(18));
+            groupofRoutes3.Add(trainRoutes.Find(18));
+        }
+
+        var groupofRoutes4 = new List<TrainRoute>();
+        if (trainRoutes.Find(19) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(19));
+        }
+        if (trainRoutes.Find(20) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(20));
+        }
+        if (trainRoutes.Find(21) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(21));
+        }
+        if (trainRoutes.Find(22) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(22));
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(23));
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(23));
         }
 
         var groupofTickets1 = new List<TrainRouteTicket>();
@@ -1462,6 +1514,122 @@ public static class SeedHelper
             groupofTickets2.Add(tickets.Find(28));
         }
 
+        var groupofTickets3 = new List<TrainRouteTicket>();
+        if (tickets.Find(29) != null)
+        {
+            groupofTickets3.Add(tickets.Find(29));
+        }
+        if (tickets.Find(30) != null)
+        {
+            groupofTickets3.Add(tickets.Find(30));
+        }
+        if (tickets.Find(31) != null)
+        {
+            groupofTickets3.Add(tickets.Find(31));
+        }
+        if (tickets.Find(32) != null)
+        {
+            groupofTickets3.Add(tickets.Find(32));
+        }
+        if (tickets.Find(33) != null)
+        {
+            groupofTickets3.Add(tickets.Find(33));
+        }
+        if (tickets.Find(34) != null)
+        {
+            groupofTickets3.Add(tickets.Find(34));
+        }
+        if (tickets.Find(35) != null)
+        {
+            groupofTickets3.Add(tickets.Find(35));
+        }
+        if (tickets.Find(36) != null)
+        {
+            groupofTickets3.Add(tickets.Find(36));
+        }
+        if (tickets.Find(37) != null)
+        {
+            groupofTickets3.Add(tickets.Find(37));
+        }
+        if (tickets.Find(38) != null)
+        {
+            groupofTickets3.Add(tickets.Find(38));
+        }
+        if (tickets.Find(39) != null)
+        {
+            groupofTickets3.Add(tickets.Find(39));
+        }
+        if (tickets.Find(40) != null)
+        {
+            groupofTickets3.Add(tickets.Find(40));
+        }
+        if (tickets.Find(41) != null)
+        {
+            groupofTickets3.Add(tickets.Find(41));
+        }
+        if (tickets.Find(42) != null)
+        {
+            groupofTickets3.Add(tickets.Find(42));
+        }
+
+        var groupofTickets4 = new List<TrainRouteTicket>();
+        if (tickets.Find(43) != null)
+        {
+            groupofTickets4.Add(tickets.Find(43));
+        }
+        if (tickets.Find(44) != null)
+        {
+            groupofTickets4.Add(tickets.Find(44));
+        }
+        if (tickets.Find(45) != null)
+        {
+            groupofTickets4.Add(tickets.Find(45));
+        }
+        if (tickets.Find(46) != null)
+        {
+            groupofTickets4.Add(tickets.Find(46));
+        }
+        if (tickets.Find(47) != null)
+        {
+            groupofTickets4.Add(tickets.Find(47));
+        }
+        if (tickets.Find(48) != null)
+        {
+            groupofTickets4.Add(tickets.Find(48));
+        }
+        if (tickets.Find(49) != null)
+        {
+            groupofTickets4.Add(tickets.Find(49));
+        }
+        if (tickets.Find(50) != null)
+        {
+            groupofTickets4.Add(tickets.Find(50));
+        }
+        if (tickets.Find(51) != null)
+        {
+            groupofTickets4.Add(tickets.Find(51));
+        }
+        if (tickets.Find(52) != null)
+        {
+            groupofTickets4.Add(tickets.Find(52));
+        }
+        if (tickets.Find(53) != null)
+        {
+            groupofTickets4.Add(tickets.Find(53));
+        }
+        if (tickets.Find(54) != null)
+        {
+            groupofTickets4.Add(tickets.Find(54));
+        }
+        if (tickets.Find(55) != null)
+        {
+            groupofTickets4.Add(tickets.Find(55));
+        }
+        if (tickets.Find(56) != null)
+        {
+            groupofTickets4.Add(tickets.Find(56));
+        }
+
         dataContext.Set<TrainScheduledRoutes>()
             .Add(new TrainScheduledRoutes
             {
@@ -1473,6 +1641,18 @@ public static class SeedHelper
             {
                 Routes = groupofRoutes2,
                 Tickets = groupofTickets2,
+            });
+        dataContext.Set<TrainScheduledRoutes>()
+            .Add(new TrainScheduledRoutes
+            {
+                Routes = groupofRoutes3,
+                Tickets = groupofTickets3,
+            });
+        dataContext.Set<TrainScheduledRoutes>()
+            .Add(new TrainScheduledRoutes
+            {
+                Routes = groupofRoutes4,
+                Tickets = groupofTickets4,
             });
 
         await dataContext.SaveChangesAsync();
