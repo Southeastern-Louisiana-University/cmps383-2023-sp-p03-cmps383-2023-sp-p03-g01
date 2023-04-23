@@ -997,8 +997,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 8, 0, 0, 0, DateTimeKind.Utc),      
-                DeperatureTime = new DateTime(2022, 5, 8, 10, 0, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 8, 0, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 10, 0, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
                 Train = train4,
@@ -1009,8 +1009,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 10,30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 12, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 10,30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 12, 15, 0, 0, DateTimeKind.Utc),
                 Path = path2,
                 PathId = path2.Id,
                 Train = train2,
@@ -1021,8 +1021,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 14, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 14, 15, 0, 0, DateTimeKind.Utc),
                 Path = path3,
                 PathId = path3.Id,
                 Train = train2,
@@ -1033,8 +1033,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 15, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 15, 30, 0, 0, DateTimeKind.Utc),
                 Path = path4,
                 PathId = path4.Id,
                 Train = train2,
@@ -1045,8 +1045,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 15, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 16, 20, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 15, 45, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 16, 20, 0, 0, DateTimeKind.Utc),
                 Path = path5,
                 PathId = path5.Id,
                 Train = train2,
@@ -1057,8 +1057,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 16, 35, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 16, 50, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 16, 35, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 16, 50, 0, 0, DateTimeKind.Utc),
                 Path = path6,
                 PathId = path6.Id,
                 Train = train2,
@@ -1070,8 +1070,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 10, 00, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 12, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 10, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 12, 00, 0, 0, DateTimeKind.Utc),
                 Path = paths.First(),
                 PathId = paths.First().Id,
                 Train = train4,
@@ -1082,8 +1082,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 12, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 14, 30, 0, 0, DateTimeKind.Utc),
                 Path = path2,
                 PathId = path2.Id,
                 Train = train2,
@@ -1094,8 +1094,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 14, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 16, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 14, 45, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 16, 00, 0, 0, DateTimeKind.Utc),
                 Path = path3,
                 PathId = path3.Id,
                 Train = train2,
@@ -1106,8 +1106,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 16, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 17, 30, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 16, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 17, 30, 0, 0, DateTimeKind.Utc),
                 Path = path4,
                 PathId = path4.Id,
                 Train = train3,
@@ -1118,8 +1118,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 17, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 18, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 17, 45, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 18, 45, 0, 0, DateTimeKind.Utc),
                 Path = path5,
                 PathId = path5.Id,
                 Train = train3,
@@ -1130,8 +1130,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 8, 19, 00, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 8, 20, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 8, 19, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 8, 20, 00, 0, 0, DateTimeKind.Utc),
                 Path = path6,
                 PathId = path6.Id,
                 Train = train3,
@@ -1143,8 +1143,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 8, 00, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 9, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 8, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 9, 00, 0, 0, DateTimeKind.Utc),
                 Path = path12,
                 PathId = path12.Id,
                 Train = train2,
@@ -1155,8 +1155,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 9, 15, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 10, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 9, 15, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 10, 15, 0, 0, DateTimeKind.Utc),
                 Path = path11,
                 PathId = path11.Id,
                 Train = train2,
@@ -1167,8 +1167,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 10, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 11, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 10, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 11, 45, 0, 0, DateTimeKind.Utc),
                 Path = path10,
                 PathId = path10.Id,
                 Train = train2,
@@ -1179,8 +1179,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 12, 00, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 13, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 12, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 13, 00, 0, 0, DateTimeKind.Utc),
                 Path = path9,
                 PathId = path9.Id,
                 Train = train2,
@@ -1191,8 +1191,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 13, 15, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 13, 15, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
                 Path = path8,
                 PathId = path8.Id,
                 Train = train2,
@@ -1203,8 +1203,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 14, 45, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 14, 45, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
                 Path = path7,
                 PathId = path7.Id,
                 Train = train4,
@@ -1216,8 +1216,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 10, 00, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 11, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 10, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 11, 00, 0, 0, DateTimeKind.Utc),
                 Path = path12,
                 PathId = path12.Id,
                 Train = train2,
@@ -1228,8 +1228,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 11, 15, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 12, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 11, 15, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 12, 15, 0, 0, DateTimeKind.Utc),
                 Path = path11,
                 PathId = path11.Id,
                 Train = train2,
@@ -1240,8 +1240,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 12, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 13, 45, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 12, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 13, 45, 0, 0, DateTimeKind.Utc),
                 Path = path10,
                 PathId = path10.Id,
                 Train = train2,
@@ -1252,8 +1252,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 15, 00, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 15, 00, 0, 0, DateTimeKind.Utc),
                 Path = path9,
                 PathId = path9.Id,
                 Train = train3,
@@ -1264,8 +1264,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 15, 15, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 15, 15, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
                 Path = path8,
                 PathId = path8.Id,
                 Train = train3,
@@ -1276,8 +1276,8 @@ public static class SeedHelper
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 16, 30, 0, 0, DateTimeKind.Utc),
-                DeperatureTime = new DateTime(2022, 5, 14, 18, 15, 0, 0, DateTimeKind.Utc),
+                DeperatureTime = new DateTime(2022, 5, 14, 16, 30, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 18, 15, 0, 0, DateTimeKind.Utc),
                 Path = path7,
                 PathId = path7.Id,
                 Train = train4,
