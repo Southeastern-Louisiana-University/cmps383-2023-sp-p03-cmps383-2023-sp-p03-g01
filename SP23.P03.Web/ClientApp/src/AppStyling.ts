@@ -319,5 +319,15 @@ export const mantineTheme: MantineThemeOverride = {
                 },
             },
         },
+
+        PasswordInput: {
+            styles: {
+                input: {
+                    '&:focus, &:focus-within': {
+                        borderColor: COLOR_PALETTE.light.default.kellyGreen,
+                    },
+                },
+            },
+        },
     },
 };

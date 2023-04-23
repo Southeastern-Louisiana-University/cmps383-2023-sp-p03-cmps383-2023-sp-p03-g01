@@ -23,6 +23,7 @@ export interface LoginDto {
     userName: string;
     /** @minLength 1 */
     password: string;
+    tickets?: TrainRouteTicketDto[] | null;
 }
 
 export interface SeatDto {
@@ -78,7 +79,7 @@ export interface TrainPathDto {
     endingTrainStationId?: number | null;
 }
 
-export interface TrainRouteDto {
+export interface TrainRouteCreateDto {
     /** @format int32 */
     id?: number;
     /** @format date-time */
@@ -89,11 +90,26 @@ export interface TrainRouteDto {
     pathId?: number | null;
     /** @format int32 */
     trainId?: number | null;
+    layover?: string | null;
+    dwellTime?: string | null;
+}
+
+export interface TrainRouteDto {
+    /** @format int32 */
+    id?: number;
+    arrivalTime?: string | null;
+    departureTime?: string | null;
+    departureStation?: string | null;
+    arrivalStation?: string | null;
+    /** @format int32 */
+    passengerCount?: number | null;
+    layover?: string | null;
+    dwellTime?: string | null;
 }
 
 export interface TrainRouteTicketCreateDto {
     /** @format int32 */
-    scheduledTrainRouteId?: number | null;
+    trainRouteId?: number | null;
     /** @format int32 */
     seatId?: number | null;
     /** @format double */
@@ -103,7 +119,7 @@ export interface TrainRouteTicketCreateDto {
 export interface TrainRouteTicketDto {
     /** @format int32 */
     id?: number;
-    scheduledTrainRoute?: TrainScheduledRoutesDto;
+    trainRoute?: TrainRouteDto;
     code?: string | null;
     seatType?: string | null;
     /** @format double */
@@ -116,10 +132,24 @@ export interface TrainScheduledRouteCreateDto {
     routesId?: number[] | null;
 }
 
+export interface TrainScheduledRouteTicketDto {
+    /** @format int32 */
+    id?: number;
+    /** @format int32 */
+    routeId?: number | null;
+    code?: string | null;
+    seatType?: string | null;
+    /** @format double */
+    cost?: number;
+}
+
 export interface TrainScheduledRoutesDto {
     /** @format int32 */
     id?: number;
     routes?: TrainRouteDto[] | null;
+    ticket?: TrainScheduledRouteTicketDto[] | null;
+    departureStation?: string | null;
+    arrivalStation?: string | null;
 }
 
 export interface TrainStationDto {
@@ -140,6 +170,7 @@ export interface UserDto {
     /** @minLength 1 */
     userName: string;
     roles: string[];
+    tickets?: TrainRouteTicketDto[] | null;
 }
 
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse, HeadersDefaults, ResponseType } from 'axios';
@@ -923,7 +954,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @name RoutesCreate
          * @request POST:/api/routes
          */
-        routesCreate: (data: TrainRouteDto, params: RequestParams = {}) =>
+        routesCreate: (data: TrainRouteCreateDto, params: RequestParams = {}) =>
             this.request<TrainRouteDto, any>({
                 path: `/api/routes`,
                 method: 'POST',
@@ -955,7 +986,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
          * @name RoutesUpdate
          * @request PUT:/api/routes/{id}
          */
-        routesUpdate: (id: number, data: TrainRouteDto, params: RequestParams = {}) =>
+        routesUpdate: (id: number, data: TrainRouteCreateDto, params: RequestParams = {}) =>
             this.request<TrainRouteDto, any>({
                 path: `/api/routes/${id}`,
                 method: 'PUT',

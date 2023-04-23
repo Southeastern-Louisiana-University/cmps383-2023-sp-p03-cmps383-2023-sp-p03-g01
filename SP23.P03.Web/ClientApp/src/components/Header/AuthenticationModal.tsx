@@ -197,27 +197,52 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
     const validateInputAndAuthenticateUser = async (mode: 'signup' | 'login') => {
         const inputIsValid = validateInput(mode);
 
-        if (inputIsValid) {
+        if (!inputIsValid) {
+            return;
+        }
+
+        if (mode === 'login') {
             setIsMakingApiCall(true);
             resetErrorMessages();
 
-            const { data, status } = await API.api.authenticationLoginCreate({
-                userName: email,
-                password,
-            });
+            API.api
+                .authenticationLoginCreate({
+                    userName: email,
+                    password,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
 
-            if (status !== 200) {
-                setIsMakingApiCall(false);
-                console.error('AHHHHHHHHHHHHHHH');
-                return;
-            }
+                    setIsMakingApiCall(false);
+                });
+        } else {
+            setIsMakingApiCall(true);
+            resetErrorMessages();
 
-            setCurrentlyLoggedInUser(data);
+            API.api
+                .usersCreate({
+                    roles: ['User'],
+                    password,
+                    userName: email,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
 
-            closeModalAndResetState();
+                    setIsMakingApiCall(false);
+                });
         }
 
-        setIsMakingApiCall(false);
+        closeModalAndResetState();
     };
 
     return (

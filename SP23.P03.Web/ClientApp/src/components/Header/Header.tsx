@@ -135,6 +135,7 @@ export function Header(): React.ReactElement {
                                         size={componentSize}
                                         onClick={() => {
                                             setCurrentlyLoggedInUser(null);
+                                            localStorage.removeItem('user');
                                         }}
                                     >
                                         Sign Out

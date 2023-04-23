@@ -6,5 +6,5 @@ import { UserDto } from '../../api/EntrackApi.ts/EntrackApi';
  */
 export const currentlyLoggedInUserState = atom<null | UserDto>({
     key: 'currentlyLoggedInUser',
-    default: null,
+    default: localStorage.getItem('user') ? (JSON.parse(localStorage.getItem('user')!) as UserDto) : null,
 });
