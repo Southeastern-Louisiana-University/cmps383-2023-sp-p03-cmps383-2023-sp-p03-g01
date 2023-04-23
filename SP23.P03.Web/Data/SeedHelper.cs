@@ -1209,7 +1209,7 @@ public static class SeedHelper
                 PathId = path7.Id,
                 Train = train4,
                 DwellTime = null,
-                Layover = "30 min",
+                Layover = null,
                 PassengerCount = 1,
             });
         //May 14, 10 am Jackson to Baton Rouge \
@@ -1399,6 +1399,10 @@ public static class SeedHelper
         if (trainRoutes.Find(23) != null)
         {
             groupofRoutes4.Add(trainRoutes.Find(23));
+        }
+        if (trainRoutes.Find(24) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(24));
         }
 
         var groupofTickets1 = new List<TrainRouteTicket>();
