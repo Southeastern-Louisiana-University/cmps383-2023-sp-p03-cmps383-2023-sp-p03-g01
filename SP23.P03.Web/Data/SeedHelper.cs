@@ -112,7 +112,7 @@ public static class SeedHelper
                 Name = "New Orleans",
                 Address = "1001 Loyola Avenue",
                 Hours = "5:00 AM - 10:00 PM",
-                City = "New Orlean",
+                City = "New Orleans",
                 State = "LA",
             });
 
