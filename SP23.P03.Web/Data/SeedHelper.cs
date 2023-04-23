@@ -1135,7 +1135,7 @@ public static class SeedHelper
                 Path = path6,
                 PathId = path6.Id,
                 Train = train3,
-                DwellTime = "15 null",
+                DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
             });
@@ -1245,18 +1245,18 @@ public static class SeedHelper
                 Path = path10,
                 PathId = path10.Id,
                 Train = train2,
-                DwellTime = "15 min",
-                Layover = null,
+                DwellTime = null,
+                Layover = "30 min",
                 PassengerCount = 1,
             });
         dataContext.Set<TrainRoute>()
             .Add(new TrainRoute
             {
-                ArrivalTime = new DateTime(2022, 5, 14, 14, 00, 0, 0, DateTimeKind.Utc),
+                ArrivalTime = new DateTime(2022, 5, 14, 14, 15, 0, 0, DateTimeKind.Utc),
                 DeperatureTime = new DateTime(2022, 5, 14, 15, 00, 0, 0, DateTimeKind.Utc),
                 Path = path9,
                 PathId = path9.Id,
-                Train = train2,
+                Train = train3,
                 DwellTime = "15 min",
                 Layover = null,
                 PassengerCount = 1,
@@ -1268,7 +1268,7 @@ public static class SeedHelper
                 DeperatureTime = new DateTime(2022, 5, 14, 16, 15, 0, 0, DateTimeKind.Utc),
                 Path = path8,
                 PathId = path8.Id,
-                Train = train2,
+                Train = train3,
                 DwellTime = "30 min",
                 Layover = null,
                 PassengerCount = 1,
@@ -1285,6 +1285,7 @@ public static class SeedHelper
                 Layover = null,
                 PassengerCount = 1,
             });
+        
         
 
         await dataContext.SaveChangesAsync();
@@ -1488,12 +1489,27 @@ public static class SeedHelper
         var Route4 = new TrainRoute();
         var Route5 = new TrainRoute();
         var Route6 = new TrainRoute();
+
+        var Route7 = new TrainRoute();
+        var Route8 = new TrainRoute();
+        var Route9 = new TrainRoute();
+        var Route10 = new TrainRoute();
+        var Route11 = new TrainRoute();
+        var Route12 = new TrainRoute();
+
         var Route13 = new TrainRoute();
         var Route14 = new TrainRoute();
         var Route15 = new TrainRoute();
         var Route16 = new TrainRoute();
         var Route17 = new TrainRoute();
         var Route18 = new TrainRoute();
+
+        var Route19 = new TrainRoute();
+        var Route20 = new TrainRoute();
+        var Route21 = new TrainRoute();
+        var Route22 = new TrainRoute();
+        var Route23 = new TrainRoute();
+        var Route24 = new TrainRoute();
 
         var seat1 = new Seat();
         var seat2 = new Seat();
@@ -1562,6 +1578,34 @@ public static class SeedHelper
         {
             Route6 = trainRoutes.Find(6);
         }
+
+
+        if (trainRoutes.Find(7) != null)
+        {
+            Route7 = trainRoutes.Find(7);
+        }
+        if (trainRoutes.Find(8) != null)
+        {
+            Route8 = trainRoutes.Find(8);
+        }
+        if (trainRoutes.Find(9) != null)
+        {
+            Route9 = trainRoutes.Find(9);
+        }
+        if (trainRoutes.Find(10) != null)
+        {
+            Route10 = trainRoutes.Find(10);
+        }
+        if (trainRoutes.Find(11) != null)
+        {
+            Route11 = trainRoutes.Find(11);
+        }
+        if (trainRoutes.Find(12) != null)
+        {
+            Route12 = trainRoutes.Find(12);
+        }
+
+
         if (trainRoutes.Find(13) != null)
         {
             Route13 = trainRoutes.Find(13);
@@ -1585,6 +1629,32 @@ public static class SeedHelper
         if (trainRoutes.Find(18) != null)
         {
             Route18 = trainRoutes.Find(18);
+        }
+
+
+        if (trainRoutes.Find(19) != null)
+        {
+            Route19 = trainRoutes.Find(19);
+        }
+        if (trainRoutes.Find(20) != null)
+        {
+            Route20 = trainRoutes.Find(20);
+        }
+        if (trainRoutes.Find(21) != null)
+        {
+            Route21 = trainRoutes.Find(21);
+        }
+        if (trainRoutes.Find(22) != null)
+        {
+            Route22 = trainRoutes.Find(22);
+        }
+        if (trainRoutes.Find(23) != null)
+        {
+            Route23 = trainRoutes.Find(23);
+        }
+        if (trainRoutes.Find(24) != null)
+        {
+            Route24 = trainRoutes.Find(24);
         }
 
         if (await tickets.AnyAsync())
@@ -1706,6 +1776,122 @@ public static class SeedHelper
                 SeatType = seat3.type,
                 Code = "BCDEFGHIJK",
             });
+        //May 8 Route 2
+        //Train 4
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 52.00,
+                TrainRoute = Route7,
+                SeatType = seat6.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 152.00,
+                TrainRoute = Route7,
+                SeatType = seat7.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102.00,
+                TrainRoute = Route7,
+                SeatType = seat8.type,
+                Code = "EFGHIJKlMN",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 204.00,
+                TrainRoute = Route7,
+                SeatType = seat9.type,
+                Code = "EFGHIJKlMN",
+            });
+        //Train 2
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route8,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route8,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route9,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route9,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route10,
+               SeatType = seat2.type,
+               Code = "FGHIJKlMNO",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route10,
+                SeatType = seat3.type,
+                Code = "FGHIJKlMNO",
+            });
+        //Train 3
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route11,
+               SeatType = seat4.type,
+               Code = "GHIJKlMNOP",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route11,
+                SeatType = seat5.type,
+                Code = "GHIJKlMNOP",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route12,
+               SeatType = seat4.type,
+               Code = "GHIJKlMNOP",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route12,
+                SeatType = seat5.type,
+                Code = "GHIJKlMNOP",
+            });
 
 
         //May 14 Route 1
@@ -1823,6 +2009,126 @@ public static class SeedHelper
                 TrainRoute = Route18,
                 SeatType = seat9.type,
                 Code = "DEFGHIJKlM",
+            });
+
+
+        //May 14 Route 2
+        //Train 2
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route19,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route19,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route20,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route20,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route21,
+               SeatType = seat2.type,
+               Code = "HIJKlMNOPQ",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route21,
+                SeatType = seat3.type,
+                Code = "HIJKlMNOPQ",
+            });
+        // Train 3
+
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route22,
+               SeatType = seat4.type,
+               Code = "IJKlMNOPQR",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route22,
+                SeatType = seat5.type,
+                Code = "IJKlMNOPQR",
+            });
+        dataContext.Set<TrainRouteTicket>()
+           .Add(new TrainRouteTicket
+           {
+               cost = 52,
+               TrainRoute = Route23,
+               SeatType = seat4.type,
+               Code = "IJKlMNOPQR",
+           });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102,
+                TrainRoute = Route23,
+                SeatType = seat5.type,
+                Code = "IJKlMNOPQR",
+            });
+
+        //Train 4
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 52.00,
+                TrainRoute = Route24,
+                SeatType = seat6.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 152.00,
+                TrainRoute = Route24,
+                SeatType = seat7.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 102.00,
+                TrainRoute = Route24,
+                SeatType = seat8.type,
+                Code = "JKlMNOPQRS",
+            });
+        dataContext.Set<TrainRouteTicket>()
+            .Add(new TrainRouteTicket
+            {
+                cost = 204.00,
+                TrainRoute = Route24,
+                SeatType = seat9.type,
+                Code = "JKlMNOPQRS",
             });
 
         await dataContext.SaveChangesAsync();
