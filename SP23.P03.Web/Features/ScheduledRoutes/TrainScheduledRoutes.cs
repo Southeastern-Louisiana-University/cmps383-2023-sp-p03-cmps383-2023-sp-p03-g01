@@ -1,4 +1,5 @@
 ﻿using SP23.P03.Web.Features.Route;
+using SP23.P03.Web.Features.TrainTicket;
 
 namespace SP23.P03.Web.Features.ScheduledRoutes
 {
@@ -6,5 +7,6 @@ namespace SP23.P03.Web.Features.ScheduledRoutes
     {
         public int Id { get; set; }
         public ICollection<TrainRoute>? Routes { get; set; } = new List<TrainRoute>();
+        public ICollection<TrainRouteTicket> Tickets { get; set; } = new List<TrainRouteTicket>();
     }
 }

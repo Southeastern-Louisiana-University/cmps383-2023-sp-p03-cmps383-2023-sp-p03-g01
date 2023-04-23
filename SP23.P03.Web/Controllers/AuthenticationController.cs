@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SP23.P03.Web.Extensions;
 using SP23.P03.Web.Features.Authorization;
+using SP23.P03.Web.Features.Route;
+using SP23.P03.Web.Features.TrainTicket;
+using System.Globalization;
 
 namespace SP23.P03.Web.Controllers;
 
@@ -65,7 +68,27 @@ public class AuthenticationController : ControllerBase
         {
             Id = x.Id,
             UserName = x.UserName!,
-            Roles = x.Roles.Select(y => y.Role!.Name).ToArray()!
+            Roles = x.Roles.Select(y => y.Role!.Name).ToArray()!,
+            Tickets = x.Tickets.Select(x => new TrainRouteTicketDto
+            {
+                Id = x.Id,
+                Code = x.Code,
+                cost = x.cost,
+                PassagerId = x.PassagerId,
+                SeatType = x.SeatType,
+                TrainRoute = new TrainRouteDto
+                {
+                    Id = x.TrainRoute.Id,
+                    ArrivalTime = x.TrainRoute.ArrivalTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    DepartureTime = x.TrainRoute.DeperatureTime.ToString("yyyy-MM-ddTHH:mm:ssZ", CultureInfo.InvariantCulture),
+                    ArrivalStation = x.TrainRoute.Path.StartingTrainStation.City + ", " + x.TrainRoute.Path.StartingTrainStation.State,
+                    DepartureStation = x.TrainRoute.Path.EndingTrainStation.City + ", " + x.TrainRoute.Path.EndingTrainStation.State,
+                    PassengerCount = x.TrainRoute.PassengerCount,
+                    DwellTime = x.TrainRoute.DwellTime,
+                    Layover = x.TrainRoute.Layover,
+                }
+             }
+            ),
         });
     }
 }

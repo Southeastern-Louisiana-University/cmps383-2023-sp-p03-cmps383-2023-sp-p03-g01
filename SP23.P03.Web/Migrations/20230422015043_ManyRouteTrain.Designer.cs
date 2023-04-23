@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SP23.P03.Web.Data;
 
@@ -11,9 +12,11 @@ using SP23.P03.Web.Data;
 namespace SP23.P03.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230422015043_ManyRouteTrain")]
+    partial class ManyRouteTrain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -243,9 +246,6 @@ namespace SP23.P03.Web.Migrations
                     b.Property<string>("Layover")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PassengerCount")
-                        .HasColumnType("int");
-
                     b.Property<int?>("PathId")
                         .HasColumnType("int");
 
@@ -355,14 +355,11 @@ namespace SP23.P03.Web.Migrations
                     b.Property<int?>("PassagerId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ScheduledTrainRouteId")
+                        .HasColumnType("int");
+
                     b.Property<string>("SeatType")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TrainRouteId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TrainScheduledRoutesId")
-                        .HasColumnType("int");
 
                     b.Property<double>("cost")
                         .HasColumnType("float");
@@ -371,9 +368,7 @@ namespace SP23.P03.Web.Migrations
 
                     b.HasIndex("PassagerId");
 
-                    b.HasIndex("TrainRouteId");
-
-                    b.HasIndex("TrainScheduledRoutesId");
+                    b.HasIndex("ScheduledTrainRouteId");
 
                     b.ToTable("TrainRouteTicket");
                 });
@@ -559,17 +554,13 @@ namespace SP23.P03.Web.Migrations
                         .WithMany("Tickets")
                         .HasForeignKey("PassagerId");
 
-                    b.HasOne("SP23.P03.Web.Features.Route.TrainRoute", "TrainRoute")
+                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", "ScheduledTrainRoute")
                         .WithMany()
-                        .HasForeignKey("TrainRouteId");
-
-                    b.HasOne("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", null)
-                        .WithMany("Tickets")
-                        .HasForeignKey("TrainScheduledRoutesId");
+                        .HasForeignKey("ScheduledTrainRouteId");
 
                     b.Navigation("Passager");
 
-                    b.Navigation("TrainRoute");
+                    b.Navigation("ScheduledTrainRoute");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Seat", b =>
@@ -607,8 +598,6 @@ namespace SP23.P03.Web.Migrations
             modelBuilder.Entity("SP23.P03.Web.Features.ScheduledRoutes.TrainScheduledRoutes", b =>
                 {
                     b.Navigation("Routes");
-
-                    b.Navigation("Tickets");
                 });
 
             modelBuilder.Entity("SP23.P03.Web.Features.Trains.Section", b =>
