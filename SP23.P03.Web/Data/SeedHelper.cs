@@ -112,7 +112,7 @@ public static class SeedHelper
                 Name = "New Orleans",
                 Address = "1001 Loyola Avenue",
                 Hours = "5:00 AM - 10:00 PM",
-                City = "New Orlean",
+                City = "New Orleans",
                 State = "LA",
             });
 
@@ -1062,7 +1062,7 @@ public static class SeedHelper
                 Path = path6,
                 PathId = path6.Id,
                 Train = train2,
-                DwellTime = "15 min",
+                DwellTime = null,
                 Layover = null,
                 PassengerCount = 1,
             });
@@ -1209,7 +1209,7 @@ public static class SeedHelper
                 PathId = path7.Id,
                 Train = train4,
                 DwellTime = null,
-                Layover = "30 min",
+                Layover = null,
                 PassengerCount = 1,
             });
         //May 14, 10 am Jackson to Baton Rouge \
@@ -1399,6 +1399,11 @@ public static class SeedHelper
         if (trainRoutes.Find(23) != null)
         {
             groupofRoutes4.Add(trainRoutes.Find(23));
+        }
+        if (trainRoutes.Find(24) != null)
+        {
+            groupofRoutes4.Add(trainRoutes.Find(24));
+
         }
 
         var groupofTickets1 = new List<TrainRouteTicket>();
