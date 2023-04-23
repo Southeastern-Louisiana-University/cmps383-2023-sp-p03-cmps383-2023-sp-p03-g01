@@ -4,11 +4,13 @@ import React, { useEffect, useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { currentlyLoggedInUserState } from '../../recoil/atoms/AuthenticationAtom';
 import { COLOR_PALETTE } from '../../styling/ColorPalette';
-import { callATimeout } from '../../util/callATimeout';
 import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useDebounce } from '../../util/useDebounce';
 import { validatePassword, validateName, validateEmail } from '../../util/ValidationFunctions';
 import { STYLING_VARIABLES } from '../../styling/StylingVariables';
+import { Api } from '../../api/EntrackApi.ts/EntrackApi';
+
+const API = new Api();
 
 interface AuthenticationModalProps {
     opened: boolean;
@@ -195,20 +197,52 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
     const validateInputAndAuthenticateUser = async (mode: 'signup' | 'login') => {
         const inputIsValid = validateInput(mode);
 
-        if (inputIsValid) {
+        if (!inputIsValid) {
+            return;
+        }
+
+        if (mode === 'login') {
             setIsMakingApiCall(true);
             resetErrorMessages();
 
-            // TODO: Replace with API call
-            // Simulate a delay in the API call
-            await callATimeout(2000);
+            API.api
+                .authenticationLoginCreate({
+                    userName: email,
+                    password,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
 
-            setCurrentlyLoggedInUser(email);
+                    setIsMakingApiCall(false);
+                });
+        } else {
+            setIsMakingApiCall(true);
+            resetErrorMessages();
 
-            closeModalAndResetState();
+            API.api
+                .usersCreate({
+                    roles: ['User'],
+                    password,
+                    userName: email,
+                })
+                .then((response) => {
+                    setCurrentlyLoggedInUser(response.data);
+                    localStorage.setItem('user', JSON.stringify(response.data));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    console.error('No error handling because no time');
+
+                    setIsMakingApiCall(false);
+                });
         }
 
-        setIsMakingApiCall(false);
+        closeModalAndResetState();
     };
 
     return (
@@ -271,7 +305,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                                 validateInputAndAuthenticateUser('login');
                             }}
                         >
-                            Login
+                            Sign In
                         </Button>
 
                         <Text>Don't have an account?</Text>
@@ -358,7 +392,7 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                             size={componentSize}
                             onClick={toggleUserHasAnAccount}
                         >
-                            Back to Login
+                            Back to Sign In
                         </Button>
                     </>
                 )}

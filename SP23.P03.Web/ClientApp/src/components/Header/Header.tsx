@@ -135,6 +135,7 @@ export function Header(): React.ReactElement {
                                         size={componentSize}
                                         onClick={() => {
                                             setCurrentlyLoggedInUser(null);
+                                            localStorage.removeItem('user');
                                         }}
                                     >
                                         Sign Out
@@ -144,7 +145,7 @@ export function Header(): React.ReactElement {
                         </Popover>
                         {browserWidth > 500 && (
                             <span style={HEADER_STYLING.loggedInUserWelcomeMessageStyles}>
-                                Hello, {currentlyLoggedInUser.split('@')[0]}
+                                Hello, {currentlyLoggedInUser.userName.split('@')[0]}
                             </span>
                         )}
                     </div>

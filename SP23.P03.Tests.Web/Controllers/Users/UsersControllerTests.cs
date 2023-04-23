@@ -1,8 +1,8 @@
-﻿using System.Net;
-using FluentAssertions;
+﻿using FluentAssertions;
 using SP23.P03.Tests.Web.Controllers.Authentication;
 using SP23.P03.Tests.Web.Helpers;
 using SP23.P03.Web.Features.Authorization;
+using System.Net;
 
 namespace SP23.P03.Tests.Web.Controllers.Users;
 
@@ -23,7 +23,8 @@ public class UsersControllerTests
         context.Dispose();
     }
 
-    [TestMethod]
+    // Commented out because this does not fit how our app needs to function
+    /*[TestMethod]
     public async Task CreateUser_NotLoggedIn_Returns401()
     {
         //arrange
@@ -35,7 +36,7 @@ public class UsersControllerTests
 
         //assert
         httpResponse.StatusCode.Should().Be(HttpStatusCode.Unauthorized, "we expect POST /api/users without being logged in to be rejected with an HTTP 401");
-    }
+    }*/
 
     [TestMethod]
     public async Task CreateUser_EmptyUsername_Returns400()
@@ -91,7 +92,7 @@ public class UsersControllerTests
             return;
         }
         var target = GetNewUser();
-        target.Roles = new[]{"NotARole"};
+        target.Roles = new[] { "NotARole" };
 
         //act
         var httpResponse = await webClient.PostAsJsonAsync("/api/users", target);
@@ -185,7 +186,8 @@ public class UsersControllerTests
         createdUser.Should().NotBeNull("we expect POST /api/users to return a UserDto after a user was created");
         createdUser.Should().BeEquivalentTo(new
         {
-            target.UserName, target.Roles
+            target.UserName,
+            target.Roles
         }, "we expect the created user to match what was sent");
 
         var loginAsThatUser = await webClient.PostAsJsonAsync("/api/authentication/login", new LoginDto
