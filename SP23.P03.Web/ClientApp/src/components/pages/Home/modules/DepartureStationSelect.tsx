@@ -1,8 +1,8 @@
 import { Select } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
 import React from 'react';
-import { useRecoilState } from 'recoil';
-import { departureStationState } from '../../../../recoil/atoms/HomePageAtom';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { allTrainStationsState, departureStationState } from '../../../../recoil/atoms/HomePageAtom';
 import { getMantineComponentSize } from '../../../../util/getMantineComponentSize';
 import { STYLING_VARIABLES } from '../../../../styling/StylingVariables';
 
@@ -14,6 +14,7 @@ export function DepartureStationSelect(): React.ReactElement {
     const componentSize = getMantineComponentSize(browserWidth);
 
     const [departureLocation, setDepartureLocation] = useRecoilState(departureStationState);
+    const allTrainStations = useRecoilValue(allTrainStationsState);
 
     const updateDepartureLocation = (value: string) => {
         setDepartureLocation(value);
@@ -23,10 +24,12 @@ export function DepartureStationSelect(): React.ReactElement {
         <Select
             style={{ width: `calc(50% - ${STYLING_VARIABLES.defaultSpacing})` }}
             size={componentSize}
-            data={['Hammond, LA', 'New Orleans, LA', 'Baton Rouge, LA', 'Lake Charles, LA']}
+            data={allTrainStations}
             label='Departing From:'
             value={departureLocation}
             onChange={updateDepartureLocation}
+            searchable
+            nothingFound='No options'
             withAsterisk
         />
     );

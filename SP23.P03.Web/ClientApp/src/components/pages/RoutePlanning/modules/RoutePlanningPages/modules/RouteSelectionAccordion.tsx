@@ -6,6 +6,9 @@ import { COLOR_PALETTE } from '../../../../../../styling/ColorPalette';
 import { formatNumberAsUSD } from '../../../../../../util/formatNumberAsUSD';
 import { SeatType } from '../../../../../../models/SeatTypes';
 import { getBackgroundBasedOnSeat } from '../../../../../../util/getBackgroundBasedOnSeat';
+import { TrainScheduledRoutesDto } from '../../../../../../api/EntrackApi.ts/EntrackApi';
+import dayjs from 'dayjs';
+import { SeatPrice } from '../../../../../../models/SeatPrice';
 
 interface SeatSelectButtonProps {
     seatType: SeatType;
@@ -92,23 +95,12 @@ const SeatSelectButton = ({ seatPrice, seatType, onClick }: SeatSelectButtonProp
 };
 
 interface RouteSelectionAccordionProps {
-    departureStation: string;
-    arrivalStation: string;
-    scheduledRoutes: {
-        departureTime: string;
-        arrivalTime: string;
-        tripDuration: string;
-        trainSwaps: number;
-    }[];
+    scheduledRoutes: TrainScheduledRoutesDto[];
 }
 /**
  * Selecting routes & seats.
  */
-export function RouteSelectionAccordion({
-    departureStation,
-    arrivalStation,
-    scheduledRoutes,
-}: RouteSelectionAccordionProps): React.ReactElement {
+export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccordionProps): React.ReactElement {
     const [selectedRoute, setSelectedRoute] = useState<number | undefined>(undefined);
     const [selectedSeat, setSelectedSeat] = useState<SeatType | undefined>(undefined);
 
@@ -122,7 +114,7 @@ export function RouteSelectionAccordion({
         setSelectedSeat(seat);
     };
 
-    const renderSelectedSeatButton = (index: number): React.ReactElement => {
+    const renderSelectedSeatButton = (index: number, trainSwaps: number): React.ReactElement => {
         if (selectedSeat === undefined) return <></>;
 
         switch (selectedSeat) {
@@ -130,7 +122,7 @@ export function RouteSelectionAccordion({
                 return (
                     <SeatSelectButton
                         seatType={SeatType.COACH}
-                        seatPrice={156}
+                        seatPrice={SeatPrice.COACH * trainSwaps}
                         onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                     />
                 );
@@ -138,7 +130,7 @@ export function RouteSelectionAccordion({
                 return (
                     <SeatSelectButton
                         seatType={SeatType.FIRST_CLASS}
-                        seatPrice={206}
+                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
                         onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                     />
                 );
@@ -146,7 +138,7 @@ export function RouteSelectionAccordion({
                 return (
                     <SeatSelectButton
                         seatType={SeatType.SLEEPER}
-                        seatPrice={256}
+                        seatPrice={SeatPrice.SLEEPER * trainSwaps}
                         onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                     />
                 );
@@ -155,7 +147,7 @@ export function RouteSelectionAccordion({
                 return (
                     <SeatSelectButton
                         seatType={SeatType.ROOMLET}
-                        seatPrice={314}
+                        seatPrice={SeatPrice.ROOMLET}
                         onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                     />
                 );
@@ -169,11 +161,61 @@ export function RouteSelectionAccordion({
         >
             <Accordion.Item value='Departure Route'>
                 <Accordion.Control>
-                    {departureStation} to {arrivalStation}
+                    {scheduledRoutes[0]?.departureStation} to {scheduledRoutes[0]?.arrivalStation}
                 </Accordion.Control>
                 <Accordion.Panel>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                         {scheduledRoutes.map((route, index) => {
+                            if (
+                                route.routes === null ||
+                                route.routes === undefined ||
+                                route.ticket === null ||
+                                route.ticket === undefined
+                            ) {
+                                return <></>;
+                            }
+
+                            const trainSwaps = route.routes.reduce((acc, curr) => {
+                                if (curr.layover) {
+                                    acc += 1;
+                                }
+
+                                return acc;
+                            }, 0);
+
+                            const departureTime = dayjs(route.routes[0]?.departureTime);
+                            const departureTimeFormatted = departureTime.format('h:mm A');
+
+                            const arrivalTime = dayjs(route.routes[route.routes.length - 1]?.arrivalTime);
+                            const arrivalTimeFormatted = arrivalTime.format('h:mm A');
+
+                            // Calculate total travel time
+                            const totalTravelTime = arrivalTime.diff(departureTime, 'minute');
+                            const hours = Math.floor(totalTravelTime / 60);
+                            const minutes = totalTravelTime % 60;
+                            const tripDuration = `${hours}hr ${minutes}min`;
+
+                            /**
+                             * Determine what seats are available on a route.
+                             * Loop through each SeatPrice and check if it exists on a ticket for all unique routeIds in the ticket array.
+                             */
+                            const availableSeats: SeatType[] = [];
+                            for (const seat in SeatPrice) {
+                                console.log('seat', seat);
+
+                                const seatExistsOnAllTickets = route.ticket.every((ticketEntry) => {
+                                    console.log('ticketEntry', ticketEntry);
+                                    return ticketEntry.cost === SeatPrice[seat as keyof typeof SeatPrice];
+                                });
+
+                                if (seatExistsOnAllTickets) {
+                                    availableSeats.push(seat as SeatType);
+                                }
+                            }
+
+                            console.log('route', route);
+                            console.log('availableSeats', availableSeats);
+
                             return (
                                 <div
                                     key={index}
@@ -213,7 +255,7 @@ export function RouteSelectionAccordion({
                                                 order={1}
                                                 weight={'normal'}
                                             >
-                                                {route.departureTime}
+                                                {departureTimeFormatted}
                                             </Title>
                                         </div>
 
@@ -235,7 +277,7 @@ export function RouteSelectionAccordion({
                                             >
                                                 <Tooltip label='Train Swaps During Route'>
                                                     <ActionIcon>
-                                                        <Text>{route.trainSwaps}</Text>
+                                                        <Text>{trainSwaps}</Text>
                                                         <IoMdTrain />
                                                     </ActionIcon>
                                                 </Tooltip>
@@ -244,7 +286,7 @@ export function RouteSelectionAccordion({
                                             <BlackArrow />
 
                                             {/* Trip Duration */}
-                                            <Text>{route.tripDuration}</Text>
+                                            <Text>{tripDuration}</Text>
                                         </div>
 
                                         {/* Arrives */}
@@ -259,7 +301,7 @@ export function RouteSelectionAccordion({
                                                 order={1}
                                                 weight={'normal'}
                                             >
-                                                {route.arrivalTime}
+                                                {arrivalTimeFormatted}
                                             </Title>
                                         </div>
                                     </div>
@@ -274,34 +316,34 @@ export function RouteSelectionAccordion({
                                         }}
                                     >
                                         {selectedSeat !== undefined && selectedRoute === index ? (
-                                            renderSelectedSeatButton(index)
+                                            renderSelectedSeatButton(index, trainSwaps)
                                         ) : (
                                             <>
                                                 {/* Coach */}
                                                 <SeatSelectButton
                                                     seatType={SeatType.COACH}
-                                                    seatPrice={156}
+                                                    seatPrice={SeatPrice.COACH * trainSwaps}
                                                     onClick={() => updateSelectedRoute(index, SeatType.COACH)}
                                                 />
 
                                                 {/* First Class */}
                                                 <SeatSelectButton
                                                     seatType={SeatType.FIRST_CLASS}
-                                                    seatPrice={206}
+                                                    seatPrice={SeatPrice.FIRST_CLASS * trainSwaps}
                                                     onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
                                                 />
 
                                                 {/* Sleeper */}
                                                 <SeatSelectButton
                                                     seatType={SeatType.SLEEPER}
-                                                    seatPrice={256}
+                                                    seatPrice={SeatPrice.SLEEPER * trainSwaps}
                                                     onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
                                                 />
 
                                                 {/* Roomlet */}
                                                 <SeatSelectButton
                                                     seatType={SeatType.ROOMLET}
-                                                    seatPrice={314}
+                                                    seatPrice={SeatPrice.ROOMLET * trainSwaps}
                                                     onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
                                                 />
                                             </>

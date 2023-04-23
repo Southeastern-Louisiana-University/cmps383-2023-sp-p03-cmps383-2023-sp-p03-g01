@@ -8,9 +8,7 @@ import { getMantineComponentSize } from '../../util/getMantineComponentSize';
 import { useDebounce } from '../../util/useDebounce';
 import { validatePassword, validateName, validateEmail } from '../../util/ValidationFunctions';
 import { STYLING_VARIABLES } from '../../styling/StylingVariables';
-import { Api } from '../../api/EntrackApi.ts/EntrackApi';
-
-const API = new Api();
+import API from '../../util/entrackApi';
 
 interface AuthenticationModalProps {
     opened: boolean;

@@ -1,6 +1,6 @@
 import { Button, Flex, Paper, Stack, Tabs, Title } from '@mantine/core';
 import { useViewportSize } from '@mantine/hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getMantineComponentSize } from '../../../util/getMantineComponentSize';
 import { DestinationStationSelect } from './modules/DestinationStationSelect';
 import { DepartureStationSelect } from './modules/DepartureStationSelect';
@@ -8,7 +8,7 @@ import { PassengersNumberInput } from './modules/PassengersNumberInput';
 import { TripSelect } from './modules/TripSelect';
 import { AppRoutes } from '../../../models/AppRoutes';
 import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
     passengerCountState,
     arrivalStationState,
@@ -16,6 +16,7 @@ import {
     tripTypeState,
     tripDurationState,
     departureDateState,
+    allTrainStationsState,
 } from '../../../recoil/atoms/HomePageAtom';
 import { TripType } from '../../../models/TripTypes';
 import { TripDateRangePicker } from './modules/TripDateRangePicker';
@@ -25,6 +26,8 @@ import { currentlyLoggedInUserState } from '../../../recoil/atoms/Authentication
 import { TicketSummary } from '../../common/TicketSummary';
 import { SeatType } from '../../../models/SeatTypes';
 import { TicketModal } from '../../common/TicketModal';
+import API from '../../../util/entrackApi';
+import { scheduledRoutesState } from '../../../recoil/atoms/RoutePlanningAtom';
 
 interface TabPanelProps {
     children: React.ReactNode;
@@ -71,6 +74,8 @@ export function HomePage(): React.ReactElement {
     const tripDuration = useRecoilValue(tripDurationState);
     const departureDate = useRecoilValue(departureDateState);
     const currentlyLoggedInUser = useRecoilValue(currentlyLoggedInUserState);
+    const [allTrainStations, setAllTrainStations] = useRecoilState(allTrainStationsState);
+    const setScheduledRoutes = useSetRecoilState(scheduledRoutesState);
 
     const [modalOpened, setModalOpened] = useState(false);
 
@@ -83,7 +88,38 @@ export function HomePage(): React.ReactElement {
 
     const navigateToRoutePlanningPage = () => {
         navigate(AppRoutes.ROUTE_PLANNING);
+
+        API.api
+            .scheduledRoutesList()
+            .then((response) => {
+                setScheduledRoutes(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
+
+    useEffect(() => {
+        if (allTrainStations.length === 0) {
+            API.api
+                .stationsList()
+                .then((response) => {
+                    setAllTrainStations(
+                        response.data.map((station) => {
+                            return {
+                                id: station.id,
+                                label: `${station.city}, ${station.state}`,
+                                value: `${station.city}, ${station.state}`,
+                            };
+                        })
+                    );
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <div
