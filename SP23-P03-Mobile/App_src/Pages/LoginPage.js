@@ -3,10 +3,10 @@ import React from 'react';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { COLOR_PALETTE } from '../styling/ColorPalette';
-import { Button, Overlay} from 'react-native-elements';
+import { Button, Overlay } from 'react-native-elements';
 import { LoginBox } from '../Compenents/LoginBox';
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
 
     const [visible, setVisible] = useState(false);
 
@@ -14,16 +14,16 @@ export default function LoginScreen() {
         setVisible(!visible);
     };
 
-    return(
+    return (
 
         <View style={styles.loginPage}>
             <Image
-                    source={require('../../assets/icon.png')}
-                    style={{ width: 250, height: 250 }}
+                source={require('../../assets/icon.png')}
+                style={{ width: 250, height: 250 }}
             />
-            <Text style={{fontSize: 50, padding: 20}}>EnTrack</Text>  
-            <Text style={{fontSize: 20, padding: 10}}>Sign in to begin your journey with us.</Text>
-            <View style={{width:'70%'}}>
+            <Text style={{ fontSize: 50, padding: 20 }}>EnTrack</Text>
+            <Text style={{ fontSize: 20, padding: 10 }}>Sign in to begin your journey with us.</Text>
+            <View style={{ width: '70%' }}>
                 <Button
                     title="Sign In"
                     titleStyle={styles.title}
@@ -33,14 +33,14 @@ export default function LoginScreen() {
                 />
             </View>
 
-            <Overlay 
-          isVisible={visible}
-          overlayStyle={{ width: '80%', height: '50%' }}
-          onBackdropPress={toggleLoginBox}>
+            <Overlay
+                isVisible={visible}
+                overlayStyle={{ width: '80%', height: '50%' }}
+                onBackdropPress={toggleLoginBox}>
 
-          <LoginBox/>
+                <LoginBox navigation={navigation} />
 
-      </Overlay>
+            </Overlay>
         </View>
     )
 }

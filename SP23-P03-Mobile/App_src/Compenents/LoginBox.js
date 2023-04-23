@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import { COLOR_PALETTE } from '../styling/ColorPalette';
 
-export function LoginBox() {
+export function LoginBox({navigation}) {
     return(
         <View style={styles.loginbox}>
             <Input
@@ -21,7 +21,7 @@ export function LoginBox() {
                 //titleStyle={styles.title}
                 type="solid"
                 buttonStyle={styles.button}
-                onPress={() => {alert('Login')}}
+                onPress={() => {navigation.navigate('Tickets')}}
             />
 
         </View>
