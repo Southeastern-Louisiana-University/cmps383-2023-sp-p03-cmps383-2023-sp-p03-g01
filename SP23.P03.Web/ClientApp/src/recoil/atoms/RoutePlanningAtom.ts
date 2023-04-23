@@ -22,6 +22,7 @@ export const scheduledRoutesState = atom<TrainScheduledRoutesDto[]>({
 export interface SelectedRoute {
     route: TrainScheduledRoutesDto;
     seat: SeatType;
+    cost: number;
 }
 
 /**

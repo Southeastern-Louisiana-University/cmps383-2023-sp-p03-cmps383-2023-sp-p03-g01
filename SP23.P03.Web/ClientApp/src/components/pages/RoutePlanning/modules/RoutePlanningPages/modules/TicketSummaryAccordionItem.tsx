@@ -6,9 +6,9 @@ import { SelectedRoute } from '../../../../../../recoil/atoms/RoutePlanningAtom'
 import dayjs from 'dayjs';
 import { useRecoilValue } from 'recoil';
 import { passengerCountState } from '../../../../../../recoil/atoms/HomePageAtom';
-import { SeatPrice, SeatType } from '../../../../../../models/SeatTypes';
 import arrow from '../../../../../../media/arrow.svg';
 import { BsHourglassSplit } from 'react-icons/bs';
+import { getSeatCost } from '../../../../../../util/getSeatCost';
 
 interface TicketSummaryAccordionItemProps {
     data: SelectedRoute;
@@ -21,19 +21,6 @@ interface TicketSummaryAccordionItemProps {
  */
 export function TicketSummaryAccordionItem({ data }: TicketSummaryAccordionItemProps): React.ReactElement {
     const passengerCount = useRecoilValue(passengerCountState);
-
-    const getSeatCost = (seat: SeatType): SeatPrice => {
-        switch (seat) {
-            case SeatType.COACH:
-                return SeatPrice.COACH;
-            case SeatType.FIRST_CLASS:
-                return SeatPrice.FIRST_CLASS;
-            case SeatType.ROOMLET:
-                return SeatPrice.ROOMLET;
-            case SeatType.SLEEPER:
-                return SeatPrice.SLEEPER;
-        }
-    };
 
     return (
         <Accordion defaultValue='Departure Route'>

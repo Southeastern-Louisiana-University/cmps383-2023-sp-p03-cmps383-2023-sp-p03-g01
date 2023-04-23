@@ -123,16 +123,18 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
         }
     };
 
-    const updateSelectedRoute = (index: number, seat: SeatType): void => {
+    const updateSelectedRoute = (index: number, seat: SeatType, cost: number): void => {
         if (selectedDepartureStation === scheduledRoutes[0]?.departureStation) {
             setDepartureRoute({
                 route: scheduledRoutes[index]!,
                 seat: seat,
+                cost: cost,
             });
         } else {
             setReturnRoute({
                 route: scheduledRoutes[index]!,
                 seat: seat,
+                cost: cost,
             });
         }
     };
@@ -145,24 +147,42 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.COACH}
-                        seatPrice={SeatPrice.COACH * trainSwaps + (passengerCount + SeatPrice.COACH)}
-                        onClick={() => updateSelectedRoute(index, SeatType.COACH)}
+                        seatPrice={SeatPrice.COACH * trainSwaps + passengerCount * SeatPrice.COACH}
+                        onClick={() =>
+                            updateSelectedRoute(
+                                index,
+                                SeatType.COACH,
+                                SeatPrice.COACH * trainSwaps + passengerCount * SeatPrice.COACH
+                            )
+                        }
                     />
                 );
             case SeatType.FIRST_CLASS:
                 return (
                     <SeatSelectButton
                         seatType={SeatType.FIRST_CLASS}
-                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps + (passengerCount + SeatPrice.FIRST_CLASS)}
-                        onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
+                        seatPrice={SeatPrice.FIRST_CLASS * trainSwaps + passengerCount * SeatPrice.FIRST_CLASS}
+                        onClick={() =>
+                            updateSelectedRoute(
+                                index,
+                                SeatType.FIRST_CLASS,
+                                SeatPrice.FIRST_CLASS * trainSwaps + passengerCount * SeatPrice.FIRST_CLASS
+                            )
+                        }
                     />
                 );
             case SeatType.SLEEPER:
                 return (
                     <SeatSelectButton
                         seatType={SeatType.SLEEPER}
-                        seatPrice={SeatPrice.SLEEPER * trainSwaps + (passengerCount + SeatPrice.SLEEPER)}
-                        onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
+                        seatPrice={SeatPrice.SLEEPER * trainSwaps + passengerCount * SeatPrice.SLEEPER}
+                        onClick={() =>
+                            updateSelectedRoute(
+                                index,
+                                SeatType.SLEEPER,
+                                SeatPrice.SLEEPER * trainSwaps + passengerCount * SeatPrice.SLEEPER
+                            )
+                        }
                     />
                 );
 
@@ -170,8 +190,14 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                 return (
                     <SeatSelectButton
                         seatType={SeatType.ROOMLET}
-                        seatPrice={SeatPrice.ROOMLET * trainSwaps + (passengerCount + SeatPrice.ROOMLET)}
-                        onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
+                        seatPrice={SeatPrice.ROOMLET * trainSwaps + passengerCount * SeatPrice.ROOMLET}
+                        onClick={() =>
+                            updateSelectedRoute(
+                                index,
+                                SeatType.ROOMLET,
+                                SeatPrice.ROOMLET * trainSwaps + passengerCount * SeatPrice.ROOMLET
+                            )
+                        }
                     />
                 );
         }
@@ -372,7 +398,14 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                             SeatPrice.COACH * trainSwaps +
                                                             passengerCount * SeatPrice.COACH
                                                         }
-                                                        onClick={() => updateSelectedRoute(index, SeatType.COACH)}
+                                                        onClick={() =>
+                                                            updateSelectedRoute(
+                                                                index,
+                                                                SeatType.COACH,
+                                                                SeatPrice.COACH * trainSwaps +
+                                                                    passengerCount * SeatPrice.COACH
+                                                            )
+                                                        }
                                                     />
                                                 )}
 
@@ -384,7 +417,14 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                             SeatPrice.FIRST_CLASS * trainSwaps +
                                                             passengerCount * SeatPrice.FIRST_CLASS
                                                         }
-                                                        onClick={() => updateSelectedRoute(index, SeatType.FIRST_CLASS)}
+                                                        onClick={() =>
+                                                            updateSelectedRoute(
+                                                                index,
+                                                                SeatType.FIRST_CLASS,
+                                                                SeatPrice.FIRST_CLASS * trainSwaps +
+                                                                    passengerCount * SeatPrice.FIRST_CLASS
+                                                            )
+                                                        }
                                                     />
                                                 )}
 
@@ -396,7 +436,14 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                             SeatPrice.SLEEPER * trainSwaps +
                                                             passengerCount * SeatPrice.SLEEPER
                                                         }
-                                                        onClick={() => updateSelectedRoute(index, SeatType.SLEEPER)}
+                                                        onClick={() =>
+                                                            updateSelectedRoute(
+                                                                index,
+                                                                SeatType.SLEEPER,
+                                                                SeatPrice.SLEEPER * trainSwaps +
+                                                                    passengerCount * SeatPrice.SLEEPER
+                                                            )
+                                                        }
                                                     />
                                                 )}
 
@@ -408,7 +455,14 @@ export function RouteSelectionAccordion({ scheduledRoutes }: RouteSelectionAccor
                                                             SeatPrice.ROOMLET * trainSwaps +
                                                             passengerCount * SeatPrice.ROOMLET
                                                         }
-                                                        onClick={() => updateSelectedRoute(index, SeatType.ROOMLET)}
+                                                        onClick={() =>
+                                                            updateSelectedRoute(
+                                                                index,
+                                                                SeatType.ROOMLET,
+                                                                SeatPrice.ROOMLET * trainSwaps +
+                                                                    passengerCount * SeatPrice.ROOMLET
+                                                            )
+                                                        }
                                                     />
                                                 )}
                                             </>
