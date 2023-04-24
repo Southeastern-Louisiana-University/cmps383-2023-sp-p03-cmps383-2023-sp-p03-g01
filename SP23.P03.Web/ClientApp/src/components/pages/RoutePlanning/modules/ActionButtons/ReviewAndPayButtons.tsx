@@ -39,8 +39,6 @@ export function ReviewAndPayButtons(): React.ReactElement {
         const ticketIds = departureTicketIds.concat(returnTicketIds);
 
         localStorage.setItem('ticketIds', JSON.stringify(ticketIds));
-
-        console.log('Ticket Ids updated');
     }, [currentlyLoggedInUser, departureRoute, returnRoute]);
 
     return (

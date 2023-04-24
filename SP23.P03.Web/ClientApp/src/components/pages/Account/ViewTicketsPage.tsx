@@ -1,6 +1,6 @@
 import { Button, Flex, Stack, Title } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import { SeatType } from '../../../models/SeatTypes';
+import { SeatPrice, SeatType } from '../../../models/SeatTypes';
 import { TicketSummaryProps, TicketSummary } from '../../common/TicketSummary';
 import { TicketModal } from '../../common/TicketModal';
 import { useViewportSize } from '@mantine/hooks';
@@ -45,7 +45,7 @@ const TicketContainer = ({ ticket }: TicketContainerProps): React.ReactElement =
  * Displays the tickets that the user has purchased.
  */
 export function ViewTicketsPage(): React.ReactElement {
-    const [ticketsToDisplay, setTicketsToDisplay] = useState<TicketSummaryProps[]>([]);
+    const [ticketsToDisplay, setTicketsToDisplay] = useState<{ [key: string]: TicketSummaryProps }>({});
 
     useEffect(() => {
         API.api.authenticationMeList().then((response) => {
@@ -74,7 +74,47 @@ export function ViewTicketsPage(): React.ReactElement {
                 });
             });
 
-            console.log(ticketsByDate);
+            // Finally, convert the tickets to the format that the TicketSummary component expects
+            const ticketsToDisplay: { [key: string]: TicketSummaryProps } = {};
+            Object.keys(ticketsByDate).forEach((date) => {
+                const lastTicketForDate = ticketsByDate[date]![ticketsByDate[date]!.length - 1]!;
+                const firstTicketForDate = ticketsByDate[date]![0]!;
+
+                const trainSwaps = ticketsByDate[date]!.reduce((acc, curr) => {
+                    if (curr.trainRoute?.layover) {
+                        acc += 1;
+                    }
+
+                    return acc;
+                }, 0);
+
+                const arrivalTime = dayjs(lastTicketForDate.trainRoute!.arrivalTime);
+                const arrivalTimeFormatted = arrivalTime.format('h:mm A');
+                const departureTime = dayjs(firstTicketForDate.trainRoute!.departureTime);
+                const departureTimeFormatted = departureTime.format('h:mm A');
+
+                // Calculate total travel time
+                const totalTravelTime = arrivalTime.diff(departureTime, 'minute');
+                const hours = Math.floor(totalTravelTime / 60);
+                const minutes = totalTravelTime % 60;
+                const tripDuration = `${hours}hr ${minutes}min`;
+
+                ticketsToDisplay[date] = {
+                    arrivalStation: lastTicketForDate.trainRoute!.arrivalStation,
+                    arrivalTime: arrivalTimeFormatted,
+                    cost:
+                        SeatPrice.COACH * trainSwaps + firstTicketForDate.trainRoute!.passengerCount * SeatPrice.COACH,
+                    departureStation: ticketsByDate[date]![0]!.trainRoute!.departureStation,
+                    departureTime: departureTimeFormatted,
+                    seat: firstTicketForDate.seatType as SeatType,
+                    duration: tripDuration,
+                    layover: null,
+                    passengerCount: firstTicketForDate.trainRoute!.passengerCount,
+                    code: firstTicketForDate.code,
+                };
+            });
+
+            setTicketsToDisplay(ticketsToDisplay);
         });
     }, []);
 
@@ -83,31 +123,30 @@ export function ViewTicketsPage(): React.ReactElement {
             style={{
                 display: 'flex',
                 flexDirection: 'column',
+                alignItems: 'center',
                 padding: '2rem',
                 gap: '2rem',
             }}
         >
             <Title>Upcoming Trips</Title>
 
-            <Stack style={{ width: '100%' }}>
-                <Title order={2}>May 8, 2023</Title>
-                <Flex
-                    wrap='wrap'
-                    gap='2rem'
-                >
-                    {/* <TicketContainer ticket={} /> */}
-                </Flex>
-            </Stack>
-
-            <Stack style={{ width: '100%' }}>
-                <Title order={2}>May 14, 2023</Title>
-                <Flex
-                    wrap='wrap'
-                    gap='2rem'
-                >
-                    {/* <TicketContainer ticket={TEST_DATA} /> */}
-                </Flex>
-            </Stack>
+            {Object.keys(ticketsToDisplay).map((date) => {
+                return (
+                    <Stack
+                        style={{ width: '100%' }}
+                        align='center'
+                        key={date}
+                    >
+                        <Title order={2}>{date}</Title>
+                        <Flex
+                            wrap='wrap'
+                            gap='2rem'
+                        >
+                            <TicketContainer ticket={ticketsToDisplay[date]!} />
+                        </Flex>
+                    </Stack>
+                );
+            })}
         </div>
     );
 }

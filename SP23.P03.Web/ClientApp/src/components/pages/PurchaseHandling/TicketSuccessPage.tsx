@@ -33,8 +33,6 @@ export function TicketSuccessPage(): React.ReactElement {
         });
 
         Promise.all(promises).then(() => {
-            console.log('Tickets updated');
-
             localStorage.removeItem('ticketIds');
         });
 

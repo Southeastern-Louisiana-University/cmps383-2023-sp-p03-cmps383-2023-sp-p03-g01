@@ -40,49 +40,53 @@ export function TicketModal(props: TicketModalProps): React.ReactElement {
                 >
                     <TicketSummary {...props.ticket} />
 
-                    <Flex
-                        align='center'
-                        style={{ height: '256px' }}
-                    >
-                        {qrCodeIsSelected ? (
-                            <QRCode value={props.ticket.arrivalStation} />
-                        ) : (
-                            <Barcode value={props.ticket.arrivalStation} />
-                        )}
-                    </Flex>
+                    {props.ticket.code && (
+                        <Flex
+                            align='center'
+                            style={{ height: '256px' }}
+                        >
+                            {qrCodeIsSelected ? (
+                                <QRCode value={props.ticket.code} />
+                            ) : (
+                                <Barcode value={props.ticket.code} />
+                            )}
+                        </Flex>
+                    )}
                 </Stack>
 
-                <Flex gap='0.5rem'>
-                    <ActionIcon
-                        variant={qrCodeVariant}
-                        size='lg'
-                        onClick={() => {
-                            setQrCodeIsSelected(true);
-                        }}
-                    >
-                        <BsQrCode />
-                    </ActionIcon>
-                    <ActionIcon
-                        variant={barcodeVariant}
-                        size='lg'
-                        onClick={() => {
-                            setQrCodeIsSelected(false);
-                        }}
-                    >
-                        <AiOutlineBarcode />
-                    </ActionIcon>
-                    <ReactToPrint
-                        trigger={() => (
-                            <ActionIcon
-                                variant='outline'
-                                size='lg'
-                            >
-                                <AiOutlinePrinter />
-                            </ActionIcon>
-                        )}
-                        content={() => componentToPrint.current}
-                    />
-                </Flex>
+                {props.ticket.code && (
+                    <Flex gap='0.5rem'>
+                        <ActionIcon
+                            variant={qrCodeVariant}
+                            size='lg'
+                            onClick={() => {
+                                setQrCodeIsSelected(true);
+                            }}
+                        >
+                            <BsQrCode />
+                        </ActionIcon>
+                        <ActionIcon
+                            variant={barcodeVariant}
+                            size='lg'
+                            onClick={() => {
+                                setQrCodeIsSelected(false);
+                            }}
+                        >
+                            <AiOutlineBarcode />
+                        </ActionIcon>
+                        <ReactToPrint
+                            trigger={() => (
+                                <ActionIcon
+                                    variant='outline'
+                                    size='lg'
+                                >
+                                    <AiOutlinePrinter />
+                                </ActionIcon>
+                            )}
+                            content={() => componentToPrint.current}
+                        />
+                    </Flex>
+                )}
             </Stack>
         </Modal>
     );

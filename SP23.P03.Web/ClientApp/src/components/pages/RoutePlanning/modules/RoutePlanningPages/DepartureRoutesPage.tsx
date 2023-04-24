@@ -21,8 +21,6 @@ export function DepartureRoutesPage(): React.ReactElement {
         return scheduledRoute.departureStation === selectedArrivalStation;
     });
 
-    console.log(sortedScheduledRoutes);
-
     /**
      * Departure Time, Arrival Time, Trip Duration, Total Stops, Cost
      * - Stop, Departure Time, Departure Station, Arrival Time, Arrival Station, Dwell Time, Layover
