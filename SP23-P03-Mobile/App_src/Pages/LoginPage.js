@@ -5,13 +5,21 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import { COLOR_PALETTE } from '../styling/ColorPalette';
 import { Button, Overlay } from 'react-native-elements';
 import { LoginBox } from '../Compenents/LoginBox';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function LoginScreen({ navigation }) {
 
     const [visible, setVisible] = useState(false);
 
     const toggleLoginBox = () => {
-        setVisible(!visible);
+        AsyncStorage.getItem('LOG_IN').then((value) => {
+            if (value != null) {
+                navigation.navigate('Tickets');
+            }
+            else {
+                setVisible(!visible);
+            }
+        });
     };
 
     return (

@@ -1,0 +1,1 @@
+export const BaseUrl = process.env.NODE_ENV === 'development' ? 'https://selu383-sp23-p03-g01.azurewebsites.net/' : 'https://selu383-sp23-p03-g01.azurewebsites.net/';

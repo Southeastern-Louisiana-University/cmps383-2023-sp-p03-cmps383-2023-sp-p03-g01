@@ -4,44 +4,41 @@ import { COLOR_PALETTE } from "../../styling/ColorPalette";
 import { Button, Header, Overlay } from 'react-native-elements'
 import { Title } from "./Title";
 import { LoginBox } from "../LoginBox.js";
+import axios from "axios";
+import { BaseUrl } from "../../../configuration";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
+export function HeaderApp({ navigation }) {
 
-export function HeaderApp() {
+  const logout = () => {
 
-  const [visible, setVisible] = useState(false);
+    axios.post(`${BaseUrl}/api/authentication/logout`).catch((error) => {
+      console.log(error);
+    });
+    AsyncStorage.removeItem('LOG_IN');
+    navigation.navigate('Login');
+  }
 
-  const toggleLoginBox = () => {
-    setVisible(!visible);
-  };
 
   return (
     <View style={styles.headerbox}>
 
       <Header
-        leftComponent={{
-          icon: 'menu',
-          color: COLOR_PALETTE.light.default.textColorPrimary,
-          onPress: () => alert('ea'),
-        }}
+        // leftComponent={{
+        //   icon: 'menu',
+        //   color: COLOR_PALETTE.light.default.textColorPrimary,
+        //   onPress: () => alert('ea'),
+        // }}
 
         centerComponent={<Title />}
 
-        rightComponent={<Button title="Sign In"
+        rightComponent={<Button title="Sign Out"
           type="clear"
           titleStyle={styles.rightStyles}
           iconPosition="top"
-          onPress={() => {toggleLoginBox()}}
+          onPress={() => { logout() }}
         />}
         backgroundColor="white" />
-
-      <Overlay 
-          isVisible={visible}
-          overlayStyle={{ width: '80%', height: '50%' }}
-          onBackdropPress={toggleLoginBox}>
-
-          {<LoginBox/>}
-
-      </Overlay>
     </View>
   );
 }

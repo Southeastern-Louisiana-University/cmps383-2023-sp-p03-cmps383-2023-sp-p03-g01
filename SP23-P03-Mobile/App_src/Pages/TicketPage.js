@@ -6,12 +6,16 @@ import { TicketSummary } from '../Compenents/Tickets/TicketSummary';
 import { Button, Overlay } from 'react-native-elements';
 import { Ticket } from '../Compenents/Tickets/Ticket';
 import { TicketPageEntry } from '../Compenents/Tickets/TicketPageEntry';
+import { HeaderApp } from '../Compenents/Header/Header';
 
 export default function TicketScreen({ navigation }) {
     return (
-        <View style={styles.ticketpage}>
-            <Text>Ticket Page</Text>
-            <TicketPageEntry props={TEST_DATA} />
+        <View>
+            <HeaderApp navigation={navigation} />
+            <View style={styles.ticketpage}>
+                <Text>Tickets</Text>
+                <TicketPageEntry props={TEST_DATA} />
+            </View>
         </View>
     )
 }
@@ -21,7 +25,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         flexDirection: 'column',
         color: COLOR_PALETTE.light.default.textColorPrimary,
-        justifyContent: 'center',
+        //justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         textAlign: 'center',
