@@ -18,6 +18,8 @@ const TicketContainer = ({ ticket }: TicketContainerProps): React.ReactElement =
 
     const [modalOpened, setModalOpened] = useState(false);
 
+    console.log('ticket', ticket);
+
     return (
         <Stack align='center'>
             <TicketSummary {...ticket} />
