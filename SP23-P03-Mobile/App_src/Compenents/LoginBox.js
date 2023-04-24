@@ -29,6 +29,8 @@ export function LoginBox({ navigation }) {
 
     // Log in the user with the given credentials and navigate to the ticket page if successful or alert the user if unsuccessful
     const login = () => {
+        console.log(username);
+        console.log(password);
         axios.post(`${BaseUrl}/api/authentication/login`, {
             username: username,
             password: password,
@@ -40,7 +42,7 @@ export function LoginBox({ navigation }) {
                     setLoginState({
                         user: response.data,
                     });
-                    AsyncStorage.setItem('LOG_IN', JSON.stringify(response.data));
+                    AsyncStorage.setItem('LOG_IN', JSON.stringify(response));
                     navigation.push('Tickets');
                 } else {
                     alert(response.status);
