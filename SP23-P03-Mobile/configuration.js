@@ -1,0 +1,1 @@
+export const BaseUrl = process.env.NODE_ENV === 'development' ? 'https://4dc9-107-141-177-111.ngrok-free.app' : 'https://selu383-sp23-p03-g01.azurewebsites.net/';
