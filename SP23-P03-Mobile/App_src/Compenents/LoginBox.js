@@ -34,7 +34,7 @@ export function LoginBox({ navigation }) {
         axios.post(`${BaseUrl}/api/authentication/login`, {
             username: username,
             password: password,
-        })
+        }, { headers: { 'Content-Type': 'application/json' } })
             .then((response) => {
                 console.log(response.data);
 
@@ -64,7 +64,7 @@ export function LoginBox({ navigation }) {
     return (
         <View style={styles.loginbox}>
             <Input
-                placeholder='Username'
+                placeholder='Email'
                 onChangeText={handleUsernameChange}
             />
             <Input

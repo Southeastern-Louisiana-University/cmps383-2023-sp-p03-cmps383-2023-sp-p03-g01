@@ -15,13 +15,13 @@ export function TicketPageEntry({ props }) {
 
     return (
         <View style={styles.ticketPageEntry}>
-            <TicketSummary props={TEST_DATA} />
+            <TicketSummary props={props} />
             <Button buttonStyle={styles.Button}
-                title="View Ticket"
+                title="View the Full Ticket"
                 titleStyle={styles.title}
                 onPress={() => { toggleVisible() }} />
             <Overlay isVisible={visible} onBackdropPress={toggleVisible}>
-                <Ticket props={TEST_DATA} />
+                <Ticket props={props} />
             </Overlay>
         </View>
     );
@@ -29,15 +29,15 @@ export function TicketPageEntry({ props }) {
 
 const styles = StyleSheet.create({
     ticketPageEntry: {
-        width: '100%',
-        height: '70%',
+        // width: '100%',
+        // height: '80%',
         flexDirection: 'column',
         alignItems: 'center',
         textAlign: 'center',
     },
     // Make sure the button sits in the center of the page and it's title in the center of the button
     Button: {
-        width: '70%',
+        width: '57%',
         backgroundColor: COLOR_PALETTE.light.default.kellyGreen,
 
     },

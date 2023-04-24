@@ -1,6 +1,6 @@
 // A page for displaying the user's tickets
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { COLOR_PALETTE } from '../styling/ColorPalette';
 import { TicketSummary } from '../Compenents/Tickets/TicketSummary';
 import { Button, Overlay } from 'react-native-elements';
@@ -11,16 +11,19 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { BaseUrl } from '../../configuration';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import dayjs from 'dayjs';
 
 export default function TicketScreen({ navigation }) {
 
+    const [tickets, setTickets] = React.useState([]);
+
     useEffect(() => {
-        AsyncStorage.getItem('LOG_IN').then((response) => {
-            console.log(JSON.parse(response).data);
+        axios.get(`${BaseUrl}/api/authentication/me`).then((response) => {
+            console.log(response.data);
             if (response.data.tickets === undefined || response.data.tickets === null) return;
 
             // First, filter out only the tickets that are coach tickets
-            const coachOnlyTickets = response.data.tickets.filter((ticket) => ticket.seatType === SeatType.COACH);
+            const coachOnlyTickets = response.data.tickets.filter((ticket) => ticket.seatType === "Coach");
 
             // Then, group the tickets by the date of the trip
             const ticketsByDate = coachOnlyTickets.reduce((acc, ticket) => {
@@ -71,7 +74,7 @@ export default function TicketScreen({ navigation }) {
                     arrivalStation: lastTicketForDate.trainRoute.arrivalStation,
                     arrivalTime: arrivalTimeFormatted,
                     cost:
-                        SeatPrice.COACH * trainSwaps + firstTicketForDate.trainRoute.passengerCount * SeatPrice.COACH,
+                        52 * trainSwaps + firstTicketForDate.trainRoute.passengerCount * 52,
                     departureStation: ticketsByDate[date][0].trainRoute.departureStation,
                     departureTime: departureTimeFormatted,
                     seat: firstTicketForDate.seatType,
@@ -82,17 +85,29 @@ export default function TicketScreen({ navigation }) {
                 };
             });
 
-            console.log(ticketsToDisplay);
+            console.log(Object.keys(ticketsToDisplay));
+            setTickets(ticketsToDisplay);
         });
     }, []);
 
+    //A function that maps each element in an array to a TicketPageEntry component
+    const mapTicketsToTicketPageEntry = () => {
+        return Object.keys(tickets).map((ticketID) => {
+            return <TicketPageEntry key={tickets[ticketID].id} props={tickets[ticketID]} />;
+        });
+    };
+
     return (
-        <View>
-            <HeaderApp navigation={navigation} />
-            <View style={styles.ticketpage}>
-                <Text>Tickets</Text>
-                <TicketPageEntry props={TEST_DATA} />
-            </View>
+        <View style={{ flex: 1 }}>
+            <ScrollView>
+                <View>
+                    <HeaderApp navigation={navigation} />
+
+                    <View style={styles.ticketpage}>
+                        {mapTicketsToTicketPageEntry()}
+                    </View>
+                </View>
+            </ScrollView>
         </View>
     )
 }
@@ -106,7 +121,7 @@ const styles = StyleSheet.create({
         color: COLOR_PALETTE.light.default.textColorPrimary,
         //justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
+        height: '80%',
         textAlign: 'center',
     },
     // Make sure the button sits in the center of the page and it's title in the center of the button
@@ -126,7 +141,12 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-    }
+    },
+    purple: {
+        backgroundColor: "purple",
+        height: 100,
+        marginBottom: 10,
+    },
 });
 
 const TEST_DATA = {

@@ -21,8 +21,8 @@ export function TicketSummary({ props }) {
 const styles = StyleSheet.create({
     //Each ticket is a view with a width of 100% and a height of 40%, a background color of cream, and ticket datapoints aligned horizontally with each other and wrapped in a row
     ticket: {
-        width: '100%',
-        height: '60%',
+        // width: '100%',
+        // height: '60%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
