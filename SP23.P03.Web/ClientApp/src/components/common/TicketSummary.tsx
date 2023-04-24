@@ -39,6 +39,7 @@ export interface TicketSummaryProps {
     seat: SeatType;
     cost: number;
     passengerCount: number;
+    code?: string;
 }
 /**
  * The ticket summary component used wherever a ticket is represented
