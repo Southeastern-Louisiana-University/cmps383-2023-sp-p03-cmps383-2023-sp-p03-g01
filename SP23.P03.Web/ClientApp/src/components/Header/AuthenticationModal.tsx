@@ -228,9 +228,22 @@ export function AuthenticationModal({ opened, onClose }: AuthenticationModalProp
                     password,
                     userName: email,
                 })
-                .then((response) => {
-                    setCurrentlyLoggedInUser(response.data);
-                    localStorage.setItem('user', JSON.stringify(response.data));
+                .then(() => {
+                    API.api
+                        .authenticationLoginCreate({
+                            userName: email,
+                            password,
+                        })
+                        .then((response) => {
+                            setCurrentlyLoggedInUser(response.data);
+                            localStorage.setItem('user', JSON.stringify(response.data));
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                            console.error('No error handling because no time');
+
+                            setIsMakingApiCall(false);
+                        });
                 })
                 .catch((error) => {
                     console.error(error);
